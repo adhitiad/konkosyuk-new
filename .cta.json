@@ -1,0 +1,35 @@
+{
+  "projectName": "konkosyuk-new",
+  "mode": "file-router",
+  "typescript": true,
+  "packageManager": "bun",
+  "includeExamples": true,
+  "tailwind": true,
+  "projectPreset": "default",
+  "addOnOptions": {
+    "prisma": {
+      "database": "postgres"
+    }
+  },
+  "git": true,
+  "install": true,
+  "intent": true,
+  "routerOnly": false,
+  "version": 1,
+  "framework": "react",
+  "chosenAddOns": [
+    "eslint",
+    "vercel",
+    "prisma",
+    "better-auth",
+    "table",
+    "shadcn",
+    "tanstack-query",
+    "store",
+    "t3env",
+    "paraglide",
+    "oRPC",
+    "mcp",
+    "form"
+  ]
+}

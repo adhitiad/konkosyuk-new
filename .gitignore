@@ -1,0 +1,24 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+.env
+.nitro
+.tanstack
+.wrangler
+.output
+.vinxi
+__unconfig*
+todos.json
+mcp-todos.json
+
+
+## Ignore all .env files except for .env.local
+*.env
+/.agents/skills/
+
+.vscode
+.idea
+
+ca.pem

@@ -1,0 +1,20 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  width="64"
+  height="64"
+  role="img"
+  aria-label="Konkosyuk logo"
+>
+  <rect width="64" height="64" rx="12" fill="#4FB8B2" />
+  <path
+    d="M20 38c0-3.3 2.7-6 6-6s6 2.7 6 6v4c0 1.1-.9 2-2 2h-4c-1.1 0-2-.9-2-2v-4zm14-14a6 6 0 1 0-12 0 6 6 0 0 0 12 0z"
+    fill="white"
+    opacity=".9"
+  />
+  <path
+    d="M38 44v-4c0-2.2-1.8-4-4-4h-2c-2.2 0-4 1.8-4 4v4c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2z"
+    fill="white"
+    opacity=".7"
+  />
+</svg>

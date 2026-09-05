@@ -1,0 +1,1949 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model accounts {
+  id                       String    @id @default(dbgenerated("(gen_random_uuid())::text"))
+  user_id                  String    @db.Uuid
+  account_id               String
+  provider_id              String
+  access_token             String?
+  refresh_token            String?
+  id_token                 String?
+  access_token_expires_at  DateTime? @db.Timestamp(6)
+  refresh_token_expires_at DateTime? @db.Timestamp(6)
+  expires_at               DateTime? @db.Timestamp(6)
+  password                 String?
+  scope                    String?
+  created_at               DateTime  @default(now()) @db.Timestamp(6)
+  updated_at               DateTime  @default(now()) @db.Timestamp(6)
+  issuer                   String?
+  users                    users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "accounts_user_id_users_id_fk")
+
+  @@index([provider_id, account_id], map: "accounts_provider_idx")
+  @@index([user_id])
+}
+
+model ad_packages {
+  id            String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String                @unique(map: "ad_packages_name_unique")
+  label         String
+  tier          AdPackageTier
+  duration      Int
+  price         Decimal               @db.Decimal(12, 2)
+  position_type AdPackagePositionType
+  sort_order    Int                   @default(0)
+  is_active     Boolean               @default(true)
+  created_at    DateTime              @default(now()) @db.Timestamp(6)
+  property_ads  property_ads[]
+
+  @@index([is_active], map: "idx_ad_packages_active")
+  @@index([tier], map: "idx_ad_packages_tier")
+}
+
+model analytics_events {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String?  @db.Uuid
+  session_id String?
+  event      String
+  properties Json?    @default("{}")
+  user_agent String?
+  ip_address String?
+  referrer   String?
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  users      users?   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "analytics_events_user_id_users_id_fk")
+
+  @@index([created_at], map: "idx_analytics_events_created")
+  @@index([event], map: "idx_analytics_events_event")
+  @@index([user_id], map: "idx_analytics_events_user")
+}
+
+model app_settings {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  key         String   @unique(map: "app_settings_key_unique")
+  value       String
+  is_secret   Boolean  @default(false)
+  description String?
+  created_at  DateTime @default(now()) @db.Timestamp(6)
+  updated_at  DateTime @default(now()) @db.Timestamp(6)
+
+  @@index([key])
+}
+
+model audit_logs {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  admin_id    String?  @db.Uuid
+  action      String
+  target_type String
+  target_id   String
+  details     Json?    @default("{}")
+  created_at  DateTime @default(now()) @db.Timestamp(6)
+  updated_at  DateTime @default(now()) @db.Timestamp(6)
+  users       users?   @relation(fields: [admin_id], references: [id], onUpdate: NoAction, map: "audit_logs_admin_id_users_id_fk")
+}
+
+model balance_logs {
+  id          String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id     String?        @db.Uuid
+  amount      Decimal        @db.Decimal(12, 2)
+  type        BalanceLogType
+  description String
+  related_id  String?
+  created_at  DateTime       @default(now()) @db.Timestamp(6)
+  updated_at  DateTime       @default(now()) @db.Timestamp(6)
+  users       users?         @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "balance_logs_user_id_users_id_fk")
+
+  @@index([created_at])
+  @@index([type])
+  @@index([user_id])
+}
+
+model booking_requests {
+  id            String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenant_id     String?              @db.Uuid
+  unit_id       String               @db.Uuid
+  property_id   String               @db.Uuid
+  num_occupants Int
+  start_date    DateTime             @db.Timestamp(6)
+  status        BookingRequestStatus @default(pending)
+  agreed_price  Decimal?             @db.Decimal(12, 2)
+  created_at    DateTime             @default(now()) @db.Timestamp(6)
+  updated_at    DateTime             @default(now()) @db.Timestamp(6)
+  properties    properties           @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "booking_requests_property_id_properties_id_fk")
+  users         users?               @relation(fields: [tenant_id], references: [id], onUpdate: NoAction, map: "booking_requests_tenant_id_users_id_fk")
+  units         units                @relation(fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "booking_requests_unit_id_units_id_fk")
+  bookings      bookings?            @relation("booking_request_to_booking")
+
+  @@index([property_id])
+  @@index([status])
+  @@index([tenant_id])
+  @@index([unit_id])
+}
+
+model bookings {
+  id                     String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id                String?                 @db.Uuid
+  property_id            String                  @db.Uuid
+  unit_id                String                  @db.Uuid
+  booking_type           BookingType
+  status                 BookingStatus           @default(pending_dp)
+  start_date             DateTime                @db.Timestamp(6)
+  end_date               DateTime                @db.Timestamp(6)
+  metadata               Json?                   @default("{}")
+  rejection_reason       String?
+  is_group_booking       Boolean?                @default(false)
+  group_booking_id       String?                 @db.Uuid
+  pricing_rule_id        String?                 @db.Uuid
+  base_price_at_booking  Decimal?                @db.Decimal(12, 2)
+  security_deposit       Decimal?                @db.Decimal(12, 2)
+  move_in_inspection_id  String?                 @db.Uuid
+  move_out_inspection_id String?                 @db.Uuid
+  inspection_status      InspectionStatus        @default(pending)
+  booking_request_id     String?                 @unique @db.Uuid
+  discount_amount        Decimal?                @default(0) @db.Decimal(12, 2)
+  tax_amount             Decimal?                @default(0) @db.Decimal(12, 2)
+  total_amount           Decimal?                @db.Decimal(12, 2)
+  currency               Currency                @default(IDR)
+  confirmed_at           DateTime?               @db.Timestamp(6)
+  cancelled_at           DateTime?               @db.Timestamp(6)
+  completed_at           DateTime?               @db.Timestamp(6)
+  rejected_at            DateTime?               @db.Timestamp(6)
+  source                 BookingSource           @default(direct)
+  referral_code          String?
+  utm_source             String?
+  utm_medium             String?
+  utm_campaign           String?
+  created_at             DateTime                @default(now()) @db.Timestamp(6)
+  updated_at             DateTime                @default(now()) @db.Timestamp(6)
+  booking_requests       booking_requests?       @relation("booking_request_to_booking", fields: [booking_request_id], references: [id], onUpdate: NoAction, map: "bookings_booking_request_id_booking_requests_id_fk")
+  group_bookings         group_bookings?         @relation(fields: [group_booking_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "bookings_group_booking_id_group_bookings_id_fk")
+  seasonal_pricing_rules seasonal_pricing_rules? @relation(fields: [pricing_rule_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "bookings_pricing_rule_id_seasonal_pricing_rules_id_fk")
+  properties             properties              @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "bookings_property_id_properties_id_fk")
+  units                  units                   @relation("unit_bookings", fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "bookings_unit_id_units_id_fk")
+  users                  users?                  @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "bookings_user_id_users_id_fk")
+  payment_transactions   payment_transactions[]
+  payments               payments[]
+  refund_requests        refund_requests[]
+  reviews                reviews[]
+  current_unit           units?                  @relation("unit_current_booking")
+  user_contracts         user_contracts[]
+
+  @@index([group_booking_id])
+  @@index([is_group_booking])
+  @@index([property_id, status, start_date, end_date], map: "bookings_property_availability_idx")
+  @@index([property_id])
+  @@index([property_id, status, created_at], map: "bookings_property_status_created_idx")
+  @@index([status])
+  @@index([unit_id])
+  @@index([user_id])
+  @@index([user_id, status, created_at], map: "bookings_user_status_created_idx")
+}
+
+model campus_areas {
+  campus_area_id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  campus_area_slug           String   @unique(map: "campus_areas_campus_area_slug_unique")
+  campus_area_name           String
+  campus_area_image_key      String
+  campus_area_property_count Int      @default(0)
+  campus_area_sort_order     Int      @default(0)
+  campus_area_is_active      Boolean  @default(true)
+  campus_area_created_at     DateTime @default(now()) @db.Timestamp(6)
+  campus_area_updated_at     DateTime @default(now()) @db.Timestamp(6)
+}
+
+model chart_of_accounts {
+  id                      String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  account_code            String              @unique(map: "chart_of_accounts_account_code_unique")
+  account_name            String
+  account_type            AccountType
+  is_active               Boolean?            @default(true)
+  parent_account_id       String?             @db.Uuid
+  chart_of_accounts       chart_of_accounts?  @relation("chart_of_accountsTochart_of_accounts", fields: [parent_account_id], references: [id], onUpdate: NoAction, map: "chart_of_accounts_parent_account_id_chart_of_accounts_id_fk")
+  other_chart_of_accounts chart_of_accounts[] @relation("chart_of_accountsTochart_of_accounts")
+}
+
+model chat_rooms {
+  id                                String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id                       String     @db.Uuid
+  tenant_id                         String?    @db.Uuid
+  owner_id                          String?    @db.Uuid
+  last_message_at                   DateTime?  @db.Timestamp(6)
+  created_at                        DateTime   @default(now()) @db.Timestamp(6)
+  updated_at                        DateTime   @default(now()) @db.Timestamp(6)
+  users_chat_rooms_owner_idTousers  users?     @relation("chat_rooms_owner_idTousers", fields: [owner_id], references: [id], onUpdate: NoAction, map: "chat_rooms_owner_id_users_id_fk")
+  properties                        properties @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "chat_rooms_property_id_properties_id_fk")
+  users_chat_rooms_tenant_idTousers users?     @relation("chat_rooms_tenant_idTousers", fields: [tenant_id], references: [id], onUpdate: NoAction, map: "chat_rooms_tenant_id_users_id_fk")
+  messages                          messages[]
+
+  @@unique([tenant_id, owner_id], map: "chat_rooms_tenant_owner_unique")
+  @@index([last_message_at])
+  @@index([owner_id])
+  @@index([property_id])
+  @@index([tenant_id])
+}
+
+model damage_reports {
+  id                                      String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  inspection_id                           String             @db.Uuid
+  item_id                                 String?            @db.Uuid
+  reported_by                             String             @db.Uuid
+  severity                                Severity
+  description                             String
+  estimated_cost                          Decimal?           @db.Decimal(12, 2)
+  actual_cost                             Decimal?           @db.Decimal(12, 2)
+  status                                  DamageReportStatus @default(reported)
+  resolution                              String?
+  resolved_by                             String?            @db.Uuid
+  resolved_at                             DateTime?          @db.Timestamp(6)
+  created_at                              DateTime?          @default(now()) @db.Timestamp(6)
+  inspections                             inspections        @relation(fields: [inspection_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "damage_reports_inspection_id_inspections_id_fk")
+  inspection_items                        inspection_items?  @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "damage_reports_item_id_inspection_items_id_fk")
+  users_damage_reports_reported_byTousers users              @relation("damage_reports_reported_byTousers", fields: [reported_by], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "damage_reports_reported_by_users_id_fk")
+  users_damage_reports_resolved_byTousers users?             @relation("damage_reports_resolved_byTousers", fields: [resolved_by], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "damage_reports_resolved_by_users_id_fk")
+}
+
+model experiment_assignments {
+  id            String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id       String?      @db.Uuid
+  variant       String
+  assigned_at   DateTime     @default(now()) @db.Timestamp(6)
+  created_at    DateTime     @default(now()) @db.Timestamp(6)
+  updated_at    DateTime     @default(now()) @db.Timestamp(6)
+  experiment_id String?      @db.Uuid
+  experiments   experiments? @relation(fields: [experiment_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "experiment_assignments_experiment_id_experiments_id_fk")
+  users         users?       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "experiment_assignments_user_id_users_id_fk")
+
+  @@unique([user_id, experiment_id], map: "experiment_assignments_user_experiment_unique")
+  @@index([experiment_id], map: "idx_experiment_assignments_experiment")
+  @@index([user_id], map: "idx_experiment_assignments_user")
+}
+
+model experiments {
+  id                     String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                   String
+  status                 ExperimentStatus         @default(draft)
+  variants               Json
+  metrics                Json
+  start_date             DateTime?                @db.Timestamp(6)
+  end_date               DateTime?                @db.Timestamp(6)
+  created_at             DateTime                 @default(now()) @db.Timestamp(6)
+  updated_at             DateTime                 @default(now()) @db.Timestamp(6)
+  experiment_assignments experiment_assignments[]
+
+  @@index([status], map: "idx_experiments_status")
+}
+
+model favorites {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id     String     @db.Uuid
+  property_id String     @db.Uuid
+  created_at  DateTime   @default(now()) @db.Timestamp(6)
+  updated_at  DateTime   @default(now()) @db.Timestamp(6)
+  properties  properties @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "favorites_property_id_properties_id_fk")
+  users       users      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "favorites_user_id_users_id_fk")
+
+  @@unique([user_id, property_id], map: "favorites_user_property_unique")
+  @@index([property_id])
+  @@index([user_id])
+}
+
+model feature_flags {
+  id                 String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  key                String   @unique(map: "feature_flags_key_idx")
+  name               String
+  description        String?
+  enabled            Boolean  @default(false)
+  rollout_percentage Int      @default(100)
+  allowedRoles       String[] @default([])
+  allowedUsers       String[] @default([]) @db.Uuid
+  created_at         DateTime @default(now()) @db.Timestamp(6)
+  updated_at         DateTime @default(now()) @db.Timestamp(6)
+}
+
+model feedbacks {
+  id         String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String?          @db.Uuid
+  category   FeedbackCategory
+  message    String
+  rating     Int?
+  status     FeedbackStatus   @default(pending)
+  created_at DateTime         @default(now()) @db.Timestamp(6)
+  updated_at DateTime         @default(now()) @db.Timestamp(6)
+  users      users?           @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "feedbacks_user_id_users_id_fk")
+
+  @@index([category])
+  @@index([status])
+  @@index([user_id])
+}
+
+model general_ledger {
+  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  transaction_date DateTime @db.Timestamp(6)
+  account_code     String
+  account_name     String
+  description      String
+  reference_type   String?
+  reference_id     String?
+  debit            Decimal? @default(0) @db.Decimal(12, 2)
+  credit           Decimal? @default(0) @db.Decimal(12, 2)
+  balance          Decimal? @db.Decimal(12, 2)
+  created_by       String?  @db.Uuid
+  created_at       DateTime @default(now()) @db.Timestamp(6)
+  updated_at       DateTime @default(now()) @db.Timestamp(6)
+  users            users?   @relation(fields: [created_by], references: [id], onUpdate: NoAction, map: "general_ledger_created_by_users_id_fk")
+
+  @@index([created_by])
+}
+
+model group_booking_members {
+  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  group_booking_id String         @db.Uuid
+  user_id          String         @db.Uuid
+  share_percentage Decimal        @db.Decimal(5, 2)
+  share_amount     Decimal        @db.Decimal(12, 2)
+  paid_amount      Decimal?       @default(0) @db.Decimal(12, 2)
+  status           MemberStatus   @default(invited)
+  joined_at        DateTime?      @db.Timestamp(6)
+  created_at       DateTime       @default(now()) @db.Timestamp(6)
+  updated_at       DateTime       @default(now()) @db.Timestamp(6)
+  group_bookings   group_bookings @relation(fields: [group_booking_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "group_booking_members_group_booking_id_group_bookings_id_fk")
+  users            users          @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "group_booking_members_user_id_users_id_fk")
+
+  @@unique([group_booking_id, user_id], map: "group_booking_members_group_booking_id_user_id_unique")
+  @@index([group_booking_id])
+  @@index([status])
+}
+
+model group_bookings {
+  id                    String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  lead_user_id          String                  @db.Uuid
+  property_id           String                  @db.Uuid
+  unit_id               String                  @db.Uuid
+  status                GroupBookingStatus      @default(pending)
+  total_amount          Decimal                 @db.Decimal(12, 2)
+  deposit_amount        Decimal                 @db.Decimal(12, 2)
+  start_date            DateTime                @db.Timestamp(6)
+  end_date              DateTime                @db.Timestamp(6)
+  metadata              Json?                   @default("{}")
+  created_at            DateTime?               @default(now()) @db.Timestamp(6)
+  updated_at            DateTime?               @default(now()) @db.Timestamp(6)
+  bookings              bookings[]
+  group_booking_members group_booking_members[]
+  users                 users                   @relation(fields: [lead_user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "group_bookings_lead_user_id_users_id_fk")
+  properties            properties              @relation(fields: [property_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "group_bookings_property_id_properties_id_fk")
+  units                 units                   @relation(fields: [unit_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "group_bookings_unit_id_units_id_fk")
+
+  @@index([created_at])
+  @@index([lead_user_id])
+  @@index([property_id])
+  @@index([status])
+}
+
+model inspection_items {
+  id                String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  inspection_id     String              @db.Uuid
+  category          InspectionCategory
+  item_name         String
+  condition         Condition?
+  notes             String?
+  repair_cost       Decimal?            @db.Decimal(12, 2)
+  photo_urls        Json?               @default("[]")
+  is_new_damage     Boolean?            @default(false)
+  created_at        DateTime?           @default(now()) @db.Timestamp(6)
+  damage_reports    damage_reports[]
+  inspections       inspections         @relation(fields: [inspection_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "inspection_items_inspection_id_inspections_id_fk")
+  inspection_photos inspection_photos[]
+}
+
+model inspection_photos {
+  id               String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  inspection_id    String            @db.Uuid
+  item_id          String?           @db.Uuid
+  type             PhotoType
+  url              String
+  caption          String?
+  metadata         Json?             @default("{}")
+  created_at       DateTime?         @default(now()) @db.Timestamp(6)
+  inspections      inspections       @relation(fields: [inspection_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "inspection_photos_inspection_id_inspections_id_fk")
+  inspection_items inspection_items? @relation(fields: [item_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "inspection_photos_item_id_inspection_items_id_fk")
+}
+
+model inspection_templates {
+  id            String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_type PropertyType
+  items         Json
+  is_default    Boolean?     @default(false)
+  created_at    DateTime?    @default(now()) @db.Timestamp(6)
+}
+
+model inspections {
+  id                                    String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  booking_id                            String              @db.Uuid
+  property_id                           String              @db.Uuid
+  unit_id                               String              @db.Uuid
+  type                                  InspectionType
+  status                                InspectionStatus?   @default(pending)
+  performed_by                          String              @db.Uuid
+  witness_id                            String?             @db.Uuid
+  overall_condition                     Condition?
+  notes                                 String?
+  damage_score                          Decimal?            @db.Decimal(5, 2)
+  estimated_repair_cost                 Decimal?            @db.Decimal(12, 2)
+  security_deposit                      Decimal?            @db.Decimal(12, 2)
+  refund_amount                         Decimal?            @db.Decimal(12, 2)
+  is_disputed                           Boolean?            @default(false)
+  dispute_reason                        String?
+  completed_at                          DateTime?           @db.Timestamp(6)
+  created_at                            DateTime?           @default(now()) @db.Timestamp(6)
+  damage_reports                        damage_reports[]
+  inspection_items                      inspection_items[]
+  inspection_photos                     inspection_photos[]
+  users_inspections_performed_byTousers users               @relation("inspections_performed_byTousers", fields: [performed_by], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "inspections_performed_by_users_id_fk")
+  properties                            properties          @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "inspections_property_id_properties_id_fk")
+  units                                 units               @relation(fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "inspections_unit_id_units_id_fk")
+  users_inspections_witness_idTousers   users?              @relation("inspections_witness_idTousers", fields: [witness_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "inspections_witness_id_users_id_fk")
+}
+
+model kyc_verifications {
+  id                 String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id            String?       @db.Uuid
+  didit_session_id   String?       @unique(map: "kyc_verifications_didit_session_id_unique")
+  didit_redirect_url String?
+  status             KYCStatus     @default(pending)
+  document_type      DocumentType?
+  ktp_image_url      String?
+  selfie_image_url   String?
+  face_match_score   Decimal?      @db.Decimal(5, 2)
+  liveness_passed    Boolean?
+  rejection_reason   String?
+  created_at         DateTime      @default(now()) @db.Timestamp(6)
+  updated_at         DateTime      @default(now()) @db.Timestamp(6)
+  users              users?        @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "kyc_verifications_user_id_users_id_fk")
+
+  @@index([didit_session_id])
+  @@index([status])
+  @@index([user_id])
+}
+
+model loyalty_transactions {
+  id             String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id        String?                @db.Uuid
+  amount         Int
+  type           LoyaltyTransactionType
+  description    String
+  reference_id   String?                @db.Uuid
+  reference_type String?
+  expires_at     DateTime?              @db.Timestamp(6)
+  created_at     DateTime               @default(now()) @db.Timestamp(6)
+  updated_at     DateTime               @default(now()) @db.Timestamp(6)
+  users          users?                 @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "loyalty_transactions_user_id_users_id_fk")
+
+  @@index([expires_at])
+  @@index([type])
+  @@index([user_id])
+}
+
+model maintenance_reports {
+  id              String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenant_id       String?                 @db.Uuid
+  property_id     String                  @db.Uuid
+  unit_id         String?                 @db.Uuid
+  category        MaintenanceCategory
+  description     String
+  images          Json?                   @default("[]")
+  status          MaintenanceReportStatus @default(pending)
+  resolution_note String?
+  created_at      DateTime                @default(now()) @db.Timestamp(6)
+  updated_at      DateTime                @default(now()) @db.Timestamp(6)
+  properties      properties              @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "maintenance_reports_property_id_properties_id_fk")
+  users           users?                  @relation(fields: [tenant_id], references: [id], onUpdate: NoAction, map: "maintenance_reports_tenant_id_users_id_fk")
+  units           units?                  @relation(fields: [unit_id], references: [id], onUpdate: NoAction, map: "maintenance_reports_unit_id_units_id_fk")
+
+  @@index([property_id])
+  @@index([status])
+  @@index([tenant_id])
+}
+
+model maintenance_tickets {
+  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  unit_id     String       @db.Uuid
+  tenant_id   String?      @db.Uuid
+  title       String
+  description String
+  images      Json?        @default("[]")
+  priority    Priority     @default(medium)
+  status      TicketStatus @default(reported)
+  owner_notes String?
+  created_at  DateTime     @default(now()) @db.Timestamp(6)
+  updated_at  DateTime     @default(now()) @db.Timestamp(6)
+  users       users?       @relation(fields: [tenant_id], references: [id], onUpdate: NoAction, map: "maintenance_tickets_tenant_id_users_id_fk")
+  units       units        @relation(fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "maintenance_tickets_unit_id_units_id_fk")
+
+  @@index([priority])
+  @@index([status])
+  @@index([tenant_id])
+}
+
+model messages {
+  id         String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  room_id    String     @db.Uuid
+  sender_id  String?    @db.Uuid
+  content    String
+  created_at DateTime   @default(now()) @db.Timestamp(6)
+  updated_at DateTime   @default(now()) @db.Timestamp(6)
+  is_read    Boolean    @default(false)
+  chat_rooms chat_rooms @relation(fields: [room_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "messages_room_id_chat_rooms_id_fk")
+  users      users?     @relation(fields: [sender_id], references: [id], onUpdate: NoAction, map: "messages_sender_id_users_id_fk")
+
+  @@index([created_at])
+  @@index([room_id])
+  @@index([sender_id])
+}
+
+model nearby_places {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id String     @db.Uuid
+  name        String
+  type        PlaceType
+  distance    Int
+  latitude    Decimal    @db.Decimal(10, 8)
+  longitude   Decimal    @db.Decimal(10, 8)
+  sort_order  Int        @default(0)
+  created_at  DateTime   @default(now()) @db.Timestamp(6)
+  properties  properties @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "nearby_places_nearby_place_property_id_properties_id_fk")
+
+  @@index([property_id], map: "idx_nearby_places_property")
+  @@index([type], map: "idx_nearby_places_type")
+}
+
+model neighborhood_insights {
+  id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id   String          @db.Uuid
+  category      InsightCategory
+  rating        Decimal?        @db.Decimal(3, 2)
+  description   String?
+  source        InsightSource   @default(tenant)
+  submitted_by  String?         @db.Uuid
+  is_verified   Boolean?        @default(false)
+  helpful_count Int?            @default(0)
+  created_at    DateTime?       @default(now()) @db.Timestamp(6)
+  updated_at    DateTime?       @default(now()) @db.Timestamp(6)
+  properties    properties      @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "neighborhood_insights_property_id_properties_id_fk")
+  users         users?          @relation(fields: [submitted_by], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "neighborhood_insights_submitted_by_users_id_fk")
+}
+
+model neighborhood_places {
+  id              String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id     String     @db.Uuid
+  type            PlaceType
+  name            String
+  distance        Decimal?   @db.Decimal(5, 2)
+  walking_minutes Int?
+  latitude        Decimal?   @db.Decimal(9, 6)
+  longitude       Decimal?   @db.Decimal(9, 6)
+  metadata        Json?      @default("{}")
+  created_at      DateTime?  @default(now()) @db.Timestamp(6)
+  updated_at      DateTime?  @default(now()) @db.Timestamp(6)
+  properties      properties @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "neighborhood_places_property_id_properties_id_fk")
+}
+
+model notification_settings {
+  id                                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  resend_api_key                    String?
+  resend_from_email                 String?
+  meta_access_token                 String?
+  meta_phone_number_id              String?
+  meta_maintenance_created_template String?
+  meta_maintenance_updated_template String?
+  created_at                        DateTime @default(now()) @db.Timestamp(6)
+  updated_at                        DateTime @default(now()) @db.Timestamp(6)
+
+  @@index([created_at])
+}
+
+model notifications {
+  id           String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id      String           @db.Uuid
+  title        String
+  message      String
+  type         NotificationType
+  reference_id String?          @db.Uuid
+  is_read      Boolean          @default(false)
+  created_at   DateTime         @default(now()) @db.Timestamp(6)
+  updated_at   DateTime         @default(now()) @db.Timestamp(6)
+  users        users            @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "notifications_user_id_users_id_fk")
+
+  @@index([is_read])
+  @@index([user_id])
+}
+
+model owner_bank_accounts {
+  id             String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  owner_id       String          @db.Uuid
+  account_type   BankAccountType
+  provider_name  String
+  account_number String
+  account_name   String
+  is_primary     Boolean         @default(false)
+  created_at     DateTime        @default(now()) @db.Timestamp(6)
+  updated_at     DateTime        @default(now()) @db.Timestamp(6)
+  users          users           @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "owner_bank_accounts_owner_id_users_id_fk")
+  withdrawals    withdrawals[]
+
+  @@index([account_type])
+  @@index([owner_id])
+}
+
+model payment_gateway_configs {
+  id                          String                       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  provider                    GatewayProvider
+  is_active                   Boolean?                     @default(false)
+  config                      Json                         @default("{}")
+  environment                 Environment                  @default(sandbox)
+  updated_at                  DateTime?                    @default(now()) @db.Timestamp(6)
+  created_at                  DateTime                     @default(now()) @db.Timestamp(6)
+  payment_gateway_credentials payment_gateway_credentials?
+}
+
+model payment_gateway_credentials {
+  id                      String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  encrypted_config        Json
+  created_at              DateTime                @default(now()) @db.Timestamp(6)
+  updated_at              DateTime                @default(now()) @db.Timestamp(6)
+  gateway_id              String                  @unique(map: "payment_gateway_credentials_gateway_id_unique") @db.Uuid
+  payment_gateway_configs payment_gateway_configs @relation(fields: [gateway_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "payment_gateway_credentials_gateway_id_payment_gateway_configs_")
+}
+
+model payment_transactions {
+  id               String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  invoice_number   String          @unique(map: "payment_transactions_invoice_number_unique")
+  booking_id       String?         @db.Uuid
+  provider         PaymentProvider
+  amount           Decimal         @db.Decimal(12, 2)
+  status           PaymentStatus   @default(pending)
+  gateway_response Json?
+  webhook_payload  Json?
+  paid_at          DateTime?       @db.Timestamp(6)
+  created_at       DateTime        @default(now()) @db.Timestamp(6)
+  updated_at       DateTime        @default(now()) @db.Timestamp(6)
+  bookings         bookings?       @relation(fields: [booking_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "payment_transactions_booking_id_bookings_id_fk")
+}
+
+model payments {
+  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  booking_id      String            @db.Uuid
+  property_id     String?           @db.Uuid
+  provider        PaymentProvider
+  purpose         PaymentPurpose
+  amount          Decimal           @db.Decimal(12, 2)
+  currency        Currency          @default(IDR)
+  status          PaymentStatus     @default(pending)
+  transaction_id  String?           @unique(map: "payments_transaction_id_unique")
+  metadata        Json?             @default("{}")
+  raw_response    Json?             @default("{}")
+  paid_at         DateTime?         @db.Timestamp(6)
+  created_at      DateTime          @default(now()) @db.Timestamp(6)
+  updated_at      DateTime          @default(now()) @db.Timestamp(6)
+  bookings        bookings          @relation(fields: [booking_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "payments_booking_id_bookings_id_fk")
+  properties      properties?       @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "payments_property_id_properties_id_fk")
+  referrals       referrals[]
+  refund_requests refund_requests[]
+
+  @@index([booking_id])
+  @@index([property_id])
+  @@index([property_id, status, paid_at], map: "payments_property_status_paidat_idx")
+  @@index([provider])
+  @@index([status])
+}
+
+model platform_settings {
+  id                     String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  key                    String    @unique @default("default")
+  platform_fee_percent   Decimal?  @default(1.8) @db.Decimal(5, 2)
+  featured_listing_price Decimal?  @default(50000) @db.Decimal(12, 2)
+  updated_at             DateTime? @default(now()) @db.Timestamp(6)
+  created_at             DateTime  @default(now()) @db.Timestamp(6)
+}
+
+model popular_areas {
+  popular_area_id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  popular_area_slug           String   @unique(map: "popular_areas_popular_area_slug_unique")
+  popular_area_name           String
+  popular_area_image_key      String
+  popular_area_property_count Int      @default(0)
+  popular_area_sort_order     Int      @default(0)
+  popular_area_is_active      Boolean  @default(true)
+  popular_area_created_at     DateTime @default(now()) @db.Timestamp(6)
+  popular_area_updated_at     DateTime @default(now()) @db.Timestamp(6)
+}
+
+model pricing_analytics {
+  id                     String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id            String     @db.Uuid
+  month                  String
+  avg_occupancy          Decimal?   @db.Decimal(5, 2)
+  avg_booking_value      Decimal?   @db.Decimal(12, 2)
+  total_bookings         Int?       @default(0)
+  recommended_price      Decimal?   @db.Decimal(12, 2)
+  recommended_adjustment Decimal?   @db.Decimal(5, 2)
+  confidence_score       Decimal?   @db.Decimal(3, 2)
+  factors                Json?      @default("{}")
+  created_at             DateTime?  @default(now()) @db.Timestamp(6)
+  properties             properties @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "pricing_analytics_property_id_properties_id_fk")
+}
+
+model pricing_suggestions {
+  id                     String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id            String                  @db.Uuid
+  rule_id                String?                 @db.Uuid
+  suggested_value        Decimal                 @db.Decimal(12, 2)
+  reason                 String
+  priority               Priority                @default(medium)
+  status                 PricingSuggestionStatus @default(pending)
+  expires_at             DateTime?               @db.Timestamp(6)
+  created_at             DateTime?               @default(now()) @db.Timestamp(6)
+  updated_at             DateTime?               @default(now()) @db.Timestamp(6)
+  properties             properties              @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "pricing_suggestions_property_id_properties_id_fk")
+  seasonal_pricing_rules seasonal_pricing_rules? @relation(fields: [rule_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pricing_suggestions_rule_id_seasonal_pricing_rules_id_fk")
+}
+
+model properties {
+  id                                                                            String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  owner_id                                                                      String                   @db.Uuid
+  name                                                                          String
+  description                                                                   String?
+  address                                                                       String
+  province                                                                      String?
+  city                                                                          String?
+  district                                                                      String?
+  type                                                                          PropertyType
+  gender_type                                                                   GenderType?
+  rental_period                                                                 RentalPeriod?
+  base_price                                                                    Decimal?                 @db.Decimal(12, 2)
+  packages                                                                      Json                     @default("{\"custom\": {\"unit\": \"days\", \"label\": \"Custom Duration\", \"enabled\": false, \"maxDuration\": 365, \"minDuration\": 1, \"pricePerUnit\": 0}, \"predefined\": []}")
+  status                                                                        PropertyStatus           @default(aktif)
+  amenities                                                                     Json?                    @default("[]")
+  metadata                                                                      Json?                    @default("{}")
+  images                                                                        Json?                    @default("[]")
+  latitude                                                                      Decimal?                 @db.Decimal(9, 6)
+  longitude                                                                     Decimal?                 @db.Decimal(9, 6)
+  is_active                                                                     Boolean                  @default(false)
+  is_featured                                                                   Boolean?                 @default(false)
+  gps_verified                                                                  Boolean                  @default(false)
+  featured_until                                                                DateTime?                @db.Timestamp(6)
+  ical_export_token                                                             String?                  @unique(map: "properties_ical_export_token_unique")
+  ical_import_url                                                               String?
+  created_at                                                                    DateTime                 @default(now()) @db.Timestamp(6)
+  updated_at                                                                    DateTime                 @default(now()) @db.Timestamp(6)
+  booking_requests                                                              booking_requests[]
+  bookings                                                                      bookings[]
+  chat_rooms                                                                    chat_rooms[]
+  favorites                                                                     favorites[]
+  group_bookings                                                                group_bookings[]
+  inspections                                                                   inspections[]
+  maintenance_reports                                                           maintenance_reports[]
+  nearby_places                                                                 nearby_places[]
+  neighborhood_insights                                                         neighborhood_insights[]
+  neighborhood_places                                                           neighborhood_places[]
+  payments                                                                      payments[]
+  pricing_analytics                                                             pricing_analytics[]
+  pricing_suggestions                                                           pricing_suggestions[]
+  users                                                                         users                    @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "properties_owner_id_users_id_fk")
+  property_ads                                                                  property_ads[]
+  property_ratings                                                              property_ratings?
+  property_rules                                                                property_rules[]
+  property_similarities_property_similarities_property_idTopoproperties         property_similarities[]  @relation("property_similarities_property_idTopoproperties")
+  property_similarities_property_similarities_similar_property_idTopoproperties property_similarities[]  @relation("property_similarities_similar_property_idTopoproperties")
+  property_tags                                                                 property_tags[]
+  referrals                                                                     referrals[]
+  reviews                                                                       reviews[]
+  seasonal_pricing_rules                                                        seasonal_pricing_rules[]
+  units                                                                         units[]
+  user_contracts                                                                user_contracts[]
+  wishlists                                                                     wishlists[]
+
+  @@index([city, is_active], map: "idx_properties_city_active")
+  @@index([latitude, longitude], map: "idx_properties_coords")
+  @@index([amenities], map: "properties_amenities_gin_idx", type: Gin)
+  @@index([city])
+  @@index([is_active])
+  @@index([metadata], map: "properties_metadata_gin_idx", type: Gin)
+  @@index([owner_id, is_active, created_at], map: "properties_owner_active_created_idx")
+  @@index([owner_id])
+  @@index([province])
+  @@index([status])
+  @@index([type])
+}
+
+model property_ads {
+  id                  String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id         String?       @db.Uuid
+  package_id          String?       @db.Uuid
+  advertiser_name     String
+  advertiser_phone    String
+  advertiser_whatsapp String?
+  title               String
+  description         String
+  image_url           String
+  target_url          String?
+  location            String
+  price               String?
+  type                AdType
+  position            Int           @default(0)
+  is_active           Boolean       @default(true)
+  clicks              Int           @default(0)
+  impressions         Int           @default(0)
+  start_date          DateTime      @default(now()) @db.Timestamp(6)
+  end_date            DateTime?     @db.Timestamp(6)
+  payment_status      PaymentStatus @default(pending)
+  paid_at             DateTime?     @db.Timestamp(6)
+  admin_note          String?
+  created_at          DateTime      @default(now()) @db.Timestamp(6)
+  updated_at          DateTime      @default(now()) @db.Timestamp(6)
+  ad_packages         ad_packages?  @relation(fields: [package_id], references: [id], onUpdate: NoAction, map: "property_ads_package_id_ad_packages_id_fk")
+  properties          properties?   @relation(fields: [property_id], references: [id], onUpdate: NoAction, map: "property_ads_property_id_properties_id_fk")
+
+  @@index([is_active], map: "idx_property_ads_active")
+  @@index([start_date, end_date], map: "idx_property_ads_dates")
+  @@index([package_id], map: "idx_property_ads_package_id")
+  @@index([paid_at], map: "idx_property_ads_paid_at")
+  @@index([payment_status], map: "idx_property_ads_payment_status")
+  @@index([position], map: "idx_property_ads_position")
+}
+
+model property_comparisons {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id      String    @db.Uuid
+  property_ids Json
+  name         String?
+  created_at   DateTime? @default(now()) @db.Timestamp(6)
+  users        users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "property_comparisons_user_id_users_id_fk")
+}
+
+model property_ratings {
+  id                  String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id         String     @unique(map: "property_ratings_property_id_unique") @db.Uuid
+  average_rating      Decimal    @default(0) @db.Decimal(3, 2)
+  total_reviews       Int        @default(0)
+  cleanliness         Decimal    @default(0) @db.Decimal(3, 2)
+  security            Decimal    @default(0) @db.Decimal(3, 2)
+  accuracy            Decimal    @default(0) @db.Decimal(3, 2)
+  communication       Decimal    @default(0) @db.Decimal(3, 2)
+  value_for_money     Decimal    @default(0) @db.Decimal(3, 2)
+  rating_distribution Json?      @default("{}")
+  updated_at          DateTime   @default(now()) @db.Timestamp(6)
+  properties          properties @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "property_ratings_property_id_properties_id_fk")
+}
+
+model property_rules {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id String     @db.Uuid
+  text        String
+  type        RuleType   @default(percentage)
+  sort_order  Int        @default(0)
+  created_at  DateTime   @default(now()) @db.Timestamp(6)
+  updated_at  DateTime   @default(now()) @db.Timestamp(6)
+  properties  properties @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "property_rules_property_rule_property_id_properties_id_fk")
+
+  @@index([property_id], map: "idx_property_rules_property")
+}
+
+model property_similarities {
+  id                  String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id         String     @db.Uuid
+  similar_property_id String     @db.Uuid
+  similarity_score    Decimal    @db.Decimal(5, 4)
+  cached_at           DateTime   @default(now()) @db.Timestamp(6)
+  created_at          DateTime   @default(now()) @db.Timestamp(6)
+  updated_at          DateTime   @default(now()) @db.Timestamp(6)
+  properties          properties @relation("property_similarities_property_idTopoproperties", fields: [property_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "property_similarities_property_id_properties_id_fk")
+  similar_properties  properties @relation("property_similarities_similar_property_idTopoproperties", fields: [similar_property_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "property_similarities_similar_property_id_properties_id_fk")
+
+  @@unique([property_id, similar_property_id], map: "property_similarities_pair_unique")
+  @@index([property_id], map: "idx_property_similarities_property")
+  @@index([similar_property_id], map: "idx_property_similarities_similar")
+}
+
+model property_tags {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id String     @db.Uuid
+  tag_id      String     @db.Uuid
+  created_at  DateTime   @default(now()) @db.Timestamp(6)
+  updated_at  DateTime   @default(now()) @db.Timestamp(6)
+  properties  properties @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "property_tags_property_id_properties_id_fk")
+  tags        tags       @relation(fields: [tag_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "property_tags_tag_id_tags_id_fk")
+
+  @@unique([property_id, tag_id], map: "property_tags_pk")
+  @@index([property_id])
+  @@index([tag_id])
+}
+
+model push_subscriptions {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String   @db.Uuid
+  endpoint   String   @unique(map: "push_subscriptions_endpoint_idx")
+  p256dh     String
+  auth       String
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  users      users    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "push_subscriptions_user_id_users_id_fk")
+
+  @@index([user_id])
+}
+
+model referrals {
+  id                                 String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  referrer_id                        String           @db.Uuid
+  referee_id                         String?          @db.Uuid
+  code                               String           @unique(map: "referrals_code_idx")
+  category                           ReferralCategory @default(tenant)
+  status                             ReferralStatus   @default(pending)
+  property_id                        String?          @db.Uuid
+  base_amount                        Decimal?         @default(0) @db.Decimal(12, 2)
+  commission_rate                    Decimal?         @default(0) @db.Decimal(5, 2)
+  commission_amount                  Decimal?         @default(0) @db.Decimal(12, 2)
+  referee_transaction_id             String?          @db.Uuid
+  eligible_at                        DateTime?        @db.Timestamp(6)
+  payout_scheduled_at                DateTime?        @db.Timestamp(6)
+  voucher_code                       String?          @unique(map: "referrals_voucher_code_idx")
+  voucher_redeemed_at                DateTime?        @db.Timestamp(6)
+  offset_applied                     Boolean?         @default(false)
+  tier                               Int?             @default(1)
+  payout_idempotency_key             String?          @unique(map: "referrals_payout_idempotency_key_idx")
+  metadata                           Json?            @default("{}")
+  completed_at                       DateTime?        @db.Timestamp(6)
+  created_at                         DateTime         @default(now()) @db.Timestamp(6)
+  updated_at                         DateTime         @default(now()) @db.Timestamp(6)
+  properties                         properties?      @relation(fields: [property_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "referrals_property_id_properties_id_fk")
+  users_referrals_referee_idTousers  users?           @relation("referrals_referee_idTousers", fields: [referee_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "referrals_referee_id_users_id_fk")
+  payments                           payments?        @relation(fields: [referee_transaction_id], references: [id], onUpdate: NoAction, map: "referrals_referee_transaction_id_payments_id_fk")
+  users_referrals_referrer_idTousers users            @relation("referrals_referrer_idTousers", fields: [referrer_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "referrals_referrer_id_users_id_fk")
+
+  @@unique([referrer_id, referee_id, category], map: "referrals_referrer_referee_category_unique")
+  @@index([referee_id])
+  @@index([referrer_id])
+}
+
+model refund_requests {
+  id                                       String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  booking_id                               String       @db.Uuid
+  payment_id                               String       @db.Uuid
+  user_id                                  String?      @db.Uuid
+  amount                                   Decimal      @db.Decimal(12, 2)
+  approved_amount                          Decimal?     @db.Decimal(12, 2)
+  reason                                   String
+  status                                   RefundStatus @default(pending)
+  reviewed_by                              String?      @db.Uuid
+  reviewed_at                              DateTime?    @db.Timestamp(6)
+  review_note                              String?
+  created_at                               DateTime     @default(now()) @db.Timestamp(6)
+  updated_at                               DateTime     @default(now()) @db.Timestamp(6)
+  bookings                                 bookings     @relation(fields: [booking_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "refund_requests_booking_id_bookings_id_fk")
+  payments                                 payments     @relation(fields: [payment_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "refund_requests_payment_id_payments_id_fk")
+  users_refund_requests_reviewed_byTousers users?       @relation("refund_requests_reviewed_byTousers", fields: [reviewed_by], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "refund_requests_reviewed_by_users_id_fk")
+  users_refund_requests_user_idTousers     users?       @relation("refund_requests_user_idTousers", fields: [user_id], references: [id], onUpdate: NoAction, map: "refund_requests_user_id_users_id_fk")
+
+  @@index([booking_id])
+  @@index([payment_id])
+  @@index([status])
+  @@index([user_id])
+}
+
+model review_replies {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  review_id  String   @db.Uuid
+  user_id    String?  @db.Uuid
+  content    String
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  updated_at DateTime @default(now()) @db.Timestamp(6)
+  reviews    reviews  @relation(fields: [review_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "review_replies_review_id_reviews_id_fk")
+  users      users?   @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "review_replies_user_id_users_id_fk")
+
+  @@index([review_id])
+  @@index([user_id])
+}
+
+model reviews {
+  id                                    String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_by_id                         String?          @db.Uuid
+  reviewed_user_id                      String?          @db.Uuid
+  property_id                           String?          @db.Uuid
+  type                                  ReviewType
+  rating                                Decimal          @db.Decimal(3, 2)
+  cleanliness                           Decimal          @db.Decimal(3, 2)
+  security                              Decimal          @db.Decimal(3, 2)
+  accuracy                              Decimal          @db.Decimal(3, 2)
+  communication                         Decimal          @db.Decimal(3, 2)
+  value_for_money                       Decimal          @db.Decimal(3, 2)
+  comment                               String
+  booking_id                            String           @db.Uuid
+  status                                ReviewStatus     @default(pending)
+  is_edited                             Boolean          @default(false)
+  helpful_count                         Int              @default(0)
+  reply_count                           Int              @default(0)
+  created_at                            DateTime         @default(now()) @db.Timestamp(6)
+  updated_at                            DateTime         @default(now()) @db.Timestamp(6)
+  review_replies                        review_replies[]
+  bookings                              bookings         @relation(fields: [booking_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "reviews_booking_id_bookings_id_fk")
+  users_reviews_created_by_idTousers    users?           @relation("reviews_created_by_idTousers", fields: [created_by_id], references: [id], onUpdate: NoAction, map: "reviews_created_by_id_users_id_fk")
+  properties                            properties?      @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "reviews_property_id_properties_id_fk")
+  users_reviews_reviewed_user_idTousers users?           @relation("reviews_reviewed_user_idTousers", fields: [reviewed_user_id], references: [id], onUpdate: NoAction, map: "reviews_reviewed_user_id_users_id_fk")
+
+  @@unique([property_id, created_by_id], map: "reviews_property_user_unique")
+  @@index([booking_id])
+  @@index([created_by_id])
+  @@index([property_id])
+  @@index([rating])
+  @@index([reviewed_user_id])
+  @@index([status])
+  @@index([type])
+}
+
+model reward_redemptions {
+  id          String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id     String?          @db.Uuid
+  reward_id   String           @db.Uuid
+  points_used Int
+  status      RedemptionStatus @default(pending)
+  created_at  DateTime         @default(now()) @db.Timestamp(6)
+  updated_at  DateTime         @default(now()) @db.Timestamp(6)
+  rewards     rewards          @relation(fields: [reward_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "reward_redemptions_reward_id_rewards_id_fk")
+  users       users?           @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "reward_redemptions_user_id_users_id_fk")
+
+  @@unique([user_id, reward_id], map: "reward_redemptions_user_reward_unique")
+  @@index([status])
+  @@index([user_id])
+}
+
+model rewards {
+  id                 String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name               String
+  description        String?
+  points_cost        Int
+  value              Decimal              @db.Decimal(12, 2)
+  is_active          Boolean              @default(true)
+  created_at         DateTime             @default(now()) @db.Timestamp(6)
+  reward_redemptions reward_redemptions[]
+}
+
+model room_facilities {
+  room_facility_id         String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  room_facility_unit_id    String           @db.Uuid
+  room_facility_category   FacilityCategory
+  room_facility_name       String
+  room_facility_icon       String           @default("circle-dot")
+  room_facility_sort_order Int              @default(0)
+  room_facility_created_at DateTime         @default(now()) @db.Timestamp(6)
+  units                    units            @relation(fields: [room_facility_unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "room_facilities_room_facility_unit_id_units_id_fk")
+
+  @@unique([room_facility_unit_id, room_facility_category, room_facility_name], map: "room_facilities_unit_category_name_unique")
+  @@index([room_facility_category], map: "idx_room_facilities_category")
+  @@index([room_facility_unit_id], map: "idx_room_facilities_unit")
+}
+
+model roommate_preferences {
+  id                 String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id            String    @unique(map: "roommate_preferences_user_id_unique") @db.Uuid
+  budget_min         Decimal?  @db.Decimal(12, 2)
+  budget_max         Decimal?  @db.Decimal(12, 2)
+  preferred_location String?
+  move_in_date       DateTime? @db.Timestamp(6)
+  duration           String?
+  lifestyle          Json?     @default("{}")
+  bio                String?
+  is_active          Boolean?  @default(true)
+  created_at         DateTime? @default(now()) @db.Timestamp(6)
+  users              users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "roommate_preferences_user_id_users_id_fk")
+}
+
+model saved_searches {
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id          String    @db.Uuid
+  name             String?
+  filters          Json      @default("{}")
+  is_active        Boolean   @default(true)
+  last_matched_at  DateTime? @db.Timestamp(6)
+  last_notified_at DateTime? @db.Timestamp(6)
+  created_at       DateTime  @default(now()) @db.Timestamp(6)
+  updated_at       DateTime  @default(now()) @db.Timestamp(6)
+  users            users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "saved_searches_user_id_users_id_fk")
+
+  @@index([is_active], map: "saved_searches_active_idx")
+  @@index([user_id])
+}
+
+model seasonal_pricing_rules {
+  id                  String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id         String                @db.Uuid
+  unit_id             String?               @db.Uuid
+  name                String
+  rule_type           RuleType              @default(percentage)
+  adjustment_value    Decimal               @db.Decimal(12, 2)
+  start_date          DateTime              @db.Timestamp(6)
+  end_date            DateTime              @db.Timestamp(6)
+  min_nights          Int?
+  max_nights          Int?
+  priority            Int?                  @default(0)
+  is_active           Boolean?              @default(true)
+  metadata            Json?                 @default("{}")
+  created_at          DateTime?             @default(now()) @db.Timestamp(6)
+  updated_at          DateTime?             @default(now()) @db.Timestamp(6)
+  bookings            bookings[]
+  pricing_suggestions pricing_suggestions[]
+  properties          properties            @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "seasonal_pricing_rules_property_id_properties_id_fk")
+  units               units?                @relation(fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "seasonal_pricing_rules_unit_id_units_id_fk")
+}
+
+model sessions {
+  id         String   @id @default(dbgenerated("(gen_random_uuid())::text"))
+  user_id    String?  @db.Uuid
+  expires_at DateTime @db.Timestamp(6)
+  token      String?  @unique(map: "sessions_token_unique")
+  ip_address String?
+  user_agent String?
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  updated_at DateTime @default(now()) @db.Timestamp(6)
+  users      users?   @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "sessions_user_id_users_id_fk")
+
+  @@index([user_id])
+}
+
+model tags {
+  id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String          @unique(map: "tags_name_unique")
+  category      TagCategory
+  created_at    DateTime        @default(now()) @db.Timestamp(6)
+  property_tags property_tags[]
+}
+
+model twoFactor {
+  id                        String    @id @default(dbgenerated("(gen_random_uuid())::text"))
+  user_id                   String?   @db.Uuid
+  secret                    String
+  backup_codes              String
+  verified                  Boolean   @default(true)
+  failed_verification_count Int?      @default(0)
+  locked_until              DateTime? @db.Timestamp(6)
+  created_at                DateTime  @default(now()) @db.Timestamp(6)
+  updated_at                DateTime  @default(now()) @db.Timestamp(6)
+  users                     users?    @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "twoFactor_user_id_users_id_fk")
+
+  @@index([secret], map: "two_factor_secret_idx")
+  @@index([user_id], map: "two_factor_user_id_idx")
+}
+
+model unit_pricing_tiers {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  unit_id       String   @db.Uuid
+  max_occupants Int
+  price         Decimal  @db.Decimal(12, 2)
+  created_at    DateTime @default(now()) @db.Timestamp(6)
+  updated_at    DateTime @default(now()) @db.Timestamp(6)
+  units         units    @relation(fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "unit_pricing_tiers_unit_id_units_id_fk")
+
+  @@index([unit_id])
+}
+
+model units {
+  id                     String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id            String                   @db.Uuid
+  name                   String
+  description            String?
+  price                  Decimal                  @db.Decimal(12, 2)
+  capacity               Int?
+  size                   String?
+  status                 UnitStatus               @default(available)
+  current_booking_id     String?                  @unique @db.Uuid
+  metadata               Json?                    @default("{}")
+  room_size              Decimal?                 @db.Decimal(6, 2)
+  electricity_included   Boolean                  @default(false)
+  furniture_included     Boolean                  @default(false)
+  created_at             DateTime                 @default(now()) @db.Timestamp(6)
+  updated_at             DateTime                 @default(now()) @db.Timestamp(6)
+  booking_requests       booking_requests[]
+  bookings               bookings[]               @relation("unit_bookings")
+  group_bookings         group_bookings[]
+  inspections            inspections[]
+  maintenance_reports    maintenance_reports[]
+  maintenance_tickets    maintenance_tickets[]
+  room_facilities        room_facilities[]
+  seasonal_pricing_rules seasonal_pricing_rules[]
+  unit_pricing_tiers     unit_pricing_tiers[]
+  current_booking        bookings?                @relation("unit_current_booking", fields: [current_booking_id], references: [id], onUpdate: NoAction, map: "units_current_booking_id_bookings_id_fk")
+  properties             properties               @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "units_property_id_properties_id_fk")
+
+  @@unique([property_id, name], map: "units_property_id_name_unique")
+  @@index([property_id])
+  @@index([property_id, status, created_at], map: "units_property_status_created_idx")
+  @@index([status])
+}
+
+model user_contracts {
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id         String?        @db.Uuid
+  booking_id      String         @db.Uuid
+  property_id     String         @db.Uuid
+  contract_url    String
+  contract_status ContractStatus @default(generated)
+  created_at      DateTime       @default(now()) @db.Timestamp(6)
+  updated_at      DateTime       @default(now()) @db.Timestamp(6)
+  bookings        bookings       @relation(fields: [booking_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_contracts_booking_id_bookings_id_fk")
+  properties      properties     @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_contracts_property_id_properties_id_fk")
+  users           users?         @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "user_contracts_user_id_users_id_fk")
+
+  @@index([booking_id])
+  @@index([property_id])
+  @@index([user_id])
+}
+
+model user_interest_vectors {
+  user_id              String   @id @db.Uuid
+  type_weights         Json     @default("{}")
+  city_weights         Json     @default("{}")
+  price_bucket_weights Json     @default("{}")
+  amenity_set          Json     @default("[]")
+  area_weights         Json     @default("{}")
+  updated_at           DateTime @default(now()) @db.Timestamp(6)
+  users                users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_interest_vectors_user_id_users_id_fk")
+
+  @@index([user_id], map: "idx_user_interest_vectors_user")
+}
+
+model user_notification_preferences {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id           String   @unique(map: "user_notification_preferences_user_id_idx") @db.Uuid
+  preferences       Json     @default("{}")
+  email_digest      String   @default("immediate")
+  quiet_hours_start String?
+  quiet_hours_end   String?
+  timezone          String   @default("Asia/Jakarta")
+  updated_at        DateTime @default(now()) @db.Timestamp(6)
+  users             users    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_notification_preferences_user_id_users_id_fk")
+}
+
+model users {
+  id                                                 String                         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email                                              String                         @unique(map: "users_email_unique")
+  email_verified                                     Boolean                        @default(false)
+  name                                               String
+  image                                              String?
+  phone                                              String?
+  whatsapp                                           String?
+  telegram                                           String?
+  role                                               UserRole                       @default(cust)
+  is_active                                          Boolean                        @default(true)
+  is_banned                                          Boolean                        @default(false)
+  ban_reason                                         String?
+  two_factor_enabled                                 Boolean?                       @default(false)
+  kyc_status                                         KYCStatus                      @default(none)
+  ktp_number                                         String?
+  ktp_image_url                                      String?
+  reputation_score                                   Decimal                        @default(0.00) @db.Decimal(4, 2)
+  balance                                            Decimal                        @default(0.00) @db.Decimal(12, 2)
+  province                                           String?
+  city                                               String?
+  district                                           String?
+  referral_code                                      String?                        @unique(map: "users_referral_code_unique")
+  referred_by                                        String?                        @db.Uuid
+  loyalty_tier                                       LoyaltyTier                    @default(bronze)
+  total_referrals                                    Int                            @default(0)
+  created_at                                         DateTime                       @default(now()) @db.Timestamp(6)
+  updated_at                                         DateTime                       @default(now()) @db.Timestamp(6)
+  accounts                                           accounts[]
+  analytics_events                                   analytics_events[]
+  audit_logs                                         audit_logs[]
+  balance_logs                                       balance_logs[]
+  booking_requests                                   booking_requests[]
+  bookings                                           bookings[]
+  chat_rooms_chat_rooms_owner_idTousers              chat_rooms[]                   @relation("chat_rooms_owner_idTousers")
+  chat_rooms_chat_rooms_tenant_idTousers             chat_rooms[]                   @relation("chat_rooms_tenant_idTousers")
+  damage_reports_damage_reports_reported_byTousers   damage_reports[]               @relation("damage_reports_reported_byTousers")
+  damage_reports_damage_reports_resolved_byTousers   damage_reports[]               @relation("damage_reports_resolved_byTousers")
+  experiment_assignments                             experiment_assignments[]
+  favorites                                          favorites[]
+  feedbacks                                          feedbacks[]
+  general_ledger                                     general_ledger[]
+  group_booking_members                              group_booking_members[]
+  group_bookings                                     group_bookings[]
+  inspections_inspections_performed_byTousers        inspections[]                  @relation("inspections_performed_byTousers")
+  inspections_inspections_witness_idTousers          inspections[]                  @relation("inspections_witness_idTousers")
+  kyc_verifications                                  kyc_verifications[]
+  loyalty_transactions                               loyalty_transactions[]
+  maintenance_reports                                maintenance_reports[]
+  maintenance_tickets                                maintenance_tickets[]
+  messages                                           messages[]
+  neighborhood_insights                              neighborhood_insights[]
+  notifications                                      notifications[]
+  owner_bank_accounts                                owner_bank_accounts[]
+  properties                                         properties[]
+  property_comparisons                               property_comparisons[]
+  push_subscriptions                                 push_subscriptions[]
+  referrals_referrals_referee_idTousers              referrals[]                    @relation("referrals_referee_idTousers")
+  referrals_referrals_referrer_idTousers             referrals[]                    @relation("referrals_referrer_idTousers")
+  refund_requests_refund_requests_reviewed_byTousers refund_requests[]              @relation("refund_requests_reviewed_byTousers")
+  refund_requests_refund_requests_user_idTousers     refund_requests[]              @relation("refund_requests_user_idTousers")
+  review_replies                                     review_replies[]
+  reviews_reviews_created_by_idTousers               reviews[]                      @relation("reviews_created_by_idTousers")
+  reviews_reviews_reviewed_user_idTousers            reviews[]                      @relation("reviews_reviewed_user_idTousers")
+  reward_redemptions                                 reward_redemptions[]
+  roommate_preferences                               roommate_preferences?
+  saved_searches                                     saved_searches[]
+  sessions                                           sessions[]
+  twoFactor                                          twoFactor[]
+  user_contracts                                     user_contracts[]
+  user_interest_vectors                              user_interest_vectors?
+  user_notification_preferences                      user_notification_preferences?
+  wishlists                                          wishlists[]
+  withdrawals                                        withdrawals[]
+
+  @@index([is_active])
+}
+
+model verifications {
+  id         String   @id @default(dbgenerated("(gen_random_uuid())::text"))
+  identifier String
+  value      String
+  expires_at DateTime @db.Timestamp(6)
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  updated_at DateTime @default(now()) @db.Timestamp(6)
+
+  @@index([identifier])
+}
+
+model wa_session {
+  id         String   @id
+  data       Json     @default("{}")
+  updated_at DateTime @default(now()) @db.Timestamp(6)
+}
+
+model webhook_events {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  provider        String
+  event_id        String
+  event_type      String?
+  payload         Json
+  signature_valid Boolean?  @default(false)
+  payload_hash    String?
+  details         Json?     @default("{}")
+  processed_at    DateTime? @db.Timestamp(6)
+  created_at      DateTime  @default(now()) @db.Timestamp(6)
+
+  @@unique([provider, event_id], map: "webhook_events_provider_event_id_unique")
+  @@index([payload_hash])
+  @@index([provider])
+}
+
+model wishlists {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id     String     @db.Uuid
+  property_id String     @db.Uuid
+  created_at  DateTime   @default(now()) @db.Timestamp(6)
+  properties  properties @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "wishlists_property_id_properties_id_fk")
+  users       users      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "wishlists_user_id_users_id_fk")
+
+  @@unique([user_id, property_id], map: "wishlists_user_property_unique")
+  @@index([property_id])
+  @@index([user_id])
+}
+
+model withdrawals {
+  id                  String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  owner_id            String?             @db.Uuid
+  bank_account_id     String              @db.Uuid
+  amount              Decimal             @db.Decimal(12, 2)
+  status              WithdrawalStatus    @default(pending)
+  admin_note          String?
+  created_at          DateTime            @default(now()) @db.Timestamp(6)
+  updated_at          DateTime            @default(now()) @db.Timestamp(6)
+  owner_bank_accounts owner_bank_accounts @relation(fields: [bank_account_id], references: [id], onUpdate: NoAction, map: "withdrawals_bank_account_id_owner_bank_accounts_id_fk")
+  users               users?              @relation(fields: [owner_id], references: [id], onUpdate: NoAction, map: "withdrawals_owner_id_users_id_fk")
+
+  @@index([bank_account_id])
+  @@index([owner_id])
+  @@index([status])
+}
+
+enum UserRole {
+  admin
+  owner
+  tenant
+  cust
+  staff
+}
+
+enum BookingType {
+  daily
+  weekly
+  monthly
+  yearly
+  custom
+}
+
+enum BookingStatus {
+  pending_dp
+  confirmed
+  active
+  completed
+  cancelled
+  rejected
+  expired
+}
+
+enum BookingRequestStatus {
+  pending
+  accepted
+  rejected
+  expired
+}
+
+enum BookingSource {
+  direct
+  agent
+  referral
+  organic
+  paid_ads
+  social_media
+}
+
+enum InspectionStatus {
+  pending
+  scheduled
+  in_progress
+  completed
+  cancelled
+  disputed
+}
+
+enum PaymentStatus {
+  pending
+  paid
+  failed
+  refunded
+  partially_refunded
+  cancelled
+  expired
+}
+
+enum PaymentProvider {
+  midtrans
+  xendit
+  tripay
+  manual
+  bank_transfer
+  e_wallet
+  credit_card
+  virtual_account
+}
+
+enum Currency {
+  IDR
+  USD
+}
+
+enum PropertyStatus {
+  aktif
+  nonaktif
+  draft
+  pending_review
+  rejected
+  archived
+}
+
+enum PropertyType {
+  kost
+  kostan
+  kontrakan
+  ruko
+  apartment
+  house
+  room
+  studio
+  boarding_house
+  homestay
+}
+
+enum GenderType {
+  putri
+  putra
+  campur
+}
+
+enum RentalPeriod {
+  harian
+  mingguan
+  bulanan
+}
+
+enum UnitStatus {
+  available
+  occupied
+  maintenance
+  reserved
+  unavailable
+}
+
+enum TicketStatus {
+  reported
+  assigned
+  in_progress
+  resolved
+  closed
+  cancelled
+}
+
+enum Priority {
+  low
+  medium
+  high
+  urgent
+}
+
+enum MaintenanceCategory {
+  plumbing
+  electrical
+  hvac
+  structural
+  appliance
+  cleaning
+  pest_control
+  security
+  other
+}
+
+enum MaintenanceReportStatus {
+  pending
+  approved
+  rejected
+  in_progress
+  completed
+  cancelled
+}
+
+enum FeedbackCategory {
+  bug_report
+  feature_request
+  general
+  complaint
+  compliment
+  other
+}
+
+enum FeedbackStatus {
+  pending
+  reviewed
+  in_progress
+  resolved
+  closed
+}
+
+enum AdType {
+  featured
+  banner
+  sidebar
+  header
+  footer
+  popup
+}
+
+enum AdPackageTier {
+  basic
+  standard
+  premium
+  enterprise
+}
+
+enum AdPackagePositionType {
+  top
+  sidebar
+  header
+  footer
+  inline
+}
+
+enum KYCStatus {
+  none
+  pending
+  verified
+  rejected
+  expired
+}
+
+enum DocumentType {
+  ktp
+  passport
+  sim
+  npwp
+  other
+}
+
+enum LoyaltyTransactionType {
+  earned
+  spent
+  expired
+  bonus
+  referral
+  refund
+}
+
+enum ReviewType {
+  property
+  host
+  tenant
+  booking
+}
+
+enum ReviewStatus {
+  pending
+  approved
+  rejected
+  flagged
+}
+
+enum ReferralCategory {
+  tenant
+  owner
+  general
+}
+
+enum ReferralStatus {
+  pending
+  qualified
+  completed
+  expired
+  cancelled
+}
+
+enum RefundStatus {
+  pending
+  approved
+  rejected
+  processed
+  cancelled
+}
+
+enum ContractStatus {
+  generated
+  signed
+  active
+  expired
+  terminated
+  cancelled
+}
+
+enum PricingSuggestionStatus {
+  pending
+  accepted
+  rejected
+  applied
+  expired
+}
+
+enum RuleType {
+  percentage
+  fixed
+  dynamic
+  seasonal
+  promotional
+}
+
+enum Severity {
+  minor
+  moderate
+  major
+  critical
+}
+
+enum DamageReportStatus {
+  reported
+  acknowledged
+  in_progress
+  resolved
+  closed
+  disputed
+}
+
+enum Condition {
+  excellent
+  good
+  fair
+  poor
+  damaged
+}
+
+enum InspectionType {
+  move_in
+  move_out
+  periodic
+  maintenance
+  damage_assessment
+  safety
+}
+
+enum PhotoType {
+  before
+  after
+  damage
+  general
+  evidence
+}
+
+enum InspectionCategory {
+  structural
+  electrical
+  plumbing
+  hvac
+  appliances
+  furniture
+  flooring
+  walls
+  windows
+  doors
+  safety
+  cleanliness
+  other
+}
+
+enum PlaceType {
+  restaurant
+  cafe
+  mall
+  hospital
+  school
+  university
+  park
+  gym
+  supermarket
+  pharmacy
+  bank
+  atm
+  public_transport
+  gas_station
+  convenience_store
+  laundry
+  salon
+  other
+}
+
+enum InsightCategory {
+  safety
+  noise
+  cleanliness
+  accessibility
+  amenities
+  community
+  transport
+  cost_of_living
+  other
+}
+
+enum InsightSource {
+  tenant
+  owner
+  public_data
+  verified_third_party
+}
+
+enum NotificationType {
+  booking
+  payment
+  maintenance
+  message
+  review
+  referral
+  system
+  promotion
+  security
+  reminder
+}
+
+enum BankAccountType {
+  savings
+  checking
+  current
+  business
+}
+
+enum GatewayProvider {
+  midtrans
+  xendit
+  tripay
+  stripe
+  paypal
+}
+
+enum Environment {
+  sandbox
+  production
+}
+
+enum WebhookProvider {
+  midtrans
+  xendit
+  tripay
+  stripe
+  paypal
+  internal
+}
+
+enum WebhookEventType {
+  payment_success
+  payment_failed
+  payment_pending
+  refund_success
+  refund_failed
+  subscription_created
+  subscription_cancelled
+  invoice_created
+  invoice_paid
+  chargeback
+}
+
+enum BalanceLogType {
+  deposit
+  withdrawal
+  payment
+  refund
+  commission
+  bonus
+  penalty
+  adjustment
+}
+
+enum GroupBookingStatus {
+  pending
+  confirmed
+  active
+  completed
+  cancelled
+  expired
+}
+
+enum MemberStatus {
+  invited
+  joined
+  paid
+  cancelled
+  left
+}
+
+enum ExperimentStatus {
+  draft
+  running
+  paused
+  completed
+  archived
+}
+
+enum TagCategory {
+  amenity
+  location
+  feature
+  policy
+  vibe
+  accessibility
+  other
+}
+
+enum PaymentPurpose {
+  rent
+  deposit
+  utility
+  maintenance
+  penalty
+  refund
+  commission
+  other
+}
+
+enum LoyaltyTier {
+  bronze
+  silver
+  gold
+  platinum
+}
+
+enum FacilityCategory {
+  bathroom
+  kitchen
+  bedroom
+  living_room
+  parking
+  security
+  laundry
+  internet
+  fitness
+  pool
+  garden
+  other
+}
+
+enum RedemptionStatus {
+  pending
+  approved
+  rejected
+  completed
+  expired
+  cancelled
+}
+
+enum WithdrawalStatus {
+  pending
+  approved
+  rejected
+  processing
+  completed
+  failed
+  cancelled
+}
+
+enum AccountType {
+  asset
+  liability
+  equity
+  revenue
+  expense
+}
