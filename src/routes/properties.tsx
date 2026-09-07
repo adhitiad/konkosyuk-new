@@ -54,6 +54,8 @@ function PropertiesList() {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const typeParam = searchParams.get('type') ?? undefined
+  const cityParam = searchParams.get('city') ?? undefined
+  const searchParam = searchParams.get('search') ?? undefined
 
   const [selectedType, setSelectedType] = useState<PropertyType | undefined>()
   const [selectedLat, setSelectedLat] = useState<number | null>(null)
@@ -77,6 +79,8 @@ function PropertiesList() {
         type: selectedType,
         gender_type: genderType?.success ? genderType.data : undefined,
         rental_period: rentalPeriod?.success ? rentalPeriod.data : undefined,
+        city: cityParam,
+        search: searchParam,
         nearby,
       },
     }),
@@ -132,6 +136,21 @@ function PropertiesList() {
             </button>
           </div>
         </div>
+
+        {(cityParam || searchParam) && (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {cityParam ? (
+              <Badge variant="secondary" className="text-xs">
+                Kota: {cityParam}
+              </Badge>
+            ) : null}
+            {searchParam ? (
+              <Badge variant="secondary" className="text-xs">
+                Pencarian: {searchParam}
+              </Badge>
+            ) : null}
+          </div>
+        )}
       </div>
 
       {showMap && (
@@ -177,7 +196,9 @@ function PropertiesList() {
       ) : (
         <div className="py-12 text-center">
           <p className="text-sm text-[var(--sea-ink-soft)]">
-            Belum ada properti tersedia.
+            {cityParam || searchParam
+              ? 'Tidak ada properti yang cocok dengan filter pencarian.'
+              : 'Belum ada properti tersedia.'}
           </p>
         </div>
       )}

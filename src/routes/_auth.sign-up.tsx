@@ -12,8 +12,9 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { authClient } from '#/lib/auth-client'
+import { registerSchema } from '#/lib/validators/auth'
+import type { RegisterInput } from '#/lib/validators/auth'
 import { Alert, AlertDescription, AlertTitle } from '#/components/ui/alert'
 import { Button } from '#/components/ui/button'
 import {
@@ -36,23 +37,7 @@ import { Input } from '#/components/ui/input'
 import { Separator } from '#/components/ui/separator'
 import { cn } from '#/lib/utils'
 
-const SignUpSchema = z.object({
-  name: z.string().min(2, 'Nama minimal 2 karakter'),
-  email: z.string().email('Format email tidak valid'),
-  phone: z
-    .string()
-    .min(8, 'Nomor WhatsApp tidak valid')
-    .max(20, 'Nomor WhatsApp tidak valid')
-    .optional()
-    .or(z.literal('')),
-  password: z
-    .string()
-    .min(8, 'Kata sandi minimal 8 karakter')
-    .max(72, 'Kata sandi terlalu panjang'),
-  role: z.enum(['tenant', 'owner']),
-})
-
-type SignUpValues = z.infer<typeof SignUpSchema>
+type SignUpValues = RegisterInput
 
 export const Route = createFileRoute('/_auth/sign-up')({
   component: SignUpPage,
@@ -63,13 +48,13 @@ function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false)
 
   const form = useForm<SignUpValues>({
-    resolver: zodResolver(SignUpSchema),
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       name: '',
       email: '',
       phone: '',
       password: '',
-      role: 'tenant',
+      role: 'PENYEWA',
     },
   })
 
@@ -252,12 +237,12 @@ function SignUpPage() {
                       {(
                         [
                           {
-                            value: 'tenant',
+                            value: 'PENYEWA',
                             label: 'Pencari Kos',
                             desc: 'Cari & booking kos',
                           },
                           {
-                            value: 'owner',
+                            value: 'PEMILIK',
                             label: 'Pemilik Kos',
                             desc: 'Pasang iklan kos',
                           },

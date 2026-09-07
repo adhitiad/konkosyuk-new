@@ -3,3 +3,7 @@ pnpm-lock.yaml
 yarn.lock
 bun.lock
 public/favicon.svg
+src/generated/prisma/**
+src/paraglide/**
+project.inlang/cache/paraglide-js/**
+.kilo/anchored-summary.md

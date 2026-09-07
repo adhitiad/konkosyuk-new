@@ -416,3 +416,58 @@ export type wishlists = Prisma.wishlistsModel
  * 
  */
 export type withdrawals = Prisma.withdrawalsModel
+/**
+ * Model Booking
+ * 
+ */
+export type Booking = Prisma.BookingModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model KycRequest
+ * 
+ */
+export type KycRequest = Prisma.KycRequestModel
+/**
+ * Model RefundRequest
+ * 
+ */
+export type RefundRequest = Prisma.RefundRequestModel
+/**
+ * Model PlatformConfig
+ * 
+ */
+export type PlatformConfig = Prisma.PlatformConfigModel
+/**
+ * Model PaymentTransaction
+ * 
+ */
+export type PaymentTransaction = Prisma.PaymentTransactionModel
+/**
+ * Model Property
+ * 
+ */
+export type Property = Prisma.PropertyModel
+/**
+ * Model UnitProperti
+ * 
+ */
+export type UnitProperti = Prisma.UnitPropertiModel
+/**
+ * Model Fasilitas
+ * 
+ */
+export type Fasilitas = Prisma.FasilitasModel
+/**
+ * Model FotoProperti
+ * 
+ */
+export type FotoProperti = Prisma.FotoPropertiModel
+/**
+ * Model Pemesanan
+ * 
+ */
+export type Pemesanan = Prisma.PemesananModel

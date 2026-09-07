@@ -9,15 +9,24 @@
 * 🟢 You can import this file directly.
 */
 
-export const UserRole = {
-  admin: 'admin',
-  owner: 'owner',
-  tenant: 'tenant',
-  cust: 'cust',
-  staff: 'staff'
+export const StatusPemesanan = {
+  MENUNGGU_PERSETUJUAN: 'MENUNGGU_PERSETUJUAN',
+  DITERIMA: 'DITERIMA',
+  DITOLAK: 'DITOLAK',
+  DIBATALKAN: 'DIBATALKAN'
 } as const
 
-export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+export type StatusPemesanan = (typeof StatusPemesanan)[keyof typeof StatusPemesanan]
+
+
+export const Role = {
+  PENYEWA: 'PENYEWA',
+  PEMILIK: 'PEMILIK',
+  ADMIN: 'ADMIN',
+  STAFF: 'STAFF'
+} as const
+
+export type Role = (typeof Role)[keyof typeof Role]
 
 
 export const BookingType = {
@@ -141,6 +150,24 @@ export const PropertyType = {
 export type PropertyType = (typeof PropertyType)[keyof typeof PropertyType]
 
 
+export const GenderType = {
+  putri: 'putri',
+  putra: 'putra',
+  campur: 'campur'
+} as const
+
+export type GenderType = (typeof GenderType)[keyof typeof GenderType]
+
+
+export const RentalPeriod = {
+  harian: 'harian',
+  mingguan: 'mingguan',
+  bulanan: 'bulanan'
+} as const
+
+export type RentalPeriod = (typeof RentalPeriod)[keyof typeof RentalPeriod]
+
+
 export const UnitStatus = {
   available: 'available',
   occupied: 'occupied',
@@ -257,15 +284,14 @@ export const AdPackagePositionType = {
 export type AdPackagePositionType = (typeof AdPackagePositionType)[keyof typeof AdPackagePositionType]
 
 
-export const KYCStatus = {
-  none: 'none',
-  pending: 'pending',
-  verified: 'verified',
-  rejected: 'rejected',
-  expired: 'expired'
+export const KycStatus = {
+  BELUM_VERIFIKASI: 'BELUM_VERIFIKASI',
+  MENUNGGU: 'MENUNGGU',
+  TERVERIFIKASI: 'TERVERIFIKASI',
+  DITOLAK: 'DITOLAK'
 } as const
 
-export type KYCStatus = (typeof KYCStatus)[keyof typeof KYCStatus]
+export type KycStatus = (typeof KycStatus)[keyof typeof KycStatus]
 
 
 export const DocumentType = {
@@ -710,3 +736,112 @@ export const AccountType = {
 } as const
 
 export type AccountType = (typeof AccountType)[keyof typeof AccountType]
+
+
+export const StatusBooking = {
+  MENUNGGU_PEMBAYARAN_DP: 'MENUNGGU_PEMBAYARAN_DP',
+  MENUNGGU_VERIFIKASI_DP: 'MENUNGGU_VERIFIKASI_DP',
+  MENUNGGU_PERSETUJUAN: 'MENUNGGU_PERSETUJUAN',
+  MENUNGGU_PELUNASAN: 'MENUNGGU_PELUNASAN',
+  AKTIF: 'AKTIF',
+  SELESAI: 'SELESAI',
+  PROSES_REFUND_DP: 'PROSES_REFUND_DP',
+  SELESAI_DITOLAK: 'SELESAI_DITOLAK',
+  DIBATALKAN: 'DIBATALKAN'
+} as const
+
+export type StatusBooking = (typeof StatusBooking)[keyof typeof StatusBooking]
+
+
+export const StatusRefundDP = {
+  BELUM_REFUND: 'BELUM_REFUND',
+  MENUNGGU_PROSES: 'MENUNGGU_PROSES',
+  SEDANG_DIPROSES: 'SEDANG_DIPROSES',
+  BERHASIL: 'BERHASIL',
+  GAGAL: 'GAGAL'
+} as const
+
+export type StatusRefundDP = (typeof StatusRefundDP)[keyof typeof StatusRefundDP]
+
+
+export const TipeTransaksi = {
+  DP: 'DP',
+  PELUNASAN: 'PELUNASAN',
+  REFUND: 'REFUND'
+} as const
+
+export type TipeTransaksi = (typeof TipeTransaksi)[keyof typeof TipeTransaksi]
+
+
+export const StatusTransaksi = {
+  PENDING: 'PENDING',
+  BERHASIL: 'BERHASIL',
+  GAGAL: 'GAGAL',
+  DIBATALKAN: 'DIBATALKAN'
+} as const
+
+export type StatusTransaksi = (typeof StatusTransaksi)[keyof typeof StatusTransaksi]
+
+
+export const MetodePembayaran = {
+  TRANSFER: 'TRANSFER',
+  E_WALLET: 'E_WALLET',
+  CREDIT_CARD: 'CREDIT_CARD',
+  VA: 'VA'
+} as const
+
+export type MetodePembayaran = (typeof MetodePembayaran)[keyof typeof MetodePembayaran]
+
+
+export const StatusPembayaran = {
+  PENDING: 'PENDING',
+  BERHASIL: 'BERHASIL',
+  GAGAL: 'GAGAL'
+} as const
+
+export type StatusPembayaran = (typeof StatusPembayaran)[keyof typeof StatusPembayaran]
+
+
+export const StatusKyc = {
+  MENUNGGU: 'MENUNGGU',
+  TERVERIFIKASI: 'TERVERIFIKASI',
+  DITOLAK: 'DITOLAK'
+} as const
+
+export type StatusKyc = (typeof StatusKyc)[keyof typeof StatusKyc]
+
+
+export const StatusRefund = {
+  MENUNGGU: 'MENUNGGU',
+  DISETUJUI: 'DISETUJUI',
+  DITOLAK: 'DITOLAK'
+} as const
+
+export type StatusRefund = (typeof StatusRefund)[keyof typeof StatusRefund]
+
+
+export const TipeProperti = {
+  KOST: 'KOST',
+  KONTRAKAN: 'KONTRAKAN'
+} as const
+
+export type TipeProperti = (typeof TipeProperti)[keyof typeof TipeProperti]
+
+
+export const StatusProperti = {
+  DRAFT: 'DRAFT',
+  AKTIF: 'AKTIF',
+  NONAKTIF: 'NONAKTIF'
+} as const
+
+export type StatusProperti = (typeof StatusProperti)[keyof typeof StatusProperti]
+
+
+export const StatusKetersediaan = {
+  TERSEDIA: 'TERSEDIA',
+  TERISI: 'TERISI',
+  DIPESAN: 'DIPESAN',
+  MAINTENANCE: 'MAINTENANCE'
+} as const
+
+export type StatusKetersediaan = (typeof StatusKetersediaan)[keyof typeof StatusKetersediaan]

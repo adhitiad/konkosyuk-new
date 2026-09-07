@@ -19,8 +19,13 @@ import { Route as AuthSignUpRouteImport } from './routes/_auth.sign-up'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
 import { Route as OwnerPropertiesRouteImport } from './routes/owner.properties'
 import { Route as PropertiesIdRouteImport } from './routes/properties/$id'
+import { Route as protectedPenyewaBookingRouteImport } from './routes/(protected)/penyewa/booking'
+import { Route as publicPropertiPropertyIdRouteImport } from './routes/(public)/properti/$propertyId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiRpcSplatRouteImport } from './routes/api.rpc.$'
+import { Route as OwnerPropertiesNewRouteImport } from './routes/owner.properties.new'
+import { Route as protectedPenyewaBookingBaruRouteImport } from './routes/(protected)/penyewa/booking/baru'
+import { Route as ApiWebhooksQstashSplatRouteImport } from './routes/api/webhooks/qstash/$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -71,6 +76,17 @@ const PropertiesIdRoute = PropertiesIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => PropertiesRoute,
 } as any)
+const protectedPenyewaBookingRoute = protectedPenyewaBookingRouteImport.update({
+  id: '/(protected)/penyewa/booking',
+  path: '/penyewa/booking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const publicPropertiPropertyIdRoute =
+  publicPropertiPropertyIdRouteImport.update({
+    id: '/(public)/properti/$propertyId',
+    path: '/properti/$propertyId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -79,6 +95,22 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerPropertiesNewRoute = OwnerPropertiesNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => OwnerPropertiesRoute,
+} as any)
+const protectedPenyewaBookingBaruRoute =
+  protectedPenyewaBookingBaruRouteImport.update({
+    id: '/baru',
+    path: '/baru',
+    getParentRoute: () => protectedPenyewaBookingRoute,
+  } as any)
+const ApiWebhooksQstashSplatRoute = ApiWebhooksQstashSplatRouteImport.update({
+  id: '/api/webhooks/qstash/$',
+  path: '/api/webhooks/qstash/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -90,10 +122,15 @@ export interface FileRoutesByFullPath {
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
   '/api/$': typeof ApiSplatRoute
-  '/owner/properties': typeof OwnerPropertiesRoute
+  '/owner/properties': typeof OwnerPropertiesRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
+  '/penyewa/booking': typeof protectedPenyewaBookingRouteWithChildren
+  '/properti/$propertyId': typeof publicPropertiPropertyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/owner/properties/new': typeof OwnerPropertiesNewRoute
+  '/penyewa/booking/baru': typeof protectedPenyewaBookingBaruRoute
+  '/api/webhooks/qstash/$': typeof ApiWebhooksQstashSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -103,10 +140,15 @@ export interface FileRoutesByTo {
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
   '/api/$': typeof ApiSplatRoute
-  '/owner/properties': typeof OwnerPropertiesRoute
+  '/owner/properties': typeof OwnerPropertiesRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
+  '/penyewa/booking': typeof protectedPenyewaBookingRouteWithChildren
+  '/properti/$propertyId': typeof publicPropertiPropertyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/owner/properties/new': typeof OwnerPropertiesNewRoute
+  '/penyewa/booking/baru': typeof protectedPenyewaBookingBaruRoute
+  '/api/webhooks/qstash/$': typeof ApiWebhooksQstashSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -118,10 +160,15 @@ export interface FileRoutesById {
   '/_auth/sign-in': typeof AuthSignInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
   '/api/$': typeof ApiSplatRoute
-  '/owner/properties': typeof OwnerPropertiesRoute
+  '/owner/properties': typeof OwnerPropertiesRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
+  '/(protected)/penyewa/booking': typeof protectedPenyewaBookingRouteWithChildren
+  '/(public)/properti/$propertyId': typeof publicPropertiPropertyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/owner/properties/new': typeof OwnerPropertiesNewRoute
+  '/(protected)/penyewa/booking/baru': typeof protectedPenyewaBookingBaruRoute
+  '/api/webhooks/qstash/$': typeof ApiWebhooksQstashSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -135,8 +182,13 @@ export interface FileRouteTypes {
     | '/api/$'
     | '/owner/properties'
     | '/properties/$id'
+    | '/penyewa/booking'
+    | '/properti/$propertyId'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/owner/properties/new'
+    | '/penyewa/booking/baru'
+    | '/api/webhooks/qstash/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -148,8 +200,13 @@ export interface FileRouteTypes {
     | '/api/$'
     | '/owner/properties'
     | '/properties/$id'
+    | '/penyewa/booking'
+    | '/properti/$propertyId'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/owner/properties/new'
+    | '/penyewa/booking/baru'
+    | '/api/webhooks/qstash/$'
   id:
     | '__root__'
     | '/'
@@ -162,8 +219,13 @@ export interface FileRouteTypes {
     | '/api/$'
     | '/owner/properties'
     | '/properties/$id'
+    | '/(protected)/penyewa/booking'
+    | '/(public)/properti/$propertyId'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/owner/properties/new'
+    | '/(protected)/penyewa/booking/baru'
+    | '/api/webhooks/qstash/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -173,9 +235,12 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   PropertiesRoute: typeof PropertiesRouteWithChildren
   ApiSplatRoute: typeof ApiSplatRoute
-  OwnerPropertiesRoute: typeof OwnerPropertiesRoute
+  OwnerPropertiesRoute: typeof OwnerPropertiesRouteWithChildren
+  protectedPenyewaBookingRoute: typeof protectedPenyewaBookingRouteWithChildren
+  publicPropertiPropertyIdRoute: typeof publicPropertiPropertyIdRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
+  ApiWebhooksQstashSplatRoute: typeof ApiWebhooksQstashSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -250,6 +315,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropertiesIdRouteImport
       parentRoute: typeof PropertiesRoute
     }
+    '/(protected)/penyewa/booking': {
+      id: '/(protected)/penyewa/booking'
+      path: '/penyewa/booking'
+      fullPath: '/penyewa/booking'
+      preLoaderRoute: typeof protectedPenyewaBookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(public)/properti/$propertyId': {
+      id: '/(public)/properti/$propertyId'
+      path: '/properti/$propertyId'
+      fullPath: '/properti/$propertyId'
+      preLoaderRoute: typeof publicPropertiPropertyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -262,6 +341,27 @@ declare module '@tanstack/react-router' {
       path: '/api/rpc/$'
       fullPath: '/api/rpc/$'
       preLoaderRoute: typeof ApiRpcSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/owner/properties/new': {
+      id: '/owner/properties/new'
+      path: '/new'
+      fullPath: '/owner/properties/new'
+      preLoaderRoute: typeof OwnerPropertiesNewRouteImport
+      parentRoute: typeof OwnerPropertiesRoute
+    }
+    '/(protected)/penyewa/booking/baru': {
+      id: '/(protected)/penyewa/booking/baru'
+      path: '/baru'
+      fullPath: '/penyewa/booking/baru'
+      preLoaderRoute: typeof protectedPenyewaBookingBaruRouteImport
+      parentRoute: typeof protectedPenyewaBookingRoute
+    }
+    '/api/webhooks/qstash/$': {
+      id: '/api/webhooks/qstash/$'
+      path: '/api/webhooks/qstash/$'
+      fullPath: '/api/webhooks/qstash/$'
+      preLoaderRoute: typeof ApiWebhooksQstashSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -291,6 +391,32 @@ const PropertiesRouteWithChildren = PropertiesRoute._addFileChildren(
   PropertiesRouteChildren,
 )
 
+interface OwnerPropertiesRouteChildren {
+  OwnerPropertiesNewRoute: typeof OwnerPropertiesNewRoute
+}
+
+const OwnerPropertiesRouteChildren: OwnerPropertiesRouteChildren = {
+  OwnerPropertiesNewRoute: OwnerPropertiesNewRoute,
+}
+
+const OwnerPropertiesRouteWithChildren = OwnerPropertiesRoute._addFileChildren(
+  OwnerPropertiesRouteChildren,
+)
+
+interface protectedPenyewaBookingRouteChildren {
+  protectedPenyewaBookingBaruRoute: typeof protectedPenyewaBookingBaruRoute
+}
+
+const protectedPenyewaBookingRouteChildren: protectedPenyewaBookingRouteChildren =
+  {
+    protectedPenyewaBookingBaruRoute: protectedPenyewaBookingBaruRoute,
+  }
+
+const protectedPenyewaBookingRouteWithChildren =
+  protectedPenyewaBookingRoute._addFileChildren(
+    protectedPenyewaBookingRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
@@ -298,9 +424,12 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   PropertiesRoute: PropertiesRouteWithChildren,
   ApiSplatRoute: ApiSplatRoute,
-  OwnerPropertiesRoute: OwnerPropertiesRoute,
+  OwnerPropertiesRoute: OwnerPropertiesRouteWithChildren,
+  protectedPenyewaBookingRoute: protectedPenyewaBookingRouteWithChildren,
+  publicPropertiPropertyIdRoute: publicPropertiPropertyIdRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
+  ApiWebhooksQstashSplatRoute: ApiWebhooksQstashSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

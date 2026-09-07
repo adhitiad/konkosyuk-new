@@ -454,7 +454,7 @@ model kyc_verifications {
   user_id            String?       @db.Uuid
   didit_session_id   String?       @unique(map: "kyc_verifications_didit_session_id_unique")
   didit_redirect_url String?
-  status             KYCStatus     @default(pending)
+  status             KycStatus     @default(MENUNGGU)
   document_type      DocumentType?
   ktp_image_url      String?
   selfie_image_url   String?
@@ -1206,6 +1206,7 @@ model units {
   updated_at             DateTime                 @default(now()) @db.Timestamp(6)
   booking_requests       booking_requests[]
   bookings               bookings[]               @relation("unit_bookings")
+  transaksi_bookings     Booking[]                @relation("Booking_unit_id")
   group_bookings         group_bookings[]
   inspections            inspections[]
   maintenance_reports    maintenance_reports[]
@@ -1274,12 +1275,12 @@ model users {
   phone                                              String?
   whatsapp                                           String?
   telegram                                           String?
-  role                                               UserRole                       @default(cust)
+  role                                               Role                           @default(PENYEWA)
   is_active                                          Boolean                        @default(true)
   is_banned                                          Boolean                        @default(false)
   ban_reason                                         String?
   two_factor_enabled                                 Boolean?                       @default(false)
-  kyc_status                                         KYCStatus                      @default(none)
+  kyc_status                                         KycStatus                      @default(BELUM_VERIFIKASI)
   ktp_number                                         String?
   ktp_image_url                                      String?
   reputation_score                                   Decimal                        @default(0.00) @db.Decimal(4, 2)
@@ -1339,8 +1340,12 @@ model users {
   user_notification_preferences                      user_notification_preferences?
   wishlists                                          wishlists[]
   withdrawals                                        withdrawals[]
+  transaksi_bookings                                 Booking[]                      @relation("Booking_penyewa")
+  kyc_requests                                       KycRequest[]                   @relation("KycRequest_user_id")
+   propertis_wizard                                   Property[]                     @relation("Property_pemilik")
+   pemesanans                                         Pemesanan[]                   @relation("PemesananTenant")
 
-  @@index([is_active])
+   @@index([is_active])
 }
 
 model verifications {
@@ -1407,12 +1412,219 @@ model withdrawals {
   @@index([status])
 }
 
-enum UserRole {
-  admin
-  owner
-  tenant
-  cust
-  staff
+model Booking {
+  id                   String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  unit_id              String            @db.Uuid
+  penyewa_id           String            @db.Uuid
+  tanggal_mulai        DateTime          @db.Timestamp(6)
+  tanggal_selesai      DateTime          @db.Timestamp(6)
+  total_harga          Decimal           @db.Decimal(12, 2)
+  status_booking       StatusBooking     @default(MENUNGGU_PEMBAYARAN_DP)
+  jumlahDP             Decimal           @default(0) @db.Decimal(12, 2)
+  jumlahPelunasan      Decimal           @default(0) @db.Decimal(12, 2)
+  tanggalBayarDP       DateTime?         @db.Timestamp(6)
+  tanggalPelunasan     DateTime?         @db.Timestamp(6)
+  tanggalDitolak       DateTime?         @db.Timestamp(6)
+  alasanPenolakan      String?
+  statusRefundDP       StatusRefundDP?   @default(BELUM_REFUND)
+  transaksiDP_id       String?           @unique
+  transaksiPelunasan_id String?          @unique
+  transaksiRefund_id   String?           @unique
+  created_at           DateTime          @default(now()) @db.Timestamp(6)
+  updated_at           DateTime          @default(now()) @db.Timestamp(6)
+  units                units             @relation("Booking_unit_id", fields: [unit_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "Booking_unit_id_units_id_fk")
+  users                users             @relation("Booking_penyewa", fields: [penyewa_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "Booking_penyewa_id_users_id_fk")
+  payments             Payment[]
+  refund_requests      RefundRequest[]
+  transaksiDP          PaymentTransaction? @relation("BookingDP", fields: [transaksiDP_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
+  transaksiPelunasan   PaymentTransaction? @relation("BookingPelunasan", fields: [transaksiPelunasan_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
+  transaksiRefund      PaymentTransaction? @relation("BookingRefund", fields: [transaksiRefund_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
+
+  @@index([penyewa_id])
+  @@index([unit_id])
+  @@index([transaksiDP_id])
+  @@index([transaksiPelunasan_id])
+  @@index([transaksiRefund_id])
+}
+
+model Payment {
+  id                 String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  booking_id         String           @db.Uuid
+  jumlah_bayar       Decimal          @db.Decimal(12, 2)
+  metode_pembayaran  MetodePembayaran
+  status_pembayaran  StatusPembayaran @default(PENDING)
+  bukti_transfer_url String?
+  created_at         DateTime         @default(now()) @db.Timestamp(6)
+  updated_at         DateTime         @default(now()) @db.Timestamp(6)
+  bookings           Booking          @relation(fields: [booking_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Payment_booking_id_Booking_id_fk")
+
+  @@index([booking_id])
+  @@index([status_pembayaran])
+}
+
+model KycRequest {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id         String    @db.Uuid
+  nama_lengkap    String
+  nomor_ktp       String    @unique
+  url_foto_ktp    String
+  url_foto_selfie String
+  status_kyc      StatusKyc @default(MENUNGGU)
+  created_at      DateTime  @default(now()) @db.Timestamp(6)
+  updated_at      DateTime  @default(now()) @db.Timestamp(6)
+  users           users     @relation("KycRequest_user_id", fields: [user_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "KycRequest_user_id_users_id_fk")
+
+  @@index([user_id])
+  @@index([status_kyc])
+}
+
+model RefundRequest {
+  id            String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  booking_id    String       @db.Uuid
+  alasan        String
+  jumlah_refund Decimal      @db.Decimal(12, 2)
+  status_refund StatusRefund @default(MENUNGGU)
+  created_at    DateTime     @default(now()) @db.Timestamp(6)
+  updated_at    DateTime     @default(now()) @db.Timestamp(6)
+  bookings      Booking      @relation(fields: [booking_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "RefundRequest_booking_id_Booking_id_fk")
+
+  @@index([booking_id])
+  @@index([status_refund])
+}
+
+model PlatformConfig {
+  id                 String   @id @default(cuid())
+  persentaseDP       Int      @default(30)
+  biayaRefundPenyewa Decimal  @default(3.88) @db.Decimal(5, 2)
+  biayaRefundPemilik Decimal  @default(0.1) @db.Decimal(5, 2)
+  updatedAt          DateTime @updatedAt
+
+  @@map("platform_config")
+}
+
+model PaymentTransaction {
+  id               String          @id @default(cuid())
+  tipeTransaksi    TipeTransaksi
+  jumlah           Decimal         @db.Decimal(12, 2)
+  status           StatusTransaksi @default(PENDING)
+  referensiGateway String?
+  metadata         Json?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  bookingDP        Booking?        @relation("BookingDP")
+  bookingPelunasan Booking?        @relation("BookingPelunasan")
+  bookingRefund    Booking?        @relation("BookingRefund")
+
+  @@index([tipeTransaksi])
+  @@index([status])
+}
+
+model Property {
+  id             String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nama_properti  String
+  deskripsi      String?
+  alamat_lengkap String
+  latitude       Decimal?       @db.Decimal(9, 6)
+  longitude      Decimal?       @db.Decimal(9, 6)
+  tipe_properti  TipeProperti
+  status         StatusProperti @default(DRAFT)
+  pemilik_id     String         @db.Uuid
+  created_at     DateTime       @default(now()) @db.Timestamp(6)
+  updated_at     DateTime       @default(now()) @db.Timestamp(6)
+  unit_propertis UnitProperti[]
+  fasilitas      Fasilitas[]
+  foto_propertis FotoProperti[]
+  users          users          @relation("Property_pemilik", fields: [pemilik_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Property_pemilik_id_users_id_fk")
+  pemesanans     Pemesanan[]
+
+  @@index([pemilik_id])
+  @@index([tipe_properti])
+  @@index([status])
+  @@index([created_at])
+}
+
+model UnitProperti {
+  id                  String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id         String             @db.Uuid
+  nama_unit           String
+  luas_meter          Decimal            @db.Decimal(8, 2)
+  harga_bulanan       Decimal            @db.Decimal(12, 2)
+  kapasitas           Int
+  status_ketersediaan StatusKetersediaan @default(TERSEDIA)
+  created_at          DateTime           @default(now()) @db.Timestamp(6)
+  updated_at          DateTime           @default(now()) @db.Timestamp(6)
+  property            Property           @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "UnitProperti_property_id_Property_id_fk")
+  fasilitas           Fasilitas[]
+  pemesanans          Pemesanan[]
+
+  @@index([property_id])
+  @@index([status_ketersediaan])
+}
+
+model Fasilitas {
+  id             String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nama_fasilitas String
+  ikon           String?
+  property_id    String        @db.Uuid
+  unit_id        String?       @db.Uuid
+  created_at     DateTime      @default(now()) @db.Timestamp(6)
+  updated_at     DateTime      @default(now()) @db.Timestamp(6)
+  property       Property      @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Fasilitas_property_id_Property_id_fk")
+  unit           UnitProperti? @relation(fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Fasilitas_unit_id_UnitProperti_id_fk")
+
+  @@index([property_id])
+  @@index([unit_id])
+}
+
+model FotoProperti {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  property_id  String   @db.Uuid
+  url_foto     String
+  urutan       Int
+  apakah_utama Boolean  @default(false)
+  created_at   DateTime @default(now()) @db.Timestamp(6)
+  updated_at   DateTime @default(now()) @db.Timestamp(6)
+  property     Property @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FotoProperti_property_id_Property_id_fk")
+
+  @@index([property_id])
+  @@index([urutan])
+}
+
+model Pemesanan {
+  id               String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  unit_properti_id String          @db.Uuid
+  property_id      String          @db.Uuid
+  tenant_id        String          @db.Uuid
+  jumlah_penghuni  Int
+  tanggal_mulai    DateTime        @db.Timestamp(6)
+  tanggal_selesai  DateTime?       @db.Timestamp(6)
+  total_harga      Decimal         @db.Decimal(12, 2)
+  status           StatusPemesanan @default(MENUNGGU_PERSETUJUAN)
+  catatan          String?
+  created_at       DateTime         @default(now()) @db.Timestamp(6)
+  updated_at       DateTime         @default(now()) @db.Timestamp(6)
+  unit_properti    UnitProperti    @relation(fields: [unit_properti_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Pemesanan_unit_properti_id_UnitProperti_id_fk")
+  property         Property        @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Pemesanan_property_id_Property_id_fk")
+  tenant           users           @relation("PemesananTenant", fields: [tenant_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Pemesanan_tenant_id_users_id_fk")
+
+  @@index([property_id])
+  @@index([unit_properti_id])
+  @@index([tenant_id])
+  @@index([status])
+}
+
+enum StatusPemesanan {
+  MENUNGGU_PERSETUJUAN
+  DITERIMA
+  DITOLAK
+  DIBATALKAN
+}
+
+enum Role {
+  PENYEWA
+  PEMILIK
+  ADMIN
+  STAFF
 }
 
 enum BookingType {
@@ -1604,12 +1816,11 @@ enum AdPackagePositionType {
   inline
 }
 
-enum KYCStatus {
-  none
-  pending
-  verified
-  rejected
-  expired
+enum KycStatus {
+  BELUM_VERIFIKASI
+  MENUNGGU
+  TERVERIFIKASI
+  DITOLAK
 }
 
 enum DocumentType {
@@ -1946,4 +2157,80 @@ enum AccountType {
   equity
   revenue
   expense
+}
+
+enum StatusBooking {
+  MENUNGGU_PEMBAYARAN_DP
+  MENUNGGU_VERIFIKASI_DP
+  MENUNGGU_PERSETUJUAN
+  MENUNGGU_PELUNASAN
+  AKTIF
+  SELESAI
+  PROSES_REFUND_DP
+  SELESAI_DITOLAK
+  DIBATALKAN
+}
+
+enum StatusRefundDP {
+  BELUM_REFUND
+  MENUNGGU_PROSES
+  SEDANG_DIPROSES
+  BERHASIL
+  GAGAL
+}
+
+enum TipeTransaksi {
+  DP
+  PELUNASAN
+  REFUND
+}
+
+enum StatusTransaksi {
+  PENDING
+  BERHASIL
+  GAGAL
+  DIBATALKAN
+}
+
+enum MetodePembayaran {
+  TRANSFER
+  E_WALLET
+  CREDIT_CARD
+  VA
+}
+
+enum StatusPembayaran {
+  PENDING
+  BERHASIL
+  GAGAL
+}
+
+enum StatusKyc {
+  MENUNGGU
+  TERVERIFIKASI
+  DITOLAK
+}
+
+enum StatusRefund {
+  MENUNGGU
+  DISETUJUI
+  DITOLAK
+}
+
+enum TipeProperti {
+  KOST
+  KONTRAKAN
+}
+
+enum StatusProperti {
+  DRAFT
+  AKTIF
+  NONAKTIF
+}
+
+enum StatusKetersediaan {
+  TERSEDIA
+  TERISI
+  DIPESAN
+  MAINTENANCE
 }

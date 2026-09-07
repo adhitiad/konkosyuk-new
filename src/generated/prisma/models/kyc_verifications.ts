@@ -39,7 +39,7 @@ export type Kyc_verificationsMinAggregateOutputType = {
   user_id: string | null
   didit_session_id: string | null
   didit_redirect_url: string | null
-  status: $Enums.KYCStatus | null
+  status: $Enums.KycStatus | null
   document_type: $Enums.DocumentType | null
   ktp_image_url: string | null
   selfie_image_url: string | null
@@ -55,7 +55,7 @@ export type Kyc_verificationsMaxAggregateOutputType = {
   user_id: string | null
   didit_session_id: string | null
   didit_redirect_url: string | null
-  status: $Enums.KYCStatus | null
+  status: $Enums.KycStatus | null
   document_type: $Enums.DocumentType | null
   ktp_image_url: string | null
   selfie_image_url: string | null
@@ -232,7 +232,7 @@ export type Kyc_verificationsGroupByOutputType = {
   user_id: string | null
   didit_session_id: string | null
   didit_redirect_url: string | null
-  status: $Enums.KYCStatus
+  status: $Enums.KycStatus
   document_type: $Enums.DocumentType | null
   ktp_image_url: string | null
   selfie_image_url: string | null
@@ -271,7 +271,7 @@ export type kyc_verificationsWhereInput = {
   user_id?: Prisma.UuidNullableFilter<"kyc_verifications"> | string | null
   didit_session_id?: Prisma.StringNullableFilter<"kyc_verifications"> | string | null
   didit_redirect_url?: Prisma.StringNullableFilter<"kyc_verifications"> | string | null
-  status?: Prisma.EnumKYCStatusFilter<"kyc_verifications"> | $Enums.KYCStatus
+  status?: Prisma.EnumKycStatusFilter<"kyc_verifications"> | $Enums.KycStatus
   document_type?: Prisma.EnumDocumentTypeNullableFilter<"kyc_verifications"> | $Enums.DocumentType | null
   ktp_image_url?: Prisma.StringNullableFilter<"kyc_verifications"> | string | null
   selfie_image_url?: Prisma.StringNullableFilter<"kyc_verifications"> | string | null
@@ -308,7 +308,7 @@ export type kyc_verificationsWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.kyc_verificationsWhereInput | Prisma.kyc_verificationsWhereInput[]
   user_id?: Prisma.UuidNullableFilter<"kyc_verifications"> | string | null
   didit_redirect_url?: Prisma.StringNullableFilter<"kyc_verifications"> | string | null
-  status?: Prisma.EnumKYCStatusFilter<"kyc_verifications"> | $Enums.KYCStatus
+  status?: Prisma.EnumKycStatusFilter<"kyc_verifications"> | $Enums.KycStatus
   document_type?: Prisma.EnumDocumentTypeNullableFilter<"kyc_verifications"> | $Enums.DocumentType | null
   ktp_image_url?: Prisma.StringNullableFilter<"kyc_verifications"> | string | null
   selfie_image_url?: Prisma.StringNullableFilter<"kyc_verifications"> | string | null
@@ -349,7 +349,7 @@ export type kyc_verificationsScalarWhereWithAggregatesInput = {
   user_id?: Prisma.UuidNullableWithAggregatesFilter<"kyc_verifications"> | string | null
   didit_session_id?: Prisma.StringNullableWithAggregatesFilter<"kyc_verifications"> | string | null
   didit_redirect_url?: Prisma.StringNullableWithAggregatesFilter<"kyc_verifications"> | string | null
-  status?: Prisma.EnumKYCStatusWithAggregatesFilter<"kyc_verifications"> | $Enums.KYCStatus
+  status?: Prisma.EnumKycStatusWithAggregatesFilter<"kyc_verifications"> | $Enums.KycStatus
   document_type?: Prisma.EnumDocumentTypeNullableWithAggregatesFilter<"kyc_verifications"> | $Enums.DocumentType | null
   ktp_image_url?: Prisma.StringNullableWithAggregatesFilter<"kyc_verifications"> | string | null
   selfie_image_url?: Prisma.StringNullableWithAggregatesFilter<"kyc_verifications"> | string | null
@@ -364,7 +364,7 @@ export type kyc_verificationsCreateInput = {
   id?: string
   didit_session_id?: string | null
   didit_redirect_url?: string | null
-  status?: $Enums.KYCStatus
+  status?: $Enums.KycStatus
   document_type?: $Enums.DocumentType | null
   ktp_image_url?: string | null
   selfie_image_url?: string | null
@@ -381,7 +381,7 @@ export type kyc_verificationsUncheckedCreateInput = {
   user_id?: string | null
   didit_session_id?: string | null
   didit_redirect_url?: string | null
-  status?: $Enums.KYCStatus
+  status?: $Enums.KycStatus
   document_type?: $Enums.DocumentType | null
   ktp_image_url?: string | null
   selfie_image_url?: string | null
@@ -396,7 +396,7 @@ export type kyc_verificationsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   didit_session_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   didit_redirect_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   document_type?: Prisma.NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selfie_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -413,7 +413,7 @@ export type kyc_verificationsUncheckedUpdateInput = {
   user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   didit_session_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   didit_redirect_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   document_type?: Prisma.NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selfie_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -429,7 +429,7 @@ export type kyc_verificationsCreateManyInput = {
   user_id?: string | null
   didit_session_id?: string | null
   didit_redirect_url?: string | null
-  status?: $Enums.KYCStatus
+  status?: $Enums.KycStatus
   document_type?: $Enums.DocumentType | null
   ktp_image_url?: string | null
   selfie_image_url?: string | null
@@ -444,7 +444,7 @@ export type kyc_verificationsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   didit_session_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   didit_redirect_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   document_type?: Prisma.NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selfie_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -460,7 +460,7 @@ export type kyc_verificationsUncheckedUpdateManyInput = {
   user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   didit_session_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   didit_redirect_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   document_type?: Prisma.NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selfie_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -537,8 +537,8 @@ export type kyc_verificationsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type EnumKYCStatusFieldUpdateOperationsInput = {
-  set?: $Enums.KYCStatus
+export type EnumKycStatusFieldUpdateOperationsInput = {
+  set?: $Enums.KycStatus
 }
 
 export type NullableEnumDocumentTypeFieldUpdateOperationsInput = {
@@ -591,7 +591,7 @@ export type kyc_verificationsCreateWithoutUsersInput = {
   id?: string
   didit_session_id?: string | null
   didit_redirect_url?: string | null
-  status?: $Enums.KYCStatus
+  status?: $Enums.KycStatus
   document_type?: $Enums.DocumentType | null
   ktp_image_url?: string | null
   selfie_image_url?: string | null
@@ -606,7 +606,7 @@ export type kyc_verificationsUncheckedCreateWithoutUsersInput = {
   id?: string
   didit_session_id?: string | null
   didit_redirect_url?: string | null
-  status?: $Enums.KYCStatus
+  status?: $Enums.KycStatus
   document_type?: $Enums.DocumentType | null
   ktp_image_url?: string | null
   selfie_image_url?: string | null
@@ -651,7 +651,7 @@ export type kyc_verificationsScalarWhereInput = {
   user_id?: Prisma.UuidNullableFilter<"kyc_verifications"> | string | null
   didit_session_id?: Prisma.StringNullableFilter<"kyc_verifications"> | string | null
   didit_redirect_url?: Prisma.StringNullableFilter<"kyc_verifications"> | string | null
-  status?: Prisma.EnumKYCStatusFilter<"kyc_verifications"> | $Enums.KYCStatus
+  status?: Prisma.EnumKycStatusFilter<"kyc_verifications"> | $Enums.KycStatus
   document_type?: Prisma.EnumDocumentTypeNullableFilter<"kyc_verifications"> | $Enums.DocumentType | null
   ktp_image_url?: Prisma.StringNullableFilter<"kyc_verifications"> | string | null
   selfie_image_url?: Prisma.StringNullableFilter<"kyc_verifications"> | string | null
@@ -666,7 +666,7 @@ export type kyc_verificationsCreateManyUsersInput = {
   id?: string
   didit_session_id?: string | null
   didit_redirect_url?: string | null
-  status?: $Enums.KYCStatus
+  status?: $Enums.KycStatus
   document_type?: $Enums.DocumentType | null
   ktp_image_url?: string | null
   selfie_image_url?: string | null
@@ -681,7 +681,7 @@ export type kyc_verificationsUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   didit_session_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   didit_redirect_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   document_type?: Prisma.NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selfie_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -696,7 +696,7 @@ export type kyc_verificationsUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   didit_session_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   didit_redirect_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   document_type?: Prisma.NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selfie_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -711,7 +711,7 @@ export type kyc_verificationsUncheckedUpdateManyWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   didit_session_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   didit_redirect_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   document_type?: Prisma.NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selfie_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -812,7 +812,7 @@ export type $kyc_verificationsPayload<ExtArgs extends runtime.Types.Extensions.I
     user_id: string | null
     didit_session_id: string | null
     didit_redirect_url: string | null
-    status: $Enums.KYCStatus
+    status: $Enums.KycStatus
     document_type: $Enums.DocumentType | null
     ktp_image_url: string | null
     selfie_image_url: string | null
@@ -1249,7 +1249,7 @@ export interface kyc_verificationsFieldRefs {
   readonly user_id: Prisma.FieldRef<"kyc_verifications", 'String'>
   readonly didit_session_id: Prisma.FieldRef<"kyc_verifications", 'String'>
   readonly didit_redirect_url: Prisma.FieldRef<"kyc_verifications", 'String'>
-  readonly status: Prisma.FieldRef<"kyc_verifications", 'KYCStatus'>
+  readonly status: Prisma.FieldRef<"kyc_verifications", 'KycStatus'>
   readonly document_type: Prisma.FieldRef<"kyc_verifications", 'DocumentType'>
   readonly ktp_image_url: Prisma.FieldRef<"kyc_verifications", 'String'>
   readonly selfie_image_url: Prisma.FieldRef<"kyc_verifications", 'String'>

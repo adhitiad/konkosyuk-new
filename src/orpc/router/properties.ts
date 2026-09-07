@@ -5,6 +5,7 @@ import { prisma } from '#/db'
 import { auth } from '#/lib/auth'
 
 import type { BookingStatus, Prisma } from '#/generated/prisma/client'
+import type { PropertyWithRelations } from '#/types/property'
 
 import {
   CheckPropertyAvailabilityInput,
@@ -52,15 +53,31 @@ export const listProperties = os
       type: PropertyTypeSchema.optional(),
       gender_type: GenderTypeSchema.optional(),
       rental_period: RentalPeriodSchema.optional(),
+      city: z.string().optional(),
+      search: z.string().optional(),
       nearby: NearbyFilterSchema.optional(),
     }),
   )
   .handler(async ({ input }) => {
     const where: Prisma.propertiesWhereInput = {
+      is_active: true,
       ...(input.owner_id ? { owner_id: input.owner_id } : {}),
       ...(input.type ? { type: input.type } : {}),
       ...(input.gender_type ? { gender_type: input.gender_type } : {}),
       ...(input.rental_period ? { rental_period: input.rental_period } : {}),
+      ...(input.city
+        ? { city: { contains: input.city, mode: 'insensitive' } }
+        : {}),
+      ...(input.search
+        ? {
+            OR: [
+              { name: { contains: input.search, mode: 'insensitive' } },
+              { description: { contains: input.search, mode: 'insensitive' } },
+              { address: { contains: input.search, mode: 'insensitive' } },
+              { city: { contains: input.search, mode: 'insensitive' } },
+            ],
+          }
+        : {}),
     }
     if (input.nearby) {
       const { lat, lng, radius_km } = input.nearby
@@ -105,6 +122,43 @@ export const listProperties = os
         latitude: lat,
         longitude: lng,
         distance_km: distanceKm,
+      }
+    })
+  })
+
+export const listFeaturedProperties = os
+  .input(z.object({ limit: z.number().int().min(1).max(24).default(12) }))
+  .handler(async ({ input }) => {
+    const properties = await prisma.properties.findMany({
+      where: { is_active: true, is_featured: true },
+      include: { units: true, property_ratings: true, users: true },
+      orderBy: [
+        { featured_until: { sort: 'desc', nulls: 'last' } },
+        { created_at: 'desc' },
+      ],
+      take: input.limit,
+    })
+    return properties.map((p) => {
+      const minUnit = p.units.length
+        ? Math.min(...p.units.map((u) => Number(u.price)))
+        : p.base_price
+          ? Number(p.base_price)
+          : null
+      const lat = p.latitude ? Number(p.latitude) : null
+      const lng = p.longitude ? Number(p.longitude) : null
+      return {
+        ...p,
+        latitude: lat,
+        longitude: lng,
+        min_price: minUnit,
+        unit_count: p.units.length,
+        average_rating: p.property_ratings
+          ? Number(p.property_ratings.average_rating)
+          : 0,
+        total_reviews: p.property_ratings
+          ? p.property_ratings.total_reviews
+          : 0,
+        owner_name: p.users.name,
       }
     })
   })
@@ -397,4 +451,69 @@ export const checkPropertyAvailability = os
     }
 
     return result
+  })
+
+export const getPropertyWithRelations = os
+  .input(z.object({ id: z.string().uuid() }))
+  .handler(async ({ input }): Promise<PropertyWithRelations | null> => {
+    const property = await prisma.property.findUnique({
+      where: { id: input.id, status: 'AKTIF' },
+      include: {
+        unit_propertis: { orderBy: { created_at: 'asc' } },
+        fasilitas: { orderBy: { nama_fasilitas: 'asc' } },
+        foto_propertis: { orderBy: { urutan: 'asc' } },
+        users: { select: { name: true, phone: true } },
+      },
+    })
+
+    if (!property) {
+      return null
+    }
+
+    return {
+      id: property.id,
+      nama_properti: property.nama_properti,
+      deskripsi: property.deskripsi,
+      alamat_lengkap: property.alamat_lengkap,
+      latitude: property.latitude?.toString() ?? null,
+      longitude: property.longitude?.toString() ?? null,
+      tipe_properti: property.tipe_properti,
+      status: property.status,
+      pemilik_id: property.pemilik_id,
+      pemilik: {
+        name: property.users.name,
+        phone: property.users.phone,
+      },
+      created_at: property.created_at,
+      updated_at: property.updated_at,
+      unit_propertis: property.unit_propertis.map((u) => ({
+        id: u.id,
+        property_id: u.property_id,
+        nama_unit: u.nama_unit,
+        luas_meter: u.luas_meter.toString(),
+        harga_bulanan: u.harga_bulanan.toString(),
+        kapasitas: u.kapasitas,
+        status_ketersediaan: u.status_ketersediaan,
+        created_at: u.created_at,
+        updated_at: u.updated_at,
+      })),
+      fasilitas: property.fasilitas.map((f) => ({
+        id: f.id,
+        nama_fasilitas: f.nama_fasilitas,
+        ikon: f.ikon,
+        property_id: f.property_id,
+        unit_id: f.unit_id,
+        created_at: f.created_at,
+        updated_at: f.updated_at,
+      })),
+      foto_propertis: property.foto_propertis.map((f) => ({
+        id: f.id,
+        property_id: f.property_id,
+        url_foto: f.url_foto,
+        urutan: f.urutan,
+        apakah_utama: f.apakah_utama,
+        created_at: f.created_at,
+        updated_at: f.updated_at,
+      })),
+    }
   })

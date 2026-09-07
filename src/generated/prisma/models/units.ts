@@ -302,6 +302,7 @@ export type unitsWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"units"> | Date | string
   booking_requests?: Prisma.Booking_requestsListRelationFilter
   bookings?: Prisma.BookingsListRelationFilter
+  transaksi_bookings?: Prisma.BookingListRelationFilter
   group_bookings?: Prisma.Group_bookingsListRelationFilter
   inspections?: Prisma.InspectionsListRelationFilter
   maintenance_reports?: Prisma.Maintenance_reportsListRelationFilter
@@ -331,6 +332,7 @@ export type unitsOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrder
   booking_requests?: Prisma.booking_requestsOrderByRelationAggregateInput
   bookings?: Prisma.bookingsOrderByRelationAggregateInput
+  transaksi_bookings?: Prisma.BookingOrderByRelationAggregateInput
   group_bookings?: Prisma.group_bookingsOrderByRelationAggregateInput
   inspections?: Prisma.inspectionsOrderByRelationAggregateInput
   maintenance_reports?: Prisma.maintenance_reportsOrderByRelationAggregateInput
@@ -364,6 +366,7 @@ export type unitsWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeFilter<"units"> | Date | string
   booking_requests?: Prisma.Booking_requestsListRelationFilter
   bookings?: Prisma.BookingsListRelationFilter
+  transaksi_bookings?: Prisma.BookingListRelationFilter
   group_bookings?: Prisma.Group_bookingsListRelationFilter
   inspections?: Prisma.InspectionsListRelationFilter
   maintenance_reports?: Prisma.Maintenance_reportsListRelationFilter
@@ -435,6 +438,7 @@ export type unitsCreateInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUnitsInput
@@ -464,6 +468,7 @@ export type unitsUncheckedCreateInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUnitsInput
@@ -489,6 +494,7 @@ export type unitsUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUnitsNestedInput
@@ -518,6 +524,7 @@ export type unitsUncheckedUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUnitsNestedInput
@@ -876,6 +883,20 @@ export type EnumUnitStatusFieldUpdateOperationsInput = {
   set?: $Enums.UnitStatus
 }
 
+export type unitsCreateNestedOneWithoutTransaksi_bookingsInput = {
+  create?: Prisma.XOR<Prisma.unitsCreateWithoutTransaksi_bookingsInput, Prisma.unitsUncheckedCreateWithoutTransaksi_bookingsInput>
+  connectOrCreate?: Prisma.unitsCreateOrConnectWithoutTransaksi_bookingsInput
+  connect?: Prisma.unitsWhereUniqueInput
+}
+
+export type unitsUpdateOneRequiredWithoutTransaksi_bookingsNestedInput = {
+  create?: Prisma.XOR<Prisma.unitsCreateWithoutTransaksi_bookingsInput, Prisma.unitsUncheckedCreateWithoutTransaksi_bookingsInput>
+  connectOrCreate?: Prisma.unitsCreateOrConnectWithoutTransaksi_bookingsInput
+  upsert?: Prisma.unitsUpsertWithoutTransaksi_bookingsInput
+  connect?: Prisma.unitsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.unitsUpdateToOneWithWhereWithoutTransaksi_bookingsInput, Prisma.unitsUpdateWithoutTransaksi_bookingsInput>, Prisma.unitsUncheckedUpdateWithoutTransaksi_bookingsInput>
+}
+
 export type unitsCreateWithoutBooking_requestsInput = {
   id?: string
   name: string
@@ -891,6 +912,7 @@ export type unitsCreateWithoutBooking_requestsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   bookings?: Prisma.bookingsCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUnitsInput
@@ -919,6 +941,7 @@ export type unitsUncheckedCreateWithoutBooking_requestsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUnitsInput
@@ -959,6 +982,7 @@ export type unitsUpdateWithoutBooking_requestsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookings?: Prisma.bookingsUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUnitsNestedInput
@@ -987,6 +1011,7 @@ export type unitsUncheckedUpdateWithoutBooking_requestsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUnitsNestedInput
@@ -1011,6 +1036,7 @@ export type unitsCreateWithoutBookingsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUnitsInput
@@ -1039,6 +1065,7 @@ export type unitsUncheckedCreateWithoutBookingsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUnitsInput
@@ -1069,6 +1096,7 @@ export type unitsCreateWithoutCurrent_bookingInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUnitsInput
@@ -1096,6 +1124,7 @@ export type unitsUncheckedCreateWithoutCurrent_bookingInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUnitsInput
@@ -1136,6 +1165,7 @@ export type unitsUpdateWithoutBookingsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUnitsNestedInput
@@ -1164,6 +1194,7 @@ export type unitsUncheckedUpdateWithoutBookingsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUnitsNestedInput
@@ -1200,6 +1231,7 @@ export type unitsUpdateWithoutCurrent_bookingInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUnitsNestedInput
@@ -1227,6 +1259,7 @@ export type unitsUncheckedUpdateWithoutCurrent_bookingInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUnitsNestedInput
@@ -1252,6 +1285,7 @@ export type unitsCreateWithoutGroup_bookingsInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUnitsInput
   maintenance_tickets?: Prisma.maintenance_ticketsCreateNestedManyWithoutUnitsInput
@@ -1280,6 +1314,7 @@ export type unitsUncheckedCreateWithoutGroup_bookingsInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_tickets?: Prisma.maintenance_ticketsUncheckedCreateNestedManyWithoutUnitsInput
@@ -1320,6 +1355,7 @@ export type unitsUpdateWithoutGroup_bookingsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUnitsNestedInput
   maintenance_tickets?: Prisma.maintenance_ticketsUpdateManyWithoutUnitsNestedInput
@@ -1348,6 +1384,7 @@ export type unitsUncheckedUpdateWithoutGroup_bookingsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUnitsNestedInput
@@ -1372,6 +1409,7 @@ export type unitsCreateWithoutInspectionsInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUnitsInput
   maintenance_tickets?: Prisma.maintenance_ticketsCreateNestedManyWithoutUnitsInput
@@ -1400,6 +1438,7 @@ export type unitsUncheckedCreateWithoutInspectionsInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_tickets?: Prisma.maintenance_ticketsUncheckedCreateNestedManyWithoutUnitsInput
@@ -1440,6 +1479,7 @@ export type unitsUpdateWithoutInspectionsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUnitsNestedInput
   maintenance_tickets?: Prisma.maintenance_ticketsUpdateManyWithoutUnitsNestedInput
@@ -1468,6 +1508,7 @@ export type unitsUncheckedUpdateWithoutInspectionsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUnitsNestedInput
@@ -1492,6 +1533,7 @@ export type unitsCreateWithoutMaintenance_reportsInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsCreateNestedManyWithoutUnitsInput
   maintenance_tickets?: Prisma.maintenance_ticketsCreateNestedManyWithoutUnitsInput
@@ -1520,6 +1562,7 @@ export type unitsUncheckedCreateWithoutMaintenance_reportsInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_tickets?: Prisma.maintenance_ticketsUncheckedCreateNestedManyWithoutUnitsInput
@@ -1560,6 +1603,7 @@ export type unitsUpdateWithoutMaintenance_reportsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUpdateManyWithoutUnitsNestedInput
   maintenance_tickets?: Prisma.maintenance_ticketsUpdateManyWithoutUnitsNestedInput
@@ -1588,6 +1632,7 @@ export type unitsUncheckedUpdateWithoutMaintenance_reportsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUnitsNestedInput
@@ -1612,6 +1657,7 @@ export type unitsCreateWithoutMaintenance_ticketsInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUnitsInput
@@ -1640,6 +1686,7 @@ export type unitsUncheckedCreateWithoutMaintenance_ticketsInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUnitsInput
@@ -1680,6 +1727,7 @@ export type unitsUpdateWithoutMaintenance_ticketsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUnitsNestedInput
@@ -1708,6 +1756,7 @@ export type unitsUncheckedUpdateWithoutMaintenance_ticketsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUnitsNestedInput
@@ -1732,6 +1781,7 @@ export type unitsCreateWithoutPropertiesInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUnitsInput
@@ -1759,6 +1809,7 @@ export type unitsUncheckedCreateWithoutPropertiesInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUnitsInput
@@ -1831,6 +1882,7 @@ export type unitsCreateWithoutRoom_facilitiesInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUnitsInput
@@ -1859,6 +1911,7 @@ export type unitsUncheckedCreateWithoutRoom_facilitiesInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUnitsInput
@@ -1899,6 +1952,7 @@ export type unitsUpdateWithoutRoom_facilitiesInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUnitsNestedInput
@@ -1927,6 +1981,7 @@ export type unitsUncheckedUpdateWithoutRoom_facilitiesInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUnitsNestedInput
@@ -1951,6 +2006,7 @@ export type unitsCreateWithoutSeasonal_pricing_rulesInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUnitsInput
@@ -1979,6 +2035,7 @@ export type unitsUncheckedCreateWithoutSeasonal_pricing_rulesInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUnitsInput
@@ -2019,6 +2076,7 @@ export type unitsUpdateWithoutSeasonal_pricing_rulesInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUnitsNestedInput
@@ -2047,6 +2105,7 @@ export type unitsUncheckedUpdateWithoutSeasonal_pricing_rulesInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUnitsNestedInput
@@ -2071,6 +2130,7 @@ export type unitsCreateWithoutUnit_pricing_tiersInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUnitsInput
@@ -2099,6 +2159,7 @@ export type unitsUncheckedCreateWithoutUnit_pricing_tiersInput = {
   updated_at?: Date | string
   booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUnitsInput
   bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUnitsInput
   group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUnitsInput
   inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUnitsInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUnitsInput
@@ -2139,6 +2200,7 @@ export type unitsUpdateWithoutUnit_pricing_tiersInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUnitsNestedInput
@@ -2167,12 +2229,137 @@ export type unitsUncheckedUpdateWithoutUnit_pricing_tiersInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUnitsNestedInput
   room_facilities?: Prisma.room_facilitiesUncheckedUpdateManyWithoutUnitsNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutUnitsNestedInput
+}
+
+export type unitsCreateWithoutTransaksi_bookingsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  capacity?: number | null
+  size?: string | null
+  status?: $Enums.UnitStatus
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  room_size?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  electricity_included?: boolean
+  furniture_included?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUnitsInput
+  bookings?: Prisma.bookingsCreateNestedManyWithoutUnitsInput
+  group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUnitsInput
+  inspections?: Prisma.inspectionsCreateNestedManyWithoutUnitsInput
+  maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUnitsInput
+  maintenance_tickets?: Prisma.maintenance_ticketsCreateNestedManyWithoutUnitsInput
+  room_facilities?: Prisma.room_facilitiesCreateNestedManyWithoutUnitsInput
+  seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutUnitsInput
+  unit_pricing_tiers?: Prisma.unit_pricing_tiersCreateNestedManyWithoutUnitsInput
+  current_booking?: Prisma.bookingsCreateNestedOneWithoutCurrent_unitInput
+  properties: Prisma.propertiesCreateNestedOneWithoutUnitsInput
+}
+
+export type unitsUncheckedCreateWithoutTransaksi_bookingsInput = {
+  id?: string
+  property_id: string
+  name: string
+  description?: string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  capacity?: number | null
+  size?: string | null
+  status?: $Enums.UnitStatus
+  current_booking_id?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  room_size?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  electricity_included?: boolean
+  furniture_included?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUnitsInput
+  bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUnitsInput
+  inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUnitsInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUnitsInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedCreateNestedManyWithoutUnitsInput
+  room_facilities?: Prisma.room_facilitiesUncheckedCreateNestedManyWithoutUnitsInput
+  seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutUnitsInput
+  unit_pricing_tiers?: Prisma.unit_pricing_tiersUncheckedCreateNestedManyWithoutUnitsInput
+}
+
+export type unitsCreateOrConnectWithoutTransaksi_bookingsInput = {
+  where: Prisma.unitsWhereUniqueInput
+  create: Prisma.XOR<Prisma.unitsCreateWithoutTransaksi_bookingsInput, Prisma.unitsUncheckedCreateWithoutTransaksi_bookingsInput>
+}
+
+export type unitsUpsertWithoutTransaksi_bookingsInput = {
+  update: Prisma.XOR<Prisma.unitsUpdateWithoutTransaksi_bookingsInput, Prisma.unitsUncheckedUpdateWithoutTransaksi_bookingsInput>
+  create: Prisma.XOR<Prisma.unitsCreateWithoutTransaksi_bookingsInput, Prisma.unitsUncheckedCreateWithoutTransaksi_bookingsInput>
+  where?: Prisma.unitsWhereInput
+}
+
+export type unitsUpdateToOneWithWhereWithoutTransaksi_bookingsInput = {
+  where?: Prisma.unitsWhereInput
+  data: Prisma.XOR<Prisma.unitsUpdateWithoutTransaksi_bookingsInput, Prisma.unitsUncheckedUpdateWithoutTransaksi_bookingsInput>
+}
+
+export type unitsUpdateWithoutTransaksi_bookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUnitStatusFieldUpdateOperationsInput | $Enums.UnitStatus
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  room_size?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  electricity_included?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  furniture_included?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  booking_requests?: Prisma.booking_requestsUpdateManyWithoutUnitsNestedInput
+  bookings?: Prisma.bookingsUpdateManyWithoutUnitsNestedInput
+  group_bookings?: Prisma.group_bookingsUpdateManyWithoutUnitsNestedInput
+  inspections?: Prisma.inspectionsUpdateManyWithoutUnitsNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUnitsNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUpdateManyWithoutUnitsNestedInput
+  room_facilities?: Prisma.room_facilitiesUpdateManyWithoutUnitsNestedInput
+  seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutUnitsNestedInput
+  unit_pricing_tiers?: Prisma.unit_pricing_tiersUpdateManyWithoutUnitsNestedInput
+  current_booking?: Prisma.bookingsUpdateOneWithoutCurrent_unitNestedInput
+  properties?: Prisma.propertiesUpdateOneRequiredWithoutUnitsNestedInput
+}
+
+export type unitsUncheckedUpdateWithoutTransaksi_bookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  property_id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUnitStatusFieldUpdateOperationsInput | $Enums.UnitStatus
+  current_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  room_size?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  electricity_included?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  furniture_included?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUnitsNestedInput
+  bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutUnitsNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUnitsNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUnitsNestedInput
+  room_facilities?: Prisma.room_facilitiesUncheckedUpdateManyWithoutUnitsNestedInput
+  seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutUnitsNestedInput
+  unit_pricing_tiers?: Prisma.unit_pricing_tiersUncheckedUpdateManyWithoutUnitsNestedInput
 }
 
 export type unitsCreateManyPropertiesInput = {
@@ -2208,6 +2395,7 @@ export type unitsUpdateWithoutPropertiesInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUnitsNestedInput
@@ -2235,6 +2423,7 @@ export type unitsUncheckedUpdateWithoutPropertiesInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUnitsNestedInput
   bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUnitsNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUnitsNestedInput
   group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUnitsNestedInput
   inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutUnitsNestedInput
   maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUnitsNestedInput
@@ -2269,6 +2458,7 @@ export type unitsUncheckedUpdateManyWithoutPropertiesInput = {
 export type UnitsCountOutputType = {
   booking_requests: number
   bookings: number
+  transaksi_bookings: number
   group_bookings: number
   inspections: number
   maintenance_reports: number
@@ -2281,6 +2471,7 @@ export type UnitsCountOutputType = {
 export type UnitsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   booking_requests?: boolean | UnitsCountOutputTypeCountBooking_requestsArgs
   bookings?: boolean | UnitsCountOutputTypeCountBookingsArgs
+  transaksi_bookings?: boolean | UnitsCountOutputTypeCountTransaksi_bookingsArgs
   group_bookings?: boolean | UnitsCountOutputTypeCountGroup_bookingsArgs
   inspections?: boolean | UnitsCountOutputTypeCountInspectionsArgs
   maintenance_reports?: boolean | UnitsCountOutputTypeCountMaintenance_reportsArgs
@@ -2312,6 +2503,13 @@ export type UnitsCountOutputTypeCountBooking_requestsArgs<ExtArgs extends runtim
  */
 export type UnitsCountOutputTypeCountBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.bookingsWhereInput
+}
+
+/**
+ * UnitsCountOutputType without action
+ */
+export type UnitsCountOutputTypeCountTransaksi_bookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookingWhereInput
 }
 
 /**
@@ -2382,6 +2580,7 @@ export type unitsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updated_at?: boolean
   booking_requests?: boolean | Prisma.units$booking_requestsArgs<ExtArgs>
   bookings?: boolean | Prisma.units$bookingsArgs<ExtArgs>
+  transaksi_bookings?: boolean | Prisma.units$transaksi_bookingsArgs<ExtArgs>
   group_bookings?: boolean | Prisma.units$group_bookingsArgs<ExtArgs>
   inspections?: boolean | Prisma.units$inspectionsArgs<ExtArgs>
   maintenance_reports?: boolean | Prisma.units$maintenance_reportsArgs<ExtArgs>
@@ -2456,6 +2655,7 @@ export type unitsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type unitsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   booking_requests?: boolean | Prisma.units$booking_requestsArgs<ExtArgs>
   bookings?: boolean | Prisma.units$bookingsArgs<ExtArgs>
+  transaksi_bookings?: boolean | Prisma.units$transaksi_bookingsArgs<ExtArgs>
   group_bookings?: boolean | Prisma.units$group_bookingsArgs<ExtArgs>
   inspections?: boolean | Prisma.units$inspectionsArgs<ExtArgs>
   maintenance_reports?: boolean | Prisma.units$maintenance_reportsArgs<ExtArgs>
@@ -2481,6 +2681,7 @@ export type $unitsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     booking_requests: Prisma.$booking_requestsPayload<ExtArgs>[]
     bookings: Prisma.$bookingsPayload<ExtArgs>[]
+    transaksi_bookings: Prisma.$BookingPayload<ExtArgs>[]
     group_bookings: Prisma.$group_bookingsPayload<ExtArgs>[]
     inspections: Prisma.$inspectionsPayload<ExtArgs>[]
     maintenance_reports: Prisma.$maintenance_reportsPayload<ExtArgs>[]
@@ -2903,6 +3104,7 @@ export interface Prisma__unitsClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   booking_requests<T extends Prisma.units$booking_requestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.units$booking_requestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$booking_requestsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bookings<T extends Prisma.units$bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.units$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$bookingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  transaksi_bookings<T extends Prisma.units$transaksi_bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.units$transaksi_bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   group_bookings<T extends Prisma.units$group_bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.units$group_bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$group_bookingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inspections<T extends Prisma.units$inspectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.units$inspectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$inspectionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   maintenance_reports<T extends Prisma.units$maintenance_reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.units$maintenance_reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$maintenance_reportsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3402,6 +3604,30 @@ export type units$bookingsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.BookingsScalarFieldEnum | Prisma.BookingsScalarFieldEnum[]
+}
+
+/**
+ * units.transaksi_bookings
+ */
+export type units$transaksi_bookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Booking
+   */
+  select?: Prisma.BookingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Booking
+   */
+  omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  where?: Prisma.BookingWhereInput
+  orderBy?: Prisma.BookingOrderByWithRelationInput | Prisma.BookingOrderByWithRelationInput[]
+  cursor?: Prisma.BookingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookingScalarFieldEnum | Prisma.BookingScalarFieldEnum[]
 }
 
 /**

@@ -125,7 +125,18 @@ export const ModelName = {
   wa_session: 'wa_session',
   webhook_events: 'webhook_events',
   wishlists: 'wishlists',
-  withdrawals: 'withdrawals'
+  withdrawals: 'withdrawals',
+  Booking: 'Booking',
+  Payment: 'Payment',
+  KycRequest: 'KycRequest',
+  RefundRequest: 'RefundRequest',
+  PlatformConfig: 'PlatformConfig',
+  PaymentTransaction: 'PaymentTransaction',
+  Property: 'Property',
+  UnitProperti: 'UnitProperti',
+  Fasilitas: 'Fasilitas',
+  FotoProperti: 'FotoProperti',
+  Pemesanan: 'Pemesanan'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -846,6 +857,8 @@ export const PropertiesScalarFieldEnum = {
   city: 'city',
   district: 'district',
   type: 'type',
+  gender_type: 'gender_type',
+  rental_period: 'rental_period',
   base_price: 'base_price',
   packages: 'packages',
   status: 'status',
@@ -1355,6 +1368,174 @@ export const WithdrawalsScalarFieldEnum = {
 } as const
 
 export type WithdrawalsScalarFieldEnum = (typeof WithdrawalsScalarFieldEnum)[keyof typeof WithdrawalsScalarFieldEnum]
+
+
+export const BookingScalarFieldEnum = {
+  id: 'id',
+  unit_id: 'unit_id',
+  penyewa_id: 'penyewa_id',
+  tanggal_mulai: 'tanggal_mulai',
+  tanggal_selesai: 'tanggal_selesai',
+  total_harga: 'total_harga',
+  status_booking: 'status_booking',
+  jumlahDP: 'jumlahDP',
+  jumlahPelunasan: 'jumlahPelunasan',
+  tanggalBayarDP: 'tanggalBayarDP',
+  tanggalPelunasan: 'tanggalPelunasan',
+  tanggalDitolak: 'tanggalDitolak',
+  alasanPenolakan: 'alasanPenolakan',
+  statusRefundDP: 'statusRefundDP',
+  transaksiDP_id: 'transaksiDP_id',
+  transaksiPelunasan_id: 'transaksiPelunasan_id',
+  transaksiRefund_id: 'transaksiRefund_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  booking_id: 'booking_id',
+  jumlah_bayar: 'jumlah_bayar',
+  metode_pembayaran: 'metode_pembayaran',
+  status_pembayaran: 'status_pembayaran',
+  bukti_transfer_url: 'bukti_transfer_url',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const KycRequestScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  nama_lengkap: 'nama_lengkap',
+  nomor_ktp: 'nomor_ktp',
+  url_foto_ktp: 'url_foto_ktp',
+  url_foto_selfie: 'url_foto_selfie',
+  status_kyc: 'status_kyc',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type KycRequestScalarFieldEnum = (typeof KycRequestScalarFieldEnum)[keyof typeof KycRequestScalarFieldEnum]
+
+
+export const RefundRequestScalarFieldEnum = {
+  id: 'id',
+  booking_id: 'booking_id',
+  alasan: 'alasan',
+  jumlah_refund: 'jumlah_refund',
+  status_refund: 'status_refund',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type RefundRequestScalarFieldEnum = (typeof RefundRequestScalarFieldEnum)[keyof typeof RefundRequestScalarFieldEnum]
+
+
+export const PlatformConfigScalarFieldEnum = {
+  id: 'id',
+  persentaseDP: 'persentaseDP',
+  biayaRefundPenyewa: 'biayaRefundPenyewa',
+  biayaRefundPemilik: 'biayaRefundPemilik',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlatformConfigScalarFieldEnum = (typeof PlatformConfigScalarFieldEnum)[keyof typeof PlatformConfigScalarFieldEnum]
+
+
+export const PaymentTransactionScalarFieldEnum = {
+  id: 'id',
+  tipeTransaksi: 'tipeTransaksi',
+  jumlah: 'jumlah',
+  status: 'status',
+  referensiGateway: 'referensiGateway',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalarFieldEnum)[keyof typeof PaymentTransactionScalarFieldEnum]
+
+
+export const PropertyScalarFieldEnum = {
+  id: 'id',
+  nama_properti: 'nama_properti',
+  deskripsi: 'deskripsi',
+  alamat_lengkap: 'alamat_lengkap',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  tipe_properti: 'tipe_properti',
+  status: 'status',
+  pemilik_id: 'pemilik_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PropertyScalarFieldEnum = (typeof PropertyScalarFieldEnum)[keyof typeof PropertyScalarFieldEnum]
+
+
+export const UnitPropertiScalarFieldEnum = {
+  id: 'id',
+  property_id: 'property_id',
+  nama_unit: 'nama_unit',
+  luas_meter: 'luas_meter',
+  harga_bulanan: 'harga_bulanan',
+  kapasitas: 'kapasitas',
+  status_ketersediaan: 'status_ketersediaan',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type UnitPropertiScalarFieldEnum = (typeof UnitPropertiScalarFieldEnum)[keyof typeof UnitPropertiScalarFieldEnum]
+
+
+export const FasilitasScalarFieldEnum = {
+  id: 'id',
+  nama_fasilitas: 'nama_fasilitas',
+  ikon: 'ikon',
+  property_id: 'property_id',
+  unit_id: 'unit_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type FasilitasScalarFieldEnum = (typeof FasilitasScalarFieldEnum)[keyof typeof FasilitasScalarFieldEnum]
+
+
+export const FotoPropertiScalarFieldEnum = {
+  id: 'id',
+  property_id: 'property_id',
+  url_foto: 'url_foto',
+  urutan: 'urutan',
+  apakah_utama: 'apakah_utama',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type FotoPropertiScalarFieldEnum = (typeof FotoPropertiScalarFieldEnum)[keyof typeof FotoPropertiScalarFieldEnum]
+
+
+export const PemesananScalarFieldEnum = {
+  id: 'id',
+  unit_properti_id: 'unit_properti_id',
+  property_id: 'property_id',
+  tenant_id: 'tenant_id',
+  jumlah_penghuni: 'jumlah_penghuni',
+  tanggal_mulai: 'tanggal_mulai',
+  tanggal_selesai: 'tanggal_selesai',
+  total_harga: 'total_harga',
+  status: 'status',
+  catatan: 'catatan',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PemesananScalarFieldEnum = (typeof PemesananScalarFieldEnum)[keyof typeof PemesananScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -15,6 +15,12 @@ export default [
     },
   },
   {
-    ignores: ['eslint.config.js', 'prettier.config.js', 'src/paraglide/**'],
+    ignores: [
+      'eslint.config.js',
+      'prettier.config.js',
+      'src/paraglide/**',
+      '.output/**',
+      'src/generated/prisma/**',
+    ],
   },
 ]

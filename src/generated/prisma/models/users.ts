@@ -47,12 +47,12 @@ export type UsersMinAggregateOutputType = {
   phone: string | null
   whatsapp: string | null
   telegram: string | null
-  role: $Enums.UserRole | null
+  role: $Enums.Role | null
   is_active: boolean | null
   is_banned: boolean | null
   ban_reason: string | null
   two_factor_enabled: boolean | null
-  kyc_status: $Enums.KYCStatus | null
+  kyc_status: $Enums.KycStatus | null
   ktp_number: string | null
   ktp_image_url: string | null
   reputation_score: runtime.Decimal | null
@@ -77,12 +77,12 @@ export type UsersMaxAggregateOutputType = {
   phone: string | null
   whatsapp: string | null
   telegram: string | null
-  role: $Enums.UserRole | null
+  role: $Enums.Role | null
   is_active: boolean | null
   is_banned: boolean | null
   ban_reason: string | null
   two_factor_enabled: boolean | null
-  kyc_status: $Enums.KYCStatus | null
+  kyc_status: $Enums.KycStatus | null
   ktp_number: string | null
   ktp_image_url: string | null
   reputation_score: runtime.Decimal | null
@@ -328,12 +328,12 @@ export type UsersGroupByOutputType = {
   phone: string | null
   whatsapp: string | null
   telegram: string | null
-  role: $Enums.UserRole
+  role: $Enums.Role
   is_active: boolean
   is_banned: boolean
   ban_reason: string | null
   two_factor_enabled: boolean | null
-  kyc_status: $Enums.KYCStatus
+  kyc_status: $Enums.KycStatus
   ktp_number: string | null
   ktp_image_url: string | null
   reputation_score: runtime.Decimal
@@ -381,12 +381,12 @@ export type usersWhereInput = {
   phone?: Prisma.StringNullableFilter<"users"> | string | null
   whatsapp?: Prisma.StringNullableFilter<"users"> | string | null
   telegram?: Prisma.StringNullableFilter<"users"> | string | null
-  role?: Prisma.EnumUserRoleFilter<"users"> | $Enums.UserRole
+  role?: Prisma.EnumRoleFilter<"users"> | $Enums.Role
   is_active?: Prisma.BoolFilter<"users"> | boolean
   is_banned?: Prisma.BoolFilter<"users"> | boolean
   ban_reason?: Prisma.StringNullableFilter<"users"> | string | null
   two_factor_enabled?: Prisma.BoolNullableFilter<"users"> | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFilter<"users"> | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFilter<"users"> | $Enums.KycStatus
   ktp_number?: Prisma.StringNullableFilter<"users"> | string | null
   ktp_image_url?: Prisma.StringNullableFilter<"users"> | string | null
   reputation_score?: Prisma.DecimalFilter<"users"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -446,6 +446,10 @@ export type usersWhereInput = {
   user_notification_preferences?: Prisma.XOR<Prisma.User_notification_preferencesNullableScalarRelationFilter, Prisma.user_notification_preferencesWhereInput> | null
   wishlists?: Prisma.WishlistsListRelationFilter
   withdrawals?: Prisma.WithdrawalsListRelationFilter
+  transaksi_bookings?: Prisma.BookingListRelationFilter
+  kyc_requests?: Prisma.KycRequestListRelationFilter
+  propertis_wizard?: Prisma.PropertyListRelationFilter
+  pemesanans?: Prisma.PemesananListRelationFilter
 }
 
 export type usersOrderByWithRelationInput = {
@@ -522,6 +526,10 @@ export type usersOrderByWithRelationInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesOrderByWithRelationInput
   wishlists?: Prisma.wishlistsOrderByRelationAggregateInput
   withdrawals?: Prisma.withdrawalsOrderByRelationAggregateInput
+  transaksi_bookings?: Prisma.BookingOrderByRelationAggregateInput
+  kyc_requests?: Prisma.KycRequestOrderByRelationAggregateInput
+  propertis_wizard?: Prisma.PropertyOrderByRelationAggregateInput
+  pemesanans?: Prisma.PemesananOrderByRelationAggregateInput
 }
 
 export type usersWhereUniqueInput = Prisma.AtLeast<{
@@ -537,12 +545,12 @@ export type usersWhereUniqueInput = Prisma.AtLeast<{
   phone?: Prisma.StringNullableFilter<"users"> | string | null
   whatsapp?: Prisma.StringNullableFilter<"users"> | string | null
   telegram?: Prisma.StringNullableFilter<"users"> | string | null
-  role?: Prisma.EnumUserRoleFilter<"users"> | $Enums.UserRole
+  role?: Prisma.EnumRoleFilter<"users"> | $Enums.Role
   is_active?: Prisma.BoolFilter<"users"> | boolean
   is_banned?: Prisma.BoolFilter<"users"> | boolean
   ban_reason?: Prisma.StringNullableFilter<"users"> | string | null
   two_factor_enabled?: Prisma.BoolNullableFilter<"users"> | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFilter<"users"> | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFilter<"users"> | $Enums.KycStatus
   ktp_number?: Prisma.StringNullableFilter<"users"> | string | null
   ktp_image_url?: Prisma.StringNullableFilter<"users"> | string | null
   reputation_score?: Prisma.DecimalFilter<"users"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -601,6 +609,10 @@ export type usersWhereUniqueInput = Prisma.AtLeast<{
   user_notification_preferences?: Prisma.XOR<Prisma.User_notification_preferencesNullableScalarRelationFilter, Prisma.user_notification_preferencesWhereInput> | null
   wishlists?: Prisma.WishlistsListRelationFilter
   withdrawals?: Prisma.WithdrawalsListRelationFilter
+  transaksi_bookings?: Prisma.BookingListRelationFilter
+  kyc_requests?: Prisma.KycRequestListRelationFilter
+  propertis_wizard?: Prisma.PropertyListRelationFilter
+  pemesanans?: Prisma.PemesananListRelationFilter
 }, "id" | "email" | "referral_code">
 
 export type usersOrderByWithAggregationInput = {
@@ -650,12 +662,12 @@ export type usersScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
   whatsapp?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
   telegram?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
-  role?: Prisma.EnumUserRoleWithAggregatesFilter<"users"> | $Enums.UserRole
+  role?: Prisma.EnumRoleWithAggregatesFilter<"users"> | $Enums.Role
   is_active?: Prisma.BoolWithAggregatesFilter<"users"> | boolean
   is_banned?: Prisma.BoolWithAggregatesFilter<"users"> | boolean
   ban_reason?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
   two_factor_enabled?: Prisma.BoolNullableWithAggregatesFilter<"users"> | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusWithAggregatesFilter<"users"> | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusWithAggregatesFilter<"users"> | $Enums.KycStatus
   ktp_number?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
   ktp_image_url?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
   reputation_score?: Prisma.DecimalWithAggregatesFilter<"users"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -680,12 +692,12 @@ export type usersCreateInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -745,6 +757,10 @@ export type usersCreateInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateInput = {
@@ -756,12 +772,12 @@ export type usersUncheckedCreateInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -821,6 +837,10 @@ export type usersUncheckedCreateInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersUpdateInput = {
@@ -832,12 +852,12 @@ export type usersUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -897,6 +917,10 @@ export type usersUpdateInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateInput = {
@@ -908,12 +932,12 @@ export type usersUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -973,6 +997,10 @@ export type usersUncheckedUpdateInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateManyInput = {
@@ -984,12 +1012,12 @@ export type usersCreateManyInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1014,12 +1042,12 @@ export type usersUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1044,12 +1072,12 @@ export type usersUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1849,8 +1877,8 @@ export type usersUpdateOneRequiredWithoutUser_notification_preferencesNestedInpu
   update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutUser_notification_preferencesInput, Prisma.usersUpdateWithoutUser_notification_preferencesInput>, Prisma.usersUncheckedUpdateWithoutUser_notification_preferencesInput>
 }
 
-export type EnumUserRoleFieldUpdateOperationsInput = {
-  set?: $Enums.UserRole
+export type EnumRoleFieldUpdateOperationsInput = {
+  set?: $Enums.Role
 }
 
 export type EnumLoyaltyTierFieldUpdateOperationsInput = {
@@ -1887,6 +1915,62 @@ export type usersUpdateOneWithoutWithdrawalsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutWithdrawalsInput, Prisma.usersUpdateWithoutWithdrawalsInput>, Prisma.usersUncheckedUpdateWithoutWithdrawalsInput>
 }
 
+export type usersCreateNestedOneWithoutTransaksi_bookingsInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutTransaksi_bookingsInput, Prisma.usersUncheckedCreateWithoutTransaksi_bookingsInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutTransaksi_bookingsInput
+  connect?: Prisma.usersWhereUniqueInput
+}
+
+export type usersUpdateOneRequiredWithoutTransaksi_bookingsNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutTransaksi_bookingsInput, Prisma.usersUncheckedCreateWithoutTransaksi_bookingsInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutTransaksi_bookingsInput
+  upsert?: Prisma.usersUpsertWithoutTransaksi_bookingsInput
+  connect?: Prisma.usersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutTransaksi_bookingsInput, Prisma.usersUpdateWithoutTransaksi_bookingsInput>, Prisma.usersUncheckedUpdateWithoutTransaksi_bookingsInput>
+}
+
+export type usersCreateNestedOneWithoutKyc_requestsInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutKyc_requestsInput, Prisma.usersUncheckedCreateWithoutKyc_requestsInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutKyc_requestsInput
+  connect?: Prisma.usersWhereUniqueInput
+}
+
+export type usersUpdateOneRequiredWithoutKyc_requestsNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutKyc_requestsInput, Prisma.usersUncheckedCreateWithoutKyc_requestsInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutKyc_requestsInput
+  upsert?: Prisma.usersUpsertWithoutKyc_requestsInput
+  connect?: Prisma.usersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutKyc_requestsInput, Prisma.usersUpdateWithoutKyc_requestsInput>, Prisma.usersUncheckedUpdateWithoutKyc_requestsInput>
+}
+
+export type usersCreateNestedOneWithoutPropertis_wizardInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutPropertis_wizardInput, Prisma.usersUncheckedCreateWithoutPropertis_wizardInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutPropertis_wizardInput
+  connect?: Prisma.usersWhereUniqueInput
+}
+
+export type usersUpdateOneRequiredWithoutPropertis_wizardNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutPropertis_wizardInput, Prisma.usersUncheckedCreateWithoutPropertis_wizardInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutPropertis_wizardInput
+  upsert?: Prisma.usersUpsertWithoutPropertis_wizardInput
+  connect?: Prisma.usersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutPropertis_wizardInput, Prisma.usersUpdateWithoutPropertis_wizardInput>, Prisma.usersUncheckedUpdateWithoutPropertis_wizardInput>
+}
+
+export type usersCreateNestedOneWithoutPemesanansInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutPemesanansInput, Prisma.usersUncheckedCreateWithoutPemesanansInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutPemesanansInput
+  connect?: Prisma.usersWhereUniqueInput
+}
+
+export type usersUpdateOneRequiredWithoutPemesanansNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutPemesanansInput, Prisma.usersUncheckedCreateWithoutPemesanansInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutPemesanansInput
+  upsert?: Prisma.usersUpsertWithoutPemesanansInput
+  connect?: Prisma.usersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutPemesanansInput, Prisma.usersUpdateWithoutPemesanansInput>, Prisma.usersUncheckedUpdateWithoutPemesanansInput>
+}
+
 export type usersCreateWithoutAccountsInput = {
   id?: string
   email: string
@@ -1896,12 +1980,12 @@ export type usersCreateWithoutAccountsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1960,6 +2044,10 @@ export type usersCreateWithoutAccountsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutAccountsInput = {
@@ -1971,12 +2059,12 @@ export type usersUncheckedCreateWithoutAccountsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2035,6 +2123,10 @@ export type usersUncheckedCreateWithoutAccountsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutAccountsInput = {
@@ -2062,12 +2154,12 @@ export type usersUpdateWithoutAccountsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2126,6 +2218,10 @@ export type usersUpdateWithoutAccountsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutAccountsInput = {
@@ -2137,12 +2233,12 @@ export type usersUncheckedUpdateWithoutAccountsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2201,6 +2297,10 @@ export type usersUncheckedUpdateWithoutAccountsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutAnalytics_eventsInput = {
@@ -2212,12 +2312,12 @@ export type usersCreateWithoutAnalytics_eventsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2276,6 +2376,10 @@ export type usersCreateWithoutAnalytics_eventsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutAnalytics_eventsInput = {
@@ -2287,12 +2391,12 @@ export type usersUncheckedCreateWithoutAnalytics_eventsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2351,6 +2455,10 @@ export type usersUncheckedCreateWithoutAnalytics_eventsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutAnalytics_eventsInput = {
@@ -2378,12 +2486,12 @@ export type usersUpdateWithoutAnalytics_eventsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2442,6 +2550,10 @@ export type usersUpdateWithoutAnalytics_eventsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutAnalytics_eventsInput = {
@@ -2453,12 +2565,12 @@ export type usersUncheckedUpdateWithoutAnalytics_eventsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2517,6 +2629,10 @@ export type usersUncheckedUpdateWithoutAnalytics_eventsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutAudit_logsInput = {
@@ -2528,12 +2644,12 @@ export type usersCreateWithoutAudit_logsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2592,6 +2708,10 @@ export type usersCreateWithoutAudit_logsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutAudit_logsInput = {
@@ -2603,12 +2723,12 @@ export type usersUncheckedCreateWithoutAudit_logsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2667,6 +2787,10 @@ export type usersUncheckedCreateWithoutAudit_logsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutAudit_logsInput = {
@@ -2694,12 +2818,12 @@ export type usersUpdateWithoutAudit_logsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2758,6 +2882,10 @@ export type usersUpdateWithoutAudit_logsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutAudit_logsInput = {
@@ -2769,12 +2897,12 @@ export type usersUncheckedUpdateWithoutAudit_logsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2833,6 +2961,10 @@ export type usersUncheckedUpdateWithoutAudit_logsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutBalance_logsInput = {
@@ -2844,12 +2976,12 @@ export type usersCreateWithoutBalance_logsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2908,6 +3040,10 @@ export type usersCreateWithoutBalance_logsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutBalance_logsInput = {
@@ -2919,12 +3055,12 @@ export type usersUncheckedCreateWithoutBalance_logsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2983,6 +3119,10 @@ export type usersUncheckedCreateWithoutBalance_logsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutBalance_logsInput = {
@@ -3010,12 +3150,12 @@ export type usersUpdateWithoutBalance_logsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3074,6 +3214,10 @@ export type usersUpdateWithoutBalance_logsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutBalance_logsInput = {
@@ -3085,12 +3229,12 @@ export type usersUncheckedUpdateWithoutBalance_logsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3149,6 +3293,10 @@ export type usersUncheckedUpdateWithoutBalance_logsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutBooking_requestsInput = {
@@ -3160,12 +3308,12 @@ export type usersCreateWithoutBooking_requestsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3224,6 +3372,10 @@ export type usersCreateWithoutBooking_requestsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutBooking_requestsInput = {
@@ -3235,12 +3387,12 @@ export type usersUncheckedCreateWithoutBooking_requestsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3299,6 +3451,10 @@ export type usersUncheckedCreateWithoutBooking_requestsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutBooking_requestsInput = {
@@ -3326,12 +3482,12 @@ export type usersUpdateWithoutBooking_requestsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3390,6 +3546,10 @@ export type usersUpdateWithoutBooking_requestsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutBooking_requestsInput = {
@@ -3401,12 +3561,12 @@ export type usersUncheckedUpdateWithoutBooking_requestsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3465,6 +3625,10 @@ export type usersUncheckedUpdateWithoutBooking_requestsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutBookingsInput = {
@@ -3476,12 +3640,12 @@ export type usersCreateWithoutBookingsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3540,6 +3704,10 @@ export type usersCreateWithoutBookingsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutBookingsInput = {
@@ -3551,12 +3719,12 @@ export type usersUncheckedCreateWithoutBookingsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3615,6 +3783,10 @@ export type usersUncheckedCreateWithoutBookingsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutBookingsInput = {
@@ -3642,12 +3814,12 @@ export type usersUpdateWithoutBookingsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3706,6 +3878,10 @@ export type usersUpdateWithoutBookingsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutBookingsInput = {
@@ -3717,12 +3893,12 @@ export type usersUncheckedUpdateWithoutBookingsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3781,6 +3957,10 @@ export type usersUncheckedUpdateWithoutBookingsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
@@ -3792,12 +3972,12 @@ export type usersCreateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3856,6 +4036,10 @@ export type usersCreateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
@@ -3867,12 +4051,12 @@ export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_owner_idTousersInpu
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3931,6 +4115,10 @@ export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_owner_idTousersInpu
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
@@ -3947,12 +4135,12 @@ export type usersCreateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4011,6 +4199,10 @@ export type usersCreateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
@@ -4022,12 +4214,12 @@ export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_tenant_idTousersInp
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4086,6 +4278,10 @@ export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_tenant_idTousersInp
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
@@ -4113,12 +4309,12 @@ export type usersUpdateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4177,6 +4373,10 @@ export type usersUpdateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
@@ -4188,12 +4388,12 @@ export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_owner_idTousersInpu
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4252,6 +4452,10 @@ export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_owner_idTousersInpu
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUpsertWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
@@ -4274,12 +4478,12 @@ export type usersUpdateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4338,6 +4542,10 @@ export type usersUpdateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
@@ -4349,12 +4557,12 @@ export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_tenant_idTousersInp
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4413,6 +4621,10 @@ export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_tenant_idTousersInp
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutDamage_reports_damage_reports_reported_byTousersInput = {
@@ -4424,12 +4636,12 @@ export type usersCreateWithoutDamage_reports_damage_reports_reported_byTousersIn
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4488,6 +4700,10 @@ export type usersCreateWithoutDamage_reports_damage_reports_reported_byTousersIn
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutDamage_reports_damage_reports_reported_byTousersInput = {
@@ -4499,12 +4715,12 @@ export type usersUncheckedCreateWithoutDamage_reports_damage_reports_reported_by
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4563,6 +4779,10 @@ export type usersUncheckedCreateWithoutDamage_reports_damage_reports_reported_by
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutDamage_reports_damage_reports_reported_byTousersInput = {
@@ -4579,12 +4799,12 @@ export type usersCreateWithoutDamage_reports_damage_reports_resolved_byTousersIn
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4643,6 +4863,10 @@ export type usersCreateWithoutDamage_reports_damage_reports_resolved_byTousersIn
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutDamage_reports_damage_reports_resolved_byTousersInput = {
@@ -4654,12 +4878,12 @@ export type usersUncheckedCreateWithoutDamage_reports_damage_reports_resolved_by
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4718,6 +4942,10 @@ export type usersUncheckedCreateWithoutDamage_reports_damage_reports_resolved_by
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutDamage_reports_damage_reports_resolved_byTousersInput = {
@@ -4745,12 +4973,12 @@ export type usersUpdateWithoutDamage_reports_damage_reports_reported_byTousersIn
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4809,6 +5037,10 @@ export type usersUpdateWithoutDamage_reports_damage_reports_reported_byTousersIn
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_reported_byTousersInput = {
@@ -4820,12 +5052,12 @@ export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_reported_by
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4884,6 +5116,10 @@ export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_reported_by
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUpsertWithoutDamage_reports_damage_reports_resolved_byTousersInput = {
@@ -4906,12 +5142,12 @@ export type usersUpdateWithoutDamage_reports_damage_reports_resolved_byTousersIn
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4970,6 +5206,10 @@ export type usersUpdateWithoutDamage_reports_damage_reports_resolved_byTousersIn
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_resolved_byTousersInput = {
@@ -4981,12 +5221,12 @@ export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_resolved_by
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5045,6 +5285,10 @@ export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_resolved_by
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutExperiment_assignmentsInput = {
@@ -5056,12 +5300,12 @@ export type usersCreateWithoutExperiment_assignmentsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5120,6 +5364,10 @@ export type usersCreateWithoutExperiment_assignmentsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutExperiment_assignmentsInput = {
@@ -5131,12 +5379,12 @@ export type usersUncheckedCreateWithoutExperiment_assignmentsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5195,6 +5443,10 @@ export type usersUncheckedCreateWithoutExperiment_assignmentsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutExperiment_assignmentsInput = {
@@ -5222,12 +5474,12 @@ export type usersUpdateWithoutExperiment_assignmentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5286,6 +5538,10 @@ export type usersUpdateWithoutExperiment_assignmentsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutExperiment_assignmentsInput = {
@@ -5297,12 +5553,12 @@ export type usersUncheckedUpdateWithoutExperiment_assignmentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5361,6 +5617,10 @@ export type usersUncheckedUpdateWithoutExperiment_assignmentsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutFavoritesInput = {
@@ -5372,12 +5632,12 @@ export type usersCreateWithoutFavoritesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5436,6 +5696,10 @@ export type usersCreateWithoutFavoritesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutFavoritesInput = {
@@ -5447,12 +5711,12 @@ export type usersUncheckedCreateWithoutFavoritesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5511,6 +5775,10 @@ export type usersUncheckedCreateWithoutFavoritesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutFavoritesInput = {
@@ -5538,12 +5806,12 @@ export type usersUpdateWithoutFavoritesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5602,6 +5870,10 @@ export type usersUpdateWithoutFavoritesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutFavoritesInput = {
@@ -5613,12 +5885,12 @@ export type usersUncheckedUpdateWithoutFavoritesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5677,6 +5949,10 @@ export type usersUncheckedUpdateWithoutFavoritesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutFeedbacksInput = {
@@ -5688,12 +5964,12 @@ export type usersCreateWithoutFeedbacksInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5752,6 +6028,10 @@ export type usersCreateWithoutFeedbacksInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutFeedbacksInput = {
@@ -5763,12 +6043,12 @@ export type usersUncheckedCreateWithoutFeedbacksInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5827,6 +6107,10 @@ export type usersUncheckedCreateWithoutFeedbacksInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutFeedbacksInput = {
@@ -5854,12 +6138,12 @@ export type usersUpdateWithoutFeedbacksInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5918,6 +6202,10 @@ export type usersUpdateWithoutFeedbacksInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutFeedbacksInput = {
@@ -5929,12 +6217,12 @@ export type usersUncheckedUpdateWithoutFeedbacksInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5993,6 +6281,10 @@ export type usersUncheckedUpdateWithoutFeedbacksInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutGeneral_ledgerInput = {
@@ -6004,12 +6296,12 @@ export type usersCreateWithoutGeneral_ledgerInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6068,6 +6360,10 @@ export type usersCreateWithoutGeneral_ledgerInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutGeneral_ledgerInput = {
@@ -6079,12 +6375,12 @@ export type usersUncheckedCreateWithoutGeneral_ledgerInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6143,6 +6439,10 @@ export type usersUncheckedCreateWithoutGeneral_ledgerInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutGeneral_ledgerInput = {
@@ -6170,12 +6470,12 @@ export type usersUpdateWithoutGeneral_ledgerInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6234,6 +6534,10 @@ export type usersUpdateWithoutGeneral_ledgerInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutGeneral_ledgerInput = {
@@ -6245,12 +6549,12 @@ export type usersUncheckedUpdateWithoutGeneral_ledgerInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6309,6 +6613,10 @@ export type usersUncheckedUpdateWithoutGeneral_ledgerInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutGroup_booking_membersInput = {
@@ -6320,12 +6628,12 @@ export type usersCreateWithoutGroup_booking_membersInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6384,6 +6692,10 @@ export type usersCreateWithoutGroup_booking_membersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutGroup_booking_membersInput = {
@@ -6395,12 +6707,12 @@ export type usersUncheckedCreateWithoutGroup_booking_membersInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6459,6 +6771,10 @@ export type usersUncheckedCreateWithoutGroup_booking_membersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutGroup_booking_membersInput = {
@@ -6486,12 +6802,12 @@ export type usersUpdateWithoutGroup_booking_membersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6550,6 +6866,10 @@ export type usersUpdateWithoutGroup_booking_membersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutGroup_booking_membersInput = {
@@ -6561,12 +6881,12 @@ export type usersUncheckedUpdateWithoutGroup_booking_membersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6625,6 +6945,10 @@ export type usersUncheckedUpdateWithoutGroup_booking_membersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutGroup_bookingsInput = {
@@ -6636,12 +6960,12 @@ export type usersCreateWithoutGroup_bookingsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6700,6 +7024,10 @@ export type usersCreateWithoutGroup_bookingsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutGroup_bookingsInput = {
@@ -6711,12 +7039,12 @@ export type usersUncheckedCreateWithoutGroup_bookingsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6775,6 +7103,10 @@ export type usersUncheckedCreateWithoutGroup_bookingsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutGroup_bookingsInput = {
@@ -6802,12 +7134,12 @@ export type usersUpdateWithoutGroup_bookingsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6866,6 +7198,10 @@ export type usersUpdateWithoutGroup_bookingsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutGroup_bookingsInput = {
@@ -6877,12 +7213,12 @@ export type usersUncheckedUpdateWithoutGroup_bookingsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6941,6 +7277,10 @@ export type usersUncheckedUpdateWithoutGroup_bookingsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutInspections_inspections_performed_byTousersInput = {
@@ -6952,12 +7292,12 @@ export type usersCreateWithoutInspections_inspections_performed_byTousersInput =
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7016,6 +7356,10 @@ export type usersCreateWithoutInspections_inspections_performed_byTousersInput =
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutInspections_inspections_performed_byTousersInput = {
@@ -7027,12 +7371,12 @@ export type usersUncheckedCreateWithoutInspections_inspections_performed_byTouse
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7091,6 +7435,10 @@ export type usersUncheckedCreateWithoutInspections_inspections_performed_byTouse
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutInspections_inspections_performed_byTousersInput = {
@@ -7107,12 +7455,12 @@ export type usersCreateWithoutInspections_inspections_witness_idTousersInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7171,6 +7519,10 @@ export type usersCreateWithoutInspections_inspections_witness_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutInspections_inspections_witness_idTousersInput = {
@@ -7182,12 +7534,12 @@ export type usersUncheckedCreateWithoutInspections_inspections_witness_idTousers
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7246,6 +7598,10 @@ export type usersUncheckedCreateWithoutInspections_inspections_witness_idTousers
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutInspections_inspections_witness_idTousersInput = {
@@ -7273,12 +7629,12 @@ export type usersUpdateWithoutInspections_inspections_performed_byTousersInput =
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7337,6 +7693,10 @@ export type usersUpdateWithoutInspections_inspections_performed_byTousersInput =
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutInspections_inspections_performed_byTousersInput = {
@@ -7348,12 +7708,12 @@ export type usersUncheckedUpdateWithoutInspections_inspections_performed_byTouse
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7412,6 +7772,10 @@ export type usersUncheckedUpdateWithoutInspections_inspections_performed_byTouse
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUpsertWithoutInspections_inspections_witness_idTousersInput = {
@@ -7434,12 +7798,12 @@ export type usersUpdateWithoutInspections_inspections_witness_idTousersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7498,6 +7862,10 @@ export type usersUpdateWithoutInspections_inspections_witness_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutInspections_inspections_witness_idTousersInput = {
@@ -7509,12 +7877,12 @@ export type usersUncheckedUpdateWithoutInspections_inspections_witness_idTousers
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7573,6 +7941,10 @@ export type usersUncheckedUpdateWithoutInspections_inspections_witness_idTousers
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutKyc_verificationsInput = {
@@ -7584,12 +7956,12 @@ export type usersCreateWithoutKyc_verificationsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7648,6 +8020,10 @@ export type usersCreateWithoutKyc_verificationsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutKyc_verificationsInput = {
@@ -7659,12 +8035,12 @@ export type usersUncheckedCreateWithoutKyc_verificationsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7723,6 +8099,10 @@ export type usersUncheckedCreateWithoutKyc_verificationsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutKyc_verificationsInput = {
@@ -7750,12 +8130,12 @@ export type usersUpdateWithoutKyc_verificationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7814,6 +8194,10 @@ export type usersUpdateWithoutKyc_verificationsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutKyc_verificationsInput = {
@@ -7825,12 +8209,12 @@ export type usersUncheckedUpdateWithoutKyc_verificationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7889,6 +8273,10 @@ export type usersUncheckedUpdateWithoutKyc_verificationsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutLoyalty_transactionsInput = {
@@ -7900,12 +8288,12 @@ export type usersCreateWithoutLoyalty_transactionsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -7964,6 +8352,10 @@ export type usersCreateWithoutLoyalty_transactionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutLoyalty_transactionsInput = {
@@ -7975,12 +8367,12 @@ export type usersUncheckedCreateWithoutLoyalty_transactionsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8039,6 +8431,10 @@ export type usersUncheckedCreateWithoutLoyalty_transactionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutLoyalty_transactionsInput = {
@@ -8066,12 +8462,12 @@ export type usersUpdateWithoutLoyalty_transactionsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8130,6 +8526,10 @@ export type usersUpdateWithoutLoyalty_transactionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutLoyalty_transactionsInput = {
@@ -8141,12 +8541,12 @@ export type usersUncheckedUpdateWithoutLoyalty_transactionsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8205,6 +8605,10 @@ export type usersUncheckedUpdateWithoutLoyalty_transactionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutMaintenance_reportsInput = {
@@ -8216,12 +8620,12 @@ export type usersCreateWithoutMaintenance_reportsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8280,6 +8684,10 @@ export type usersCreateWithoutMaintenance_reportsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutMaintenance_reportsInput = {
@@ -8291,12 +8699,12 @@ export type usersUncheckedCreateWithoutMaintenance_reportsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8355,6 +8763,10 @@ export type usersUncheckedCreateWithoutMaintenance_reportsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutMaintenance_reportsInput = {
@@ -8382,12 +8794,12 @@ export type usersUpdateWithoutMaintenance_reportsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8446,6 +8858,10 @@ export type usersUpdateWithoutMaintenance_reportsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutMaintenance_reportsInput = {
@@ -8457,12 +8873,12 @@ export type usersUncheckedUpdateWithoutMaintenance_reportsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8521,6 +8937,10 @@ export type usersUncheckedUpdateWithoutMaintenance_reportsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutMaintenance_ticketsInput = {
@@ -8532,12 +8952,12 @@ export type usersCreateWithoutMaintenance_ticketsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8596,6 +9016,10 @@ export type usersCreateWithoutMaintenance_ticketsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutMaintenance_ticketsInput = {
@@ -8607,12 +9031,12 @@ export type usersUncheckedCreateWithoutMaintenance_ticketsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8671,6 +9095,10 @@ export type usersUncheckedCreateWithoutMaintenance_ticketsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutMaintenance_ticketsInput = {
@@ -8698,12 +9126,12 @@ export type usersUpdateWithoutMaintenance_ticketsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8762,6 +9190,10 @@ export type usersUpdateWithoutMaintenance_ticketsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutMaintenance_ticketsInput = {
@@ -8773,12 +9205,12 @@ export type usersUncheckedUpdateWithoutMaintenance_ticketsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8837,6 +9269,10 @@ export type usersUncheckedUpdateWithoutMaintenance_ticketsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutMessagesInput = {
@@ -8848,12 +9284,12 @@ export type usersCreateWithoutMessagesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8912,6 +9348,10 @@ export type usersCreateWithoutMessagesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutMessagesInput = {
@@ -8923,12 +9363,12 @@ export type usersUncheckedCreateWithoutMessagesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -8987,6 +9427,10 @@ export type usersUncheckedCreateWithoutMessagesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutMessagesInput = {
@@ -9014,12 +9458,12 @@ export type usersUpdateWithoutMessagesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -9078,6 +9522,10 @@ export type usersUpdateWithoutMessagesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutMessagesInput = {
@@ -9089,12 +9537,12 @@ export type usersUncheckedUpdateWithoutMessagesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -9153,6 +9601,10 @@ export type usersUncheckedUpdateWithoutMessagesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutNeighborhood_insightsInput = {
@@ -9164,12 +9616,12 @@ export type usersCreateWithoutNeighborhood_insightsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -9228,6 +9680,10 @@ export type usersCreateWithoutNeighborhood_insightsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutNeighborhood_insightsInput = {
@@ -9239,12 +9695,12 @@ export type usersUncheckedCreateWithoutNeighborhood_insightsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -9303,6 +9759,10 @@ export type usersUncheckedCreateWithoutNeighborhood_insightsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutNeighborhood_insightsInput = {
@@ -9330,12 +9790,12 @@ export type usersUpdateWithoutNeighborhood_insightsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -9394,6 +9854,10 @@ export type usersUpdateWithoutNeighborhood_insightsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutNeighborhood_insightsInput = {
@@ -9405,12 +9869,12 @@ export type usersUncheckedUpdateWithoutNeighborhood_insightsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -9469,6 +9933,10 @@ export type usersUncheckedUpdateWithoutNeighborhood_insightsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutNotificationsInput = {
@@ -9480,12 +9948,12 @@ export type usersCreateWithoutNotificationsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -9544,6 +10012,10 @@ export type usersCreateWithoutNotificationsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutNotificationsInput = {
@@ -9555,12 +10027,12 @@ export type usersUncheckedCreateWithoutNotificationsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -9619,6 +10091,10 @@ export type usersUncheckedCreateWithoutNotificationsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutNotificationsInput = {
@@ -9646,12 +10122,12 @@ export type usersUpdateWithoutNotificationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -9710,6 +10186,10 @@ export type usersUpdateWithoutNotificationsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutNotificationsInput = {
@@ -9721,12 +10201,12 @@ export type usersUncheckedUpdateWithoutNotificationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -9785,6 +10265,10 @@ export type usersUncheckedUpdateWithoutNotificationsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutOwner_bank_accountsInput = {
@@ -9796,12 +10280,12 @@ export type usersCreateWithoutOwner_bank_accountsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -9860,6 +10344,10 @@ export type usersCreateWithoutOwner_bank_accountsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutOwner_bank_accountsInput = {
@@ -9871,12 +10359,12 @@ export type usersUncheckedCreateWithoutOwner_bank_accountsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -9935,6 +10423,10 @@ export type usersUncheckedCreateWithoutOwner_bank_accountsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutOwner_bank_accountsInput = {
@@ -9962,12 +10454,12 @@ export type usersUpdateWithoutOwner_bank_accountsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10026,6 +10518,10 @@ export type usersUpdateWithoutOwner_bank_accountsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutOwner_bank_accountsInput = {
@@ -10037,12 +10533,12 @@ export type usersUncheckedUpdateWithoutOwner_bank_accountsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10101,6 +10597,10 @@ export type usersUncheckedUpdateWithoutOwner_bank_accountsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutPropertiesInput = {
@@ -10112,12 +10612,12 @@ export type usersCreateWithoutPropertiesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10176,6 +10676,10 @@ export type usersCreateWithoutPropertiesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutPropertiesInput = {
@@ -10187,12 +10691,12 @@ export type usersUncheckedCreateWithoutPropertiesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10251,6 +10755,10 @@ export type usersUncheckedCreateWithoutPropertiesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutPropertiesInput = {
@@ -10278,12 +10786,12 @@ export type usersUpdateWithoutPropertiesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10342,6 +10850,10 @@ export type usersUpdateWithoutPropertiesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutPropertiesInput = {
@@ -10353,12 +10865,12 @@ export type usersUncheckedUpdateWithoutPropertiesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10417,6 +10929,10 @@ export type usersUncheckedUpdateWithoutPropertiesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutProperty_comparisonsInput = {
@@ -10428,12 +10944,12 @@ export type usersCreateWithoutProperty_comparisonsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10492,6 +11008,10 @@ export type usersCreateWithoutProperty_comparisonsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutProperty_comparisonsInput = {
@@ -10503,12 +11023,12 @@ export type usersUncheckedCreateWithoutProperty_comparisonsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10567,6 +11087,10 @@ export type usersUncheckedCreateWithoutProperty_comparisonsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutProperty_comparisonsInput = {
@@ -10594,12 +11118,12 @@ export type usersUpdateWithoutProperty_comparisonsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10658,6 +11182,10 @@ export type usersUpdateWithoutProperty_comparisonsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutProperty_comparisonsInput = {
@@ -10669,12 +11197,12 @@ export type usersUncheckedUpdateWithoutProperty_comparisonsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10733,6 +11261,10 @@ export type usersUncheckedUpdateWithoutProperty_comparisonsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutPush_subscriptionsInput = {
@@ -10744,12 +11276,12 @@ export type usersCreateWithoutPush_subscriptionsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10808,6 +11340,10 @@ export type usersCreateWithoutPush_subscriptionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutPush_subscriptionsInput = {
@@ -10819,12 +11355,12 @@ export type usersUncheckedCreateWithoutPush_subscriptionsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10883,6 +11419,10 @@ export type usersUncheckedCreateWithoutPush_subscriptionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutPush_subscriptionsInput = {
@@ -10910,12 +11450,12 @@ export type usersUpdateWithoutPush_subscriptionsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -10974,6 +11514,10 @@ export type usersUpdateWithoutPush_subscriptionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutPush_subscriptionsInput = {
@@ -10985,12 +11529,12 @@ export type usersUncheckedUpdateWithoutPush_subscriptionsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11049,6 +11593,10 @@ export type usersUncheckedUpdateWithoutPush_subscriptionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutReferrals_referrals_referee_idTousersInput = {
@@ -11060,12 +11608,12 @@ export type usersCreateWithoutReferrals_referrals_referee_idTousersInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11124,6 +11672,10 @@ export type usersCreateWithoutReferrals_referrals_referee_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutReferrals_referrals_referee_idTousersInput = {
@@ -11135,12 +11687,12 @@ export type usersUncheckedCreateWithoutReferrals_referrals_referee_idTousersInpu
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11199,6 +11751,10 @@ export type usersUncheckedCreateWithoutReferrals_referrals_referee_idTousersInpu
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutReferrals_referrals_referee_idTousersInput = {
@@ -11215,12 +11771,12 @@ export type usersCreateWithoutReferrals_referrals_referrer_idTousersInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11279,6 +11835,10 @@ export type usersCreateWithoutReferrals_referrals_referrer_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutReferrals_referrals_referrer_idTousersInput = {
@@ -11290,12 +11850,12 @@ export type usersUncheckedCreateWithoutReferrals_referrals_referrer_idTousersInp
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11354,6 +11914,10 @@ export type usersUncheckedCreateWithoutReferrals_referrals_referrer_idTousersInp
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutReferrals_referrals_referrer_idTousersInput = {
@@ -11381,12 +11945,12 @@ export type usersUpdateWithoutReferrals_referrals_referee_idTousersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11445,6 +12009,10 @@ export type usersUpdateWithoutReferrals_referrals_referee_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReferrals_referrals_referee_idTousersInput = {
@@ -11456,12 +12024,12 @@ export type usersUncheckedUpdateWithoutReferrals_referrals_referee_idTousersInpu
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11520,6 +12088,10 @@ export type usersUncheckedUpdateWithoutReferrals_referrals_referee_idTousersInpu
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUpsertWithoutReferrals_referrals_referrer_idTousersInput = {
@@ -11542,12 +12114,12 @@ export type usersUpdateWithoutReferrals_referrals_referrer_idTousersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11606,6 +12178,10 @@ export type usersUpdateWithoutReferrals_referrals_referrer_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReferrals_referrals_referrer_idTousersInput = {
@@ -11617,12 +12193,12 @@ export type usersUncheckedUpdateWithoutReferrals_referrals_referrer_idTousersInp
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11681,6 +12257,10 @@ export type usersUncheckedUpdateWithoutReferrals_referrals_referrer_idTousersInp
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutRefund_requests_refund_requests_reviewed_byTousersInput = {
@@ -11692,12 +12272,12 @@ export type usersCreateWithoutRefund_requests_refund_requests_reviewed_byTousers
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11756,6 +12336,10 @@ export type usersCreateWithoutRefund_requests_refund_requests_reviewed_byTousers
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutRefund_requests_refund_requests_reviewed_byTousersInput = {
@@ -11767,12 +12351,12 @@ export type usersUncheckedCreateWithoutRefund_requests_refund_requests_reviewed_
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11831,6 +12415,10 @@ export type usersUncheckedCreateWithoutRefund_requests_refund_requests_reviewed_
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutRefund_requests_refund_requests_reviewed_byTousersInput = {
@@ -11847,12 +12435,12 @@ export type usersCreateWithoutRefund_requests_refund_requests_user_idTousersInpu
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11911,6 +12499,10 @@ export type usersCreateWithoutRefund_requests_refund_requests_user_idTousersInpu
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutRefund_requests_refund_requests_user_idTousersInput = {
@@ -11922,12 +12514,12 @@ export type usersUncheckedCreateWithoutRefund_requests_refund_requests_user_idTo
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -11986,6 +12578,10 @@ export type usersUncheckedCreateWithoutRefund_requests_refund_requests_user_idTo
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutRefund_requests_refund_requests_user_idTousersInput = {
@@ -12013,12 +12609,12 @@ export type usersUpdateWithoutRefund_requests_refund_requests_reviewed_byTousers
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -12077,6 +12673,10 @@ export type usersUpdateWithoutRefund_requests_refund_requests_reviewed_byTousers
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_reviewed_byTousersInput = {
@@ -12088,12 +12688,12 @@ export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_reviewed_
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -12152,6 +12752,10 @@ export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_reviewed_
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUpsertWithoutRefund_requests_refund_requests_user_idTousersInput = {
@@ -12174,12 +12778,12 @@ export type usersUpdateWithoutRefund_requests_refund_requests_user_idTousersInpu
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -12238,6 +12842,10 @@ export type usersUpdateWithoutRefund_requests_refund_requests_user_idTousersInpu
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_user_idTousersInput = {
@@ -12249,12 +12857,12 @@ export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_user_idTo
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -12313,6 +12921,10 @@ export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_user_idTo
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutReview_repliesInput = {
@@ -12324,12 +12936,12 @@ export type usersCreateWithoutReview_repliesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -12388,6 +13000,10 @@ export type usersCreateWithoutReview_repliesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutReview_repliesInput = {
@@ -12399,12 +13015,12 @@ export type usersUncheckedCreateWithoutReview_repliesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -12463,6 +13079,10 @@ export type usersUncheckedCreateWithoutReview_repliesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutReview_repliesInput = {
@@ -12490,12 +13110,12 @@ export type usersUpdateWithoutReview_repliesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -12554,6 +13174,10 @@ export type usersUpdateWithoutReview_repliesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReview_repliesInput = {
@@ -12565,12 +13189,12 @@ export type usersUncheckedUpdateWithoutReview_repliesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -12629,6 +13253,10 @@ export type usersUncheckedUpdateWithoutReview_repliesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutReviews_reviews_created_by_idTousersInput = {
@@ -12640,12 +13268,12 @@ export type usersCreateWithoutReviews_reviews_created_by_idTousersInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -12704,6 +13332,10 @@ export type usersCreateWithoutReviews_reviews_created_by_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutReviews_reviews_created_by_idTousersInput = {
@@ -12715,12 +13347,12 @@ export type usersUncheckedCreateWithoutReviews_reviews_created_by_idTousersInput
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -12779,6 +13411,10 @@ export type usersUncheckedCreateWithoutReviews_reviews_created_by_idTousersInput
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutReviews_reviews_created_by_idTousersInput = {
@@ -12795,12 +13431,12 @@ export type usersCreateWithoutReviews_reviews_reviewed_user_idTousersInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -12859,6 +13495,10 @@ export type usersCreateWithoutReviews_reviews_reviewed_user_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutReviews_reviews_reviewed_user_idTousersInput = {
@@ -12870,12 +13510,12 @@ export type usersUncheckedCreateWithoutReviews_reviews_reviewed_user_idTousersIn
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -12934,6 +13574,10 @@ export type usersUncheckedCreateWithoutReviews_reviews_reviewed_user_idTousersIn
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutReviews_reviews_reviewed_user_idTousersInput = {
@@ -12961,12 +13605,12 @@ export type usersUpdateWithoutReviews_reviews_created_by_idTousersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13025,6 +13669,10 @@ export type usersUpdateWithoutReviews_reviews_created_by_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReviews_reviews_created_by_idTousersInput = {
@@ -13036,12 +13684,12 @@ export type usersUncheckedUpdateWithoutReviews_reviews_created_by_idTousersInput
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13100,6 +13748,10 @@ export type usersUncheckedUpdateWithoutReviews_reviews_created_by_idTousersInput
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUpsertWithoutReviews_reviews_reviewed_user_idTousersInput = {
@@ -13122,12 +13774,12 @@ export type usersUpdateWithoutReviews_reviews_reviewed_user_idTousersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13186,6 +13838,10 @@ export type usersUpdateWithoutReviews_reviews_reviewed_user_idTousersInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReviews_reviews_reviewed_user_idTousersInput = {
@@ -13197,12 +13853,12 @@ export type usersUncheckedUpdateWithoutReviews_reviews_reviewed_user_idTousersIn
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13261,6 +13917,10 @@ export type usersUncheckedUpdateWithoutReviews_reviews_reviewed_user_idTousersIn
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutReward_redemptionsInput = {
@@ -13272,12 +13932,12 @@ export type usersCreateWithoutReward_redemptionsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13336,6 +13996,10 @@ export type usersCreateWithoutReward_redemptionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutReward_redemptionsInput = {
@@ -13347,12 +14011,12 @@ export type usersUncheckedCreateWithoutReward_redemptionsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13411,6 +14075,10 @@ export type usersUncheckedCreateWithoutReward_redemptionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutReward_redemptionsInput = {
@@ -13438,12 +14106,12 @@ export type usersUpdateWithoutReward_redemptionsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13502,6 +14170,10 @@ export type usersUpdateWithoutReward_redemptionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReward_redemptionsInput = {
@@ -13513,12 +14185,12 @@ export type usersUncheckedUpdateWithoutReward_redemptionsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13577,6 +14249,10 @@ export type usersUncheckedUpdateWithoutReward_redemptionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutRoommate_preferencesInput = {
@@ -13588,12 +14264,12 @@ export type usersCreateWithoutRoommate_preferencesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13652,6 +14328,10 @@ export type usersCreateWithoutRoommate_preferencesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutRoommate_preferencesInput = {
@@ -13663,12 +14343,12 @@ export type usersUncheckedCreateWithoutRoommate_preferencesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13727,6 +14407,10 @@ export type usersUncheckedCreateWithoutRoommate_preferencesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutRoommate_preferencesInput = {
@@ -13754,12 +14438,12 @@ export type usersUpdateWithoutRoommate_preferencesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13818,6 +14502,10 @@ export type usersUpdateWithoutRoommate_preferencesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutRoommate_preferencesInput = {
@@ -13829,12 +14517,12 @@ export type usersUncheckedUpdateWithoutRoommate_preferencesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13893,6 +14581,10 @@ export type usersUncheckedUpdateWithoutRoommate_preferencesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutSaved_searchesInput = {
@@ -13904,12 +14596,12 @@ export type usersCreateWithoutSaved_searchesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -13968,6 +14660,10 @@ export type usersCreateWithoutSaved_searchesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutSaved_searchesInput = {
@@ -13979,12 +14675,12 @@ export type usersUncheckedCreateWithoutSaved_searchesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14043,6 +14739,10 @@ export type usersUncheckedCreateWithoutSaved_searchesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutSaved_searchesInput = {
@@ -14070,12 +14770,12 @@ export type usersUpdateWithoutSaved_searchesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14134,6 +14834,10 @@ export type usersUpdateWithoutSaved_searchesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutSaved_searchesInput = {
@@ -14145,12 +14849,12 @@ export type usersUncheckedUpdateWithoutSaved_searchesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14209,6 +14913,10 @@ export type usersUncheckedUpdateWithoutSaved_searchesInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutSessionsInput = {
@@ -14220,12 +14928,12 @@ export type usersCreateWithoutSessionsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14284,6 +14992,10 @@ export type usersCreateWithoutSessionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutSessionsInput = {
@@ -14295,12 +15007,12 @@ export type usersUncheckedCreateWithoutSessionsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14359,6 +15071,10 @@ export type usersUncheckedCreateWithoutSessionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutSessionsInput = {
@@ -14386,12 +15102,12 @@ export type usersUpdateWithoutSessionsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14450,6 +15166,10 @@ export type usersUpdateWithoutSessionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutSessionsInput = {
@@ -14461,12 +15181,12 @@ export type usersUncheckedUpdateWithoutSessionsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14525,6 +15245,10 @@ export type usersUncheckedUpdateWithoutSessionsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutTwoFactorInput = {
@@ -14536,12 +15260,12 @@ export type usersCreateWithoutTwoFactorInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14600,6 +15324,10 @@ export type usersCreateWithoutTwoFactorInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutTwoFactorInput = {
@@ -14611,12 +15339,12 @@ export type usersUncheckedCreateWithoutTwoFactorInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14675,6 +15403,10 @@ export type usersUncheckedCreateWithoutTwoFactorInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutTwoFactorInput = {
@@ -14702,12 +15434,12 @@ export type usersUpdateWithoutTwoFactorInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14766,6 +15498,10 @@ export type usersUpdateWithoutTwoFactorInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutTwoFactorInput = {
@@ -14777,12 +15513,12 @@ export type usersUncheckedUpdateWithoutTwoFactorInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14841,6 +15577,10 @@ export type usersUncheckedUpdateWithoutTwoFactorInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutUser_contractsInput = {
@@ -14852,12 +15592,12 @@ export type usersCreateWithoutUser_contractsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14916,6 +15656,10 @@ export type usersCreateWithoutUser_contractsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutUser_contractsInput = {
@@ -14927,12 +15671,12 @@ export type usersUncheckedCreateWithoutUser_contractsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -14991,6 +15735,10 @@ export type usersUncheckedCreateWithoutUser_contractsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutUser_contractsInput = {
@@ -15018,12 +15766,12 @@ export type usersUpdateWithoutUser_contractsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -15082,6 +15830,10 @@ export type usersUpdateWithoutUser_contractsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutUser_contractsInput = {
@@ -15093,12 +15845,12 @@ export type usersUncheckedUpdateWithoutUser_contractsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -15157,6 +15909,10 @@ export type usersUncheckedUpdateWithoutUser_contractsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutUser_interest_vectorsInput = {
@@ -15168,12 +15924,12 @@ export type usersCreateWithoutUser_interest_vectorsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -15232,6 +15988,10 @@ export type usersCreateWithoutUser_interest_vectorsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutUser_interest_vectorsInput = {
@@ -15243,12 +16003,12 @@ export type usersUncheckedCreateWithoutUser_interest_vectorsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -15307,6 +16067,10 @@ export type usersUncheckedCreateWithoutUser_interest_vectorsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutUser_interest_vectorsInput = {
@@ -15334,12 +16098,12 @@ export type usersUpdateWithoutUser_interest_vectorsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -15398,6 +16162,10 @@ export type usersUpdateWithoutUser_interest_vectorsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutUser_interest_vectorsInput = {
@@ -15409,12 +16177,12 @@ export type usersUncheckedUpdateWithoutUser_interest_vectorsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -15473,6 +16241,10 @@ export type usersUncheckedUpdateWithoutUser_interest_vectorsInput = {
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutUser_notification_preferencesInput = {
@@ -15484,12 +16256,12 @@ export type usersCreateWithoutUser_notification_preferencesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -15548,6 +16320,10 @@ export type usersCreateWithoutUser_notification_preferencesInput = {
   user_interest_vectors?: Prisma.user_interest_vectorsCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutUser_notification_preferencesInput = {
@@ -15559,12 +16335,12 @@ export type usersUncheckedCreateWithoutUser_notification_preferencesInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -15623,6 +16399,10 @@ export type usersUncheckedCreateWithoutUser_notification_preferencesInput = {
   user_interest_vectors?: Prisma.user_interest_vectorsUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutUser_notification_preferencesInput = {
@@ -15650,12 +16430,12 @@ export type usersUpdateWithoutUser_notification_preferencesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -15714,6 +16494,10 @@ export type usersUpdateWithoutUser_notification_preferencesInput = {
   user_interest_vectors?: Prisma.user_interest_vectorsUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutUser_notification_preferencesInput = {
@@ -15725,12 +16509,12 @@ export type usersUncheckedUpdateWithoutUser_notification_preferencesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -15789,6 +16573,10 @@ export type usersUncheckedUpdateWithoutUser_notification_preferencesInput = {
   user_interest_vectors?: Prisma.user_interest_vectorsUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutWishlistsInput = {
@@ -15800,12 +16588,12 @@ export type usersCreateWithoutWishlistsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -15864,6 +16652,10 @@ export type usersCreateWithoutWishlistsInput = {
   user_interest_vectors?: Prisma.user_interest_vectorsCreateNestedOneWithoutUsersInput
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutWishlistsInput = {
@@ -15875,12 +16667,12 @@ export type usersUncheckedCreateWithoutWishlistsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -15939,6 +16731,10 @@ export type usersUncheckedCreateWithoutWishlistsInput = {
   user_interest_vectors?: Prisma.user_interest_vectorsUncheckedCreateNestedOneWithoutUsersInput
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutWishlistsInput = {
@@ -15966,12 +16762,12 @@ export type usersUpdateWithoutWishlistsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -16030,6 +16826,10 @@ export type usersUpdateWithoutWishlistsInput = {
   user_interest_vectors?: Prisma.user_interest_vectorsUpdateOneWithoutUsersNestedInput
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutWishlistsInput = {
@@ -16041,12 +16841,12 @@ export type usersUncheckedUpdateWithoutWishlistsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -16105,6 +16905,10 @@ export type usersUncheckedUpdateWithoutWishlistsInput = {
   user_interest_vectors?: Prisma.user_interest_vectorsUncheckedUpdateOneWithoutUsersNestedInput
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type usersCreateWithoutWithdrawalsInput = {
@@ -16116,12 +16920,12 @@ export type usersCreateWithoutWithdrawalsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -16180,6 +16984,10 @@ export type usersCreateWithoutWithdrawalsInput = {
   user_interest_vectors?: Prisma.user_interest_vectorsCreateNestedOneWithoutUsersInput
   user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
 }
 
 export type usersUncheckedCreateWithoutWithdrawalsInput = {
@@ -16191,12 +16999,12 @@ export type usersUncheckedCreateWithoutWithdrawalsInput = {
   phone?: string | null
   whatsapp?: string | null
   telegram?: string | null
-  role?: $Enums.UserRole
+  role?: $Enums.Role
   is_active?: boolean
   is_banned?: boolean
   ban_reason?: string | null
   two_factor_enabled?: boolean | null
-  kyc_status?: $Enums.KYCStatus
+  kyc_status?: $Enums.KycStatus
   ktp_number?: string | null
   ktp_image_url?: string | null
   reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -16255,6 +17063,10 @@ export type usersUncheckedCreateWithoutWithdrawalsInput = {
   user_interest_vectors?: Prisma.user_interest_vectorsUncheckedCreateNestedOneWithoutUsersInput
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type usersCreateOrConnectWithoutWithdrawalsInput = {
@@ -16282,12 +17094,12 @@ export type usersUpdateWithoutWithdrawalsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -16346,6 +17158,10 @@ export type usersUpdateWithoutWithdrawalsInput = {
   user_interest_vectors?: Prisma.user_interest_vectorsUpdateOneWithoutUsersNestedInput
   user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
 }
 
 export type usersUncheckedUpdateWithoutWithdrawalsInput = {
@@ -16357,12 +17173,12 @@ export type usersUncheckedUpdateWithoutWithdrawalsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  kyc_status?: Prisma.EnumKYCStatusFieldUpdateOperationsInput | $Enums.KYCStatus
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
   ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -16421,6 +17237,1338 @@ export type usersUncheckedUpdateWithoutWithdrawalsInput = {
   user_interest_vectors?: Prisma.user_interest_vectorsUncheckedUpdateOneWithoutUsersNestedInput
   user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type usersCreateWithoutTransaksi_bookingsInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+}
+
+export type usersUncheckedCreateWithoutTransaksi_bookingsInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsUncheckedCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsUncheckedCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsUncheckedCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsUncheckedCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesUncheckedCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksUncheckedCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerUncheckedCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesUncheckedCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsUncheckedCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesUncheckedCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesUncheckedCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesUncheckedCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsUncheckedCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorUncheckedCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type usersCreateOrConnectWithoutTransaksi_bookingsInput = {
+  where: Prisma.usersWhereUniqueInput
+  create: Prisma.XOR<Prisma.usersCreateWithoutTransaksi_bookingsInput, Prisma.usersUncheckedCreateWithoutTransaksi_bookingsInput>
+}
+
+export type usersUpsertWithoutTransaksi_bookingsInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutTransaksi_bookingsInput, Prisma.usersUncheckedUpdateWithoutTransaksi_bookingsInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutTransaksi_bookingsInput, Prisma.usersUncheckedCreateWithoutTransaksi_bookingsInput>
+  where?: Prisma.usersWhereInput
+}
+
+export type usersUpdateToOneWithWhereWithoutTransaksi_bookingsInput = {
+  where?: Prisma.usersWhereInput
+  data: Prisma.XOR<Prisma.usersUpdateWithoutTransaksi_bookingsInput, Prisma.usersUncheckedUpdateWithoutTransaksi_bookingsInput>
+}
+
+export type usersUpdateWithoutTransaksi_bookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+}
+
+export type usersUncheckedUpdateWithoutTransaksi_bookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUncheckedUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUncheckedUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUncheckedUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUncheckedUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUncheckedUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUncheckedUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUncheckedUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUncheckedUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUncheckedUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUncheckedUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUncheckedUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUncheckedUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUncheckedUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUncheckedUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type usersCreateWithoutKyc_requestsInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+}
+
+export type usersUncheckedCreateWithoutKyc_requestsInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsUncheckedCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsUncheckedCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsUncheckedCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsUncheckedCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesUncheckedCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksUncheckedCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerUncheckedCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesUncheckedCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsUncheckedCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesUncheckedCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesUncheckedCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesUncheckedCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsUncheckedCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorUncheckedCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type usersCreateOrConnectWithoutKyc_requestsInput = {
+  where: Prisma.usersWhereUniqueInput
+  create: Prisma.XOR<Prisma.usersCreateWithoutKyc_requestsInput, Prisma.usersUncheckedCreateWithoutKyc_requestsInput>
+}
+
+export type usersUpsertWithoutKyc_requestsInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutKyc_requestsInput, Prisma.usersUncheckedUpdateWithoutKyc_requestsInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutKyc_requestsInput, Prisma.usersUncheckedCreateWithoutKyc_requestsInput>
+  where?: Prisma.usersWhereInput
+}
+
+export type usersUpdateToOneWithWhereWithoutKyc_requestsInput = {
+  where?: Prisma.usersWhereInput
+  data: Prisma.XOR<Prisma.usersUpdateWithoutKyc_requestsInput, Prisma.usersUncheckedUpdateWithoutKyc_requestsInput>
+}
+
+export type usersUpdateWithoutKyc_requestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+}
+
+export type usersUncheckedUpdateWithoutKyc_requestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUncheckedUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUncheckedUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUncheckedUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUncheckedUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUncheckedUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUncheckedUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUncheckedUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUncheckedUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUncheckedUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUncheckedUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUncheckedUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUncheckedUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUncheckedUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUncheckedUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type usersCreateWithoutPropertis_wizardInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+}
+
+export type usersUncheckedCreateWithoutPropertis_wizardInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsUncheckedCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsUncheckedCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsUncheckedCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsUncheckedCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesUncheckedCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksUncheckedCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerUncheckedCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesUncheckedCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsUncheckedCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesUncheckedCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesUncheckedCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesUncheckedCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsUncheckedCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorUncheckedCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type usersCreateOrConnectWithoutPropertis_wizardInput = {
+  where: Prisma.usersWhereUniqueInput
+  create: Prisma.XOR<Prisma.usersCreateWithoutPropertis_wizardInput, Prisma.usersUncheckedCreateWithoutPropertis_wizardInput>
+}
+
+export type usersUpsertWithoutPropertis_wizardInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutPropertis_wizardInput, Prisma.usersUncheckedUpdateWithoutPropertis_wizardInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutPropertis_wizardInput, Prisma.usersUncheckedCreateWithoutPropertis_wizardInput>
+  where?: Prisma.usersWhereInput
+}
+
+export type usersUpdateToOneWithWhereWithoutPropertis_wizardInput = {
+  where?: Prisma.usersWhereInput
+  data: Prisma.XOR<Prisma.usersUpdateWithoutPropertis_wizardInput, Prisma.usersUncheckedUpdateWithoutPropertis_wizardInput>
+}
+
+export type usersUpdateWithoutPropertis_wizardInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+}
+
+export type usersUncheckedUpdateWithoutPropertis_wizardInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUncheckedUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUncheckedUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUncheckedUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUncheckedUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUncheckedUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUncheckedUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUncheckedUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUncheckedUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUncheckedUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUncheckedUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUncheckedUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUncheckedUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUncheckedUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUncheckedUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type usersCreateWithoutPemesanansInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+}
+
+export type usersUncheckedCreateWithoutPemesanansInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsUncheckedCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsUncheckedCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsUncheckedCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsUncheckedCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesUncheckedCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksUncheckedCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerUncheckedCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesUncheckedCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsUncheckedCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesUncheckedCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesUncheckedCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesUncheckedCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsUncheckedCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorUncheckedCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type usersCreateOrConnectWithoutPemesanansInput = {
+  where: Prisma.usersWhereUniqueInput
+  create: Prisma.XOR<Prisma.usersCreateWithoutPemesanansInput, Prisma.usersUncheckedCreateWithoutPemesanansInput>
+}
+
+export type usersUpsertWithoutPemesanansInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutPemesanansInput, Prisma.usersUncheckedUpdateWithoutPemesanansInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutPemesanansInput, Prisma.usersUncheckedCreateWithoutPemesanansInput>
+  where?: Prisma.usersWhereInput
+}
+
+export type usersUpdateToOneWithWhereWithoutPemesanansInput = {
+  where?: Prisma.usersWhereInput
+  data: Prisma.XOR<Prisma.usersUpdateWithoutPemesanansInput, Prisma.usersUncheckedUpdateWithoutPemesanansInput>
+}
+
+export type usersUpdateWithoutPemesanansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+}
+
+export type usersUncheckedUpdateWithoutPemesanansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUncheckedUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUncheckedUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUncheckedUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUncheckedUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUncheckedUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUncheckedUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUncheckedUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUncheckedUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUncheckedUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUncheckedUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUncheckedUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUncheckedUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUncheckedUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUncheckedUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 
@@ -16472,6 +18620,10 @@ export type UsersCountOutputType = {
   user_contracts: number
   wishlists: number
   withdrawals: number
+  transaksi_bookings: number
+  kyc_requests: number
+  propertis_wizard: number
+  pemesanans: number
 }
 
 export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -16518,6 +18670,10 @@ export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   user_contracts?: boolean | UsersCountOutputTypeCountUser_contractsArgs
   wishlists?: boolean | UsersCountOutputTypeCountWishlistsArgs
   withdrawals?: boolean | UsersCountOutputTypeCountWithdrawalsArgs
+  transaksi_bookings?: boolean | UsersCountOutputTypeCountTransaksi_bookingsArgs
+  kyc_requests?: boolean | UsersCountOutputTypeCountKyc_requestsArgs
+  propertis_wizard?: boolean | UsersCountOutputTypeCountPropertis_wizardArgs
+  pemesanans?: boolean | UsersCountOutputTypeCountPemesanansArgs
 }
 
 /**
@@ -16831,6 +18987,34 @@ export type UsersCountOutputTypeCountWithdrawalsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.withdrawalsWhereInput
 }
 
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountTransaksi_bookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookingWhereInput
+}
+
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountKyc_requestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.KycRequestWhereInput
+}
+
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountPropertis_wizardArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PropertyWhereInput
+}
+
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountPemesanansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PemesananWhereInput
+}
+
 
 export type usersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -16906,6 +19090,10 @@ export type usersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   user_notification_preferences?: boolean | Prisma.users$user_notification_preferencesArgs<ExtArgs>
   wishlists?: boolean | Prisma.users$wishlistsArgs<ExtArgs>
   withdrawals?: boolean | Prisma.users$withdrawalsArgs<ExtArgs>
+  transaksi_bookings?: boolean | Prisma.users$transaksi_bookingsArgs<ExtArgs>
+  kyc_requests?: boolean | Prisma.users$kyc_requestsArgs<ExtArgs>
+  propertis_wizard?: boolean | Prisma.users$propertis_wizardArgs<ExtArgs>
+  pemesanans?: boolean | Prisma.users$pemesanansArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["users"]>
 
@@ -17047,6 +19235,10 @@ export type usersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   user_notification_preferences?: boolean | Prisma.users$user_notification_preferencesArgs<ExtArgs>
   wishlists?: boolean | Prisma.users$wishlistsArgs<ExtArgs>
   withdrawals?: boolean | Prisma.users$withdrawalsArgs<ExtArgs>
+  transaksi_bookings?: boolean | Prisma.users$transaksi_bookingsArgs<ExtArgs>
+  kyc_requests?: boolean | Prisma.users$kyc_requestsArgs<ExtArgs>
+  propertis_wizard?: boolean | Prisma.users$propertis_wizardArgs<ExtArgs>
+  pemesanans?: boolean | Prisma.users$pemesanansArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type usersIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -17101,6 +19293,10 @@ export type $usersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     user_notification_preferences: Prisma.$user_notification_preferencesPayload<ExtArgs> | null
     wishlists: Prisma.$wishlistsPayload<ExtArgs>[]
     withdrawals: Prisma.$withdrawalsPayload<ExtArgs>[]
+    transaksi_bookings: Prisma.$BookingPayload<ExtArgs>[]
+    kyc_requests: Prisma.$KycRequestPayload<ExtArgs>[]
+    propertis_wizard: Prisma.$PropertyPayload<ExtArgs>[]
+    pemesanans: Prisma.$PemesananPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -17111,12 +19307,12 @@ export type $usersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     phone: string | null
     whatsapp: string | null
     telegram: string | null
-    role: $Enums.UserRole
+    role: $Enums.Role
     is_active: boolean
     is_banned: boolean
     ban_reason: string | null
     two_factor_enabled: boolean | null
-    kyc_status: $Enums.KYCStatus
+    kyc_status: $Enums.KycStatus
     ktp_number: string | null
     ktp_image_url: string | null
     reputation_score: runtime.Decimal
@@ -17570,6 +19766,10 @@ export interface Prisma__usersClient<T, Null = never, ExtArgs extends runtime.Ty
   user_notification_preferences<T extends Prisma.users$user_notification_preferencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$user_notification_preferencesArgs<ExtArgs>>): Prisma.Prisma__user_notification_preferencesClient<runtime.Types.Result.GetResult<Prisma.$user_notification_preferencesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   wishlists<T extends Prisma.users$wishlistsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$wishlistsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$wishlistsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   withdrawals<T extends Prisma.users$withdrawalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$withdrawalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$withdrawalsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  transaksi_bookings<T extends Prisma.users$transaksi_bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$transaksi_bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  kyc_requests<T extends Prisma.users$kyc_requestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$kyc_requestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$KycRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  propertis_wizard<T extends Prisma.users$propertis_wizardArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$propertis_wizardArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pemesanans<T extends Prisma.users$pemesanansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$pemesanansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PemesananPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17607,12 +19807,12 @@ export interface usersFieldRefs {
   readonly phone: Prisma.FieldRef<"users", 'String'>
   readonly whatsapp: Prisma.FieldRef<"users", 'String'>
   readonly telegram: Prisma.FieldRef<"users", 'String'>
-  readonly role: Prisma.FieldRef<"users", 'UserRole'>
+  readonly role: Prisma.FieldRef<"users", 'Role'>
   readonly is_active: Prisma.FieldRef<"users", 'Boolean'>
   readonly is_banned: Prisma.FieldRef<"users", 'Boolean'>
   readonly ban_reason: Prisma.FieldRef<"users", 'String'>
   readonly two_factor_enabled: Prisma.FieldRef<"users", 'Boolean'>
-  readonly kyc_status: Prisma.FieldRef<"users", 'KYCStatus'>
+  readonly kyc_status: Prisma.FieldRef<"users", 'KycStatus'>
   readonly ktp_number: Prisma.FieldRef<"users", 'String'>
   readonly ktp_image_url: Prisma.FieldRef<"users", 'String'>
   readonly reputation_score: Prisma.FieldRef<"users", 'Decimal'>
@@ -19105,6 +21305,102 @@ export type users$withdrawalsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.WithdrawalsScalarFieldEnum | Prisma.WithdrawalsScalarFieldEnum[]
+}
+
+/**
+ * users.transaksi_bookings
+ */
+export type users$transaksi_bookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Booking
+   */
+  select?: Prisma.BookingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Booking
+   */
+  omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  where?: Prisma.BookingWhereInput
+  orderBy?: Prisma.BookingOrderByWithRelationInput | Prisma.BookingOrderByWithRelationInput[]
+  cursor?: Prisma.BookingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookingScalarFieldEnum | Prisma.BookingScalarFieldEnum[]
+}
+
+/**
+ * users.kyc_requests
+ */
+export type users$kyc_requestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the KycRequest
+   */
+  select?: Prisma.KycRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the KycRequest
+   */
+  omit?: Prisma.KycRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.KycRequestInclude<ExtArgs> | null
+  where?: Prisma.KycRequestWhereInput
+  orderBy?: Prisma.KycRequestOrderByWithRelationInput | Prisma.KycRequestOrderByWithRelationInput[]
+  cursor?: Prisma.KycRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.KycRequestScalarFieldEnum | Prisma.KycRequestScalarFieldEnum[]
+}
+
+/**
+ * users.propertis_wizard
+ */
+export type users$propertis_wizardArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Property
+   */
+  select?: Prisma.PropertySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Property
+   */
+  omit?: Prisma.PropertyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInclude<ExtArgs> | null
+  where?: Prisma.PropertyWhereInput
+  orderBy?: Prisma.PropertyOrderByWithRelationInput | Prisma.PropertyOrderByWithRelationInput[]
+  cursor?: Prisma.PropertyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PropertyScalarFieldEnum | Prisma.PropertyScalarFieldEnum[]
+}
+
+/**
+ * users.pemesanans
+ */
+export type users$pemesanansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Pemesanan
+   */
+  select?: Prisma.PemesananSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Pemesanan
+   */
+  omit?: Prisma.PemesananOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PemesananInclude<ExtArgs> | null
+  where?: Prisma.PemesananWhereInput
+  orderBy?: Prisma.PemesananOrderByWithRelationInput | Prisma.PemesananOrderByWithRelationInput[]
+  cursor?: Prisma.PemesananWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PemesananScalarFieldEnum | Prisma.PemesananScalarFieldEnum[]
 }
 
 /**

@@ -1,10 +1,12 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
+import { useQuery } from '@tanstack/react-query'
+import { useMemo, useState } from 'react'
 import {
   Bath,
+  Bed,
   Building2,
   CalendarDays,
   ChevronRight,
-  Compass,
   Home,
   MapPin,
   Search,
@@ -13,14 +15,14 @@ import {
   Star,
   Wallet,
 } from 'lucide-react'
-import { Avatar, AvatarFallback } from '#/components/ui/avatar'
+
+import { orpc } from '#/orpc/client'
 import { Badge } from '#/components/ui/badge'
 import { Button } from '#/components/ui/button'
 import {
   Card,
   CardContent,
   CardDescription,
-  CardHeader,
   CardTitle,
 } from '#/components/ui/card'
 import { Input } from '#/components/ui/input'
@@ -33,14 +35,8 @@ import {
   SelectValue,
 } from '#/components/ui/select'
 import { Separator } from '#/components/ui/separator'
-import {
-  categories,
-  facilities,
-  featuredKos,
-  popularCities,
-  testimonials,
-  whyUs,
-} from '#/data/landing'
+import { PropertyCard } from '#/components/property/PropertyCard'
+import { facilities } from '#/data/landing'
 
 export const Route = createFileRoute('/')({ component: HomePage })
 
@@ -55,13 +51,10 @@ function HomePage() {
   return (
     <main className="page-wrap px-4 pb-20 pt-8 sm:pt-12">
       <Hero />
-      <Categories />
-      <PopularCities />
-      <FeaturedKos />
-      <WhyUs />
-      <OwnerCta />
-      <Testimonials />
-      <PromoBanner />
+      <HowItWorks />
+      <ValueProposition />
+      <FeaturedListings />
+      <OwnerCTA />
     </main>
   )
 }
@@ -93,7 +86,7 @@ function Hero() {
             terhubung ke pemilik.
           </p>
 
-          <SearchBar />
+          <HeroSearch />
 
           <dl className="mt-8 grid max-w-xl grid-cols-3 gap-4 text-left">
             <Stat icon={Home} value="50K+" label="Kos aktif" />
@@ -156,17 +149,52 @@ function Hero() {
   )
 }
 
-function SearchBar() {
+function HeroSearch() {
   const navigate = useNavigate()
+  const [location, setLocation] = useState('')
+  const [keyword, setKeyword] = useState('')
+  const [date, setDate] = useState('')
+  const [roomType, setRoomType] = useState('')
+
+  const canSearch = location.length > 0 || keyword.length > 0
+
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (!canSearch) return
+    const params = new URLSearchParams()
+    if (location) params.set('city', location)
+    if (keyword) params.set('search', keyword)
+    if (roomType) params.set('type', roomType)
+    if (date) params.set('checkin', date)
+    const qs = params.toString()
+    navigate({ to: `/properties${qs ? `?${qs}` : ''}` })
+  }
 
   return (
     <form
       className="island-shell flex flex-col gap-2 rounded-2xl p-2 sm:flex-row sm:items-center sm:rounded-full sm:p-1.5"
-      onSubmit={(e) => {
-        e.preventDefault()
-        navigate({ to: '/properties' })
-      }}
+      onSubmit={onSubmit}
     >
+      <div className="flex flex-1 items-center gap-2 rounded-full px-3 py-1.5 transition hover:bg-white/40">
+        <Search className="h-4 w-4 text-[var(--lagoon-deep)]" />
+        <div className="flex w-full flex-col">
+          <Label htmlFor="hero-keyword" className="sr-only">
+            Cari kos
+          </Label>
+          <Input
+            id="hero-keyword"
+            type="text"
+            placeholder="Nama kos, area, atau kota?"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            className="h-auto w-full border-0 bg-transparent p-0 text-sm font-medium text-[var(--sea-ink)] shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-[var(--sea-ink-soft)]/80"
+          />
+        </div>
+      </div>
+      <Separator
+        orientation="vertical"
+        className="hidden h-8 sm:block bg-[var(--line)]"
+      />
       <div className="flex flex-1 items-center gap-2 rounded-full px-3 py-1.5 transition hover:bg-white/40">
         <MapPin className="h-4 w-4 text-[var(--lagoon-deep)]" />
         <div className="flex w-full flex-col">
@@ -176,7 +204,9 @@ function SearchBar() {
           <Input
             id="hero-location"
             type="text"
-            placeholder="Mau cari kos di kota mana?"
+            placeholder="Kota?"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
             className="h-auto w-full border-0 bg-transparent p-0 text-sm font-medium text-[var(--sea-ink)] shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-[var(--sea-ink-soft)]/80"
           />
         </div>
@@ -193,8 +223,9 @@ function SearchBar() {
           </Label>
           <Input
             id="hero-date"
-            type="text"
-            placeholder="Tanggal masuk"
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             className="h-auto w-full border-0 bg-transparent p-0 text-sm font-medium text-[var(--sea-ink)] shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-[var(--sea-ink-soft)]/80"
           />
         </div>
@@ -205,7 +236,7 @@ function SearchBar() {
       />
       <div className="flex flex-1 items-center gap-2 rounded-full px-3 py-1.5 transition hover:bg-white/40">
         <Bath className="h-4 w-4 text-[var(--lagoon-deep)]" />
-        <Select name="roomType">
+        <Select value={roomType} onValueChange={setRoomType}>
           <SelectTrigger
             id="hero-room-type"
             name="roomType"
@@ -219,13 +250,16 @@ function SearchBar() {
             <SelectItem value="putri">Putri</SelectItem>
             <SelectItem value="putra">Putra</SelectItem>
             <SelectItem value="campur">Campur</SelectItem>
+            <SelectItem value="harian">Harian</SelectItem>
+            <SelectItem value="bulanan">Bulanan</SelectItem>
           </SelectContent>
         </Select>
       </div>
       <Button
         type="submit"
         size="lg"
-        className="rounded-full bg-[var(--lagoon-deep)] px-5 text-white shadow-[0_8px_24px_rgba(50,143,151,0.32)] hover:bg-[#246f76]"
+        disabled={!canSearch}
+        className="rounded-full bg-[var(--lagoon-deep)] px-5 text-white shadow-[0_8px_24px_rgba(50,143,151,0.32)] hover:bg-[#246f76] disabled:cursor-not-allowed disabled:opacity-60"
       >
         <Search className="h-4 w-4" />
         Cari Kos
@@ -295,196 +329,88 @@ function SectionHeader({
   )
 }
 
-function Categories() {
-  return (
-    <section id="kategori" className="mt-12">
-      <SectionHeader
-        kicker="Kategori"
-        title="Pilih tipe kos sesuai kebutuhanmu"
-        subtitle="Dari kos harian untuk transit sampai kos bulanan untuk jangka panjang."
-      />
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {categories.map((c, index) => (
-          <Link
-            key={c.key}
-            to="/properties"
-            search={{ type: c.key }}
-            className="island-shell feature-card rise-in relative overflow-hidden rounded-2xl p-5 no-underline"
-            style={{ animationDelay: `${index * 60 + 80}ms` }}
-          >
-            <div
-              className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${c.accent} opacity-70`}
-            />
-            <div className="relative flex items-start justify-between">
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/60 bg-white/80 text-lg font-bold text-[var(--sea-ink)] shadow-sm">
-                {c.icon}
-              </span>
-              <ChevronRight className="h-5 w-5 text-[var(--sea-ink-soft)]" />
-            </div>
-            <h3 className="relative mt-4 text-base font-semibold text-[var(--sea-ink)]">
-              {c.label}
-            </h3>
-            <p className="relative mt-1 text-sm text-[var(--sea-ink-soft)]">
-              {c.desc}
-            </p>
-          </Link>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function PopularCities() {
-  return (
-    <section id="kota" className="mt-12">
-      <SectionHeader
-        kicker="Lokasi"
-        title="Cari kos di kota populer"
-        subtitle="Telusuri kos-kos terdekat dari kampus, kantor, atau tempat kerjamu."
-      />
-      <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
-        {popularCities.map((city, index) => (
-          <Link
-            key={city.slug}
-            to="/properties"
-            className="island-shell feature-card rise-in flex items-center justify-between rounded-xl p-4 no-underline"
-            style={{ animationDelay: `${index * 40 + 60}ms` }}
-          >
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[rgba(79,184,178,0.18)] text-[var(--lagoon-deep)]">
-                <Compass className="h-4 w-4" />
-              </span>
-              <div>
-                <p className="m-0 text-sm font-semibold text-[var(--sea-ink)]">
-                  Kos di {city.name}
-                </p>
-                <p className="m-0 text-xs text-[var(--sea-ink-soft)]">
-                  {city.count.toLocaleString('id-ID')} kos
-                </p>
-              </div>
-            </div>
-            <ChevronRight className="h-4 w-4 text-[var(--sea-ink-soft)]" />
-          </Link>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function FeaturedKos() {
-  return (
-    <section id="rekomendasi" className="mt-12">
-      <SectionHeader
-        kicker="Rekomendasi"
-        title="Kos favorit minggu ini"
-        subtitle="Pilihan terbaik berdasarkan rating, lokasi, dan review pengguna asli."
-        cta={{ label: 'Lihat semua', href: '/properties' }}
-      />
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {featuredKos.map((kos, index) => (
-          <Link key={kos.id} to="/properties" className="no-underline">
-            <Card
-              className="island-shell feature-card rise-in gap-0 overflow-hidden rounded-2xl border-[var(--line)] py-0"
-              style={{ animationDelay: `${index * 60 + 60}ms` }}
-            >
-              <div
-                className={`relative flex h-40 items-center justify-center bg-gradient-to-br ${kos.hue}`}
-              >
-                <span className="text-6xl font-bold text-white/70">
-                  {kos.initial}
-                </span>
-                {kos.badge ? (
-                  <Badge className="absolute left-3 top-3 border-0 bg-white/85 text-[var(--lagoon-deep)] shadow-sm hover:bg-white/85">
-                    <Sparkles className="h-3 w-3" />
-                    {kos.badge}
-                  </Badge>
-                ) : null}
-                <Badge className="absolute right-3 top-3 border-0 bg-black/40 text-white hover:bg-black/40">
-                  <Star className="h-3 w-3 fill-current text-amber-300" />
-                  {kos.rating.toFixed(1)}
-                </Badge>
-              </div>
-              <CardHeader className="px-4 pt-4">
-                <CardTitle className="line-clamp-2 text-sm font-semibold text-[var(--sea-ink)]">
-                  {kos.name}
-                </CardTitle>
-                <CardDescription className="flex items-center gap-1 text-xs text-[var(--sea-ink-soft)]">
-                  <MapPin className="h-3 w-3" />
-                  {kos.district}, {kos.city}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3 px-4 pb-4">
-                <div className="flex flex-wrap gap-1.5">
-                  {kos.facilities.slice(0, 3).map((f) => (
-                    <Badge
-                      key={f}
-                      variant="outline"
-                      className="border-[var(--chip-line)] bg-[var(--chip-bg)] px-2 py-0.5 text-[0.65rem] font-normal text-[var(--sea-ink-soft)]"
-                    >
-                      {f}
-                    </Badge>
-                  ))}
-                  {kos.facilities.length > 3 ? (
-                    <Badge
-                      variant="outline"
-                      className="border-[var(--chip-line)] bg-[var(--chip-bg)] px-2 py-0.5 text-[0.65rem] font-normal text-[var(--sea-ink-soft)]"
-                    >
-                      +{kos.facilities.length - 3}
-                    </Badge>
-                  ) : null}
-                </div>
-                <Separator className="bg-[var(--line)]" />
-                <div className="flex items-end justify-between">
-                  <div>
-                    <p className="text-[0.65rem] uppercase tracking-wider text-[var(--sea-ink-soft)]">
-                      Mulai dari
-                    </p>
-                    <p className="text-base font-bold text-[var(--lagoon-deep)]">
-                      {currency(kos.price)}
-                      <span className="text-xs font-normal text-[var(--sea-ink-soft)]">
-                        /{kos.period}
-                      </span>
-                    </p>
-                  </div>
-                  <span className="text-[0.65rem] text-[var(--sea-ink-soft)]">
-                    {kos.reviews} review
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function WhyUs() {
+function ValueProposition() {
   return (
     <section className="mt-12">
       <SectionHeader
-        kicker="Kenapa Konkosyuk"
-        title="Cara paling mudah cari kos di Indonesia"
-        subtitle="Ribuan pengguna mempercayakan pencarian kos mereka setiap bulannya."
+        kicker="Kenyamanan"
+        title="Kenyamanan yang kamu butuhkan, semua lengkap."
+        subtitle="Setiap fasilitas kami pilih agar kamu merasa seperti di rumah."
       />
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {whyUs.map((item, index) => {
-          const Icon = item.icon
-          return (
-            <Card
-              key={item.title}
-              className="island-shell feature-card rise-in gap-3 rounded-2xl border-[var(--line)] py-5"
-              style={{ animationDelay: `${index * 80 + 60}ms` }}
-            >
-              <CardContent className="space-y-2 px-5">
+      <Card className="island-shell rise-in border-[var(--line)]">
+        <CardContent className="grid gap-6 py-8 sm:grid-cols-2 lg:grid-cols-4 sm:gap-8">
+          {facilities.map((f, index) => {
+            const Icon = f.icon
+            return (
+              <div
+                key={f.name}
+                className="flex flex-col items-center gap-3 text-center"
+                style={{ animationDelay: `${index * 60 + 60}ms` }}
+              >
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[rgba(79,184,178,0.18)] text-[var(--lagoon-deep)]">
                   <Icon className="h-5 w-5" />
                 </span>
+                <span className="text-sm font-medium text-[var(--sea-ink)]">
+                  {f.name}
+                </span>
+              </div>
+            )
+          })}
+        </CardContent>
+      </Card>
+    </section>
+  )
+}
+
+function HowItWorks() {
+  const steps = [
+    {
+      icon: Search,
+      title: 'Cari',
+      desc: 'Filter kos berdasarkan lokasi, tipe, harga, dan fasilitas.',
+    },
+    {
+      icon: Star,
+      title: 'Pilih',
+      desc: 'Lihat foto asli dan ulasan pengguna lain.',
+    },
+    {
+      icon: CalendarDays,
+      title: 'Booking',
+      desc: 'Konfirmasi instan dan lakukan pembayaran DP.',
+    },
+    {
+      icon: Bed,
+      title: 'Tinggal',
+      desc: 'Pindah dengan mudah sesuai jadwal yang disepakati.',
+    },
+  ]
+
+  return (
+    <section className="mt-12">
+      <SectionHeader
+        kicker="Cara Kerja"
+        title="Cari kos dalam 4 langkah mudah"
+        subtitle="Dari pencarian hingga kunci rumah, semua dilakukan hanya di Konkosyuk."
+      />
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((step, index) => {
+          const Icon = step.icon
+          return (
+            <Card
+              key={step.title}
+              className="island-shell feature-card rise-in flex h-full flex-col gap-4 rounded-2xl border-[var(--line)] py-6"
+              style={{ animationDelay: `${index * 120 + 60}ms` }}
+            >
+              <CardContent className="flex flex-1 flex-col items-center gap-3 px-5 text-center">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(79,184,178,0.18)] text-[var(--lagoon-deep)]">
+                  <Icon className="h-5 w-5" />
+                </span>
                 <CardTitle className="text-base font-semibold text-[var(--sea-ink)]">
-                  {item.title}
+                  {step.title}
                 </CardTitle>
                 <CardDescription className="text-sm text-[var(--sea-ink-soft)]">
-                  {item.desc}
+                  {step.desc}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -495,7 +421,55 @@ function WhyUs() {
   )
 }
 
-function OwnerCta() {
+function FeaturedListings() {
+  const { data: featured = [], isLoading } = useQuery(
+    orpc.listFeaturedProperties.queryOptions({ input: { limit: 12 } }),
+  )
+
+  const limited = useMemo(() => featured.slice(0, 8), [featured])
+
+  return (
+    <section className="mt-12">
+      <SectionHeader
+        kicker="Rekomendasi"
+        title="Properti unggulan"
+        subtitle="Pilihan terbaik berdasarkan lokasi, rating, dan review pengguna asli."
+        cta={{ label: 'Lihat semua', href: '/properties' }}
+      />
+      {isLoading ? (
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <Card
+              key={i}
+              className="h-full gap-0 overflow-hidden rounded-2xl border-[var(--line)] py-0"
+            >
+              <div className="aspect-[16/10] w-full animate-pulse bg-[var(--line)]/40" />
+              <CardContent className="flex flex-col gap-2 p-4">
+                <div className="h-4 w-3/4 animate-pulse rounded bg-[var(--line)]/40" />
+                <div className="h-3 w-1/2 animate-pulse rounded bg-[var(--line)]/40" />
+                <div className="h-4 w-1/4 animate-pulse rounded bg-[var(--line)]/40" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      ) : limited.length === 0 ? (
+        <p className="text-center text-sm text-[var(--sea-ink-soft)]">
+          Belum ada properti unggulan. Cek lagi nanti!
+        </p>
+      ) : (
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {limited.map((p, index) => (
+            <div key={p.id} style={{ animationDelay: `${index * 60 + 60}ms` }}>
+              <PropertyCard property={p} />
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  )
+}
+
+function OwnerCTA() {
   return (
     <section
       id="pemilik"
@@ -555,95 +529,4 @@ function OwnerCta() {
   )
 }
 
-function Testimonials() {
-  return (
-    <section className="mt-12">
-      <SectionHeader
-        kicker="Cerita mereka"
-        title="Apa kata pengguna Konkosyuk"
-        subtitle="Ribuan anak kos & pemilik kos sudah menemukan pasangan yang tepat lewat platform kami."
-      />
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {testimonials.map((t, index) => (
-          <Card
-            key={t.name}
-            className="island-shell feature-card rise-in h-full gap-3 rounded-2xl border-[var(--line)] py-5"
-            style={{ animationDelay: `${index * 80 + 60}ms` }}
-          >
-            <CardContent className="flex h-full flex-col gap-3 px-5">
-              <div className="flex items-center gap-1 text-amber-400">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-current" />
-                ))}
-              </div>
-              <blockquote className="flex-1 text-sm text-[var(--sea-ink-soft)]">
-                “{t.quote}”
-              </blockquote>
-              <Separator className="bg-[var(--line)]" />
-              <div className="flex items-center gap-3">
-                <Avatar
-                  size="lg"
-                  className={`bg-gradient-to-br ${t.hue} text-white`}
-                >
-                  <AvatarFallback
-                    className={`bg-gradient-to-br ${t.hue} text-sm font-bold text-white`}
-                  >
-                    {t.avatar}
-                  </AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="m-0 text-sm font-semibold text-[var(--sea-ink)]">
-                    {t.name}
-                  </p>
-                  <p className="m-0 text-xs text-[var(--sea-ink-soft)]">
-                    {t.role}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function PromoBanner() {
-  return (
-    <section
-      id="app"
-      className="island-shell rise-in mt-12 overflow-hidden rounded-2xl"
-    >
-      <div className="grid items-center gap-6 p-6 sm:grid-cols-[1.2fr_0.8fr] sm:p-8">
-        <div>
-          <p className="island-kicker mb-2">App Segera Hadir</p>
-          <h2 className="display-title text-2xl font-bold tracking-tight text-[var(--sea-ink)] sm:text-3xl">
-            Download aplikasi Konkosyuk dan dapatkan voucher Rp 100.000
-          </h2>
-          <p className="mt-2 max-w-xl text-sm text-[var(--sea-ink-soft)] sm:text-base">
-            Booking kos dari mana aja, notifikasi kos baru di area favoritmu,
-            dan promo eksklusif hanya di aplikasi.
-          </p>
-        </div>
-        <ul className="grid grid-cols-3 gap-2 sm:grid-cols-6 lg:grid-cols-3">
-          {facilities.slice(0, 6).map((f) => {
-            const Icon = f.icon
-            return (
-              <li
-                key={f.name}
-                className="island-shell flex flex-col items-center gap-1 rounded-xl p-2 text-center"
-              >
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[rgba(79,184,178,0.18)] text-[var(--lagoon-deep)]">
-                  <Icon className="h-4 w-4" />
-                </span>
-                <span className="text-[0.65rem] font-medium text-[var(--sea-ink-soft)]">
-                  {f.name}
-                </span>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-    </section>
-  )
-}
+export default HomePage

@@ -48,6 +48,8 @@ export type PropertiesMinAggregateOutputType = {
   city: string | null
   district: string | null
   type: $Enums.PropertyType | null
+  gender_type: $Enums.GenderType | null
+  rental_period: $Enums.RentalPeriod | null
   base_price: runtime.Decimal | null
   status: $Enums.PropertyStatus | null
   latitude: runtime.Decimal | null
@@ -72,6 +74,8 @@ export type PropertiesMaxAggregateOutputType = {
   city: string | null
   district: string | null
   type: $Enums.PropertyType | null
+  gender_type: $Enums.GenderType | null
+  rental_period: $Enums.RentalPeriod | null
   base_price: runtime.Decimal | null
   status: $Enums.PropertyStatus | null
   latitude: runtime.Decimal | null
@@ -96,6 +100,8 @@ export type PropertiesCountAggregateOutputType = {
   city: number
   district: number
   type: number
+  gender_type: number
+  rental_period: number
   base_price: number
   packages: number
   status: number
@@ -138,6 +144,8 @@ export type PropertiesMinAggregateInputType = {
   city?: true
   district?: true
   type?: true
+  gender_type?: true
+  rental_period?: true
   base_price?: true
   status?: true
   latitude?: true
@@ -162,6 +170,8 @@ export type PropertiesMaxAggregateInputType = {
   city?: true
   district?: true
   type?: true
+  gender_type?: true
+  rental_period?: true
   base_price?: true
   status?: true
   latitude?: true
@@ -186,6 +196,8 @@ export type PropertiesCountAggregateInputType = {
   city?: true
   district?: true
   type?: true
+  gender_type?: true
+  rental_period?: true
   base_price?: true
   packages?: true
   status?: true
@@ -301,6 +313,8 @@ export type PropertiesGroupByOutputType = {
   city: string | null
   district: string | null
   type: $Enums.PropertyType
+  gender_type: $Enums.GenderType | null
+  rental_period: $Enums.RentalPeriod | null
   base_price: runtime.Decimal | null
   packages: runtime.JsonValue
   status: $Enums.PropertyStatus
@@ -352,6 +366,8 @@ export type propertiesWhereInput = {
   city?: Prisma.StringNullableFilter<"properties"> | string | null
   district?: Prisma.StringNullableFilter<"properties"> | string | null
   type?: Prisma.EnumPropertyTypeFilter<"properties"> | $Enums.PropertyType
+  gender_type?: Prisma.EnumGenderTypeNullableFilter<"properties"> | $Enums.GenderType | null
+  rental_period?: Prisma.EnumRentalPeriodNullableFilter<"properties"> | $Enums.RentalPeriod | null
   base_price?: Prisma.DecimalNullableFilter<"properties"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonFilter<"properties">
   status?: Prisma.EnumPropertyStatusFilter<"properties"> | $Enums.PropertyStatus
@@ -406,6 +422,8 @@ export type propertiesOrderByWithRelationInput = {
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
+  gender_type?: Prisma.SortOrderInput | Prisma.SortOrder
+  rental_period?: Prisma.SortOrderInput | Prisma.SortOrder
   base_price?: Prisma.SortOrderInput | Prisma.SortOrder
   packages?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -464,6 +482,8 @@ export type propertiesWhereUniqueInput = Prisma.AtLeast<{
   city?: Prisma.StringNullableFilter<"properties"> | string | null
   district?: Prisma.StringNullableFilter<"properties"> | string | null
   type?: Prisma.EnumPropertyTypeFilter<"properties"> | $Enums.PropertyType
+  gender_type?: Prisma.EnumGenderTypeNullableFilter<"properties"> | $Enums.GenderType | null
+  rental_period?: Prisma.EnumRentalPeriodNullableFilter<"properties"> | $Enums.RentalPeriod | null
   base_price?: Prisma.DecimalNullableFilter<"properties"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonFilter<"properties">
   status?: Prisma.EnumPropertyStatusFilter<"properties"> | $Enums.PropertyStatus
@@ -517,6 +537,8 @@ export type propertiesOrderByWithAggregationInput = {
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
+  gender_type?: Prisma.SortOrderInput | Prisma.SortOrder
+  rental_period?: Prisma.SortOrderInput | Prisma.SortOrder
   base_price?: Prisma.SortOrderInput | Prisma.SortOrder
   packages?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -553,6 +575,8 @@ export type propertiesScalarWhereWithAggregatesInput = {
   city?: Prisma.StringNullableWithAggregatesFilter<"properties"> | string | null
   district?: Prisma.StringNullableWithAggregatesFilter<"properties"> | string | null
   type?: Prisma.EnumPropertyTypeWithAggregatesFilter<"properties"> | $Enums.PropertyType
+  gender_type?: Prisma.EnumGenderTypeNullableWithAggregatesFilter<"properties"> | $Enums.GenderType | null
+  rental_period?: Prisma.EnumRentalPeriodNullableWithAggregatesFilter<"properties"> | $Enums.RentalPeriod | null
   base_price?: Prisma.DecimalNullableWithAggregatesFilter<"properties"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonWithAggregatesFilter<"properties">
   status?: Prisma.EnumPropertyStatusWithAggregatesFilter<"properties"> | $Enums.PropertyStatus
@@ -580,6 +604,8 @@ export type propertiesCreateInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -634,6 +660,8 @@ export type propertiesUncheckedCreateInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -686,6 +714,8 @@ export type propertiesUpdateInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -740,6 +770,8 @@ export type propertiesUncheckedUpdateInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -793,6 +825,8 @@ export type propertiesCreateManyInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -820,6 +854,8 @@ export type propertiesUpdateManyMutationInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -848,6 +884,8 @@ export type propertiesUncheckedUpdateManyInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -886,6 +924,8 @@ export type propertiesCountOrderByAggregateInput = {
   city?: Prisma.SortOrder
   district?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  gender_type?: Prisma.SortOrder
+  rental_period?: Prisma.SortOrder
   base_price?: Prisma.SortOrder
   packages?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -920,6 +960,8 @@ export type propertiesMaxOrderByAggregateInput = {
   city?: Prisma.SortOrder
   district?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  gender_type?: Prisma.SortOrder
+  rental_period?: Prisma.SortOrder
   base_price?: Prisma.SortOrder
   status?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
@@ -944,6 +986,8 @@ export type propertiesMinOrderByAggregateInput = {
   city?: Prisma.SortOrder
   district?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  gender_type?: Prisma.SortOrder
+  rental_period?: Prisma.SortOrder
   base_price?: Prisma.SortOrder
   status?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
@@ -1156,6 +1200,14 @@ export type propertiesUpdateOneRequiredWithoutPricing_suggestionsNestedInput = {
   upsert?: Prisma.propertiesUpsertWithoutPricing_suggestionsInput
   connect?: Prisma.propertiesWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.propertiesUpdateToOneWithWhereWithoutPricing_suggestionsInput, Prisma.propertiesUpdateWithoutPricing_suggestionsInput>, Prisma.propertiesUncheckedUpdateWithoutPricing_suggestionsInput>
+}
+
+export type NullableEnumGenderTypeFieldUpdateOperationsInput = {
+  set?: $Enums.GenderType | null
+}
+
+export type NullableEnumRentalPeriodFieldUpdateOperationsInput = {
+  set?: $Enums.RentalPeriod | null
 }
 
 export type EnumPropertyStatusFieldUpdateOperationsInput = {
@@ -1387,6 +1439,8 @@ export type propertiesCreateWithoutBooking_requestsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -1440,6 +1494,8 @@ export type propertiesUncheckedCreateWithoutBooking_requestsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -1507,6 +1563,8 @@ export type propertiesUpdateWithoutBooking_requestsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -1560,6 +1618,8 @@ export type propertiesUncheckedUpdateWithoutBooking_requestsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -1611,6 +1671,8 @@ export type propertiesCreateWithoutBookingsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -1664,6 +1726,8 @@ export type propertiesUncheckedCreateWithoutBookingsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -1731,6 +1795,8 @@ export type propertiesUpdateWithoutBookingsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -1784,6 +1850,8 @@ export type propertiesUncheckedUpdateWithoutBookingsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -1835,6 +1903,8 @@ export type propertiesCreateWithoutChat_roomsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -1888,6 +1958,8 @@ export type propertiesUncheckedCreateWithoutChat_roomsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -1955,6 +2027,8 @@ export type propertiesUpdateWithoutChat_roomsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -2008,6 +2082,8 @@ export type propertiesUncheckedUpdateWithoutChat_roomsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -2059,6 +2135,8 @@ export type propertiesCreateWithoutFavoritesInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -2112,6 +2190,8 @@ export type propertiesUncheckedCreateWithoutFavoritesInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -2179,6 +2259,8 @@ export type propertiesUpdateWithoutFavoritesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -2232,6 +2314,8 @@ export type propertiesUncheckedUpdateWithoutFavoritesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -2283,6 +2367,8 @@ export type propertiesCreateWithoutGroup_bookingsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -2336,6 +2422,8 @@ export type propertiesUncheckedCreateWithoutGroup_bookingsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -2403,6 +2491,8 @@ export type propertiesUpdateWithoutGroup_bookingsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -2456,6 +2546,8 @@ export type propertiesUncheckedUpdateWithoutGroup_bookingsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -2507,6 +2599,8 @@ export type propertiesCreateWithoutInspectionsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -2560,6 +2654,8 @@ export type propertiesUncheckedCreateWithoutInspectionsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -2627,6 +2723,8 @@ export type propertiesUpdateWithoutInspectionsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -2680,6 +2778,8 @@ export type propertiesUncheckedUpdateWithoutInspectionsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -2731,6 +2831,8 @@ export type propertiesCreateWithoutMaintenance_reportsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -2784,6 +2886,8 @@ export type propertiesUncheckedCreateWithoutMaintenance_reportsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -2851,6 +2955,8 @@ export type propertiesUpdateWithoutMaintenance_reportsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -2904,6 +3010,8 @@ export type propertiesUncheckedUpdateWithoutMaintenance_reportsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -2955,6 +3063,8 @@ export type propertiesCreateWithoutNearby_placesInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -3008,6 +3118,8 @@ export type propertiesUncheckedCreateWithoutNearby_placesInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -3075,6 +3187,8 @@ export type propertiesUpdateWithoutNearby_placesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -3128,6 +3242,8 @@ export type propertiesUncheckedUpdateWithoutNearby_placesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -3179,6 +3295,8 @@ export type propertiesCreateWithoutNeighborhood_insightsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -3232,6 +3350,8 @@ export type propertiesUncheckedCreateWithoutNeighborhood_insightsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -3299,6 +3419,8 @@ export type propertiesUpdateWithoutNeighborhood_insightsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -3352,6 +3474,8 @@ export type propertiesUncheckedUpdateWithoutNeighborhood_insightsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -3403,6 +3527,8 @@ export type propertiesCreateWithoutNeighborhood_placesInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -3456,6 +3582,8 @@ export type propertiesUncheckedCreateWithoutNeighborhood_placesInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -3523,6 +3651,8 @@ export type propertiesUpdateWithoutNeighborhood_placesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -3576,6 +3706,8 @@ export type propertiesUncheckedUpdateWithoutNeighborhood_placesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -3627,6 +3759,8 @@ export type propertiesCreateWithoutPaymentsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -3680,6 +3814,8 @@ export type propertiesUncheckedCreateWithoutPaymentsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -3747,6 +3883,8 @@ export type propertiesUpdateWithoutPaymentsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -3800,6 +3938,8 @@ export type propertiesUncheckedUpdateWithoutPaymentsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -3851,6 +3991,8 @@ export type propertiesCreateWithoutPricing_analyticsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -3904,6 +4046,8 @@ export type propertiesUncheckedCreateWithoutPricing_analyticsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -3971,6 +4115,8 @@ export type propertiesUpdateWithoutPricing_analyticsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -4024,6 +4170,8 @@ export type propertiesUncheckedUpdateWithoutPricing_analyticsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -4075,6 +4223,8 @@ export type propertiesCreateWithoutPricing_suggestionsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -4128,6 +4278,8 @@ export type propertiesUncheckedCreateWithoutPricing_suggestionsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -4195,6 +4347,8 @@ export type propertiesUpdateWithoutPricing_suggestionsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -4248,6 +4402,8 @@ export type propertiesUncheckedUpdateWithoutPricing_suggestionsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -4299,6 +4455,8 @@ export type propertiesCreateWithoutProperty_adsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -4352,6 +4510,8 @@ export type propertiesUncheckedCreateWithoutProperty_adsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -4419,6 +4579,8 @@ export type propertiesUpdateWithoutProperty_adsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -4472,6 +4634,8 @@ export type propertiesUncheckedUpdateWithoutProperty_adsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -4523,6 +4687,8 @@ export type propertiesCreateWithoutProperty_ratingsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -4576,6 +4742,8 @@ export type propertiesUncheckedCreateWithoutProperty_ratingsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -4643,6 +4811,8 @@ export type propertiesUpdateWithoutProperty_ratingsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -4696,6 +4866,8 @@ export type propertiesUncheckedUpdateWithoutProperty_ratingsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -4747,6 +4919,8 @@ export type propertiesCreateWithoutProperty_rulesInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -4800,6 +4974,8 @@ export type propertiesUncheckedCreateWithoutProperty_rulesInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -4867,6 +5043,8 @@ export type propertiesUpdateWithoutProperty_rulesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -4920,6 +5098,8 @@ export type propertiesUncheckedUpdateWithoutProperty_rulesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -4971,6 +5151,8 @@ export type propertiesCreateWithoutProperty_similarities_property_similarities_p
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -5024,6 +5206,8 @@ export type propertiesUncheckedCreateWithoutProperty_similarities_property_simil
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -5080,6 +5264,8 @@ export type propertiesCreateWithoutProperty_similarities_property_similarities_s
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -5133,6 +5319,8 @@ export type propertiesUncheckedCreateWithoutProperty_similarities_property_simil
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -5200,6 +5388,8 @@ export type propertiesUpdateWithoutProperty_similarities_property_similarities_p
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -5253,6 +5443,8 @@ export type propertiesUncheckedUpdateWithoutProperty_similarities_property_simil
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -5315,6 +5507,8 @@ export type propertiesUpdateWithoutProperty_similarities_property_similarities_s
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -5368,6 +5562,8 @@ export type propertiesUncheckedUpdateWithoutProperty_similarities_property_simil
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -5419,6 +5615,8 @@ export type propertiesCreateWithoutProperty_tagsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -5472,6 +5670,8 @@ export type propertiesUncheckedCreateWithoutProperty_tagsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -5539,6 +5739,8 @@ export type propertiesUpdateWithoutProperty_tagsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -5592,6 +5794,8 @@ export type propertiesUncheckedUpdateWithoutProperty_tagsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -5643,6 +5847,8 @@ export type propertiesCreateWithoutReferralsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -5696,6 +5902,8 @@ export type propertiesUncheckedCreateWithoutReferralsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -5763,6 +5971,8 @@ export type propertiesUpdateWithoutReferralsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -5816,6 +6026,8 @@ export type propertiesUncheckedUpdateWithoutReferralsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -5867,6 +6079,8 @@ export type propertiesCreateWithoutReviewsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -5920,6 +6134,8 @@ export type propertiesUncheckedCreateWithoutReviewsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -5987,6 +6203,8 @@ export type propertiesUpdateWithoutReviewsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -6040,6 +6258,8 @@ export type propertiesUncheckedUpdateWithoutReviewsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -6091,6 +6311,8 @@ export type propertiesCreateWithoutSeasonal_pricing_rulesInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -6144,6 +6366,8 @@ export type propertiesUncheckedCreateWithoutSeasonal_pricing_rulesInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -6211,6 +6435,8 @@ export type propertiesUpdateWithoutSeasonal_pricing_rulesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -6264,6 +6490,8 @@ export type propertiesUncheckedUpdateWithoutSeasonal_pricing_rulesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -6315,6 +6543,8 @@ export type propertiesCreateWithoutUnitsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -6368,6 +6598,8 @@ export type propertiesUncheckedCreateWithoutUnitsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -6435,6 +6667,8 @@ export type propertiesUpdateWithoutUnitsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -6488,6 +6722,8 @@ export type propertiesUncheckedUpdateWithoutUnitsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -6539,6 +6775,8 @@ export type propertiesCreateWithoutUser_contractsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -6592,6 +6830,8 @@ export type propertiesUncheckedCreateWithoutUser_contractsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -6659,6 +6899,8 @@ export type propertiesUpdateWithoutUser_contractsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -6712,6 +6954,8 @@ export type propertiesUncheckedUpdateWithoutUser_contractsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -6763,6 +7007,8 @@ export type propertiesCreateWithoutUsersInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -6815,6 +7061,8 @@ export type propertiesUncheckedCreateWithoutUsersInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -6897,6 +7145,8 @@ export type propertiesScalarWhereInput = {
   city?: Prisma.StringNullableFilter<"properties"> | string | null
   district?: Prisma.StringNullableFilter<"properties"> | string | null
   type?: Prisma.EnumPropertyTypeFilter<"properties"> | $Enums.PropertyType
+  gender_type?: Prisma.EnumGenderTypeNullableFilter<"properties"> | $Enums.GenderType | null
+  rental_period?: Prisma.EnumRentalPeriodNullableFilter<"properties"> | $Enums.RentalPeriod | null
   base_price?: Prisma.DecimalNullableFilter<"properties"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonFilter<"properties">
   status?: Prisma.EnumPropertyStatusFilter<"properties"> | $Enums.PropertyStatus
@@ -6924,6 +7174,8 @@ export type propertiesCreateWithoutWishlistsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -6977,6 +7229,8 @@ export type propertiesUncheckedCreateWithoutWishlistsInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -7044,6 +7298,8 @@ export type propertiesUpdateWithoutWishlistsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -7097,6 +7353,8 @@ export type propertiesUncheckedUpdateWithoutWishlistsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -7148,6 +7406,8 @@ export type propertiesCreateManyUsersInput = {
   city?: string | null
   district?: string | null
   type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
   base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PropertyStatus
@@ -7175,6 +7435,8 @@ export type propertiesUpdateWithoutUsersInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -7227,6 +7489,8 @@ export type propertiesUncheckedUpdateWithoutUsersInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -7279,6 +7543,8 @@ export type propertiesUncheckedUpdateManyWithoutUsersInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
   base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -7545,6 +7811,8 @@ export type propertiesSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   city?: boolean
   district?: boolean
   type?: boolean
+  gender_type?: boolean
+  rental_period?: boolean
   base_price?: boolean
   packages?: boolean
   status?: boolean
@@ -7600,6 +7868,8 @@ export type propertiesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   city?: boolean
   district?: boolean
   type?: boolean
+  gender_type?: boolean
+  rental_period?: boolean
   base_price?: boolean
   packages?: boolean
   status?: boolean
@@ -7629,6 +7899,8 @@ export type propertiesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   city?: boolean
   district?: boolean
   type?: boolean
+  gender_type?: boolean
+  rental_period?: boolean
   base_price?: boolean
   packages?: boolean
   status?: boolean
@@ -7658,6 +7930,8 @@ export type propertiesSelectScalar = {
   city?: boolean
   district?: boolean
   type?: boolean
+  gender_type?: boolean
+  rental_period?: boolean
   base_price?: boolean
   packages?: boolean
   status?: boolean
@@ -7676,7 +7950,7 @@ export type propertiesSelectScalar = {
   updated_at?: boolean
 }
 
-export type propertiesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "owner_id" | "name" | "description" | "address" | "province" | "city" | "district" | "type" | "base_price" | "packages" | "status" | "amenities" | "metadata" | "images" | "latitude" | "longitude" | "is_active" | "is_featured" | "gps_verified" | "featured_until" | "ical_export_token" | "ical_import_url" | "created_at" | "updated_at", ExtArgs["result"]["properties"]>
+export type propertiesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "owner_id" | "name" | "description" | "address" | "province" | "city" | "district" | "type" | "gender_type" | "rental_period" | "base_price" | "packages" | "status" | "amenities" | "metadata" | "images" | "latitude" | "longitude" | "is_active" | "is_featured" | "gps_verified" | "featured_until" | "ical_export_token" | "ical_import_url" | "created_at" | "updated_at", ExtArgs["result"]["properties"]>
 export type propertiesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   booking_requests?: boolean | Prisma.properties$booking_requestsArgs<ExtArgs>
   bookings?: boolean | Prisma.properties$bookingsArgs<ExtArgs>
@@ -7753,6 +8027,8 @@ export type $propertiesPayload<ExtArgs extends runtime.Types.Extensions.Internal
     city: string | null
     district: string | null
     type: $Enums.PropertyType
+    gender_type: $Enums.GenderType | null
+    rental_period: $Enums.RentalPeriod | null
     base_price: runtime.Decimal | null
     packages: runtime.JsonValue
     status: $Enums.PropertyStatus
@@ -8227,6 +8503,8 @@ export interface propertiesFieldRefs {
   readonly city: Prisma.FieldRef<"properties", 'String'>
   readonly district: Prisma.FieldRef<"properties", 'String'>
   readonly type: Prisma.FieldRef<"properties", 'PropertyType'>
+  readonly gender_type: Prisma.FieldRef<"properties", 'GenderType'>
+  readonly rental_period: Prisma.FieldRef<"properties", 'RentalPeriod'>
   readonly base_price: Prisma.FieldRef<"properties", 'Decimal'>
   readonly packages: Prisma.FieldRef<"properties", 'Json'>
   readonly status: Prisma.FieldRef<"properties", 'PropertyStatus'>

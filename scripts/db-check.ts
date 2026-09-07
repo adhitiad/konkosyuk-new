@@ -40,7 +40,7 @@ function testTcp(host: string, port: number): Promise<TcpResult> {
     socket.setTimeout(TCP_TIMEOUT_MS)
     socket.on('connect', () => finish('ok'))
     socket.on('timeout', () => finish('timeout'))
-    socket.on('error', (error) =>
+    socket.on('error', (error: NodeJS.ErrnoException) =>
       finish(`error:${error.code ?? error.message}`),
     )
   })
