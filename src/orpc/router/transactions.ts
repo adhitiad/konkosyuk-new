@@ -910,4 +910,78 @@ export const getDaftarRequestBooking = requireOwnerOrAdmin
     return bookings.map(serializeBooking)
   })
 
+export const getStatistikPemilik = requireOwnerOrAdmin.handler(
+  async ({ context }) => {
+    const ownerId = context.user.id
+    const isAdmin = isAdminRole(context.user.role)
+
+    const now = new Date()
+    const firstOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
+
+    const [totalRequest, bookingAktif, pendapatanResult] = await Promise.all([
+      prisma.booking.count({
+        where: isAdmin
+          ? { status_booking: 'MENUNGGU_PERSETUJUAN' }
+          : {
+              units: { properties: { owner_id: ownerId } },
+              status_booking: 'MENUNGGU_PERSETUJUAN',
+            },
+      }),
+      prisma.booking.count({
+        where: isAdmin
+          ? { status_booking: 'AKTIF' }
+          : {
+              units: { properties: { owner_id: ownerId } },
+              status_booking: 'AKTIF',
+            },
+      }),
+      prisma.booking.aggregate({
+        where: isAdmin
+          ? {
+              status_booking: {
+                in: ['AKTIF', 'SELESAI', 'MENUNGGU_PELUNASAN'],
+              },
+              tanggalBayarDP: { not: null },
+              tanggalPelunasan: { gte: firstOfMonth },
+            }
+          : {
+              units: { properties: { owner_id: ownerId } },
+              status_booking: {
+                in: ['AKTIF', 'SELESAI', 'MENUNGGU_PELUNASAN'],
+              },
+              tanggalBayarDP: { not: null },
+              tanggalPelunasan: { gte: firstOfMonth },
+            },
+        _sum: { total_harga: true },
+      }),
+    ])
+
+    return {
+      totalRequest,
+      bookingAktif,
+      pendapatanBulanIni: decimalStr(pendapatanResult._sum.total_harga),
+    }
+  },
+)
+
+export const getBookingAktif = requireOwnerOrAdmin.handler(
+  async ({ context }) => {
+    const ownerId = context.user.id
+    const isAdmin = isAdminRole(context.user.role)
+
+    const bookings = await prisma.booking.findMany({
+      where: isAdmin
+        ? { status_booking: 'AKTIF' }
+        : {
+            units: { properties: { owner_id: ownerId } },
+            status_booking: 'AKTIF',
+          },
+      select: bookingSelect,
+      orderBy: { tanggal_mulai: 'desc' },
+    })
+
+    return bookings.map(serializeBooking)
+  },
+)
+
 export const ajukanBooking = createTransaksiBooking
