@@ -20,5 +20,6 @@ mcp-todos.json
 
 .vscode
 .idea
+/strix_runs
 
 ca.pem

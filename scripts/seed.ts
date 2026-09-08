@@ -14,7 +14,7 @@
  * Skrip bersifat idempotent: akun dengan email `*@konkosyuk.test`
  * dihapus terlebih dahulu sebelum dibuat ulang.
  *
- * Jalankan: bun --bun run db:seed
+ * Jalankan: bun --bun run seed:users
  */
 import { PrismaPg } from '@prisma/adapter-pg'
 
@@ -25,6 +25,11 @@ import {
   PrismaClient,
   Role,
   KycStatus,
+  PropertyType,
+  GenderType,
+  RentalPeriod,
+  PropertyStatus,
+  RoomStatus,
 } from '../src/generated/prisma/client.js'
 
 interface SeedUser {
@@ -61,6 +66,150 @@ const seedUsers: SeedUser[] = [
   },
 ]
 
+const SEED_PROPERTIES = [
+  {
+    name: 'Kos Mawar Depok',
+    description: 'Kos putri dengan fasilitas lengkap dekat kampus UI.',
+    address: 'Jl. Margonda Raya No. 123, Depok',
+    province: 'Jawa Barat',
+    city: 'Depok',
+    district: 'Beji',
+    type: PropertyType.kost,
+    gender_type: GenderType.putri,
+    rental_period: RentalPeriod.bulanan,
+    base_price: 1_650_000,
+    is_active: true,
+    rooms: [
+      {
+        name: 'Kamar 1A',
+        status: RoomStatus.available,
+        price: 1_650_000,
+        facilities: ['AC', 'Kamar mandi dalam', 'WiFi'],
+      },
+      {
+        name: 'Kamar 1B',
+        status: RoomStatus.booked,
+        price: 1_700_000,
+        facilities: ['AC', 'Kamar mandi dalam', 'WiFi', 'Lemari'],
+      },
+      {
+        name: 'Kamar 2A',
+        status: RoomStatus.available,
+        price: 1_500_000,
+        facilities: ['Kipas angin', 'Kamar mandi dalam', 'WiFi'],
+      },
+      {
+        name: 'Kamar 2B',
+        status: RoomStatus.maintenance,
+        price: 1_550_000,
+        facilities: ['AC', 'Kamar mandi dalam'],
+      },
+      {
+        name: 'Kamar 3A',
+        status: RoomStatus.available,
+        price: 1_800_000,
+        facilities: [
+          'AC',
+          'Kamar mandi dalam',
+          'WiFi',
+          'Lemari',
+          'Meja belajar',
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Kos Melati Bandung',
+    description: 'Kos putra strategis di sekitar ITB.',
+    address: 'Jl. Dago Pojok No. 45, Bandung',
+    province: 'Jawa Barat',
+    city: 'Bandung',
+    district: 'Coblong',
+    type: PropertyType.kost,
+    gender_type: GenderType.putra,
+    rental_period: RentalPeriod.bulanan,
+    base_price: 1_800_000,
+    is_active: true,
+    rooms: [
+      {
+        name: 'Room A1',
+        status: RoomStatus.available,
+        price: 1_800_000,
+        facilities: ['AC', 'WiFi', 'Kamar mandi dalam'],
+      },
+      {
+        name: 'Room A2',
+        status: RoomStatus.available,
+        price: 1_750_000,
+        facilities: ['Kipas angin', 'WiFi', 'Kamar mandi luar'],
+      },
+      {
+        name: 'Room B1',
+        status: RoomStatus.booked,
+        price: 2_000_000,
+        facilities: ['AC', 'WiFi', 'Kamar mandi dalam', 'Lemari'],
+      },
+      {
+        name: 'Room B2',
+        status: RoomStatus.maintenance,
+        price: 1_900_000,
+        facilities: ['AC', 'WiFi'],
+      },
+      {
+        name: 'Room C1',
+        status: RoomStatus.available,
+        price: 2_100_000,
+        facilities: ['AC', 'WiFi', 'Kamar mandi dalam', 'Lemari', 'TV'],
+      },
+    ],
+  },
+  {
+    name: 'Kos Bougenville Yogyakarta',
+    description: 'Kos campur nyaman dekat UGM.',
+    address: 'Jl. Tentara Pelajar No. 88, Yogyakarta',
+    province: 'DI Yogyakarta',
+    city: 'Yogyakarta',
+    district: 'Sleman',
+    type: PropertyType.kost,
+    gender_type: GenderType.campur,
+    rental_period: RentalPeriod.bulanan,
+    base_price: 1_200_000,
+    is_active: true,
+    rooms: [
+      {
+        name: '101',
+        status: RoomStatus.available,
+        price: 1_200_000,
+        facilities: ['Kipas angin', 'WiFi'],
+      },
+      {
+        name: '102',
+        status: RoomStatus.booked,
+        price: 1_300_000,
+        facilities: ['AC', 'WiFi', 'Kamar mandi dalam'],
+      },
+      {
+        name: '103',
+        status: RoomStatus.available,
+        price: 1_250_000,
+        facilities: ['Kipas angin', 'WiFi', 'Kamar mandi dalam'],
+      },
+      {
+        name: '104',
+        status: RoomStatus.available,
+        price: 1_400_000,
+        facilities: ['AC', 'WiFi', 'Kamar mandi dalam', 'Lemari'],
+      },
+      {
+        name: '105',
+        status: RoomStatus.maintenance,
+        price: 1_150_000,
+        facilities: ['Kipas angin', 'WiFi'],
+      },
+    ],
+  },
+]
+
 function createPrismaClient(): PrismaClient {
   const databaseUrl = getDatabaseUrl()
 
@@ -81,6 +230,9 @@ async function seed(): Promise<void> {
   console.info(`   Menghapus data seed lama dari domain @${SEED_DOMAIN}...`)
 
   await prisma.$transaction(async (tx) => {
+    await tx.rooms.deleteMany({})
+    await tx.properties.deleteMany({})
+
     await tx.accounts.deleteMany({
       where: {
         users: {
@@ -119,6 +271,55 @@ async function seed(): Promise<void> {
 
       console.info(
         `   ✅ ${user.email} — peran: ${user.role}, KYC: ${user.kycStatus}`,
+      )
+    }
+
+    const owner = await tx.users.findFirst({
+      where: { email: { endsWith: `@${SEED_DOMAIN}` }, role: Role.PEMILIK },
+    })
+
+    if (!owner) {
+      throw new Error('Pemilik tidak ditemukan untuk seeding properti')
+    }
+
+    console.info('   🌿 Menambahkan properti dan kamar...')
+
+    for (const propertyData of SEED_PROPERTIES) {
+      const property = await tx.properties.create({
+        data: {
+          owner_id: owner.id,
+          name: propertyData.name,
+          description: propertyData.description,
+          address: propertyData.address,
+          province: propertyData.province,
+          city: propertyData.city,
+          district: propertyData.district,
+          type: propertyData.type,
+          gender_type: propertyData.gender_type,
+          rental_period: propertyData.rental_period,
+          base_price: propertyData.base_price,
+          status: PropertyStatus.aktif,
+          is_active: propertyData.is_active,
+          amenities: [],
+          images: [],
+          metadata: {},
+        },
+      })
+
+      for (const roomData of propertyData.rooms) {
+        await tx.rooms.create({
+          data: {
+            property_id: property.id,
+            name: roomData.name,
+            status: roomData.status,
+            price: roomData.price,
+            facilities: roomData.facilities,
+          },
+        })
+      }
+
+      console.info(
+        `   ✅ ${property.name} — ${propertyData.rooms.length} kamar`,
       )
     }
   })

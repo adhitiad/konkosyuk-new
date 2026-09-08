@@ -454,6 +454,7 @@ export const ModelName = {
   reviews: 'reviews',
   reward_redemptions: 'reward_redemptions',
   rewards: 'rewards',
+  rooms: 'rooms',
   room_facilities: 'room_facilities',
   roommate_preferences: 'roommate_preferences',
   saved_searches: 'saved_searches',
@@ -498,7 +499,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "accounts" | "ad_packages" | "analytics_events" | "app_settings" | "audit_logs" | "balance_logs" | "booking_requests" | "bookings" | "campus_areas" | "chart_of_accounts" | "chat_rooms" | "damage_reports" | "experiment_assignments" | "experiments" | "favorites" | "feature_flags" | "feedbacks" | "general_ledger" | "group_booking_members" | "group_bookings" | "inspection_items" | "inspection_photos" | "inspection_templates" | "inspections" | "kyc_verifications" | "loyalty_transactions" | "maintenance_reports" | "maintenance_tickets" | "messages" | "nearby_places" | "neighborhood_insights" | "neighborhood_places" | "notification_settings" | "notifications" | "owner_bank_accounts" | "payment_gateway_configs" | "payment_gateway_credentials" | "payment_transactions" | "payments" | "platform_settings" | "popular_areas" | "pricing_analytics" | "pricing_suggestions" | "properties" | "property_ads" | "property_comparisons" | "property_ratings" | "property_rules" | "property_similarities" | "property_tags" | "push_subscriptions" | "referrals" | "refund_requests" | "review_replies" | "reviews" | "reward_redemptions" | "rewards" | "room_facilities" | "roommate_preferences" | "saved_searches" | "seasonal_pricing_rules" | "sessions" | "tags" | "twoFactor" | "unit_pricing_tiers" | "units" | "user_contracts" | "user_interest_vectors" | "user_notification_preferences" | "users" | "verifications" | "wa_session" | "webhook_events" | "wishlists" | "withdrawals" | "booking" | "payment" | "kycRequest" | "refundRequest" | "platformConfig" | "paymentTransaction" | "property" | "unitProperti" | "fasilitas" | "fotoProperti" | "pemesanan"
+    modelProps: "accounts" | "ad_packages" | "analytics_events" | "app_settings" | "audit_logs" | "balance_logs" | "booking_requests" | "bookings" | "campus_areas" | "chart_of_accounts" | "chat_rooms" | "damage_reports" | "experiment_assignments" | "experiments" | "favorites" | "feature_flags" | "feedbacks" | "general_ledger" | "group_booking_members" | "group_bookings" | "inspection_items" | "inspection_photos" | "inspection_templates" | "inspections" | "kyc_verifications" | "loyalty_transactions" | "maintenance_reports" | "maintenance_tickets" | "messages" | "nearby_places" | "neighborhood_insights" | "neighborhood_places" | "notification_settings" | "notifications" | "owner_bank_accounts" | "payment_gateway_configs" | "payment_gateway_credentials" | "payment_transactions" | "payments" | "platform_settings" | "popular_areas" | "pricing_analytics" | "pricing_suggestions" | "properties" | "property_ads" | "property_comparisons" | "property_ratings" | "property_rules" | "property_similarities" | "property_tags" | "push_subscriptions" | "referrals" | "refund_requests" | "review_replies" | "reviews" | "reward_redemptions" | "rewards" | "rooms" | "room_facilities" | "roommate_preferences" | "saved_searches" | "seasonal_pricing_rules" | "sessions" | "tags" | "twoFactor" | "unit_pricing_tiers" | "units" | "user_contracts" | "user_interest_vectors" | "user_notification_preferences" | "users" | "verifications" | "wa_session" | "webhook_events" | "wishlists" | "withdrawals" | "booking" | "payment" | "kycRequest" | "refundRequest" | "platformConfig" | "paymentTransaction" | "property" | "unitProperti" | "fasilitas" | "fotoProperti" | "pemesanan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4720,6 +4721,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    rooms: {
+      payload: Prisma.$roomsPayload<ExtArgs>
+      fields: Prisma.roomsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.roomsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$roomsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.roomsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$roomsPayload>
+        }
+        findFirst: {
+          args: Prisma.roomsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$roomsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.roomsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$roomsPayload>
+        }
+        findMany: {
+          args: Prisma.roomsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$roomsPayload>[]
+        }
+        create: {
+          args: Prisma.roomsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$roomsPayload>
+        }
+        createMany: {
+          args: Prisma.roomsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.roomsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$roomsPayload>[]
+        }
+        delete: {
+          args: Prisma.roomsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$roomsPayload>
+        }
+        update: {
+          args: Prisma.roomsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$roomsPayload>
+        }
+        deleteMany: {
+          args: Prisma.roomsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.roomsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.roomsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$roomsPayload>[]
+        }
+        upsert: {
+          args: Prisma.roomsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$roomsPayload>
+        }
+        aggregate: {
+          args: Prisma.RoomsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRooms>
+        }
+        groupBy: {
+          args: Prisma.roomsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoomsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.roomsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoomsCountAggregateOutputType> | number
+        }
+      }
+    }
     room_facilities: {
       payload: Prisma.$room_facilitiesPayload<ExtArgs>
       fields: Prisma.room_facilitiesFieldRefs
@@ -7847,6 +7922,20 @@ export const RewardsScalarFieldEnum = {
 export type RewardsScalarFieldEnum = (typeof RewardsScalarFieldEnum)[keyof typeof RewardsScalarFieldEnum]
 
 
+export const RoomsScalarFieldEnum = {
+  id: 'id',
+  property_id: 'property_id',
+  name: 'name',
+  status: 'status',
+  price: 'price',
+  facilities: 'facilities',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type RoomsScalarFieldEnum = (typeof RoomsScalarFieldEnum)[keyof typeof RoomsScalarFieldEnum]
+
+
 export const Room_facilitiesScalarFieldEnum = {
   room_facility_id: 'room_facility_id',
   room_facility_unit_id: 'room_facility_unit_id',
@@ -9134,6 +9223,20 @@ export type ListEnumRedemptionStatusFieldRefInput<$PrismaModel> = FieldRefInputT
 
 
 /**
+ * Reference to a field of type 'RoomStatus'
+ */
+export type EnumRoomStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'RoomStatus[]'
+ */
+export type ListEnumRoomStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'FacilityCategory'
  */
 export type EnumFacilityCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FacilityCategory'>
@@ -9620,6 +9723,7 @@ export type GlobalOmitConfig = {
   reviews?: Prisma.reviewsOmit
   reward_redemptions?: Prisma.reward_redemptionsOmit
   rewards?: Prisma.rewardsOmit
+  rooms?: Prisma.roomsOmit
   room_facilities?: Prisma.room_facilitiesOmit
   roommate_preferences?: Prisma.roommate_preferencesOmit
   saved_searches?: Prisma.saved_searchesOmit

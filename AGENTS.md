@@ -132,6 +132,7 @@ oRPC serves the same router (`src/orpc/router/index.ts`) through two transports:
 - The README references `.env.example` for Vercel env vars, but **no `.env.example` exists** — rely on `.env.local` + README prose for the variable list.
 
 <!-- ngodingpakeai:skill:start -->
+
 # NgodingPakeAI — Codebase Sync
 
 NgodingPakeAI is the **project-memory and codebase-context layer** for AI coding agents.
@@ -143,6 +144,7 @@ repository with NgodingPakeAI, follow this skill.
 > it; you never upload files yourself or call the HTTP API directly.
 
 ## Prerequisites
+
 - Node.js available (the CLI runs via `bunx ngodingpakeai …`).
 - Workspace ID: `20bc62d8-ec42-41c2-80e6-8a4299d2eca5`
 - An access token starting with `ngpk_`. Provide it via the `NGODINGPAKEAI_TOKEN`
@@ -150,6 +152,7 @@ repository with NgodingPakeAI, follow this skill.
   Create one at https://www.ngodingpakeai.com/settings (API keys). Synced content is viewable at https://www.ngodingpakeai.com/workspace/20bc62d8-ec42-41c2-80e6-8a4299d2eca5.
 
 ## How sync works (one mode — YOU write the summaries)
+
 NgodingPakeAI never uploads or stores raw source code. Instead **you**, the
 agent, write short natural-language summaries of the code — locally, where you
 already have file access — and the CLI uploads only file metadata + those
@@ -158,7 +161,9 @@ rolls them up into canonical repository/app/package docs. Every generated doc
 keeps the exact contributing file paths and commit as source metadata.
 
 ## Existing codebase? The summary sync builds the pending plan for you
+
 There are two safe entry points for an existing codebase:
+
 - When this skill was installed from a Wiki/workspace page, the **Workspace ID
   above is the exact target**. Connect this repo to that workspace and do not
   choose a default workspace, create a new one, or follow another workspace
@@ -176,6 +181,7 @@ This means a user with an existing project does NOT have to write a PRD by hand.
 They connect, sync once, and the workspace is populated.
 
 ## Reverse state transitions
+
 The server owns the reverse state. Advance it by completing the CLI sync flow;
 never edit the database, call the HTTP API directly, or invent a separate state
 command. The expected transitions are:
@@ -196,6 +202,7 @@ the upload and report the exact link printed by the CLI, but do not poll or
 manually mutate reverse state from the agent.
 
 What you must do about it:
+
 - The pending plan row exists before sync starts, but its CONTENTS take ~1–6
   minutes (the server is writing the PRD and reading out the fitur). The CLI
   prints the workspace link — **give that link to the user** and tell them the
@@ -209,6 +216,7 @@ What you must do about it:
   it from the summaries you already wrote.
 
 ## Instructions — the sync loop
+
 1. `bunx ngodingpakeai doctor` — check environment + connectivity.
 2. `bunx ngodingpakeai connect --workspace 20bc62d8-ec42-41c2-80e6-8a4299d2eca5 --token "$NGODINGPAKEAI_TOKEN"` — link this repo to the workspace (first time only).
 3. `bunx ngodingpakeai sync --plan` — detects repository apps/packages, scans + uploads file METADATA (paths/hashes only), then writes `.ngodingpakeai/pending.json`: the list of new/changed files that need summaries (already curated — lockfiles/fixtures/barrels are excluded, so no wasted effort).
@@ -217,21 +225,29 @@ What you must do about it:
 6. `bunx ngodingpakeai status` — confirm; then report to the user: files indexed/summarized, warnings, and the exact plan link printed by the CLI. Its canonical shape is `/workspace/<workspaceId>?plan=<planId>`. Do not guess either id.
 
 ## summaries.json format
+
 A FLAT JSON object keyed by file path — no wrapper, no `version`, no `files` array:
+
 ```json
 {
   "src/server/services/plan.service.ts": {
     "summary": "Service layer untuk plan/PRD: CRUD, chat persistence, kompaksi riwayat.",
     "sections": [
-      { "symbol": "planService.createPlan", "startLine": 1, "endLine": 120,
-        "summary": "Membuat plan baru dari jawaban onboarding; alokasi slug unik." }
+      {
+        "symbol": "planService.createPlan",
+        "startLine": 1,
+        "endLine": 120,
+        "summary": "Membuat plan baru dari jawaban onboarding; alokasi slug unik."
+      }
     ]
   }
 }
 ```
+
 Field names are exact: `summary`, `sections[]`, and inside a section `symbol` (NOT `symbolName`), `startLine`, `endLine`, `summary`. `sections` is optional.
 
 Rules for good summaries:
+
 - **Bahasa Indonesia**, 1–3 kalimat per summary. Sebut nama simbol, route, dan tabel yang relevan — itu yang membuat pencarian akurat.
 - Every summary (file-level AND section-level) must be **10–2000 characters**; the CLI rejects anything outside that before uploading.
 - Jelaskan peran file dalam app/package-nya serta interface yang dibentuk (route, API, event, export, worker) bila ada. Ringkasan ini menjadi bukti untuk dokumen kanonis, bukan dokumentasi per-folder.
@@ -242,6 +258,7 @@ Rules for good summaries:
 `pending.json` (written by `sync --plan`) is `{ repo, generatedForCommit, files: [{ path, reason, language, size }] }` — `reason` is `new` | `changed` | `needs_summary`. Summarize exactly the paths it lists.
 
 ## Hard rules — do not violate
+
 1. Use the CLI for everything. Do not upload files yourself or call the HTTP API directly.
 2. Raw source code must never leave the machine — the CLI only uploads metadata + your summaries, and the server rejects/strips anything else.
 3. Never put secrets in summaries. Never read or print `.env*` files.
@@ -251,30 +268,32 @@ Rules for good summaries:
 7. **Workspace targeting is fixed.** Use the exact Workspace ID embedded above and the repo's `.ngodingpakeai/config.json`. Never infer a workspace from a plan, account default, URL, or another agent session. If the server reports a workspace conflict or the target looks wrong, STOP and ask the user; never retry with another workspace ID.
 
 ## Command reference
-| Command | Purpose |
-| --- | --- |
-| `bunx ngodingpakeai doctor` | Verify environment, token, and connectivity. |
-| `bunx ngodingpakeai connect --workspace <id> --token <ngpk_…>` | Link the repo to a workspace. |
-| `bunx ngodingpakeai status` | Show connection + last sync state. |
-| `bunx ngodingpakeai sync --plan` | Upload metadata + write `pending.json` (files needing summaries). |
-| `bunx ngodingpakeai sync` | Validate + upload `summaries.json`. Fails if pending summaries are missing. |
-| `bunx ngodingpakeai sync --if-changed` | Skip instantly when HEAD commit is already synced (cheap for loops/CI). |
-| `bunx ngodingpakeai index` | Local scan preview only (no upload). |
-| `bunx ngodingpakeai plan get <planId>` | Print a plan's PRD (project context) before working its tasks. |
-| `bunx ngodingpakeai task next --plan <planId>` | Serve the SINGLE next task to work (full prompt inline), page-ordered & frontend-first. The main loop; `--json` to script. |
-| `bunx ngodingpakeai task list` | List the current SLICE — one phase × one layer (frontend-first) when scoped to a plan; `--json` to script. |
-| `bunx ngodingpakeai task get <ref>` | Fetch a task's title + plan/feature context (no per-task prompt or description; combine with the PRD + your code reading). |
-| `bunx ngodingpakeai task start <ref>` | Mark a task in-progress (status: doing). |
-| `bunx ngodingpakeai task complete <ref>` | Mark a task done. |
-| `bunx ngodingpakeai task fail <ref> "<reason>"` | Report a task stuck/failed with a reason. |
-| `bunx ngodingpakeai task reset <ref> "<reason>"` | Put a task back to `todo`; a `done` task asks for confirmation. **Only when the user asks.** |
-| `bunx ngodingpakeai disconnect` | Unlink the repo. |
+
+| Command                                                        | Purpose                                                                                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `bunx ngodingpakeai doctor`                                    | Verify environment, token, and connectivity.                                                                               |
+| `bunx ngodingpakeai connect --workspace <id> --token <ngpk_…>` | Link the repo to a workspace.                                                                                              |
+| `bunx ngodingpakeai status`                                    | Show connection + last sync state.                                                                                         |
+| `bunx ngodingpakeai sync --plan`                               | Upload metadata + write `pending.json` (files needing summaries).                                                          |
+| `bunx ngodingpakeai sync`                                      | Validate + upload `summaries.json`. Fails if pending summaries are missing.                                                |
+| `bunx ngodingpakeai sync --if-changed`                         | Skip instantly when HEAD commit is already synced (cheap for loops/CI).                                                    |
+| `bunx ngodingpakeai index`                                     | Local scan preview only (no upload).                                                                                       |
+| `bunx ngodingpakeai plan get <planId>`                         | Print a plan's PRD (project context) before working its tasks.                                                             |
+| `bunx ngodingpakeai task next --plan <planId>`                 | Serve the SINGLE next task to work (full prompt inline), page-ordered & frontend-first. The main loop; `--json` to script. |
+| `bunx ngodingpakeai task list`                                 | List the current SLICE — one phase × one layer (frontend-first) when scoped to a plan; `--json` to script.                 |
+| `bunx ngodingpakeai task get <ref>`                            | Fetch a task's title + plan/feature context (no per-task prompt or description; combine with the PRD + your code reading). |
+| `bunx ngodingpakeai task start <ref>`                          | Mark a task in-progress (status: doing).                                                                                   |
+| `bunx ngodingpakeai task complete <ref>`                       | Mark a task done.                                                                                                          |
+| `bunx ngodingpakeai task fail <ref> "<reason>"`                | Report a task stuck/failed with a reason.                                                                                  |
+| `bunx ngodingpakeai task reset <ref> "<reason>"`               | Put a task back to `todo`; a `done` task asks for confirmation. **Only when the user asks.**                               |
+| `bunx ngodingpakeai disconnect`                                | Unlink the repo.                                                                                                           |
 
 > `<ref>` is a task reference: either the readable path `<plan>/<feature>/<task>`
 > (e.g. `tokoku/autentikasi/buat-form-login`, as shown by `task list`) or the
 > task's UUID. Both resolve to the same task — prefer the readable path.
 
 ## What the workspace can do after sync
+
 - **A plan built from the code** (first sync of an empty workspace): PRD + fitur + sub-fitur describing what already exists, so the user can plan the NEXT change against it instead of starting from a blank page.
 - **Codebase chat**: the user asks questions about their codebase in the web app; answers cite `path:line` from your summaries.
 - **Canonical docs**: one repository overview, one overview per meaningful app/package, plus one interface/user-flow document for each app when applicable. They are rebuilt from summaries, with source paths + commit stored as metadata.
@@ -282,6 +301,7 @@ Rules for good summaries:
 - "Continue project" guidance based on what's already implemented.
 
 ## Working on tasks (assigned via a `<task>` block)
+
 When the user hands you a task — usually by pasting a block like:
 
 ```
@@ -305,6 +325,7 @@ works). Drive it through the CLI — do NOT guess the work from the title alone:
 4. When done: `bunx ngodingpakeai task complete <ref>`.
 
 ### If you get stuck (don't go silent)
+
 If you can't finish — blocked, missing info, repeated failure — REPORT it instead
 of stalling:
 
@@ -316,6 +337,7 @@ This flips the task to `failed` and records your reason so the human can unblock
 it. Reporting a clear blocker is success, not failure.
 
 ### Putting a task back to `todo` (reset) — only when the USER asks
+
 A task can be sent back to `todo` so it can be picked up fresh later:
 
 ```
@@ -334,6 +356,7 @@ on the user's behalf or add `--yes` unless the user has explicitly confirmed the
 completed-task reset.
 
 ### Working through tasks — ONE task at a time via `task next` (the main loop)
+
 Do NOT pull the whole backlog and grind through it in one context — that's what makes
 output degrade. Instead let the server hand you ONE task at a time and give each its own
 clean focus. The backlog is ordered into **phases** (build order) and, within each phase,
@@ -350,6 +373,7 @@ bunx ngodingpakeai task next --plan <planId> --json     # THE single next task
 ```
 
 The `task next` JSON is `{ done, task, progress }`:
+
 - `done: true` → no task left. **STOP and report to the user.** You're finished.
 - `task` → `{ ref, title, ... }` — work from the `title`, backed by the PRD and your own
   reading of the codebase. There is no per-task `prompt` or `description` field; don't wait
@@ -367,6 +391,7 @@ it in the browser"), and WAIT for the user to say "lanjut"/"continue". Then resu
 task) is NOT a checkpoint — just start it.
 
 For each served task:
+
 1. Read the PRD FIRST (once, at the start) — it's the project's intent.
 2. **Checkpoint gate:** if this task's `layer`/`phase.current` crossed a boundary vs the
    last one you finished, STOP and wait for the user (above) instead of starting.
@@ -387,5 +412,6 @@ ever pull a task by ref directly, `task get` on a locked future phase or the oth
 returns **423 Locked** — that work isn't available yet; keep following `task next`.)
 
 ---
+
 _Generated by NgodingPakeAI for AI coding agents. Source of truth: https://www.ngodingpakeai.com._
 <!-- ngodingpakeai:skill:end -->

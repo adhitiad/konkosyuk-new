@@ -521,5 +521,3 @@ function OwnerCTA() {
     </section>
   )
 }
-
-

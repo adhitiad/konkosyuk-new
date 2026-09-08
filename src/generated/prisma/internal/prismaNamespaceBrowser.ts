@@ -108,6 +108,7 @@ export const ModelName = {
   reviews: 'reviews',
   reward_redemptions: 'reward_redemptions',
   rewards: 'rewards',
+  rooms: 'rooms',
   room_facilities: 'room_facilities',
   roommate_preferences: 'roommate_preferences',
   saved_searches: 'saved_searches',
@@ -1095,6 +1096,20 @@ export const RewardsScalarFieldEnum = {
 } as const
 
 export type RewardsScalarFieldEnum = (typeof RewardsScalarFieldEnum)[keyof typeof RewardsScalarFieldEnum]
+
+
+export const RoomsScalarFieldEnum = {
+  id: 'id',
+  property_id: 'property_id',
+  name: 'name',
+  status: 'status',
+  price: 'price',
+  facilities: 'facilities',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type RoomsScalarFieldEnum = (typeof RoomsScalarFieldEnum)[keyof typeof RoomsScalarFieldEnum]
 
 
 export const Room_facilitiesScalarFieldEnum = {

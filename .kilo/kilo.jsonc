@@ -13,15 +13,15 @@
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp",
       "headers": {
-        "x-api-key": "3929868d-b65e-4bf3-90ee-f346f25c2c94"
+        "x-api-key": "3929868d-b65e-4bf3-90ee-f346f25c2c94",
       },
-      "enabled": true
+      "enabled": true,
     },
     "sequentialthinking": {
-      "enabled": true
+      "enabled": true,
     },
     "firecrawl": {
-      "enabled": true
+      "enabled": true,
     },
-  }
+  },
 }

@@ -408,6 +408,7 @@ export type propertiesWhereInput = {
   reviews?: Prisma.ReviewsListRelationFilter
   seasonal_pricing_rules?: Prisma.Seasonal_pricing_rulesListRelationFilter
   units?: Prisma.UnitsListRelationFilter
+  rooms?: Prisma.RoomsListRelationFilter
   user_contracts?: Prisma.User_contractsListRelationFilter
   wishlists?: Prisma.WishlistsListRelationFilter
 }
@@ -464,6 +465,7 @@ export type propertiesOrderByWithRelationInput = {
   reviews?: Prisma.reviewsOrderByRelationAggregateInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesOrderByRelationAggregateInput
   units?: Prisma.unitsOrderByRelationAggregateInput
+  rooms?: Prisma.roomsOrderByRelationAggregateInput
   user_contracts?: Prisma.user_contractsOrderByRelationAggregateInput
   wishlists?: Prisma.wishlistsOrderByRelationAggregateInput
 }
@@ -523,6 +525,7 @@ export type propertiesWhereUniqueInput = Prisma.AtLeast<{
   reviews?: Prisma.ReviewsListRelationFilter
   seasonal_pricing_rules?: Prisma.Seasonal_pricing_rulesListRelationFilter
   units?: Prisma.UnitsListRelationFilter
+  rooms?: Prisma.RoomsListRelationFilter
   user_contracts?: Prisma.User_contractsListRelationFilter
   wishlists?: Prisma.WishlistsListRelationFilter
 }, "id" | "ical_export_token">
@@ -646,6 +649,7 @@ export type propertiesCreateInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -701,6 +705,7 @@ export type propertiesUncheckedCreateInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -756,6 +761,7 @@ export type propertiesUpdateInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -811,6 +817,7 @@ export type propertiesUncheckedUpdateInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -1332,6 +1339,20 @@ export type propertiesUpdateOneWithoutReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.propertiesUpdateToOneWithWhereWithoutReviewsInput, Prisma.propertiesUpdateWithoutReviewsInput>, Prisma.propertiesUncheckedUpdateWithoutReviewsInput>
 }
 
+export type propertiesCreateNestedOneWithoutRoomsInput = {
+  create?: Prisma.XOR<Prisma.propertiesCreateWithoutRoomsInput, Prisma.propertiesUncheckedCreateWithoutRoomsInput>
+  connectOrCreate?: Prisma.propertiesCreateOrConnectWithoutRoomsInput
+  connect?: Prisma.propertiesWhereUniqueInput
+}
+
+export type propertiesUpdateOneRequiredWithoutRoomsNestedInput = {
+  create?: Prisma.XOR<Prisma.propertiesCreateWithoutRoomsInput, Prisma.propertiesUncheckedCreateWithoutRoomsInput>
+  connectOrCreate?: Prisma.propertiesCreateOrConnectWithoutRoomsInput
+  upsert?: Prisma.propertiesUpsertWithoutRoomsInput
+  connect?: Prisma.propertiesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.propertiesUpdateToOneWithWhereWithoutRoomsInput, Prisma.propertiesUpdateWithoutRoomsInput>, Prisma.propertiesUncheckedUpdateWithoutRoomsInput>
+}
+
 export type propertiesCreateNestedOneWithoutSeasonal_pricing_rulesInput = {
   create?: Prisma.XOR<Prisma.propertiesCreateWithoutSeasonal_pricing_rulesInput, Prisma.propertiesUncheckedCreateWithoutSeasonal_pricing_rulesInput>
   connectOrCreate?: Prisma.propertiesCreateOrConnectWithoutSeasonal_pricing_rulesInput
@@ -1480,6 +1501,7 @@ export type propertiesCreateWithoutBooking_requestsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -1534,6 +1556,7 @@ export type propertiesUncheckedCreateWithoutBooking_requestsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -1604,6 +1627,7 @@ export type propertiesUpdateWithoutBooking_requestsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -1658,6 +1682,7 @@ export type propertiesUncheckedUpdateWithoutBooking_requestsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -1712,6 +1737,7 @@ export type propertiesCreateWithoutBookingsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -1766,6 +1792,7 @@ export type propertiesUncheckedCreateWithoutBookingsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -1836,6 +1863,7 @@ export type propertiesUpdateWithoutBookingsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -1890,6 +1918,7 @@ export type propertiesUncheckedUpdateWithoutBookingsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -1944,6 +1973,7 @@ export type propertiesCreateWithoutChat_roomsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -1998,6 +2028,7 @@ export type propertiesUncheckedCreateWithoutChat_roomsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -2068,6 +2099,7 @@ export type propertiesUpdateWithoutChat_roomsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -2122,6 +2154,7 @@ export type propertiesUncheckedUpdateWithoutChat_roomsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -2176,6 +2209,7 @@ export type propertiesCreateWithoutFavoritesInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -2230,6 +2264,7 @@ export type propertiesUncheckedCreateWithoutFavoritesInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -2300,6 +2335,7 @@ export type propertiesUpdateWithoutFavoritesInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -2354,6 +2390,7 @@ export type propertiesUncheckedUpdateWithoutFavoritesInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -2408,6 +2445,7 @@ export type propertiesCreateWithoutGroup_bookingsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -2462,6 +2500,7 @@ export type propertiesUncheckedCreateWithoutGroup_bookingsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -2532,6 +2571,7 @@ export type propertiesUpdateWithoutGroup_bookingsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -2586,6 +2626,7 @@ export type propertiesUncheckedUpdateWithoutGroup_bookingsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -2640,6 +2681,7 @@ export type propertiesCreateWithoutInspectionsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -2694,6 +2736,7 @@ export type propertiesUncheckedCreateWithoutInspectionsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -2764,6 +2807,7 @@ export type propertiesUpdateWithoutInspectionsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -2818,6 +2862,7 @@ export type propertiesUncheckedUpdateWithoutInspectionsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -2872,6 +2917,7 @@ export type propertiesCreateWithoutMaintenance_reportsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -2926,6 +2972,7 @@ export type propertiesUncheckedCreateWithoutMaintenance_reportsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -2996,6 +3043,7 @@ export type propertiesUpdateWithoutMaintenance_reportsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -3050,6 +3098,7 @@ export type propertiesUncheckedUpdateWithoutMaintenance_reportsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -3104,6 +3153,7 @@ export type propertiesCreateWithoutNearby_placesInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -3158,6 +3208,7 @@ export type propertiesUncheckedCreateWithoutNearby_placesInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -3228,6 +3279,7 @@ export type propertiesUpdateWithoutNearby_placesInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -3282,6 +3334,7 @@ export type propertiesUncheckedUpdateWithoutNearby_placesInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -3336,6 +3389,7 @@ export type propertiesCreateWithoutNeighborhood_insightsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -3390,6 +3444,7 @@ export type propertiesUncheckedCreateWithoutNeighborhood_insightsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -3460,6 +3515,7 @@ export type propertiesUpdateWithoutNeighborhood_insightsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -3514,6 +3570,7 @@ export type propertiesUncheckedUpdateWithoutNeighborhood_insightsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -3568,6 +3625,7 @@ export type propertiesCreateWithoutNeighborhood_placesInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -3622,6 +3680,7 @@ export type propertiesUncheckedCreateWithoutNeighborhood_placesInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -3692,6 +3751,7 @@ export type propertiesUpdateWithoutNeighborhood_placesInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -3746,6 +3806,7 @@ export type propertiesUncheckedUpdateWithoutNeighborhood_placesInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -3800,6 +3861,7 @@ export type propertiesCreateWithoutPaymentsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -3854,6 +3916,7 @@ export type propertiesUncheckedCreateWithoutPaymentsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -3924,6 +3987,7 @@ export type propertiesUpdateWithoutPaymentsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -3978,6 +4042,7 @@ export type propertiesUncheckedUpdateWithoutPaymentsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -4032,6 +4097,7 @@ export type propertiesCreateWithoutPricing_analyticsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -4086,6 +4152,7 @@ export type propertiesUncheckedCreateWithoutPricing_analyticsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -4156,6 +4223,7 @@ export type propertiesUpdateWithoutPricing_analyticsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -4210,6 +4278,7 @@ export type propertiesUncheckedUpdateWithoutPricing_analyticsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -4264,6 +4333,7 @@ export type propertiesCreateWithoutPricing_suggestionsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -4318,6 +4388,7 @@ export type propertiesUncheckedCreateWithoutPricing_suggestionsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -4388,6 +4459,7 @@ export type propertiesUpdateWithoutPricing_suggestionsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -4442,6 +4514,7 @@ export type propertiesUncheckedUpdateWithoutPricing_suggestionsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -4496,6 +4569,7 @@ export type propertiesCreateWithoutProperty_adsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -4550,6 +4624,7 @@ export type propertiesUncheckedCreateWithoutProperty_adsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -4620,6 +4695,7 @@ export type propertiesUpdateWithoutProperty_adsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -4674,6 +4750,7 @@ export type propertiesUncheckedUpdateWithoutProperty_adsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -4728,6 +4805,7 @@ export type propertiesCreateWithoutProperty_ratingsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -4782,6 +4860,7 @@ export type propertiesUncheckedCreateWithoutProperty_ratingsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -4852,6 +4931,7 @@ export type propertiesUpdateWithoutProperty_ratingsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -4906,6 +4986,7 @@ export type propertiesUncheckedUpdateWithoutProperty_ratingsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -4960,6 +5041,7 @@ export type propertiesCreateWithoutProperty_rulesInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -5014,6 +5096,7 @@ export type propertiesUncheckedCreateWithoutProperty_rulesInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -5084,6 +5167,7 @@ export type propertiesUpdateWithoutProperty_rulesInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -5138,6 +5222,7 @@ export type propertiesUncheckedUpdateWithoutProperty_rulesInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -5192,6 +5277,7 @@ export type propertiesCreateWithoutProperty_similarities_property_similarities_p
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -5246,6 +5332,7 @@ export type propertiesUncheckedCreateWithoutProperty_similarities_property_simil
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -5305,6 +5392,7 @@ export type propertiesCreateWithoutProperty_similarities_property_similarities_s
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -5359,6 +5447,7 @@ export type propertiesUncheckedCreateWithoutProperty_similarities_property_simil
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -5429,6 +5518,7 @@ export type propertiesUpdateWithoutProperty_similarities_property_similarities_p
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -5483,6 +5573,7 @@ export type propertiesUncheckedUpdateWithoutProperty_similarities_property_simil
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -5548,6 +5639,7 @@ export type propertiesUpdateWithoutProperty_similarities_property_similarities_s
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -5602,6 +5694,7 @@ export type propertiesUncheckedUpdateWithoutProperty_similarities_property_simil
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -5656,6 +5749,7 @@ export type propertiesCreateWithoutProperty_tagsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -5710,6 +5804,7 @@ export type propertiesUncheckedCreateWithoutProperty_tagsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -5780,6 +5875,7 @@ export type propertiesUpdateWithoutProperty_tagsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -5834,6 +5930,7 @@ export type propertiesUncheckedUpdateWithoutProperty_tagsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -5888,6 +5985,7 @@ export type propertiesCreateWithoutReferralsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -5942,6 +6040,7 @@ export type propertiesUncheckedCreateWithoutReferralsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -6012,6 +6111,7 @@ export type propertiesUpdateWithoutReferralsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -6066,6 +6166,7 @@ export type propertiesUncheckedUpdateWithoutReferralsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -6120,6 +6221,7 @@ export type propertiesCreateWithoutReviewsInput = {
   referrals?: Prisma.referralsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -6174,6 +6276,7 @@ export type propertiesUncheckedCreateWithoutReviewsInput = {
   referrals?: Prisma.referralsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -6244,6 +6347,7 @@ export type propertiesUpdateWithoutReviewsInput = {
   referrals?: Prisma.referralsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -6296,6 +6400,243 @@ export type propertiesUncheckedUpdateWithoutReviewsInput = {
   property_similarities_property_similarities_similar_property_idTopoproperties?: Prisma.property_similaritiesUncheckedUpdateManyWithoutSimilar_propertiesNestedInput
   property_tags?: Prisma.property_tagsUncheckedUpdateManyWithoutPropertiesNestedInput
   referrals?: Prisma.referralsUncheckedUpdateManyWithoutPropertiesNestedInput
+  seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
+  units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
+  user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
+  wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
+}
+
+export type propertiesCreateWithoutRoomsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  address: string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
+  base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PropertyStatus
+  amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: boolean
+  is_featured?: boolean | null
+  gps_verified?: boolean
+  featured_until?: Date | string | null
+  ical_export_token?: string | null
+  ical_import_url?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutPropertiesInput
+  bookings?: Prisma.bookingsCreateNestedManyWithoutPropertiesInput
+  chat_rooms?: Prisma.chat_roomsCreateNestedManyWithoutPropertiesInput
+  favorites?: Prisma.favoritesCreateNestedManyWithoutPropertiesInput
+  group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutPropertiesInput
+  inspections?: Prisma.inspectionsCreateNestedManyWithoutPropertiesInput
+  maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutPropertiesInput
+  nearby_places?: Prisma.nearby_placesCreateNestedManyWithoutPropertiesInput
+  neighborhood_insights?: Prisma.neighborhood_insightsCreateNestedManyWithoutPropertiesInput
+  neighborhood_places?: Prisma.neighborhood_placesCreateNestedManyWithoutPropertiesInput
+  payments?: Prisma.paymentsCreateNestedManyWithoutPropertiesInput
+  pricing_analytics?: Prisma.pricing_analyticsCreateNestedManyWithoutPropertiesInput
+  pricing_suggestions?: Prisma.pricing_suggestionsCreateNestedManyWithoutPropertiesInput
+  users: Prisma.usersCreateNestedOneWithoutPropertiesInput
+  property_ads?: Prisma.property_adsCreateNestedManyWithoutPropertiesInput
+  property_ratings?: Prisma.property_ratingsCreateNestedOneWithoutPropertiesInput
+  property_rules?: Prisma.property_rulesCreateNestedManyWithoutPropertiesInput
+  property_similarities_property_similarities_property_idTopoproperties?: Prisma.property_similaritiesCreateNestedManyWithoutPropertiesInput
+  property_similarities_property_similarities_similar_property_idTopoproperties?: Prisma.property_similaritiesCreateNestedManyWithoutSimilar_propertiesInput
+  property_tags?: Prisma.property_tagsCreateNestedManyWithoutPropertiesInput
+  referrals?: Prisma.referralsCreateNestedManyWithoutPropertiesInput
+  reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
+  seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
+  units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
+  wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
+}
+
+export type propertiesUncheckedCreateWithoutRoomsInput = {
+  id?: string
+  owner_id: string
+  name: string
+  description?: string | null
+  address: string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  type: $Enums.PropertyType
+  gender_type?: $Enums.GenderType | null
+  rental_period?: $Enums.RentalPeriod | null
+  base_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PropertyStatus
+  amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: boolean
+  is_featured?: boolean | null
+  gps_verified?: boolean
+  featured_until?: Date | string | null
+  ical_export_token?: string | null
+  ical_import_url?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutPropertiesInput
+  bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutPropertiesInput
+  chat_rooms?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutPropertiesInput
+  favorites?: Prisma.favoritesUncheckedCreateNestedManyWithoutPropertiesInput
+  group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutPropertiesInput
+  inspections?: Prisma.inspectionsUncheckedCreateNestedManyWithoutPropertiesInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutPropertiesInput
+  nearby_places?: Prisma.nearby_placesUncheckedCreateNestedManyWithoutPropertiesInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedCreateNestedManyWithoutPropertiesInput
+  neighborhood_places?: Prisma.neighborhood_placesUncheckedCreateNestedManyWithoutPropertiesInput
+  payments?: Prisma.paymentsUncheckedCreateNestedManyWithoutPropertiesInput
+  pricing_analytics?: Prisma.pricing_analyticsUncheckedCreateNestedManyWithoutPropertiesInput
+  pricing_suggestions?: Prisma.pricing_suggestionsUncheckedCreateNestedManyWithoutPropertiesInput
+  property_ads?: Prisma.property_adsUncheckedCreateNestedManyWithoutPropertiesInput
+  property_ratings?: Prisma.property_ratingsUncheckedCreateNestedOneWithoutPropertiesInput
+  property_rules?: Prisma.property_rulesUncheckedCreateNestedManyWithoutPropertiesInput
+  property_similarities_property_similarities_property_idTopoproperties?: Prisma.property_similaritiesUncheckedCreateNestedManyWithoutPropertiesInput
+  property_similarities_property_similarities_similar_property_idTopoproperties?: Prisma.property_similaritiesUncheckedCreateNestedManyWithoutSimilar_propertiesInput
+  property_tags?: Prisma.property_tagsUncheckedCreateNestedManyWithoutPropertiesInput
+  referrals?: Prisma.referralsUncheckedCreateNestedManyWithoutPropertiesInput
+  reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
+  seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
+  units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
+  wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
+}
+
+export type propertiesCreateOrConnectWithoutRoomsInput = {
+  where: Prisma.propertiesWhereUniqueInput
+  create: Prisma.XOR<Prisma.propertiesCreateWithoutRoomsInput, Prisma.propertiesUncheckedCreateWithoutRoomsInput>
+}
+
+export type propertiesUpsertWithoutRoomsInput = {
+  update: Prisma.XOR<Prisma.propertiesUpdateWithoutRoomsInput, Prisma.propertiesUncheckedUpdateWithoutRoomsInput>
+  create: Prisma.XOR<Prisma.propertiesCreateWithoutRoomsInput, Prisma.propertiesUncheckedCreateWithoutRoomsInput>
+  where?: Prisma.propertiesWhereInput
+}
+
+export type propertiesUpdateToOneWithWhereWithoutRoomsInput = {
+  where?: Prisma.propertiesWhereInput
+  data: Prisma.XOR<Prisma.propertiesUpdateWithoutRoomsInput, Prisma.propertiesUncheckedUpdateWithoutRoomsInput>
+}
+
+export type propertiesUpdateWithoutRoomsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
+  base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_featured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  gps_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featured_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ical_export_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ical_import_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  booking_requests?: Prisma.booking_requestsUpdateManyWithoutPropertiesNestedInput
+  bookings?: Prisma.bookingsUpdateManyWithoutPropertiesNestedInput
+  chat_rooms?: Prisma.chat_roomsUpdateManyWithoutPropertiesNestedInput
+  favorites?: Prisma.favoritesUpdateManyWithoutPropertiesNestedInput
+  group_bookings?: Prisma.group_bookingsUpdateManyWithoutPropertiesNestedInput
+  inspections?: Prisma.inspectionsUpdateManyWithoutPropertiesNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutPropertiesNestedInput
+  nearby_places?: Prisma.nearby_placesUpdateManyWithoutPropertiesNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUpdateManyWithoutPropertiesNestedInput
+  neighborhood_places?: Prisma.neighborhood_placesUpdateManyWithoutPropertiesNestedInput
+  payments?: Prisma.paymentsUpdateManyWithoutPropertiesNestedInput
+  pricing_analytics?: Prisma.pricing_analyticsUpdateManyWithoutPropertiesNestedInput
+  pricing_suggestions?: Prisma.pricing_suggestionsUpdateManyWithoutPropertiesNestedInput
+  users?: Prisma.usersUpdateOneRequiredWithoutPropertiesNestedInput
+  property_ads?: Prisma.property_adsUpdateManyWithoutPropertiesNestedInput
+  property_ratings?: Prisma.property_ratingsUpdateOneWithoutPropertiesNestedInput
+  property_rules?: Prisma.property_rulesUpdateManyWithoutPropertiesNestedInput
+  property_similarities_property_similarities_property_idTopoproperties?: Prisma.property_similaritiesUpdateManyWithoutPropertiesNestedInput
+  property_similarities_property_similarities_similar_property_idTopoproperties?: Prisma.property_similaritiesUpdateManyWithoutSimilar_propertiesNestedInput
+  property_tags?: Prisma.property_tagsUpdateManyWithoutPropertiesNestedInput
+  referrals?: Prisma.referralsUpdateManyWithoutPropertiesNestedInput
+  reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
+  seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
+  units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
+  wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
+}
+
+export type propertiesUncheckedUpdateWithoutRoomsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  owner_id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  gender_type?: Prisma.NullableEnumGenderTypeFieldUpdateOperationsInput | $Enums.GenderType | null
+  rental_period?: Prisma.NullableEnumRentalPeriodFieldUpdateOperationsInput | $Enums.RentalPeriod | null
+  base_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packages?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_featured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  gps_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featured_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ical_export_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ical_import_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutPropertiesNestedInput
+  bookings?: Prisma.bookingsUncheckedUpdateManyWithoutPropertiesNestedInput
+  chat_rooms?: Prisma.chat_roomsUncheckedUpdateManyWithoutPropertiesNestedInput
+  favorites?: Prisma.favoritesUncheckedUpdateManyWithoutPropertiesNestedInput
+  group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutPropertiesNestedInput
+  inspections?: Prisma.inspectionsUncheckedUpdateManyWithoutPropertiesNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutPropertiesNestedInput
+  nearby_places?: Prisma.nearby_placesUncheckedUpdateManyWithoutPropertiesNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedUpdateManyWithoutPropertiesNestedInput
+  neighborhood_places?: Prisma.neighborhood_placesUncheckedUpdateManyWithoutPropertiesNestedInput
+  payments?: Prisma.paymentsUncheckedUpdateManyWithoutPropertiesNestedInput
+  pricing_analytics?: Prisma.pricing_analyticsUncheckedUpdateManyWithoutPropertiesNestedInput
+  pricing_suggestions?: Prisma.pricing_suggestionsUncheckedUpdateManyWithoutPropertiesNestedInput
+  property_ads?: Prisma.property_adsUncheckedUpdateManyWithoutPropertiesNestedInput
+  property_ratings?: Prisma.property_ratingsUncheckedUpdateOneWithoutPropertiesNestedInput
+  property_rules?: Prisma.property_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
+  property_similarities_property_similarities_property_idTopoproperties?: Prisma.property_similaritiesUncheckedUpdateManyWithoutPropertiesNestedInput
+  property_similarities_property_similarities_similar_property_idTopoproperties?: Prisma.property_similaritiesUncheckedUpdateManyWithoutSimilar_propertiesNestedInput
+  property_tags?: Prisma.property_tagsUncheckedUpdateManyWithoutPropertiesNestedInput
+  referrals?: Prisma.referralsUncheckedUpdateManyWithoutPropertiesNestedInput
+  reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
@@ -6352,6 +6693,7 @@ export type propertiesCreateWithoutSeasonal_pricing_rulesInput = {
   referrals?: Prisma.referralsCreateNestedManyWithoutPropertiesInput
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -6406,6 +6748,7 @@ export type propertiesUncheckedCreateWithoutSeasonal_pricing_rulesInput = {
   referrals?: Prisma.referralsUncheckedCreateNestedManyWithoutPropertiesInput
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -6476,6 +6819,7 @@ export type propertiesUpdateWithoutSeasonal_pricing_rulesInput = {
   referrals?: Prisma.referralsUpdateManyWithoutPropertiesNestedInput
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -6530,6 +6874,7 @@ export type propertiesUncheckedUpdateWithoutSeasonal_pricing_rulesInput = {
   referrals?: Prisma.referralsUncheckedUpdateManyWithoutPropertiesNestedInput
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -6584,6 +6929,7 @@ export type propertiesCreateWithoutUnitsInput = {
   referrals?: Prisma.referralsCreateNestedManyWithoutPropertiesInput
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -6638,6 +6984,7 @@ export type propertiesUncheckedCreateWithoutUnitsInput = {
   referrals?: Prisma.referralsUncheckedCreateNestedManyWithoutPropertiesInput
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -6708,6 +7055,7 @@ export type propertiesUpdateWithoutUnitsInput = {
   referrals?: Prisma.referralsUpdateManyWithoutPropertiesNestedInput
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -6762,6 +7110,7 @@ export type propertiesUncheckedUpdateWithoutUnitsInput = {
   referrals?: Prisma.referralsUncheckedUpdateManyWithoutPropertiesNestedInput
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -6817,6 +7166,7 @@ export type propertiesCreateWithoutUser_contractsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
 
@@ -6871,6 +7221,7 @@ export type propertiesUncheckedCreateWithoutUser_contractsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
 
@@ -6941,6 +7292,7 @@ export type propertiesUpdateWithoutUser_contractsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
 
@@ -6995,6 +7347,7 @@ export type propertiesUncheckedUpdateWithoutUser_contractsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
 
@@ -7048,6 +7401,7 @@ export type propertiesCreateWithoutUsersInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsCreateNestedManyWithoutPropertiesInput
 }
@@ -7102,6 +7456,7 @@ export type propertiesUncheckedCreateWithoutUsersInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
   wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutPropertiesInput
 }
@@ -7216,6 +7571,7 @@ export type propertiesCreateWithoutWishlistsInput = {
   reviews?: Prisma.reviewsCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsCreateNestedManyWithoutPropertiesInput
 }
 
@@ -7270,6 +7626,7 @@ export type propertiesUncheckedCreateWithoutWishlistsInput = {
   reviews?: Prisma.reviewsUncheckedCreateNestedManyWithoutPropertiesInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedCreateNestedManyWithoutPropertiesInput
   units?: Prisma.unitsUncheckedCreateNestedManyWithoutPropertiesInput
+  rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutPropertiesInput
   user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutPropertiesInput
 }
 
@@ -7340,6 +7697,7 @@ export type propertiesUpdateWithoutWishlistsInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
 }
 
@@ -7394,6 +7752,7 @@ export type propertiesUncheckedUpdateWithoutWishlistsInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
 
@@ -7476,6 +7835,7 @@ export type propertiesUpdateWithoutUsersInput = {
   reviews?: Prisma.reviewsUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUpdateManyWithoutPropertiesNestedInput
 }
@@ -7530,6 +7890,7 @@ export type propertiesUncheckedUpdateWithoutUsersInput = {
   reviews?: Prisma.reviewsUncheckedUpdateManyWithoutPropertiesNestedInput
   seasonal_pricing_rules?: Prisma.seasonal_pricing_rulesUncheckedUpdateManyWithoutPropertiesNestedInput
   units?: Prisma.unitsUncheckedUpdateManyWithoutPropertiesNestedInput
+  rooms?: Prisma.roomsUncheckedUpdateManyWithoutPropertiesNestedInput
   user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutPropertiesNestedInput
   wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutPropertiesNestedInput
 }
@@ -7591,6 +7952,7 @@ export type PropertiesCountOutputType = {
   reviews: number
   seasonal_pricing_rules: number
   units: number
+  rooms: number
   user_contracts: number
   wishlists: number
 }
@@ -7618,6 +7980,7 @@ export type PropertiesCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   reviews?: boolean | PropertiesCountOutputTypeCountReviewsArgs
   seasonal_pricing_rules?: boolean | PropertiesCountOutputTypeCountSeasonal_pricing_rulesArgs
   units?: boolean | PropertiesCountOutputTypeCountUnitsArgs
+  rooms?: boolean | PropertiesCountOutputTypeCountRoomsArgs
   user_contracts?: boolean | PropertiesCountOutputTypeCountUser_contractsArgs
   wishlists?: boolean | PropertiesCountOutputTypeCountWishlistsArgs
 }
@@ -7789,6 +8152,13 @@ export type PropertiesCountOutputTypeCountUnitsArgs<ExtArgs extends runtime.Type
 /**
  * PropertiesCountOutputType without action
  */
+export type PropertiesCountOutputTypeCountRoomsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.roomsWhereInput
+}
+
+/**
+ * PropertiesCountOutputType without action
+ */
 export type PropertiesCountOutputTypeCountUser_contractsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.user_contractsWhereInput
 }
@@ -7853,6 +8223,7 @@ export type propertiesSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   reviews?: boolean | Prisma.properties$reviewsArgs<ExtArgs>
   seasonal_pricing_rules?: boolean | Prisma.properties$seasonal_pricing_rulesArgs<ExtArgs>
   units?: boolean | Prisma.properties$unitsArgs<ExtArgs>
+  rooms?: boolean | Prisma.properties$roomsArgs<ExtArgs>
   user_contracts?: boolean | Prisma.properties$user_contractsArgs<ExtArgs>
   wishlists?: boolean | Prisma.properties$wishlistsArgs<ExtArgs>
   _count?: boolean | Prisma.PropertiesCountOutputTypeDefaultArgs<ExtArgs>
@@ -7976,6 +8347,7 @@ export type propertiesInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   reviews?: boolean | Prisma.properties$reviewsArgs<ExtArgs>
   seasonal_pricing_rules?: boolean | Prisma.properties$seasonal_pricing_rulesArgs<ExtArgs>
   units?: boolean | Prisma.properties$unitsArgs<ExtArgs>
+  rooms?: boolean | Prisma.properties$roomsArgs<ExtArgs>
   user_contracts?: boolean | Prisma.properties$user_contractsArgs<ExtArgs>
   wishlists?: boolean | Prisma.properties$wishlistsArgs<ExtArgs>
   _count?: boolean | Prisma.PropertiesCountOutputTypeDefaultArgs<ExtArgs>
@@ -8014,6 +8386,7 @@ export type $propertiesPayload<ExtArgs extends runtime.Types.Extensions.Internal
     reviews: Prisma.$reviewsPayload<ExtArgs>[]
     seasonal_pricing_rules: Prisma.$seasonal_pricing_rulesPayload<ExtArgs>[]
     units: Prisma.$unitsPayload<ExtArgs>[]
+    rooms: Prisma.$roomsPayload<ExtArgs>[]
     user_contracts: Prisma.$user_contractsPayload<ExtArgs>[]
     wishlists: Prisma.$wishlistsPayload<ExtArgs>[]
   }
@@ -8463,6 +8836,7 @@ export interface Prisma__propertiesClient<T, Null = never, ExtArgs extends runti
   reviews<T extends Prisma.properties$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.properties$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   seasonal_pricing_rules<T extends Prisma.properties$seasonal_pricing_rulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.properties$seasonal_pricing_rulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$seasonal_pricing_rulesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   units<T extends Prisma.properties$unitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.properties$unitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$unitsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rooms<T extends Prisma.properties$roomsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.properties$roomsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$roomsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user_contracts<T extends Prisma.properties$user_contractsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.properties$user_contractsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$user_contractsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   wishlists<T extends Prisma.properties$wishlistsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.properties$wishlistsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$wishlistsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -9466,6 +9840,30 @@ export type properties$unitsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.UnitsScalarFieldEnum | Prisma.UnitsScalarFieldEnum[]
+}
+
+/**
+ * properties.rooms
+ */
+export type properties$roomsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the rooms
+   */
+  select?: Prisma.roomsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the rooms
+   */
+  omit?: Prisma.roomsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.roomsInclude<ExtArgs> | null
+  where?: Prisma.roomsWhereInput
+  orderBy?: Prisma.roomsOrderByWithRelationInput | Prisma.roomsOrderByWithRelationInput[]
+  cursor?: Prisma.roomsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoomsScalarFieldEnum | Prisma.RoomsScalarFieldEnum[]
 }
 
 /**

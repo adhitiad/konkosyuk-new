@@ -303,6 +303,11 @@ export type reward_redemptions = Prisma.reward_redemptionsModel
  */
 export type rewards = Prisma.rewardsModel
 /**
+ * Model rooms
+ * 
+ */
+export type rooms = Prisma.roomsModel
+/**
  * Model room_facilities
  * 
  */

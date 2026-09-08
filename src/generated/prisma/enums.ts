@@ -179,6 +179,15 @@ export const UnitStatus = {
 export type UnitStatus = (typeof UnitStatus)[keyof typeof UnitStatus]
 
 
+export const RoomStatus = {
+  available: 'available',
+  booked: 'booked',
+  maintenance: 'maintenance'
+} as const
+
+export type RoomStatus = (typeof RoomStatus)[keyof typeof RoomStatus]
+
+
 export const TicketStatus = {
   reported: 'reported',
   assigned: 'assigned',
