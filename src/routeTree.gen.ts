@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as CariRouteImport } from './routes/cari'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PengaturanRouteImport } from './routes/pengaturan'
 import { Route as PropertiesRouteImport } from './routes/properties'
@@ -53,6 +54,11 @@ const AuthRoute = AuthRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CariRoute = CariRouteImport.update({
+  id: '/cari',
+  path: '/cari',
   getParentRoute: () => rootRouteImport,
 } as any)
 const McpRoute = McpRouteImport.update({
@@ -209,6 +215,7 @@ const ApiWebhooksQstashSplatRoute = ApiWebhooksQstashSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/cari': typeof CariRoute
   '/mcp': typeof McpRoute
   '/pengaturan': typeof PengaturanRoute
   '/properties': typeof PropertiesRouteWithChildren
@@ -241,6 +248,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/cari': typeof CariRoute
   '/mcp': typeof McpRoute
   '/pengaturan': typeof PengaturanRoute
   '/properties': typeof PropertiesRouteWithChildren
@@ -273,6 +281,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/about': typeof AboutRoute
+  '/cari': typeof CariRoute
   '/mcp': typeof McpRoute
   '/pengaturan': typeof PengaturanRoute
   '/properties': typeof PropertiesRouteWithChildren
@@ -307,6 +316,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/cari'
     | '/mcp'
     | '/pengaturan'
     | '/properties'
@@ -339,6 +349,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/cari'
     | '/mcp'
     | '/pengaturan'
     | '/properties'
@@ -370,6 +381,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_auth'
     | '/about'
+    | '/cari'
     | '/mcp'
     | '/pengaturan'
     | '/properties'
@@ -404,6 +416,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
   AboutRoute: typeof AboutRoute
+  CariRoute: typeof CariRoute
   McpRoute: typeof McpRoute
   PengaturanRoute: typeof PengaturanRoute
   PropertiesRoute: typeof PropertiesRouteWithChildren
@@ -440,6 +453,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cari': {
+      id: '/cari'
+      path: '/cari'
+      fullPath: '/cari'
+      preLoaderRoute: typeof CariRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mcp': {
@@ -738,6 +758,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
   AboutRoute: AboutRoute,
+  CariRoute: CariRoute,
   McpRoute: McpRoute,
   PengaturanRoute: PengaturanRoute,
   PropertiesRoute: PropertiesRouteWithChildren,

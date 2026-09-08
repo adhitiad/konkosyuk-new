@@ -4,7 +4,7 @@ import { MapPin, ChevronLeft, Bed, Ruler, Zap, Armchair, X } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 
 import { orpc } from '#/orpc/client'
 import { authClient } from '#/lib/auth-client'

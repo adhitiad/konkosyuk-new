@@ -189,3 +189,13 @@ export const PropertyAvailabilityResult = z.object({
   total_units: z.number(),
   units: z.array(UnitAvailabilityResult),
 })
+
+export const RoomSearchSchema = z.object({
+  city: z.string().optional(),
+  type: PropertyTypeSchema.optional(),
+  price_min: z.number().nonnegative().optional(),
+  price_max: z.number().nonnegative().optional(),
+  facilities: z.array(z.string()).optional(),
+  search: z.string().optional(),
+  limit: z.number().int().min(1).max(100).default(50),
+})

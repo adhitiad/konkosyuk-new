@@ -163,6 +163,102 @@ export const listFeaturedProperties = os
     })
   })
 
+export const searchRooms = os
+  .input(
+    z.object({
+      city: z.string().optional(),
+      type: PropertyTypeSchema.optional(),
+      price_min: z.number().nonnegative().optional(),
+      price_max: z.number().nonnegative().optional(),
+      facilities: z.array(z.string()).optional(),
+      search: z.string().optional(),
+      limit: z.number().int().min(1).max(100).default(50),
+    }),
+  )
+  .handler(async ({ input }) => {
+    const where: Prisma.propertiesWhereInput = {
+      is_active: true,
+      ...(input.type ? { type: input.type } : {}),
+      ...(input.city
+        ? { city: { contains: input.city, mode: 'insensitive' } }
+        : {}),
+      ...(input.search
+        ? {
+            OR: [
+              { name: { contains: input.search, mode: 'insensitive' } },
+              { address: { contains: input.search, mode: 'insensitive' } },
+              { city: { contains: input.search, mode: 'insensitive' } },
+            ],
+          }
+        : {}),
+    }
+
+    const properties = await prisma.properties.findMany({
+      where,
+      include: {
+        rooms: {
+          where: {
+            ...(input.price_min !== undefined || input.price_max !== undefined
+              ? {
+                  price: {
+                    ...(input.price_min !== undefined
+                      ? { gte: input.price_min }
+                      : {}),
+                    ...(input.price_max !== undefined
+                      ? { lte: input.price_max }
+                      : {}),
+                  },
+                }
+              : {}),
+          },
+        },
+      },
+      take: input.limit,
+    })
+
+    const rows = properties.flatMap((property) => {
+      const rooms = property.rooms.filter((room) => {
+        if (!input.facilities || input.facilities.length === 0) {
+          return true
+        }
+        const roomFacilities: string[] = Array.isArray(room.facilities)
+          ? (room.facilities as unknown as string[])
+          : []
+        return input.facilities.every((facility) =>
+          roomFacilities.includes(facility),
+        )
+      })
+
+      const images: string[] = Array.isArray(property.images)
+        ? property.images.map(String)
+        : []
+
+      return rooms.map((room) => ({
+        id: room.id,
+        name: room.name,
+        price: Number(room.price),
+        status: room.status,
+        facilities: Array.isArray(room.facilities)
+          ? (room.facilities as unknown as string[])
+          : [],
+        property_id: property.id,
+        property_name: property.name,
+        property_city: property.city,
+        property_type: property.type,
+        property_address: property.address,
+        property_images: images,
+        property_base_price: property.base_price
+          ? Number(property.base_price)
+          : null,
+      }))
+    })
+
+    return {
+      rows,
+      total: rows.length,
+    }
+  })
+
 export const getProperty = os
   .input(z.object({ id: z.string().uuid() }))
   .handler(async ({ input }) => {

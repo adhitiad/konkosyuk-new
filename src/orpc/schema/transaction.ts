@@ -19,6 +19,15 @@ export const MetodePembayaranSchema = z.enum([
   'VA',
 ])
 
+export const PaymentChannelSchema = z.enum([
+  'QRIS_DYNAMIC',
+  'QRIS_STATIC',
+  'E_WALLET',
+  'VA',
+  'MERCHANT',
+  'DIRECT_TRANSFER',
+])
+
 export const StatusPembayaranSchema = z.enum(['PENDING', 'BERHASIL', 'GAGAL'])
 
 export const StatusKycSchema = z.enum(['MENUNGGU', 'TERVERIFIKASI', 'DITOLAK'])
@@ -108,4 +117,30 @@ export const prosesRefundDPSchema = z.object({
 
 export const getRefundStatusSchema = z.object({
   booking_id: z.string().uuid(),
+})
+
+export const createPaymentLinkSchema = z.object({
+  booking_id: z.string().uuid(),
+  amount: z.number().min(0),
+  method: PaymentChannelSchema,
+  provider: z.string().min(1).max(120).optional(),
+  channel: z.string().min(1).max(120).optional(),
+  expired_at: z.coerce.date().optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
+})
+
+export const getPaymentStatusSchema = z.object({
+  transaction_id: z.string().uuid().optional(),
+  booking_id: z.string().uuid().optional(),
+})
+
+export const PaymentWebhookSchema = z.object({
+  event_id: z.string().min(1),
+  transaction_id: z.string().uuid(),
+  status: z.enum(['PENDING', 'BERHASIL', 'GAGAL', 'DIBATALKAN']),
+  amount: z.number().min(0).optional(),
+  paid_at: z.coerce.date().optional(),
+  provider: z.string().min(1).optional(),
+  channel: z.string().min(1).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 })

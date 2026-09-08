@@ -12,6 +12,7 @@ export type AuditAction =
   | 'verify_payment'
   | 'approve_booking'
   | 'reject_booking'
+  | 'create_payment_link'
 
 type LogAuditInput = {
   adminId: string

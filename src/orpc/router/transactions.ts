@@ -3,6 +3,7 @@ import { ORPCError } from '@orpc/server'
 import { os } from '#/orpc/server'
 import { prisma } from '#/db'
 import { auth } from '#/lib/auth'
+import type { Prisma } from '#/generated/prisma/client.js'
 import {
   createPayment as createGatewayPayment,
   refundPayment as refundGatewayPayment,
@@ -30,6 +31,9 @@ import {
   getRefundStatusSchema,
   refundSchema,
   prosesRefundDPSchema,
+  createPaymentLinkSchema,
+  getPaymentStatusSchema,
+  PaymentWebhookSchema,
 } from '#/orpc/schema/transaction'
 
 const withSession = os.use(async ({ context, next }) => {
@@ -866,6 +870,313 @@ export const getRefundStatus = withSession
       statusRefundDP: booking.statusRefundDP,
       jumlahDP: decimalStr(booking.jumlahDP),
       transaksiRefund,
+    }
+  })
+
+export const createPaymentLink = withSession
+  .input(createPaymentLinkSchema)
+  .handler(async ({ input, context }) => {
+    const booking = await loadBooking(input.booking_id)
+    if (!booking) {
+      throw new ORPCError('NOT_FOUND', { message: 'Booking not found' })
+    }
+    if (!canAccessBooking(booking, context.user)) {
+      throw new ORPCError('FORBIDDEN', {
+        message: 'Not authorized to create payment for this booking',
+      })
+    }
+
+    const expiredAt =
+      input.expired_at ?? new Date(Date.now() + 24 * 60 * 60 * 1000)
+
+    const referensiGateway = `${input.method.toLowerCase()}_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`
+
+    const transaction = await prisma.paymentTransaction.create({
+      data: {
+        tipeTransaksi: 'DP',
+        jumlah: input.amount,
+        status: 'PENDING',
+        referensiGateway,
+        metadata: {
+          provider: input.provider ?? 'mock_gateway',
+          channel: input.channel ?? input.method,
+          method: input.method,
+          booking_id: input.booking_id,
+          created_by: context.user.id,
+          expired_at: expiredAt.toISOString(),
+          simulated: true,
+          ...input.metadata,
+        },
+      },
+    })
+
+    const payment = await prisma.payment.create({
+      data: {
+        booking_id: input.booking_id,
+        jumlah_bayar: input.amount,
+        metode_pembayaran:
+          input.method === 'QRIS_DYNAMIC' || input.method === 'QRIS_STATIC'
+            ? 'TRANSFER'
+            : input.method === 'VA'
+              ? 'VA'
+              : input.method === 'E_WALLET'
+                ? 'E_WALLET'
+                : 'TRANSFER',
+        status_pembayaran: 'PENDING',
+        transaction_id: transaction.id,
+        provider: input.provider ?? 'mock_gateway',
+        metadata: {
+          channel: input.channel,
+          method: input.method,
+          referensiGateway,
+          expired_at: expiredAt.toISOString(),
+          ...input.metadata,
+        },
+      },
+      include: { bookings: true },
+    })
+
+    const paymentLink = `/pay/${transaction.id}?ref=${referensiGateway}`
+
+    await logAudit({
+      adminId: context.user.id,
+      action: 'create_payment_link',
+      targetType: 'payment',
+      targetId: payment.id,
+      details: {
+        method: input.method,
+        channel: input.channel,
+        referensiGateway,
+      },
+    })
+
+    return {
+      payment_id: payment.id,
+      transaction_id: transaction.id,
+      referensiGateway,
+      payment_link: paymentLink,
+      amount: decimalStr(transaction.jumlah),
+      status: transaction.status,
+      method: input.method,
+      channel: input.channel,
+      expired_at: expiredAt.toISOString(),
+      provider: input.provider ?? 'mock_gateway',
+    }
+  })
+
+export const getPaymentStatus = withSession
+  .input(getPaymentStatusSchema)
+  .handler(async ({ input, context }) => {
+    if (!input.transaction_id && !input.booking_id) {
+      throw new ORPCError('BAD_REQUEST', {
+        message: 'transaction_id or booking_id is required',
+      })
+    }
+
+    let transaction = null
+    if (input.transaction_id) {
+      transaction = await prisma.paymentTransaction.findUnique({
+        where: { id: input.transaction_id },
+      })
+    } else if (input.booking_id) {
+      const booking = await loadBooking(input.booking_id)
+      if (!booking) {
+        throw new ORPCError('NOT_FOUND', { message: 'Booking not found' })
+      }
+      if (!canAccessBooking(booking, context.user)) {
+        throw new ORPCError('FORBIDDEN', {
+          message: 'Not authorized to view this payment',
+        })
+      }
+      transaction = await prisma.paymentTransaction.findFirst({
+        where: {
+          metadata: {
+            path: ['booking_id'],
+            equals: input.booking_id,
+          },
+        },
+        orderBy: { createdAt: 'desc' },
+      })
+    }
+
+    if (!transaction) {
+      throw new ORPCError('NOT_FOUND', { message: 'Transaction not found' })
+    }
+
+    return {
+      transaction_id: transaction.id,
+      status: transaction.status,
+      referensiGateway: transaction.referensiGateway,
+      amount: decimalStr(transaction.jumlah),
+      metadata: (transaction.metadata ?? {}) as Record<string, unknown>,
+    }
+  })
+
+export const processPaymentWebhook = os
+  .input(PaymentWebhookSchema)
+  .handler(async ({ input }) => {
+    const existingEvent = await prisma.webhook_events.findFirst({
+      where: {
+        provider: input.provider ?? 'qstash',
+        event_id: input.event_id,
+      },
+    })
+
+    if (existingEvent?.processed_at) {
+      return {
+        success: true,
+        idempotent: true,
+        transaction_id: input.transaction_id,
+        status: input.status,
+        message: 'Webhook already processed',
+      }
+    }
+
+    const result = await prisma.$transaction(async (tx) => {
+      const transaction = await tx.paymentTransaction.findUnique({
+        where: { id: input.transaction_id },
+      })
+      if (!transaction) {
+        throw new ORPCError('NOT_FOUND', { message: 'Transaction not found' })
+      }
+
+      const previousStatus = transaction.status
+      const updatedTransaction = await tx.paymentTransaction.update({
+        where: { id: input.transaction_id },
+        data: {
+          status: input.status,
+          metadata: {
+            ...((transaction.metadata ?? {}) as Record<string, unknown>),
+            webhook_status: input.status,
+            webhook_paid_at: input.paid_at?.toISOString() ?? null,
+            webhook_provider: input.provider,
+            webhook_channel: input.channel,
+            ...input.metadata,
+          },
+        },
+      })
+
+      const metadata = (updatedTransaction.metadata ?? {}) as Record<
+        string,
+        unknown
+      >
+      const bookingId = metadata.booking_id as string | undefined
+
+      let updatedPayment = null
+      let updatedBooking = null
+      let updatedPemesanan = null
+
+      if (bookingId) {
+        const booking = await tx.booking.findUnique({
+          where: { id: bookingId },
+          select: { id: true, status_booking: true, unit_id: true },
+        })
+
+        if (booking) {
+          let nextBookingStatus: 'AKTIF' | 'MENUNGGU_PEMBAYARAN_DP' | undefined
+          if (input.status === 'BERHASIL') {
+            nextBookingStatus = 'AKTIF'
+          } else if (input.status === 'GAGAL') {
+            nextBookingStatus = 'MENUNGGU_PEMBAYARAN_DP'
+          }
+
+          if (
+            nextBookingStatus &&
+            booking.status_booking !== nextBookingStatus
+          ) {
+            updatedBooking = await tx.booking.update({
+              where: { id: bookingId },
+              data: {
+                status_booking: nextBookingStatus,
+                ...(input.status === 'BERHASIL'
+                  ? { tanggalBayarDP: input.paid_at ?? new Date() }
+                  : {}),
+              },
+              select: { id: true, status_booking: true },
+            })
+          }
+        }
+
+        updatedPayment = await tx.payment.updateMany({
+          where: {
+            booking_id: bookingId,
+            transaction_id: updatedTransaction.id,
+          },
+          data: {
+            status_pembayaran:
+              input.status === 'BERHASIL'
+                ? 'BERHASIL'
+                : input.status === 'GAGAL'
+                  ? 'GAGAL'
+                  : 'PENDING',
+            paid_at: input.paid_at ?? null,
+          },
+        })
+
+        if (updatedPayment.count > 0) {
+          const pemesanan = await tx.pemesanan.findFirst({
+            where: {
+              property_id: booking ? undefined : undefined,
+              unit_properti_id: booking?.unit_id,
+            },
+          })
+
+          if (pemesanan) {
+            let nextPemesananStatus:
+              'MENUNGGU_PERSETUJUAN' | 'DITERIMA' | undefined
+            if (input.status === 'BERHASIL') {
+              nextPemesananStatus = 'DITERIMA'
+            } else if (input.status === 'GAGAL') {
+              nextPemesananStatus = 'MENUNGGU_PERSETUJUAN'
+            }
+
+            if (
+              nextPemesananStatus &&
+              pemesanan.status !== nextPemesananStatus
+            ) {
+              updatedPemesanan = await tx.pemesanan.update({
+                where: { id: pemesanan.id },
+                data: { status: nextPemesananStatus },
+                select: { id: true, status: true },
+              })
+            }
+          }
+        }
+      }
+
+      await tx.webhook_events.create({
+        data: {
+          provider: input.provider ?? 'qstash',
+          event_id: input.event_id,
+          event_type: 'payment.update',
+          payload: (input.metadata ?? {}) as Prisma.InputJsonValue,
+          signature_valid: true,
+          details: {
+            previous_status: previousStatus,
+            new_status: input.status,
+            transaction_id: input.transaction_id,
+            booking_id: bookingId,
+          },
+          processed_at: new Date(),
+        },
+      })
+
+      return {
+        transaction: updatedTransaction,
+        payment: updatedPayment,
+        booking: updatedBooking,
+        pemesanan: updatedPemesanan,
+      }
+    })
+
+    return {
+      success: true,
+      idempotent: false,
+      transaction_id: input.transaction_id,
+      status: input.status,
+      booking_status: result.booking?.status_booking,
+      pemesanan_status: result.pemesanan?.status,
+      message: 'Payment status updated',
     }
   })
 
