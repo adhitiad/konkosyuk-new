@@ -1,12 +1,20 @@
-import { createFileRoute, Link, useLocation } from '@tanstack/react-router'
+import {
+  createFileRoute,
+  Link,
+  useLocation,
+  useNavigate,
+} from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
-import { ChevronDown, MapPin, Bed } from 'lucide-react'
+import { ChevronDown, MapPin, Bed, Search, X } from 'lucide-react'
 import type { Prisma, PropertyType } from '#/generated/prisma/client'
 import { useState } from 'react'
 
 import { orpc } from '#/orpc/client'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
 import { Badge } from '#/components/ui/badge'
+import { Input } from '#/components/ui/input'
+import { Label } from '#/components/ui/label'
+import { Button } from '#/components/ui/button'
 import {
   Select,
   SelectContent,
@@ -52,11 +60,15 @@ type Property = {
 
 function PropertiesList() {
   const location = useLocation()
+  const navigate = useNavigate()
   const searchParams = new URLSearchParams(location.search)
   const typeParam = searchParams.get('type') ?? undefined
   const cityParam = searchParams.get('city') ?? undefined
   const searchParam = searchParams.get('search') ?? undefined
+  const checkinParam = searchParams.get('checkin') ?? undefined
 
+  const [keyword, setKeyword] = useState(searchParam ?? '')
+  const [city, setCity] = useState(cityParam ?? '')
   const [selectedType, setSelectedType] = useState<PropertyType | undefined>()
   const [selectedLat, setSelectedLat] = useState<number | null>(null)
   const [selectedLng, setSelectedLng] = useState<number | null>(null)
@@ -85,6 +97,24 @@ function PropertiesList() {
       },
     }),
   )
+
+  function onSearch(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const params = new URLSearchParams()
+    if (city.trim()) params.set('city', city.trim())
+    if (keyword.trim()) params.set('search', keyword.trim())
+    if (typeParam) params.set('type', typeParam)
+    if (checkinParam) params.set('checkin', checkinParam)
+    const qs = params.toString()
+    navigate({ to: `/properties${qs ? `?${qs}` : ''}` })
+  }
+
+  function clearFilters() {
+    setKeyword('')
+    setCity('')
+    setSelectedType(undefined)
+    navigate({ to: '/properties' })
+  }
 
   if (isLoading) {
     return (
@@ -136,6 +166,55 @@ function PropertiesList() {
             </button>
           </div>
         </div>
+
+        <form
+          onSubmit={onSearch}
+          className="mt-4 flex flex-col gap-2 sm:flex-row"
+        >
+          <div className="flex flex-1 items-center gap-2 rounded-md border border-neutral-200 px-3 focus-within:ring-1 focus-within:ring-[var(--lagoon-deep)] dark:border-neutral-700">
+            <Search className="h-4 w-4 shrink-0 text-[var(--lagoon-deep)]" />
+            <Label htmlFor="katalog-keyword" className="sr-only">
+              Cari properti
+            </Label>
+            <Input
+              id="katalog-keyword"
+              type="text"
+              placeholder="Nama kos, area, atau kata kunci"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              className="h-auto w-full border-0 bg-transparent p-0 text-sm shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
+            />
+          </div>
+          <div className="flex flex-1 items-center gap-2 rounded-md border border-neutral-200 px-3 focus-within:ring-1 focus-within:ring-[var(--lagoon-deep)] dark:border-neutral-700 sm:max-w-56">
+            <MapPin className="h-4 w-4 shrink-0 text-[var(--lagoon-deep)]" />
+            <Label htmlFor="katalog-city" className="sr-only">
+              Kota
+            </Label>
+            <Input
+              id="katalog-city"
+              type="text"
+              placeholder="Kota"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className="h-auto w-full border-0 bg-transparent p-0 text-sm shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
+            />
+          </div>
+          <Button type="submit" size="sm" className="sm:h-9">
+            Cari
+          </Button>
+          {(searchParam || cityParam) && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="sm:h-9"
+              onClick={clearFilters}
+            >
+              <X className="h-4 w-4" />
+              Hapus filter
+            </Button>
+          )}
+        </form>
 
         {(cityParam || searchParam) && (
           <div className="mt-3 flex flex-wrap gap-2">
@@ -194,12 +273,21 @@ function PropertiesList() {
           ))}
         </div>
       ) : (
-        <div className="py-12 text-center">
+        <div className="flex flex-col items-center gap-3 py-12 text-center">
           <p className="text-sm text-[var(--sea-ink-soft)]">
-            {cityParam || searchParam
+            {cityParam || searchParam || selectedType || typeParam
               ? 'Tidak ada properti yang cocok dengan filter pencarian.'
               : 'Belum ada properti tersedia.'}
           </p>
+          {(cityParam || searchParam || selectedType || typeParam) && (
+            <button
+              onClick={clearFilters}
+              className="inline-flex items-center gap-1 rounded-md border border-neutral-200 px-3 py-1.5 text-sm hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-800"
+            >
+              <X className="h-4 w-4" />
+              Hapus filter
+            </button>
+          )}
         </div>
       )}
     </main>

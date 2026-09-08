@@ -27,6 +27,7 @@ import {
 } from '#/components/ui/dialog'
 import { Textarea } from '#/components/ui/textarea'
 import { Label } from '#/components/ui/label'
+import { TableSkeleton } from '#/components/ui/skeleton-card'
 
 export const Route = createFileRoute('/(protected)/pemilik/dashboard/requests')(
   {
@@ -135,9 +136,17 @@ function BookingRequestsContent() {
 
   if (isLoading) {
     return (
-      <p className="text-sm text-[var(--sea-ink-soft)]">
-        Memuat permintaan booking...
-      </p>
+      <div className="space-y-4">
+        <div className="mb-4">
+          <h2 className="text-lg font-semibold text-[var(--sea-ink)]">
+            Permintaan Booking Masuk
+          </h2>
+          <p className="text-sm text-[var(--sea-ink-soft)]">
+            Memuat permintaan booking...
+          </p>
+        </div>
+        <TableSkeleton rows={4} />
+      </div>
     )
   }
 

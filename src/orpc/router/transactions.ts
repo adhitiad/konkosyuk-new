@@ -10,6 +10,7 @@ import {
 } from '#/lib/payments/mock-gateway.js'
 import { calculateDpAmount } from '#/lib/services/platform-config.js'
 import { scheduleBookingExpiry } from '#/lib/services/booking-expiry.js'
+import { logAudit } from '#/lib/services/audit'
 
 import {
   createBookingSchema,
@@ -175,7 +176,7 @@ export const createPayment = withSession
 
 export const verifyPayment = requireOwnerOrAdmin
   .input(verifyPaymentSchema)
-  .handler(async ({ input }) => {
+  .handler(async ({ input, context }) => {
     const payment = await prisma.payment.findUnique({
       where: { id: input.payment_id },
       include: { bookings: true },
@@ -202,6 +203,14 @@ export const verifyPayment = requireOwnerOrAdmin
         },
       })
     }
+
+    await logAudit({
+      adminId: context.user.id,
+      action: 'verify_payment',
+      targetType: 'payment',
+      targetId: input.payment_id,
+      details: { status_pembayaran: input.status_pembayaran },
+    })
 
     return updated
   })
@@ -238,7 +247,7 @@ export const listKycRequests = withSession.handler(async () => {
 
 export const approveKyc = requireAdmin
   .input(approveKycSchema)
-  .handler(async ({ input }) => {
+  .handler(async ({ input, context }) => {
     const kycRequest = await prisma.kycRequest.findUnique({
       where: { id: input.kyc_request_id },
       select: { id: true, user_id: true },
@@ -275,6 +284,15 @@ export const approveKyc = requireAdmin
       }
 
       return result
+    })
+
+    await logAudit({
+      adminId: context.user.id,
+      action:
+        input.status_kyc === 'TERVERIFIKASI' ? 'approve_kyc' : 'reject_kyc',
+      targetType: 'kyc_request',
+      targetId: input.kyc_request_id,
+      details: { status_kyc: input.status_kyc },
     })
 
     return updated
@@ -579,6 +597,13 @@ export const setujuiBooking = requireOwnerOrAdmin
       select: bookingSelect,
     })
 
+    await logAudit({
+      adminId: context.user.id,
+      action: 'approve_booking',
+      targetType: 'booking',
+      targetId: input.booking_id,
+    })
+
     return serializeBooking(updated)
   })
 
@@ -623,6 +648,14 @@ export const tolakBooking = requireOwnerOrAdmin
       })
 
       return bookingUpdate
+    })
+
+    await logAudit({
+      adminId: context.user.id,
+      action: 'reject_booking',
+      targetType: 'booking',
+      targetId: input.booking_id,
+      details: { alasan: input.alasan },
     })
 
     return serializeBooking(updated)
@@ -699,7 +732,7 @@ export const refund = requireOwnerOrAdmin
 
 export const prosesRefundDP = requireAdmin
   .input(prosesRefundDPSchema)
-  .handler(async ({ input }) => {
+  .handler(async ({ input, context }) => {
     const booking = await loadBooking(input.booking_id)
     if (!booking) {
       throw new ORPCError('NOT_FOUND', { message: 'Booking not found' })
@@ -747,6 +780,18 @@ export const prosesRefundDP = requireAdmin
         select: bookingSelect,
       })
 
+      await logAudit({
+        adminId: context.user.id,
+        action: 'process_refund_dp',
+        targetType: 'booking',
+        targetId: booking.id,
+        details: {
+          statusRefundDP: 'BERHASIL',
+          jumlah: Number(booking.jumlahDP),
+          transaksiRefund_id: refundTx.transactionId,
+        },
+      })
+
       return {
         success: true,
         booking_id: booking.id,
@@ -764,6 +809,17 @@ export const prosesRefundDP = requireAdmin
         where: { id: booking.id },
         data: { statusRefundDP: 'GAGAL' },
         select: bookingSelect,
+      })
+
+      await logAudit({
+        adminId: context.user.id,
+        action: 'process_refund_dp',
+        targetType: 'booking',
+        targetId: booking.id,
+        details: {
+          statusRefundDP: 'GAGAL',
+          error: error instanceof Error ? error.message : 'Unknown error',
+        },
       })
 
       return {
@@ -918,7 +974,18 @@ export const getStatistikPemilik = requireOwnerOrAdmin.handler(
     const now = new Date()
     const firstOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
 
-    const [totalRequest, bookingAktif, pendapatanResult] = await Promise.all([
+    const ownerWhere = isAdmin
+      ? {}
+      : { units: { properties: { owner_id: ownerId } } }
+
+    const [
+      totalRequest,
+      bookingAktif,
+      pendapatanResult,
+      totalProperti,
+      totalUnit,
+      aktivitasRows,
+    ] = await Promise.all([
       prisma.booking.count({
         where: isAdmin
           ? { status_booking: 'MENUNGGU_PERSETUJUAN' }
@@ -936,30 +1003,58 @@ export const getStatistikPemilik = requireOwnerOrAdmin.handler(
             },
       }),
       prisma.booking.aggregate({
-        where: isAdmin
-          ? {
-              status_booking: {
-                in: ['AKTIF', 'SELESAI', 'MENUNGGU_PELUNASAN'],
-              },
-              tanggalBayarDP: { not: null },
-              tanggalPelunasan: { gte: firstOfMonth },
-            }
-          : {
-              units: { properties: { owner_id: ownerId } },
-              status_booking: {
-                in: ['AKTIF', 'SELESAI', 'MENUNGGU_PELUNASAN'],
-              },
-              tanggalBayarDP: { not: null },
-              tanggalPelunasan: { gte: firstOfMonth },
-            },
+        where: {
+          ...ownerWhere,
+          status_booking: {
+            in: ['AKTIF', 'SELESAI', 'MENUNGGU_PELUNASAN'],
+          },
+          tanggalBayarDP: { not: null },
+          tanggalPelunasan: { gte: firstOfMonth },
+        },
         _sum: { total_harga: true },
+      }),
+      prisma.properties.count({
+        where: isAdmin ? {} : { owner_id: ownerId },
+      }),
+      prisma.units.count({
+        where: isAdmin ? {} : { properties: { owner_id: ownerId } },
+      }),
+      prisma.booking.findMany({
+        where: ownerWhere,
+        select: {
+          id: true,
+          status_booking: true,
+          tanggal_mulai: true,
+          tanggal_selesai: true,
+          total_harga: true,
+          created_at: true,
+          units: {
+            select: { name: true, properties: { select: { name: true } } },
+          },
+          users: { select: { name: true } },
+        },
+        orderBy: { created_at: 'desc' },
+        take: 5,
       }),
     ])
 
     return {
+      totalProperti,
+      totalUnit,
       totalRequest,
       bookingAktif,
       pendapatanBulanIni: decimalStr(pendapatanResult._sum.total_harga),
+      aktivitas: aktivitasRows.map((a) => ({
+        id: a.id,
+        namaProperti: a.units.properties.name,
+        namaUnit: a.units.name,
+        namaPenyewa: a.users.name,
+        status: a.status_booking,
+        tanggalMulai: a.tanggal_mulai,
+        tanggalSelesai: a.tanggal_selesai,
+        totalHarga: decimalStr(a.total_harga),
+        createdAt: a.created_at,
+      })),
     }
   },
 )

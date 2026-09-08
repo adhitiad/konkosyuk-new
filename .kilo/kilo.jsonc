@@ -1,3 +1,27 @@
 {
   "$schema": "https://app.kilo.ai/config.json",
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "Authorization": "ctx7sk-aeec615d-518c-4a5f-a21c-765773be48e8",
+      },
+      "enabled": true,
+    },
+    "exa": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp",
+      "headers": {
+        "x-api-key": "3929868d-b65e-4bf3-90ee-f346f25c2c94"
+      },
+      "enabled": true
+    },
+    "sequentialthinking": {
+      "enabled": true
+    },
+    "firecrawl": {
+      "enabled": true
+    },
+  }
 }

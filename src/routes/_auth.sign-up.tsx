@@ -322,6 +322,7 @@ function SignUpPage() {
           Sudah punya akun?{' '}
           <Link
             to="/sign-in"
+            search={{ redirect: undefined }}
             className="font-semibold text-[var(--lagoon-deep)] no-underline hover:underline"
           >
             Masuk di sini

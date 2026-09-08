@@ -4,7 +4,7 @@ import { MapPin, ChevronLeft, Bed, Ruler, Zap, Armchair, X } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { useState } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 import { orpc } from '#/orpc/client'
 import { authClient } from '#/lib/auth-client'
@@ -42,6 +42,29 @@ export const Route = createFileRoute('/properties/$id')({
     await context.queryClient.prefetchQuery(
       orpc.getProperty.queryOptions({ input: { id: params.id } }),
     )
+  },
+  head: ({ params }) => {
+    const title = `Detail Properti — Konkosyuk`
+    const description =
+      'Cari kos nyaman di seluruh Indonesia. Booking langsung, harga transparan, tanpa perantara ribet.'
+    return {
+      meta: [
+        { title },
+        { name: 'description', content: description },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:type', content: 'website' },
+        { property: 'twitter:card', content: 'summary_large_image' },
+        { property: 'twitter:title', content: title },
+        { property: 'twitter:description', content: description },
+      ],
+      links: [
+        {
+          rel: 'canonical',
+          href: `/properties/${params.id}`,
+        },
+      ],
+    }
   },
 })
 
@@ -306,6 +329,51 @@ function PropertyDetailPage() {
     : []
 
   const basePrice = property.base_price ? Number(property.base_price) : null
+
+  useEffect(() => {
+    const title = `${property.name} — Konkosyuk`
+    const description =
+      property.description?.slice(0, 160) ??
+      'Cari kos nyaman di seluruh Indonesia. Booking langsung, harga transparan, tanpa perantara ribet.'
+
+    document.title = title
+
+    const metaDesc = document.querySelector('meta[name="description"]')
+    if (metaDesc) {
+      metaDesc.setAttribute('content', description)
+    }
+
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'LodgingBusiness',
+      name: property.name,
+      description: property.description ?? undefined,
+      address: property.address,
+      ...(property.city ? { addressLocality: property.city } : {}),
+      ...(property.province ? { addressRegion: property.province } : {}),
+      ...(basePrice
+        ? { priceRange: `IDR ${basePrice.toLocaleString('id-ID')}+` }
+        : {}),
+      ...(images.length > 0 ? { image: images[0] } : {}),
+    }
+
+    const existingScript = document.querySelector(
+      'script[data-jsonld="property"]',
+    )
+    if (existingScript) {
+      existingScript.remove()
+    }
+
+    const script = document.createElement('script')
+    script.setAttribute('type', 'application/ld+json')
+    script.setAttribute('data-jsonld', 'property')
+    script.textContent = JSON.stringify(jsonLd)
+    document.head.appendChild(script)
+
+    return () => {
+      script.remove()
+    }
+  }, [property, basePrice, images])
 
   return (
     <main className="page-wrap py-6">

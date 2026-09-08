@@ -1,12 +1,21 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
-import { Hash, Calendar, User, Bell } from 'lucide-react'
+import { useState } from 'react'
+import {
+  Hash,
+  Calendar,
+  User,
+  Bell,
+  ChevronDown,
+  ChevronUp,
+} from 'lucide-react'
 import type { InferRouterOutputs } from '@orpc/server'
 import type router from '#/orpc/router'
 import { orpc } from '#/orpc/client'
 import { authClient } from '#/lib/auth-client'
 import { Badge } from '#/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
+import { TableSkeleton } from '#/components/ui/skeleton-card'
 
 export const Route = createFileRoute('/(protected)/pemilik/dashboard/active')({
   component: ActiveBookingsPage,
@@ -63,9 +72,17 @@ function ActiveBookingsContent() {
 
   if (isLoading) {
     return (
-      <p className="text-sm text-[var(--sea-ink-soft)]">
-        Memuat booking aktif...
-      </p>
+      <div className="space-y-4">
+        <div className="mb-4">
+          <h2 className="text-lg font-semibold text-[var(--sea-ink)]">
+            Booking Aktif
+          </h2>
+          <p className="text-sm text-[var(--sea-ink-soft)]">
+            Memuat booking aktif...
+          </p>
+        </div>
+        <TableSkeleton rows={4} />
+      </div>
     )
   }
 
@@ -101,6 +118,7 @@ function ActiveBookingsContent() {
 }
 
 function BookingActiveCard({ booking }: { booking: BookingOutput }) {
+  const [expanded, setExpanded] = useState(false)
   const status = STATUS_LABELS[booking.status_booking] || booking.status_booking
 
   return (
@@ -149,6 +167,64 @@ function BookingActiveCard({ booking }: { booking: BookingOutput }) {
             Rp{Number(booking.total_harga).toLocaleString('id-ID')}
           </span>
         </div>
+
+        <button
+          type="button"
+          className="flex w-full items-center justify-center gap-1 pt-1 text-xs font-medium text-[var(--sea-ink-soft)] hover:text-[var(--sea-ink)]"
+          onClick={() => setExpanded((prev) => !prev)}
+        >
+          {expanded ? 'Tutup Detail' : 'Lihat Detail'}
+          {expanded ? (
+            <ChevronUp className="h-3.5 w-3.5" />
+          ) : (
+            <ChevronDown className="h-3.5 w-3.5" />
+          )}
+        </button>
+
+        {expanded && (
+          <div className="space-y-2 rounded-lg border border-[var(--line)] bg-neutral-50 p-3 text-xs text-[var(--sea-ink-soft)]">
+            <div className="flex justify-between">
+              <span>ID Booking</span>
+              <span className="font-mono">{booking.id}</span>
+            </div>
+            {booking.jumlahDP && Number(booking.jumlahDP) > 0 && (
+              <div className="flex justify-between">
+                <span>Tanggal Bayar DP</span>
+                <span>
+                  {booking.tanggalBayarDP
+                    ? new Date(booking.tanggalBayarDP).toLocaleDateString(
+                        'id-ID',
+                      )
+                    : '-'}
+                </span>
+              </div>
+            )}
+            {booking.jumlahPelunasan && Number(booking.jumlahPelunasan) > 0 && (
+              <div className="flex justify-between">
+                <span>Tanggal Pelunasan</span>
+                <span>
+                  {booking.tanggalPelunasan
+                    ? new Date(booking.tanggalPelunasan).toLocaleDateString(
+                        'id-ID',
+                      )
+                    : '-'}
+                </span>
+              </div>
+            )}
+            <div className="flex justify-between">
+              <span>Harga Satuan</span>
+              <span>
+                Rp{Number(booking.unit.price).toLocaleString('id-ID')}/bulan
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Dibuat pada</span>
+              <span>
+                {new Date(booking.created_at).toLocaleDateString('id-ID')}
+              </span>
+            </div>
+          </div>
+        )}
       </CardContent>
     </Card>
   )

@@ -89,3 +89,22 @@ export interface PublishPropertyResult {
   status: 'AKTIF' | 'NONAKTIF' | 'DRAFT'
   message: string
 }
+
+export interface UnitPropertyListResult {
+  id: string
+  nama_unit: string
+  harga_bulanan: string
+  kapasitas: number
+  status_ketersediaan: 'TERSEDIA' | 'TERISI' | 'DIPESAN' | 'MAINTENANCE'
+}
+
+export interface PropertyListResult {
+  id: string
+  nama_properti: string
+  alamat_lengkap: string
+  tipe_properti: 'KOST' | 'KONTRAKAN'
+  status: 'DRAFT' | 'AKTIF' | 'NONAKTIF'
+  created_at: Date
+  unit_count: number
+  units: UnitPropertyListResult[]
+}

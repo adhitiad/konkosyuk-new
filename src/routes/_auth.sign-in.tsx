@@ -37,10 +37,22 @@ type SignInValues = z.input<typeof SignInSchema>
 
 export const Route = createFileRoute('/_auth/sign-in')({
   component: SignInPage,
+  validateSearch: (search: Record<string, unknown>) => {
+    const redirect = search.redirect
+    return {
+      redirect:
+        typeof redirect === 'string' &&
+        redirect.startsWith('/') &&
+        !redirect.startsWith('//')
+          ? redirect
+          : undefined,
+    }
+  },
 })
 
 function SignInPage() {
   const navigate = useNavigate()
+  const redirect = Route.useSearch({ select: (s) => s.redirect })
   const [showPassword, setShowPassword] = useState(false)
 
   const form = useForm<SignInValues>({
@@ -60,8 +72,19 @@ function SignInPage() {
       }
       return result.data
     },
-    onSuccess: () => {
-      void navigate({ to: '/' })
+    onSuccess: (data) => {
+      const userRole = (data as { user: { role: string } }).user.role
+      let targetPath = redirect ?? '/'
+      if (
+        userRole === 'PEMILIK' ||
+        userRole === 'ADMIN' ||
+        userRole === 'STAFF'
+      ) {
+        targetPath = '/pemilik/dashboard'
+      } else if (userRole === 'PENYEWA') {
+        targetPath = '/penyewa/booking'
+      }
+      void navigate({ to: targetPath })
     },
   })
 

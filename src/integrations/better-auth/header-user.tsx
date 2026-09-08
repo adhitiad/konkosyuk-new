@@ -94,7 +94,9 @@ export default function BetterAuthHeader() {
         size="sm"
         className="rounded-full text-[var(--sea-ink)] hover:bg-[var(--link-bg-hover)]"
       >
-        <Link to="/sign-in">Masuk</Link>
+        <Link to="/sign-in" search={{ redirect: undefined }}>
+          Masuk
+        </Link>
       </Button>
       <Button
         asChild

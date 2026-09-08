@@ -1,12 +1,42 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
-import { CheckCircle, TrendingUp, Clock } from 'lucide-react'
+import {
+  Building2,
+  CheckCircle,
+  Clock,
+  DoorOpen,
+  TrendingUp,
+  CalendarClock,
+} from 'lucide-react'
 import { orpc } from '#/orpc/client'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
+import { StatsCardSkeleton } from '#/components/ui/skeleton-card'
 
 export const Route = createFileRoute('/(protected)/pemilik/dashboard/')({
   component: DashboardHome,
 })
+
+const ACTIVITY_STATUS_LABELS: Record<string, string> = {
+  MENUNGGU_PEMBAYARAN_DP: 'Menunggu Pembayaran DP',
+  MENUNGGU_VERIFIKASI_DP: 'Menunggu Verifikasi DP',
+  MENUNGGU_PERSETUJUAN: 'Menunggu Persetujuan',
+  AKTIF: 'Aktif',
+  MENUNGGU_PELUNASAN: 'Menunggu Pelunasan',
+  SELESAI: 'Selesai',
+  SELESAI_DITOLAK: 'Selesai (Ditolak)',
+  PROSES_REFUND_DP: 'Proses Refund DP',
+  DIBATALKAN: 'Dibatalkan',
+}
+
+function formatTgl(itemDate: Date) {
+  if (!(itemDate instanceof Date) || Number.isNaN(itemDate.getTime()))
+    return '-'
+  return itemDate.toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  })
+}
 
 function DashboardHome() {
   const { data: stats, isLoading } = useQuery(
@@ -15,7 +45,9 @@ function DashboardHome() {
 
   if (isLoading) {
     return (
-      <p className="text-sm text-[var(--sea-ink-soft)]">Memuat statistik...</p>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <StatsCardSkeleton count={5} />
+      </div>
     )
   }
 
@@ -28,6 +60,18 @@ function DashboardHome() {
   }
 
   const statCards = [
+    {
+      title: 'Jumlah Properti',
+      value: stats.totalProperti,
+      icon: Building2,
+      desc: 'listing milik Anda',
+    },
+    {
+      title: 'Jumlah Unit',
+      value: stats.totalUnit,
+      icon: DoorOpen,
+      desc: 'unit tersedia',
+    },
     {
       title: 'Permintaan Booking',
       value: stats.totalRequest,
@@ -76,12 +120,39 @@ function DashboardHome() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Aksi Cepat</CardTitle>
+          <CardTitle className="text-base">Aktivitas Terbaru</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-[var(--sea-ink-soft)]">
-            Kelola permintaan booking dan pantau properti Anda dari panel ini.
-          </p>
+          {stats.aktivitas.length > 0 ? (
+            <ul className="divide-y divide-[var(--line)]">
+              {stats.aktivitas.map((a) => (
+                <li key={a.id} className="flex items-start gap-3 py-3">
+                  <CalendarClock className="mt-0.5 h-4 w-4 shrink-0 text-[var(--lagoon-deep)]" />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <p className="truncate text-sm font-medium text-[var(--sea-ink)]">
+                        {a.namaProperti} — {a.namaUnit}
+                      </p>
+                      <span className="text-xs text-[var(--sea-ink-soft)]">
+                        {formatTgl(a.createdAt)}
+                      </span>
+                    </div>
+                    <p className="mt-0.5 text-xs text-[var(--sea-ink-soft)]">
+                      Oleh {a.namaPenyewa} ·{' '}
+                      {ACTIVITY_STATUS_LABELS[a.status] ?? a.status}
+                    </p>
+                    <p className="mt-0.5 text-sm font-semibold text-[var(--lagoon-deep)]">
+                      Rp{Number(a.totalHarga).toLocaleString('id-ID')}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-[var(--sea-ink-soft)]">
+              Belum ada aktivitas sewa terbaru.
+            </p>
+          )}
         </CardContent>
       </Card>
     </div>

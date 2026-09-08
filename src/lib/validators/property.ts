@@ -80,3 +80,9 @@ export const getPropertyByIdSchema = z.object({
 })
 
 export type GetPropertyByIdInput = z.infer<typeof getPropertyByIdSchema>
+
+export const updateInfoDasarSchema = step1InfoDasarSchema.extend({
+  property_id: z.string().uuid(),
+})
+
+export type UpdateInfoDasarInput = z.infer<typeof updateInfoDasarSchema>

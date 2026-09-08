@@ -10,6 +10,7 @@ import {
   XCircle,
   Clock,
   LogIn,
+  Search,
 } from 'lucide-react'
 
 import { authClient } from '#/lib/auth-client'
@@ -177,7 +178,9 @@ function BookingCard({ booking }: { booking: PemesananWithRelations }) {
       return await orpc.batalPemesanan.call(input)
     },
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: ['pemesanan'] })
+      void queryClient.invalidateQueries({
+        queryKey: orpc.listPemesananSaya.queryKey(),
+      })
       setShowCancelDialog(false)
     },
   })
@@ -290,15 +293,23 @@ function EmptyState() {
           <p className="text-sm text-[var(--sea-ink-soft)]">
             Kamu belum memiliki pemesanan.
           </p>
-          <Button asChild>
-            <Link
-              to="/penyewa/booking/baru"
-              search={{ property_id: '', unit_id: '' }}
-            >
-              <ClipboardList className="h-4 w-4" />
-              Ajukan Pemesanan Baru
-            </Link>
-          </Button>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <Button asChild>
+              <Link to="/properties">
+                <Search className="h-4 w-4" />
+                Cari Properti
+              </Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link
+                to="/penyewa/booking/baru"
+                search={{ property_id: '', unit_id: '' }}
+              >
+                <ClipboardList className="h-4 w-4" />
+                Ajukan Pemesanan Baru
+              </Link>
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </>

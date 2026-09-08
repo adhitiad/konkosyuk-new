@@ -1,25 +1,34 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useState } from 'react'
-import { Plus, Edit, Trash2, Home, LogIn } from 'lucide-react'
+import { useQuery } from '@tanstack/react-query'
+import { BedDouble, Building2, LogIn, MapPin, Pencil, Plus } from 'lucide-react'
 
 import { authClient } from '#/lib/auth-client'
-import { orpc } from '#/orpc/client'
+import { listPropertiPemilik } from '#/server/property'
 import { Button } from '#/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
 import { Badge } from '#/components/ui/badge'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '#/components/ui/dialog'
 
 export const Route = createFileRoute('/owner/properties')({
   component: OwnerProperties,
 })
+
+const TIPE_LABEL = {
+  KOST: 'Kost',
+  KONTRAKAN: 'Kontrakan',
+} as const
+
+const STATUS_LABEL = {
+  DRAFT: 'Draft',
+  AKTIF: 'Aktif',
+  NONAKTIF: 'Non-aktif',
+} as const
+
+const KETERSEDIAAN_LABEL = {
+  TERSEDIA: 'Tersedia',
+  TERISI: 'Terisi',
+  DIPESAN: 'Dipesan',
+  MAINTENANCE: 'Maintenance',
+} as const
 
 function OwnerProperties() {
   const { data: session, isPending } = authClient.useSession()
@@ -58,7 +67,7 @@ function OwnerProperties() {
     )
   }
 
-  if (session.user.role !== 'owner' && session.user.role !== 'admin') {
+  if (session.user.role !== 'PEMILIK' && session.user.role !== 'ADMIN') {
     return (
       <main className="page-wrap py-8">
         <Card>
@@ -92,15 +101,16 @@ function OwnerProperties() {
         </Button>
       </div>
 
-      <PropertiesList userId={session.user.id} />
+      <PropertiesList />
     </main>
   )
 }
 
-function PropertiesList({ userId }: { userId: string }) {
-  const { data: properties, isLoading } = useQuery(
-    orpc.listProperties.queryOptions({ input: { owner_id: userId } }),
-  )
+function PropertiesList() {
+  const { data: properties, isLoading } = useQuery({
+    queryKey: ['properti-pemilik'],
+    queryFn: () => listPropertiPemilik(),
+  })
 
   if (isLoading) {
     return (
@@ -112,7 +122,7 @@ function PropertiesList({ userId }: { userId: string }) {
     return (
       <Card>
         <CardContent className="py-8 text-center">
-          <Home className="mx-auto mb-2 h-8 w-8 text-neutral-400" />
+          <Building2 className="mx-auto mb-2 h-8 w-8 text-neutral-400" />
           <p className="text-sm text-[var(--sea-ink-soft)]">
             Kamu belum memiliki properti. Klik tombol di atas untuk menambahkan.
           </p>
@@ -124,112 +134,80 @@ function PropertiesList({ userId }: { userId: string }) {
   return (
     <div className="grid grid-cols-1 gap-4">
       {properties.map((p) => (
-        <OwnerPropertyCard key={p.id} property={p} />
+        <PropertyCard key={p.id} property={p} />
       ))}
     </div>
   )
 }
 
-type Property = {
-  id: string
-  name: string
-  address: string
-  city?: string | null
-  type: string
-  is_active?: boolean | null
-  is_featured?: boolean | null
-  units?: unknown[]
-}
-
-function OwnerPropertyCard({ property }: { property: Property }) {
-  const queryClient = useQueryClient()
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false)
-
-  const deleteMutation = useMutation({
-    mutationFn: async (input: { id: string }) => {
-      return await orpc.deleteProperty.call(input)
-    },
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: ['properties'] })
-      setShowDeleteDialog(false)
-    },
-  })
+function PropertyCard({
+  property,
+}: {
+  property: NonNullable<Awaited<ReturnType<typeof listPropertiPemilik>>>[number]
+}) {
+  const statusVariant =
+    property.status === 'AKTIF'
+      ? 'default'
+      : property.status === 'NONAKTIF'
+        ? 'outline'
+        : 'secondary'
 
   return (
-    <>
-      <Card>
-        <CardHeader>
-          <div className="flex items-start justify-between">
-            <CardTitle className="text-lg">{property.name}</CardTitle>
-            <div className="flex gap-2">
-              {property.is_featured && (
-                <Badge variant="secondary">Unggulan</Badge>
-              )}
-              <Badge variant={property.is_active ? 'default' : 'secondary'}>
-                {property.is_active ? 'Aktif' : 'Non-aktif'}
-              </Badge>
-            </div>
+    <Card>
+      <CardHeader>
+        <div className="flex items-start justify-between gap-2">
+          <CardTitle className="text-lg">{property.nama_properti}</CardTitle>
+          <Badge variant={statusVariant}>{STATUS_LABEL[property.status]}</Badge>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <p className="flex items-start gap-1.5 text-sm text-[var(--sea-ink-soft)]">
+          <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
+          <span>{property.alamat_lengkap}</span>
+        </p>
+        <p className="mt-2 text-xs text-[var(--sea-ink-soft)]">
+          Tipe: {TIPE_LABEL[property.tipe_properti]} · {property.unit_count}{' '}
+          unit
+        </p>
+
+        {property.units.length > 0 && (
+          <div className="mt-3 space-y-2">
+            {property.units.map((u) => (
+              <div
+                key={u.id}
+                className="flex items-center justify-between rounded-lg border border-[var(--line)] px-3 py-2"
+              >
+                <div className="flex items-center gap-2">
+                  <BedDouble className="h-4 w-4 text-[var(--lagoon-deep)]" />
+                  <span className="text-sm font-medium text-[var(--sea-ink)]">
+                    {u.nama_unit}
+                  </span>
+                  <span className="text-xs text-[var(--sea-ink-soft)]">
+                    {u.kapasitas} orang
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold text-[var(--lagoon-deep)]">
+                    Rp{Number(u.harga_bulanan).toLocaleString('id-ID')}/bulan
+                  </span>
+                  <Badge variant="secondary">
+                    {KETERSEDIAAN_LABEL[u.status_ketersediaan]}
+                  </Badge>
+                </div>
+              </div>
+            ))}
           </div>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-[var(--sea-ink-soft)]">
-            {property.address}, {property.city}
-          </p>
-          <p className="mt-1 text-xs text-[var(--sea-ink-soft)]">
-            Tipe: {property.type}
-          </p>
-          {property.units && (
-            <p className="mt-1 text-xs text-[var(--sea-ink-soft)]">
-              {property.units.length} unit
-            </p>
-          )}
-        </CardContent>
-        <CardContent className="flex gap-2">
+        )}
+
+        <div className="mt-4 flex justify-end">
           <Button asChild size="sm" variant="outline">
             <a href={`/owner/properties/${property.id}`}>
-              <Edit className="h-3.5 w-3.5" />
-              Edit
+              <Pencil className="h-3.5 w-3.5" />
+              Kelola
             </a>
           </Button>
-          <Button
-            size="sm"
-            variant="destructive"
-            onClick={() => setShowDeleteDialog(true)}
-          >
-            <Trash2 className="h-3.5 w-3.5" />
-            Hapus
-          </Button>
-        </CardContent>
-      </Card>
-
-      <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Hapus Properti</DialogTitle>
-            <DialogDescription>
-              Apakah kamu yakin ingin menghapus "{property.name}"? Tindakan ini
-              tidak dapat dibatalkan.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowDeleteDialog(false)}
-            >
-              Batal
-            </Button>
-            <Button
-              variant="destructive"
-              size="sm"
-              disabled={deleteMutation.isPending}
-              onClick={() => deleteMutation.mutate({ id: property.id })}
-            >
-              Hapus
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </>
+        </div>
+      </CardContent>
+    </Card>
   )
 }

@@ -35,6 +35,7 @@ import {
   SelectValue,
 } from '#/components/ui/select'
 import { Separator } from '#/components/ui/separator'
+import { PropertyCardSkeleton } from '#/components/ui/skeleton-card'
 import { PropertyCard } from '#/components/property/PropertyCard'
 import { facilities } from '#/data/landing'
 
@@ -439,21 +440,13 @@ function FeaturedListings() {
       {isLoading ? (
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {Array.from({ length: 8 }).map((_, i) => (
-            <Card
-              key={i}
-              className="h-full gap-0 overflow-hidden rounded-2xl border-[var(--line)] py-0"
-            >
-              <div className="aspect-[16/10] w-full animate-pulse bg-[var(--line)]/40" />
-              <CardContent className="flex flex-col gap-2 p-4">
-                <div className="h-4 w-3/4 animate-pulse rounded bg-[var(--line)]/40" />
-                <div className="h-3 w-1/2 animate-pulse rounded bg-[var(--line)]/40" />
-                <div className="h-4 w-1/4 animate-pulse rounded bg-[var(--line)]/40" />
-              </CardContent>
-            </Card>
+            <div key={i} style={{ animationDelay: `${i * 60 + 60}ms` }}>
+              <PropertyCardSkeleton />
+            </div>
           ))}
         </div>
       ) : limited.length === 0 ? (
-        <p className="text-center text-sm text-[var(--sea-ink-soft)]">
+        <p className="col-span-full text-center text-sm text-[var(--sea-ink-soft)]">
           Belum ada properti unggulan. Cek lagi nanti!
         </p>
       ) : (
@@ -529,4 +522,4 @@ function OwnerCTA() {
   )
 }
 
-export default HomePage
+

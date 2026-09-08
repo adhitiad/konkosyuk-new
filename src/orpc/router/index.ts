@@ -1,3 +1,16 @@
+﻿import {
+  getStatistikPlatform,
+  getKonfigurasiPlatform,
+  updateKonfigurasiPlatform,
+  getAllBookings,
+  getAllUsers,
+  updateUserRole,
+  updateUserStatus,
+  getKycVerifications,
+  getInspections,
+  getMaintenanceReports,
+  getAuditLogs,
+} from './admin'
 import {
   ajukanBooking,
   approveKyc,
@@ -54,6 +67,13 @@ import {
   tolakPemesanan,
 } from './pemesanan'
 import { getUserLocale, setUserLocale } from './preferences'
+import {
+  addToWishlist,
+  removeFromWishlist,
+  getMyWishlist,
+  checkWishlistStatus,
+  getWishlistCount,
+} from './wishlist'
 
 export default {
   listTodos,
@@ -107,4 +127,20 @@ export default {
   setUserLocale,
   searchLocations,
   reverseGeocode,
+  getStatistikPlatform,
+  getKonfigurasiPlatform,
+  updateKonfigurasiPlatform,
+  getAllBookings,
+  getAllUsers,
+  updateUserRole,
+  updateUserStatus,
+  getKycVerifications,
+  getInspections,
+  getMaintenanceReports,
+  getAuditLogs,
+  addToWishlist,
+  removeFromWishlist,
+  getMyWishlist,
+  checkWishlistStatus,
+  getWishlistCount,
 }

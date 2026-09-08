@@ -14,6 +14,7 @@ import { Button } from '#/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
 import { Skeleton } from '#/components/ui/skeleton'
 import { PropertyImageGallery } from '#/components/property/PropertyImageGallery'
+import { PropertyMap } from '#/components/property/PropertyMap'
 import { UnitCard } from '#/components/property/UnitCard'
 import {
   getTipePropertiLabel,
@@ -242,12 +243,23 @@ function PropertyDetailPage() {
             <CardHeader>
               <CardTitle className="text-lg">Lokasi</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-sm text-[var(--sea-ink-soft)]">
-                {property.alamat_lengkap}
+            <CardContent className="space-y-3">
+              <p className="flex items-start gap-1.5 text-sm text-[var(--sea-ink-soft)]">
+                <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                <span>{property.alamat_lengkap}</span>
               </p>
+              {property.latitude &&
+                property.longitude &&
+                !Number.isNaN(Number(property.latitude)) &&
+                !Number.isNaN(Number(property.longitude)) && (
+                  <PropertyMap
+                    lat={Number(property.latitude)}
+                    lng={Number(property.longitude)}
+                    address={property.alamat_lengkap}
+                  />
+                )}
               {mapLink && (
-                <Button variant="link" asChild className="mt-2 p-0">
+                <Button variant="link" asChild className="p-0">
                   <a href={mapLink} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-3.5 w-3.5" />
                     Lihat di peta

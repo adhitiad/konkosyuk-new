@@ -3,6 +3,8 @@ import { Bed, MapPin, Star } from 'lucide-react'
 
 import { Badge } from '#/components/ui/badge'
 import { Button } from '#/components/ui/button'
+import { OptimizedImage } from '#/components/optimized-image'
+import { WishlistButton } from '#/components/property/WishlistButton'
 import type { PropertyType } from '#/generated/prisma/client'
 
 export type FeaturedProperty = {
@@ -96,16 +98,18 @@ export function PropertyCard({ property }: { property: FeaturedProperty }) {
       <div className="island-shell feature-card rise-in group flex h-full flex-col gap-0 overflow-hidden rounded-2xl border border-[var(--line)]">
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-br from-[rgba(79,184,178,0.18)] to-[rgba(47,106,74,0.08)]">
           {img ? (
-            <img
+            <OptimizedImage
               src={img}
               alt={property.name}
-              className="h-full w-full object-cover object-center transition duration-300 group-hover:scale-[1.03]"
+              aspectRatio="video"
+              className="group-hover:scale-[1.03] transition-transform duration-300"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center text-5xl font-bold text-white/60">
               {property.name.charAt(0)}
             </div>
           )}
+          <WishlistButton propertyId={property.id} />
           <div className="absolute bottom-3 left-3 flex flex-col gap-1.5">
             <Badge
               variant="outline"
@@ -123,7 +127,7 @@ export function PropertyCard({ property }: { property: FeaturedProperty }) {
             )}
           </div>
           {rating > 0 && (
-            <div className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-white/90 px-1.5 py-0.5 text-xs font-medium text-[var(--sea-ink)]">
+            <div className="absolute right-3 top-10 flex items-center gap-1 rounded-full bg-white/90 px-1.5 py-0.5 text-xs font-medium text-[var(--sea-ink)]">
               <Star className="h-3.5 w-3.5 fill-current text-amber-400" />
               <span>{rating.toFixed(1)}</span>
               <span className="text-[var(--sea-ink-soft)]">

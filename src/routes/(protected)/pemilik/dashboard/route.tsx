@@ -33,6 +33,16 @@ function DashboardLayout() {
     )
   }
 
+  if (session.user.role !== 'PEMILIK' && session.user.role !== 'ADMIN') {
+    return (
+      <main className="page-wrap py-8">
+        <p className="text-sm text-[var(--sea-ink-soft)]">
+          Halaman ini hanya dapat diakses oleh pemilik properti.
+        </p>
+      </main>
+    )
+  }
+
   const navItems = [
     { to: '/pemilik/dashboard', label: 'Ringkasan', icon: LayoutDashboard },
     { to: '/pemilik/dashboard/requests', label: 'Permintaan', icon: Clock },

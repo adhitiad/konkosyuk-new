@@ -1,0 +1,1019 @@
+{
+  ".agents/rules/global-web.md": {
+    "summary": "Dokumen markdown konfigurasi atau panduan di dalam repo."
+  },
+  ".agents/rules/global.md": {
+    "summary": "Dokumen markdown konfigurasi atau panduan di dalam repo."
+  },
+  ".agents/rules/ui-ux.md": {
+    "summary": "Dokumen markdown konfigurasi atau panduan di dalam repo."
+  },
+  ".claude/skills/ngodingpakeai/SKILL.md": {
+    "summary": "Dokumen markdown konfigurasi atau panduan di dalam repo."
+  },
+  ".codegraph/.gitignore": {
+    "summary": "File konfigurasi gitignore/lockfile untuk mengecualikan artefak build, cache, dan dependensi dari kontrol versi."
+  },
+  ".codegraph/daemon.pid": {
+    "summary": "File konfigurasi atau artefak: .codegraph/daemon.pid."
+  },
+  ".codex/skills/ngodingpakeai/SKILL.md": {
+    "summary": "Dokumen markdown konfigurasi atau panduan di dalam repo."
+  },
+  ".cta.json": {
+    "summary": "File konfigurasi JSON."
+  },
+  ".cursor/skills/ngodingpakeai/SKILL.md": {
+    "summary": "Dokumen markdown konfigurasi atau panduan di dalam repo."
+  },
+  ".cursorrules": {
+    "summary": "File konfigurasi atau artefak: .cursorrules."
+  },
+  ".github/agents/dwim.agent.md": {
+    "summary": "Dokumen markdown konfigurasi atau panduan di dalam repo."
+  },
+  ".github/workflows/check-skills.yml": {
+    "summary": "File workflow GitHub Actions untuk CI/CD."
+  },
+  ".gitignore": {
+    "summary": "File konfigurasi gitignore/lockfile untuk mengecualikan artefak build, cache, dan dependensi dari kontrol versi."
+  },
+  ".kilo/.gitignore": {
+    "summary": "File konfigurasi gitignore/lockfile untuk mengecualikan artefak build, cache, dan dependensi dari kontrol versi."
+  },
+  ".kilo/anchored-summary.md": {
+    "summary": "Ringkasan anchorKil o untuk konteks agen AI."
+  },
+  ".kilo/kilo.jsonc": {
+    "summary": "File konfigurasi atau artefak: .kilo/kilo.jsonc."
+  },
+  ".kilo/rules/global-web.md": {
+    "summary": "Dokumen markdown konfigurasi atau panduan di dalam repo."
+  },
+  ".kilo/rules/global.md": {
+    "summary": "Dokumen markdown konfigurasi atau panduan di dalam repo."
+  },
+  ".kilo/rules/ui-ux.md": {
+    "summary": "Dokumen markdown konfigurasi atau panduan di dalam repo."
+  },
+  ".kilo/skills/tanstak.md": {
+    "summary": "Dokumen markdown konfigurasi atau panduan di dalam repo."
+  },
+  ".ngodingpakeaiignore": {
+    "summary": "File konfigurasi atau artefak: .ngodingpakeaiignore."
+  },
+  ".prettierignore": {
+    "summary": "File konfigurasi atau artefak: .prettierignore."
+  },
+  "AGENTS.md": {
+    "summary": "Dokumen panduan agen AI untuk repo ini: stack, konvensi, perintah, dan aturan kerja."
+  },
+  "bun.lock": {
+    "summary": "File konfigurasi gitignore/lockfile untuk mengecualikan artefak build, cache, dan dependensi dari kontrol versi."
+  },
+  "components.json": {
+    "summary": "Konfigurasi shadcn/ui: style new-york, warna zinc, alias komponen, dan path impor."
+  },
+  "docs/investigasi-model-unit.md": {
+    "summary": "Dokumen investigasi model data unit properti dan relasi database."
+  },
+  "eslint.config.js": {
+    "summary": "File JavaScript: eslint.config.js."
+  },
+  "messages/de.json": {
+    "summary": "File terjemahan i18n Paraglide untuk locale de."
+  },
+  "messages/en.json": {
+    "summary": "File terjemahan i18n Paraglide untuk locale en."
+  },
+  "messages/fil.json": {
+    "summary": "File terjemahan i18n Paraglide untuk locale fil."
+  },
+  "messages/id.json": {
+    "summary": "File terjemahan i18n Paraglide untuk locale id."
+  },
+  "messages/ko.json": {
+    "summary": "File terjemahan i18n Paraglide untuk locale ko."
+  },
+  "messages/ru.json": {
+    "summary": "File terjemahan i18n Paraglide untuk locale ru."
+  },
+  "messages/th.json": {
+    "summary": "File terjemahan i18n Paraglide untuk locale th."
+  },
+  "messages/vi.json": {
+    "summary": "File terjemahan i18n Paraglide untuk locale vi."
+  },
+  "messages/zh.json": {
+    "summary": "File terjemahan i18n Paraglide untuk locale zh."
+  },
+  "package.json": {
+    "summary": "Manifest proyek Node/Bun: dependensi, skrip dev/build/lint/db, dan alias impor #/*."
+  },
+  "prettier.config.js": {
+    "summary": "File JavaScript: prettier.config.js."
+  },
+  "prisma/migrations/20260904071138_adit/migration.sql": {
+    "summary": "File SQL migrasi Prisma untuk perubahan schema database."
+  },
+  "prisma/migrations/migration_lock.toml": {
+    "summary": "File TOML konfigurasi migration Prisma."
+  },
+  "prisma/schema.prisma": {
+    "summary": "File konfigurasi atau artefak: prisma/schema.prisma."
+  },
+  "prisma/seed.ts": {
+    "summary": "File Prisma: schema/migrasi/seed/config untuk database PostgreSQL."
+  },
+  "prisma.config.ts": {
+    "summary": "File TypeScript/TSX: prisma.config.ts."
+  },
+  "project.inlang/.gitignore": {
+    "summary": "File konfigurasi gitignore/lockfile untuk mengecualikan artefak build, cache, dan dependensi dari kontrol versi."
+  },
+  "project.inlang/.meta.json": {
+    "summary": "File metadata atau gitignore konfigurasi proyek."
+  },
+  "project.inlang/cache/paraglide-js/b8b67e872e38051a.json": {
+    "summary": "File konfigurasi JSON."
+  },
+  "project.inlang/cache/paraglide-js/de297a7f05bd528f.json": {
+    "summary": "File konfigurasi JSON."
+  },
+  "project.inlang/cache/plugins/2sy648wh9sugi": {
+    "summary": "File konfigurasi atau artefak: project.inlang/cache/plugins/2sy648wh9sugi."
+  },
+  "project.inlang/cache/plugins/ygx0uiahq6uw": {
+    "summary": "File konfigurasi atau artefak: project.inlang/cache/plugins/ygx0uiahq6uw."
+  },
+  "project.inlang/README.md": {
+    "summary": "Dokumen README proyek yang menjelaskan setup, deployment, dan arsitektur aplikasi listing properti."
+  },
+  "project.inlang/settings.json": {
+    "summary": "Konfigurasi Paraglide i18n: locale dasar, daftar locale, dan pengaturan terjemahan."
+  },
+  "README.md": {
+    "summary": "Dokumen README proyek yang menjelaskan setup, deployment, dan arsitektur aplikasi listing properti."
+  },
+  "scripts/db-check.ts": {
+    "summary": "Script utilitas: db-check untuk maintenance database dan testing."
+  },
+  "scripts/seed-platform-config.ts": {
+    "summary": "Script utilitas: seed-platform-config untuk maintenance database dan testing."
+  },
+  "scripts/seed.ts": {
+    "summary": "Script utilitas: seed untuk maintenance database dan testing."
+  },
+  "scripts/test-mock-gateway.ts": {
+    "summary": "Script utilitas: test-mock-gateway untuk maintenance database dan testing."
+  },
+  "scripts/test-platform-config.ts": {
+    "summary": "Script utilitas: test-platform-config untuk maintenance database dan testing."
+  },
+  "server/middleware/auth-gateway.ts": {
+    "summary": "File server-side: auth-gateway."
+  },
+  "skills-lock.json": {
+    "summary": "File konfigurasi gitignore/lockfile untuk mengecualikan artefak build, cache, dan dependensi dari kontrol versi."
+  },
+  "src/components/error-boundary.tsx": {
+    "summary": "Komponen React UI di src/components: error-boundary."
+  },
+  "src/components/Footer.tsx": {
+    "summary": "Komponen React UI di src/components: Footer."
+  },
+  "src/components/Header.tsx": {
+    "summary": "Komponen React UI di src/components: Header."
+  },
+  "src/components/LocaleSwitcher.tsx": {
+    "summary": "Komponen React UI di src/components: LocaleSwitcher."
+  },
+  "src/components/MapPicker.tsx": {
+    "summary": "Komponen React UI di src/components: MapPicker."
+  },
+  "src/components/NotFound.tsx": {
+    "summary": "Komponen React UI di src/components: NotFound."
+  },
+  "src/components/optimized-image.tsx": {
+    "summary": "Komponen React UI di src/components: optimized-image."
+  },
+  "src/components/page-transition.tsx": {
+    "summary": "Komponen React UI di src/components: page-transition."
+  },
+  "src/components/property/PropertyCard.tsx": {
+    "summary": "Komponen React UI di src/components: PropertyCard."
+  },
+  "src/components/property/PropertyImageGallery.tsx": {
+    "summary": "Komponen React UI di src/components: PropertyImageGallery."
+  },
+  "src/components/property/UnitCard.tsx": {
+    "summary": "Komponen React UI di src/components: UnitCard."
+  },
+  "src/components/ThemeToggle.tsx": {
+    "summary": "Komponen React UI di src/components: ThemeToggle."
+  },
+  "src/components/ui/alert.tsx": {
+    "summary": "Komponen React UI di src/components: alert."
+  },
+  "src/components/ui/avatar.tsx": {
+    "summary": "Komponen React UI di src/components: avatar."
+  },
+  "src/components/ui/badge.tsx": {
+    "summary": "Komponen React UI di src/components: badge."
+  },
+  "src/components/ui/button.tsx": {
+    "summary": "Komponen React UI di src/components: button."
+  },
+  "src/components/ui/card.tsx": {
+    "summary": "Komponen React UI di src/components: card."
+  },
+  "src/components/ui/checkbox.tsx": {
+    "summary": "Komponen React UI di src/components: checkbox."
+  },
+  "src/components/ui/dialog.tsx": {
+    "summary": "Komponen React UI di src/components: dialog."
+  },
+  "src/components/ui/dropdown-menu.tsx": {
+    "summary": "Komponen React UI di src/components: dropdown-menu."
+  },
+  "src/components/ui/form.tsx": {
+    "summary": "Komponen React UI di src/components: form."
+  },
+  "src/components/ui/input.tsx": {
+    "summary": "Komponen React UI di src/components: input."
+  },
+  "src/components/ui/label.tsx": {
+    "summary": "Komponen React UI di src/components: label."
+  },
+  "src/components/ui/select.tsx": {
+    "summary": "Komponen React UI di src/components: select."
+  },
+  "src/components/ui/separator.tsx": {
+    "summary": "Komponen React UI di src/components: separator."
+  },
+  "src/components/ui/sheet.tsx": {
+    "summary": "Komponen React UI di src/components: sheet."
+  },
+  "src/components/ui/skeleton-card.tsx": {
+    "summary": "Komponen React UI di src/components: skeleton-card."
+  },
+  "src/components/ui/skeleton.tsx": {
+    "summary": "Komponen React UI di src/components: skeleton."
+  },
+  "src/components/ui/slider.tsx": {
+    "summary": "Komponen React UI di src/components: slider."
+  },
+  "src/components/ui/switch.tsx": {
+    "summary": "Komponen React UI di src/components: switch."
+  },
+  "src/components/ui/tabs.tsx": {
+    "summary": "Komponen React UI di src/components: tabs."
+  },
+  "src/components/ui/textarea.tsx": {
+    "summary": "Komponen React UI di src/components: textarea."
+  },
+  "src/data/landing.ts": {
+    "summary": "File TypeScript/TSX: src/data/landing.ts."
+  },
+  "src/data/locales.ts": {
+    "summary": "File TypeScript/TSX: src/data/locales.ts."
+  },
+  "src/database-url.ts": {
+    "summary": "File TypeScript/TSX: src/database-url.ts."
+  },
+  "src/db.ts": {
+    "summary": "File TypeScript/TSX: src/db.ts."
+  },
+  "src/env.ts": {
+    "summary": "File TypeScript/TSX: src/env.ts."
+  },
+  "src/generated/prisma/browser.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/client.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/commonInputTypes.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/enums.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/internal/class.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/internal/prismaNamespace.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/internal/prismaNamespaceBrowser.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/accounts.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/ad_packages.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/analytics_events.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/app_settings.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/audit_logs.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/balance_logs.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/Booking.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/bookings.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/booking_requests.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/campus_areas.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/chart_of_accounts.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/chat_rooms.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/damage_reports.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/experiments.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/experiment_assignments.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/Fasilitas.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/favorites.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/feature_flags.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/feedbacks.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/FotoProperti.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/general_ledger.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/group_bookings.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/group_booking_members.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/inspections.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/inspection_items.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/inspection_photos.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/inspection_templates.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/KycRequest.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/kyc_verifications.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/loyalty_transactions.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/maintenance_reports.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/maintenance_tickets.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/messages.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/nearby_places.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/neighborhood_insights.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/neighborhood_places.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/notifications.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/notification_settings.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/owner_bank_accounts.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/Payment.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/payments.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/PaymentTransaction.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/payment_gateway_configs.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/payment_gateway_credentials.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/payment_transactions.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/Pemesanan.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/PlatformConfig.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/platform_settings.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/popular_areas.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/pricing_analytics.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/pricing_suggestions.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/properties.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/Property.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/property_ads.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/property_comparisons.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/property_ratings.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/property_rules.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/property_similarities.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/property_tags.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/push_subscriptions.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/referrals.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/RefundRequest.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/refund_requests.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/reviews.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/review_replies.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/rewards.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/reward_redemptions.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/roommate_preferences.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/room_facilities.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/saved_searches.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/seasonal_pricing_rules.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/sessions.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/tags.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/twoFactor.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/UnitProperti.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/units.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/unit_pricing_tiers.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/users.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/user_contracts.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/user_interest_vectors.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/user_notification_preferences.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/verifications.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/wa_session.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/webhook_events.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/wishlists.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models/withdrawals.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/generated/prisma/models.ts": {
+    "summary": "Generated Prisma client TypeScript dari prisma/schema.prisma, digunakan untuk query database PostgreSQL."
+  },
+  "src/integrations/better-auth/header-user.tsx": {
+    "summary": "File TypeScript/TSX: src/integrations/better-auth/header-user.tsx."
+  },
+  "src/integrations/tanstack-query/devtools.tsx": {
+    "summary": "File TypeScript/TSX: src/integrations/tanstack-query/devtools.tsx."
+  },
+  "src/integrations/tanstack-query/root-provider.tsx": {
+    "summary": "File TypeScript/TSX: src/integrations/tanstack-query/root-provider.tsx."
+  },
+  "src/lib/auth-client.ts": {
+    "summary": "Modul utilitas/library di src/lib: auth-client."
+  },
+  "src/lib/auth.ts": {
+    "summary": "Modul utilitas/library di src/lib: auth."
+  },
+  "src/lib/cloudinary.ts": {
+    "summary": "Modul utilitas/library di src/lib: cloudinary."
+  },
+  "src/lib/payments/mock-gateway.ts": {
+    "summary": "Modul utilitas/library di src/lib: mock-gateway."
+  },
+  "src/lib/qstash.ts": {
+    "summary": "Modul utilitas/library di src/lib: qstash."
+  },
+  "src/lib/services/booking-expiry-processor.ts": {
+    "summary": "Modul utilitas/library di src/lib: booking-expiry-processor."
+  },
+  "src/lib/services/booking-expiry.ts": {
+    "summary": "Modul utilitas/library di src/lib: booking-expiry."
+  },
+  "src/lib/services/platform-config.ts": {
+    "summary": "Modul utilitas/library di src/lib: platform-config."
+  },
+  "src/lib/tipeProperti.ts": {
+    "summary": "Modul utilitas/library di src/lib: tipeProperti."
+  },
+  "src/lib/utils.ts": {
+    "summary": "Modul utilitas/library di src/lib: utils."
+  },
+  "src/lib/validators/auth.ts": {
+    "summary": "Modul utilitas/library di src/lib: auth."
+  },
+  "src/lib/validators/booking.ts": {
+    "summary": "Modul utilitas/library di src/lib: booking."
+  },
+  "src/lib/validators/pemesanan.ts": {
+    "summary": "Modul utilitas/library di src/lib: pemesanan."
+  },
+  "src/lib/validators/property.ts": {
+    "summary": "Modul utilitas/library di src/lib: property."
+  },
+  "src/mcp-todos.ts": {
+    "summary": "File TypeScript/TSX: src/mcp-todos.ts."
+  },
+  "src/orpc/client.ts": {
+    "summary": "File TypeScript/TSX: src/orpc/client.ts."
+  },
+  "src/orpc/router/admin.ts": {
+    "summary": "Router oRPC untuk prosedur API admin dengan validasi Zod."
+  },
+  "src/orpc/router/bookings.ts": {
+    "summary": "Router oRPC untuk prosedur API bookings dengan validasi Zod."
+  },
+  "src/orpc/router/geocoding.ts": {
+    "summary": "Router oRPC untuk prosedur API geocoding dengan validasi Zod."
+  },
+  "src/orpc/router/index.ts": {
+    "summary": "Router oRPC untuk prosedur API index dengan validasi Zod."
+  },
+  "src/orpc/router/pemesanan.ts": {
+    "summary": "Router oRPC untuk prosedur API pemesanan dengan validasi Zod."
+  },
+  "src/orpc/router/preferences.ts": {
+    "summary": "Router oRPC untuk prosedur API preferences dengan validasi Zod."
+  },
+  "src/orpc/router/properties.ts": {
+    "summary": "Router oRPC untuk prosedur API properties dengan validasi Zod."
+  },
+  "src/orpc/router/todos.ts": {
+    "summary": "Router oRPC untuk prosedur API todos dengan validasi Zod."
+  },
+  "src/orpc/router/transactions.ts": {
+    "summary": "Router oRPC untuk prosedur API transactions dengan validasi Zod."
+  },
+  "src/orpc/schema/admin.ts": {
+    "summary": "Schema Zod validasi input untuk prosedur oRPC terkait admin."
+  },
+  "src/orpc/schema/bookings.ts": {
+    "summary": "Schema Zod validasi input untuk prosedur oRPC terkait bookings."
+  },
+  "src/orpc/schema/properties.ts": {
+    "summary": "Schema Zod validasi input untuk prosedur oRPC terkait properties."
+  },
+  "src/orpc/schema/transaction.ts": {
+    "summary": "Schema Zod validasi input untuk prosedur oRPC terkait transaction."
+  },
+  "src/orpc/schema.ts": {
+    "summary": "File TypeScript/TSX: src/orpc/schema.ts."
+  },
+  "src/orpc/server.ts": {
+    "summary": "File TypeScript/TSX: src/orpc/server.ts."
+  },
+  "src/paraglide/.gitignore": {
+    "summary": "File konfigurasi gitignore/lockfile untuk mengecualikan artefak build, cache, dan dependensi dari kontrol versi."
+  },
+  "src/paraglide/.prettierignore": {
+    "summary": "File konfigurasi atau artefak: src/paraglide/.prettierignore."
+  },
+  "src/paraglide/messages/about_page.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/app_description.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/app_title.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_email_label.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_email_placeholder.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_error_email_exists.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_error_generic.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_error_invalid_credentials.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_forgot_password.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_have_account.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_name_label.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_name_placeholder.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_no_account.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_or_continue_with.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_password_label.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_password_placeholder.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_phone_label.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_phone_placeholder.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_privacy_link.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_remember_me.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_role_label.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_role_owner.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_role_tenant.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_signin_link.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_signin_submit.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_signin_subtitle.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_signin_title.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_signup_link.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_signup_submit.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_signup_subtitle.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_signup_title.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_success_signin.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_success_signup.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_terms_agreement.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/auth_terms_link.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/current_locale.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/example_message.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/home_page.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/language_label.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/lang_dialog_description.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/lang_dialog_title.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/lang_english_label.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/lang_native_label.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/lang_suggested.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/learn_router.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/nav_dashboard.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/nav_home.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/nav_list_property.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/nav_recommendations.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/nav_search.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/nav_sign_in.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/nav_sign_out.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/nav_sign_up.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/package.json": {
+    "summary": "Manifest proyek Node/Bun: dependensi, skrip dev/build/lint/db, dan alias impor #/*."
+  },
+  "src/paraglide/messages/search_date_placeholder.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/search_location_placeholder.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/search_submit.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/search_type_placeholder.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages/_index.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/messages.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/README.md": {
+    "summary": "Dokumen README proyek yang menjelaskan setup, deployment, dan arsitektur aplikasi listing properti."
+  },
+  "src/paraglide/registry.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/runtime.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/paraglide/server.js": {
+    "summary": "Output generated Paraglide JS untuk runtime i18n, di-regenerate otomatis oleh Vite plugin."
+  },
+  "src/polyfill.ts": {
+    "summary": "File TypeScript/TSX: src/polyfill.ts."
+  },
+  "src/router.tsx": {
+    "summary": "File TypeScript/TSX: src/router.tsx."
+  },
+  "src/routes/(protected)/admin/bookings.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/(protected)/admin/bookings.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/(protected)/admin/index.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/(protected)/admin/index.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/(protected)/admin/konfigurasi.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/(protected)/admin/konfigurasi.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/(protected)/admin/route.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/(protected)/admin/route.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/(protected)/pemilik/dashboard/active.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/(protected)/pemilik/dashboard/active.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/(protected)/pemilik/dashboard/history.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/(protected)/pemilik/dashboard/history.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/(protected)/pemilik/dashboard/index.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/(protected)/pemilik/dashboard/index.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/(protected)/pemilik/dashboard/requests.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/(protected)/pemilik/dashboard/requests.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/(protected)/pemilik/dashboard/route.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/(protected)/pemilik/dashboard/route.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/(protected)/penyewa/booking/baru.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/(protected)/penyewa/booking/baru.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/(protected)/penyewa/booking.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/(protected)/penyewa/booking.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/(public)/properti/$propertyId.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/(public)/properti/$propertyId.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/about.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/about.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/api/auth/$.ts": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/api/auth/$.ts untuk aplikasi listing properti."
+  },
+  "src/routes/api/webhooks/qstash/$.ts": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/api/webhooks/qstash/$.ts untuk aplikasi listing properti."
+  },
+  "src/routes/api.$.ts": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/api.$.ts untuk aplikasi listing properti."
+  },
+  "src/routes/api.rpc.$.ts": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/api.rpc.$.ts untuk aplikasi listing properti."
+  },
+  "src/routes/index.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/index.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/mcp.ts": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/mcp.ts untuk aplikasi listing properti."
+  },
+  "src/routes/owner.properties.new.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/owner.properties.new.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/owner.properties.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/owner.properties.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/properties/$id.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/properties/$id.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/properties.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/properties.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/_auth.sign-in.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/_auth.sign-in.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/_auth.sign-up.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/_auth.sign-up.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/_auth.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/_auth.tsx untuk aplikasi listing properti."
+  },
+  "src/routes/__root.tsx": {
+    "summary": "Route TanStack Router yang melayani halaman src/routes/__root.tsx untuk aplikasi listing properti."
+  },
+  "src/routeTree.gen.ts": {
+    "summary": "File TypeScript/TSX: src/routeTree.gen.ts."
+  },
+  "src/server/auth-gateway/config.ts": {
+    "summary": "Modul server-side: config."
+  },
+  "src/server/auth-gateway/device.ts": {
+    "summary": "Modul server-side: device."
+  },
+  "src/server/auth-gateway/index.ts": {
+    "summary": "Modul server-side: index."
+  },
+  "src/server/auth-gateway/rate-limiter.ts": {
+    "summary": "Modul server-side: rate-limiter."
+  },
+  "src/server/auth-gateway/session.ts": {
+    "summary": "Modul server-side: session."
+  },
+  "src/server/property.ts": {
+    "summary": "Modul server-side: property."
+  },
+  "src/server/upload.ts": {
+    "summary": "Modul server-side: upload."
+  },
+  "src/server.ts": {
+    "summary": "File TypeScript/TSX: src/server.ts."
+  },
+  "src/styles.css": {
+    "summary": "Stylesheet CSS global untuk aplikasi TanStack Start dengan Tailwind CSS v4."
+  },
+  "src/types/booking.ts": {
+    "summary": "Tipe TypeScript untuk domain booking."
+  },
+  "src/types/pemesanan.ts": {
+    "summary": "Tipe TypeScript untuk domain pemesanan."
+  },
+  "src/types/property.ts": {
+    "summary": "Tipe TypeScript untuk domain property."
+  },
+  "src/types/user.ts": {
+    "summary": "Tipe TypeScript untuk domain user."
+  },
+  "src/utils/mcp-handler.ts": {
+    "summary": "Utilitas helper: mcp-handler."
+  },
+  "src/utils/propertyType.ts": {
+    "summary": "Utilitas helper: propertyType."
+  },
+  "tsconfig.json": {
+    "summary": "Konfigurasi TypeScript strict mode, path alias, dan pengaturan kompilasi untuk proyek TanStack Start."
+  },
+  "tsr.config.json": {
+    "summary": "File konfigurasi JSON."
+  },
+  "vercel.json": {
+    "summary": "Konfigurasi deployment Vercel dengan framework tanstack-start."
+  },
+  "vite.config.ts": {
+    "summary": "File TypeScript/TSX: vite.config.ts."
+  }
+}

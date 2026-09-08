@@ -23,6 +23,10 @@ export const Route = createFileRoute('/(protected)/penyewa/booking/baru')({
 
 function BookingFormPage() {
   const { data: session, isPending } = authClient.useSession()
+  const { property_id, unit_id } = Route.useSearch()
+  const redirect = `/penyewa/booking/baru?property_id=${encodeURIComponent(
+    property_id,
+  )}&unit_id=${encodeURIComponent(unit_id)}`
 
   if (isPending) {
     return (
@@ -46,10 +50,10 @@ function BookingFormPage() {
           </CardContent>
           <CardContent className="flex justify-end">
             <Button asChild>
-              <a href="/sign-in">
+              <Link to="/sign-in" search={{ redirect }}>
                 <LogIn className="h-4 w-4" />
                 Masuk
-              </a>
+              </Link>
             </Button>
           </CardContent>
         </Card>
@@ -99,7 +103,9 @@ function BookingFormContent() {
       return await orpc.ajukanPemesanan.call(input)
     },
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: ['pemesanan'] })
+      void queryClient.invalidateQueries({
+        queryKey: orpc.listPemesananSaya.queryKey(),
+      })
       void navigate({ to: '/penyewa/booking' })
     },
     onError: (err: Error) => {

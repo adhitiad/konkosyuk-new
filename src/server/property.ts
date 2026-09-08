@@ -9,6 +9,7 @@ import {
   step3FasilitasFotoSchema,
   publishPropertySchema,
   getPropertyByIdSchema,
+  updateInfoDasarSchema,
 } from '#/lib/validators/property'
 
 import type {
@@ -17,6 +18,7 @@ import type {
   SavedWizardStep3Result,
   PublishPropertyResult,
   PropertyWithRelations,
+  PropertyListResult,
 } from '#/types/property'
 
 async function getSession() {
@@ -254,6 +256,88 @@ export const publikasikanProperti = createServerFn({ method: 'POST' })
       property_id: input.property_id,
       status: updated.status,
       message: 'Properti berhasil dipublikasikan',
+    }
+  })
+
+export const listPropertiPemilik = createServerFn({ method: 'GET' }).handler(
+  async (): Promise<PropertyListResult[]> => {
+    const session = await getSession()
+    const userId = session?.user.id
+    if (!userId) {
+      throw new Error('Authentication required')
+    }
+
+    if (session.user.role !== 'PEMILIK' && session.user.role !== 'ADMIN') {
+      throw new Error('Only owners or admins can list properties')
+    }
+
+    const isAdmin = session.user.role === 'ADMIN'
+    const properties = await prisma.property.findMany({
+      where: isAdmin ? {} : { pemilik_id: userId },
+      include: { unit_propertis: { orderBy: { created_at: 'asc' } } },
+      orderBy: { created_at: 'desc' },
+    })
+
+    return properties.map((p) => ({
+      id: p.id,
+      nama_properti: p.nama_properti,
+      alamat_lengkap: p.alamat_lengkap,
+      tipe_properti: p.tipe_properti,
+      status: p.status,
+      created_at: p.created_at,
+      unit_count: p.unit_propertis.length,
+      units: p.unit_propertis.map((u) => ({
+        id: u.id,
+        nama_unit: u.nama_unit,
+        harga_bulanan: u.harga_bulanan.toString(),
+        kapasitas: u.kapasitas,
+        status_ketersediaan: u.status_ketersediaan,
+      })),
+    }))
+  },
+)
+
+export const updateInfoDasarProperti = createServerFn({ method: 'POST' })
+  .validator(updateInfoDasarSchema)
+  .handler(async ({ data: input }): Promise<SavedWizardStep1Result> => {
+    const session = await getSession()
+    const userId = session?.user.id
+    if (!userId) {
+      throw new Error('Authentication required')
+    }
+
+    if (session.user.role !== 'PEMILIK' && session.user.role !== 'ADMIN') {
+      throw new Error('Only owners or admins can update properties')
+    }
+
+    const property = await prisma.property.findUnique({
+      where: { id: input.property_id },
+      select: { id: true, pemilik_id: true },
+    })
+
+    if (!property) {
+      throw new Error('Property not found')
+    }
+
+    if (property.pemilik_id !== userId && session.user.role !== 'ADMIN') {
+      throw new Error('You do not have permission to update this property')
+    }
+
+    await prisma.property.update({
+      where: { id: input.property_id },
+      data: {
+        nama_properti: input.nama_properti,
+        deskripsi: input.deskripsi ?? null,
+        alamat_lengkap: input.alamat_lengkap,
+        latitude: input.latitude,
+        longitude: input.longitude,
+        tipe_properti: input.tipe_properti,
+      },
+    })
+
+    return {
+      property_id: input.property_id,
+      message: 'Info dasar properti berhasil diperbarui',
     }
   })
 

@@ -13,17 +13,26 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as PengaturanRouteImport } from './routes/pengaturan'
 import { Route as PropertiesRouteImport } from './routes/properties'
+import { Route as protectedAdminRouteRouteImport } from './routes/(protected)/admin/route'
 import { Route as AuthSignInRouteImport } from './routes/_auth.sign-in'
 import { Route as AuthSignUpRouteImport } from './routes/_auth.sign-up'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
 import { Route as OwnerPropertiesRouteImport } from './routes/owner.properties'
 import { Route as PropertiesIdRouteImport } from './routes/properties/$id'
+import { Route as protectedAdminIndexRouteImport } from './routes/(protected)/admin/index'
+import { Route as protectedAdminBookingsRouteImport } from './routes/(protected)/admin/bookings'
+import { Route as protectedAdminKonfigurasiRouteImport } from './routes/(protected)/admin/konfigurasi'
+import { Route as protectedAdminUsersRouteImport } from './routes/(protected)/admin/users'
+import { Route as protectedAdminVerificationRouteImport } from './routes/(protected)/admin/verification'
 import { Route as protectedPemilikDashboardRouteRouteImport } from './routes/(protected)/pemilik/dashboard/route'
 import { Route as protectedPenyewaBookingRouteImport } from './routes/(protected)/penyewa/booking'
+import { Route as protectedPenyewaWishlistRouteImport } from './routes/(protected)/penyewa/wishlist'
 import { Route as publicPropertiPropertyIdRouteImport } from './routes/(public)/properti/$propertyId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiRpcSplatRouteImport } from './routes/api.rpc.$'
+import { Route as OwnerPropertiesIdRouteImport } from './routes/owner.properties.$id'
 import { Route as OwnerPropertiesNewRouteImport } from './routes/owner.properties.new'
 import { Route as protectedPemilikDashboardIndexRouteImport } from './routes/(protected)/pemilik/dashboard/index'
 import { Route as protectedPemilikDashboardActiveRouteImport } from './routes/(protected)/pemilik/dashboard/active'
@@ -51,9 +60,19 @@ const McpRoute = McpRouteImport.update({
   path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PengaturanRoute = PengaturanRouteImport.update({
+  id: '/pengaturan',
+  path: '/pengaturan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PropertiesRoute = PropertiesRouteImport.update({
   id: '/properties',
   path: '/properties',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const protectedAdminRouteRoute = protectedAdminRouteRouteImport.update({
+  id: '/(protected)/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthSignInRoute = AuthSignInRouteImport.update({
@@ -81,6 +100,33 @@ const PropertiesIdRoute = PropertiesIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => PropertiesRoute,
 } as any)
+const protectedAdminIndexRoute = protectedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => protectedAdminRouteRoute,
+} as any)
+const protectedAdminBookingsRoute = protectedAdminBookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => protectedAdminRouteRoute,
+} as any)
+const protectedAdminKonfigurasiRoute =
+  protectedAdminKonfigurasiRouteImport.update({
+    id: '/konfigurasi',
+    path: '/konfigurasi',
+    getParentRoute: () => protectedAdminRouteRoute,
+  } as any)
+const protectedAdminUsersRoute = protectedAdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => protectedAdminRouteRoute,
+} as any)
+const protectedAdminVerificationRoute =
+  protectedAdminVerificationRouteImport.update({
+    id: '/verification',
+    path: '/verification',
+    getParentRoute: () => protectedAdminRouteRoute,
+  } as any)
 const protectedPemilikDashboardRouteRoute =
   protectedPemilikDashboardRouteRouteImport.update({
     id: '/(protected)/pemilik/dashboard',
@@ -92,6 +138,12 @@ const protectedPenyewaBookingRoute = protectedPenyewaBookingRouteImport.update({
   path: '/penyewa/booking',
   getParentRoute: () => rootRouteImport,
 } as any)
+const protectedPenyewaWishlistRoute =
+  protectedPenyewaWishlistRouteImport.update({
+    id: '/(protected)/penyewa/wishlist',
+    path: '/penyewa/wishlist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const publicPropertiPropertyIdRoute =
   publicPropertiPropertyIdRouteImport.update({
     id: '/(public)/properti/$propertyId',
@@ -107,6 +159,11 @@ const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
   getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerPropertiesIdRoute = OwnerPropertiesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => OwnerPropertiesRoute,
 } as any)
 const OwnerPropertiesNewRoute = OwnerPropertiesNewRouteImport.update({
   id: '/new',
@@ -153,18 +210,27 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/mcp': typeof McpRoute
+  '/pengaturan': typeof PengaturanRoute
   '/properties': typeof PropertiesRouteWithChildren
+  '/admin': typeof protectedAdminRouteRouteWithChildren
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
   '/api/$': typeof ApiSplatRoute
   '/owner/properties': typeof OwnerPropertiesRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
   '/pemilik/dashboard': typeof protectedPemilikDashboardRouteRouteWithChildren
+  '/admin/bookings': typeof protectedAdminBookingsRoute
+  '/admin/konfigurasi': typeof protectedAdminKonfigurasiRoute
+  '/admin/users': typeof protectedAdminUsersRoute
+  '/admin/verification': typeof protectedAdminVerificationRoute
   '/penyewa/booking': typeof protectedPenyewaBookingRouteWithChildren
+  '/penyewa/wishlist': typeof protectedPenyewaWishlistRoute
   '/properti/$propertyId': typeof publicPropertiPropertyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/owner/properties/$id': typeof OwnerPropertiesIdRoute
   '/owner/properties/new': typeof OwnerPropertiesNewRoute
+  '/admin/': typeof protectedAdminIndexRoute
   '/pemilik/dashboard/active': typeof protectedPemilikDashboardActiveRoute
   '/pemilik/dashboard/history': typeof protectedPemilikDashboardHistoryRoute
   '/pemilik/dashboard/requests': typeof protectedPemilikDashboardRequestsRoute
@@ -176,17 +242,25 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/mcp': typeof McpRoute
+  '/pengaturan': typeof PengaturanRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
   '/api/$': typeof ApiSplatRoute
   '/owner/properties': typeof OwnerPropertiesRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
+  '/admin/bookings': typeof protectedAdminBookingsRoute
+  '/admin/konfigurasi': typeof protectedAdminKonfigurasiRoute
+  '/admin/users': typeof protectedAdminUsersRoute
+  '/admin/verification': typeof protectedAdminVerificationRoute
   '/penyewa/booking': typeof protectedPenyewaBookingRouteWithChildren
+  '/penyewa/wishlist': typeof protectedPenyewaWishlistRoute
   '/properti/$propertyId': typeof publicPropertiPropertyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/owner/properties/$id': typeof OwnerPropertiesIdRoute
   '/owner/properties/new': typeof OwnerPropertiesNewRoute
+  '/admin': typeof protectedAdminIndexRoute
   '/pemilik/dashboard/active': typeof protectedPemilikDashboardActiveRoute
   '/pemilik/dashboard/history': typeof protectedPemilikDashboardHistoryRoute
   '/pemilik/dashboard/requests': typeof protectedPemilikDashboardRequestsRoute
@@ -200,18 +274,27 @@ export interface FileRoutesById {
   '/_auth': typeof AuthRouteWithChildren
   '/about': typeof AboutRoute
   '/mcp': typeof McpRoute
+  '/pengaturan': typeof PengaturanRoute
   '/properties': typeof PropertiesRouteWithChildren
+  '/(protected)/admin': typeof protectedAdminRouteRouteWithChildren
   '/_auth/sign-in': typeof AuthSignInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
   '/api/$': typeof ApiSplatRoute
   '/owner/properties': typeof OwnerPropertiesRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
   '/(protected)/pemilik/dashboard': typeof protectedPemilikDashboardRouteRouteWithChildren
+  '/(protected)/admin/bookings': typeof protectedAdminBookingsRoute
+  '/(protected)/admin/konfigurasi': typeof protectedAdminKonfigurasiRoute
+  '/(protected)/admin/users': typeof protectedAdminUsersRoute
+  '/(protected)/admin/verification': typeof protectedAdminVerificationRoute
   '/(protected)/penyewa/booking': typeof protectedPenyewaBookingRouteWithChildren
+  '/(protected)/penyewa/wishlist': typeof protectedPenyewaWishlistRoute
   '/(public)/properti/$propertyId': typeof publicPropertiPropertyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/owner/properties/$id': typeof OwnerPropertiesIdRoute
   '/owner/properties/new': typeof OwnerPropertiesNewRoute
+  '/(protected)/admin/': typeof protectedAdminIndexRoute
   '/(protected)/pemilik/dashboard/active': typeof protectedPemilikDashboardActiveRoute
   '/(protected)/pemilik/dashboard/history': typeof protectedPemilikDashboardHistoryRoute
   '/(protected)/pemilik/dashboard/requests': typeof protectedPemilikDashboardRequestsRoute
@@ -225,18 +308,27 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/mcp'
+    | '/pengaturan'
     | '/properties'
+    | '/admin'
     | '/sign-in'
     | '/sign-up'
     | '/api/$'
     | '/owner/properties'
     | '/properties/$id'
     | '/pemilik/dashboard'
+    | '/admin/bookings'
+    | '/admin/konfigurasi'
+    | '/admin/users'
+    | '/admin/verification'
     | '/penyewa/booking'
+    | '/penyewa/wishlist'
     | '/properti/$propertyId'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/owner/properties/$id'
     | '/owner/properties/new'
+    | '/admin/'
     | '/pemilik/dashboard/active'
     | '/pemilik/dashboard/history'
     | '/pemilik/dashboard/requests'
@@ -248,17 +340,25 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/mcp'
+    | '/pengaturan'
     | '/properties'
     | '/sign-in'
     | '/sign-up'
     | '/api/$'
     | '/owner/properties'
     | '/properties/$id'
+    | '/admin/bookings'
+    | '/admin/konfigurasi'
+    | '/admin/users'
+    | '/admin/verification'
     | '/penyewa/booking'
+    | '/penyewa/wishlist'
     | '/properti/$propertyId'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/owner/properties/$id'
     | '/owner/properties/new'
+    | '/admin'
     | '/pemilik/dashboard/active'
     | '/pemilik/dashboard/history'
     | '/pemilik/dashboard/requests'
@@ -271,18 +371,27 @@ export interface FileRouteTypes {
     | '/_auth'
     | '/about'
     | '/mcp'
+    | '/pengaturan'
     | '/properties'
+    | '/(protected)/admin'
     | '/_auth/sign-in'
     | '/_auth/sign-up'
     | '/api/$'
     | '/owner/properties'
     | '/properties/$id'
     | '/(protected)/pemilik/dashboard'
+    | '/(protected)/admin/bookings'
+    | '/(protected)/admin/konfigurasi'
+    | '/(protected)/admin/users'
+    | '/(protected)/admin/verification'
     | '/(protected)/penyewa/booking'
+    | '/(protected)/penyewa/wishlist'
     | '/(public)/properti/$propertyId'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/owner/properties/$id'
     | '/owner/properties/new'
+    | '/(protected)/admin/'
     | '/(protected)/pemilik/dashboard/active'
     | '/(protected)/pemilik/dashboard/history'
     | '/(protected)/pemilik/dashboard/requests'
@@ -296,11 +405,14 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRouteWithChildren
   AboutRoute: typeof AboutRoute
   McpRoute: typeof McpRoute
+  PengaturanRoute: typeof PengaturanRoute
   PropertiesRoute: typeof PropertiesRouteWithChildren
+  protectedAdminRouteRoute: typeof protectedAdminRouteRouteWithChildren
   ApiSplatRoute: typeof ApiSplatRoute
   OwnerPropertiesRoute: typeof OwnerPropertiesRouteWithChildren
   protectedPemilikDashboardRouteRoute: typeof protectedPemilikDashboardRouteRouteWithChildren
   protectedPenyewaBookingRoute: typeof protectedPenyewaBookingRouteWithChildren
+  protectedPenyewaWishlistRoute: typeof protectedPenyewaWishlistRoute
   publicPropertiPropertyIdRoute: typeof publicPropertiPropertyIdRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
@@ -337,11 +449,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pengaturan': {
+      id: '/pengaturan'
+      path: '/pengaturan'
+      fullPath: '/pengaturan'
+      preLoaderRoute: typeof PengaturanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/properties': {
       id: '/properties'
       path: '/properties'
       fullPath: '/properties'
       preLoaderRoute: typeof PropertiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(protected)/admin': {
+      id: '/(protected)/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof protectedAdminRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth/sign-in': {
@@ -379,6 +505,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropertiesIdRouteImport
       parentRoute: typeof PropertiesRoute
     }
+    '/(protected)/admin/': {
+      id: '/(protected)/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof protectedAdminIndexRouteImport
+      parentRoute: typeof protectedAdminRouteRoute
+    }
+    '/(protected)/admin/bookings': {
+      id: '/(protected)/admin/bookings'
+      path: '/bookings'
+      fullPath: '/admin/bookings'
+      preLoaderRoute: typeof protectedAdminBookingsRouteImport
+      parentRoute: typeof protectedAdminRouteRoute
+    }
+    '/(protected)/admin/konfigurasi': {
+      id: '/(protected)/admin/konfigurasi'
+      path: '/konfigurasi'
+      fullPath: '/admin/konfigurasi'
+      preLoaderRoute: typeof protectedAdminKonfigurasiRouteImport
+      parentRoute: typeof protectedAdminRouteRoute
+    }
+    '/(protected)/admin/users': {
+      id: '/(protected)/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof protectedAdminUsersRouteImport
+      parentRoute: typeof protectedAdminRouteRoute
+    }
+    '/(protected)/admin/verification': {
+      id: '/(protected)/admin/verification'
+      path: '/verification'
+      fullPath: '/admin/verification'
+      preLoaderRoute: typeof protectedAdminVerificationRouteImport
+      parentRoute: typeof protectedAdminRouteRoute
+    }
     '/(protected)/pemilik/dashboard': {
       id: '/(protected)/pemilik/dashboard'
       path: '/pemilik/dashboard'
@@ -391,6 +552,13 @@ declare module '@tanstack/react-router' {
       path: '/penyewa/booking'
       fullPath: '/penyewa/booking'
       preLoaderRoute: typeof protectedPenyewaBookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(protected)/penyewa/wishlist': {
+      id: '/(protected)/penyewa/wishlist'
+      path: '/penyewa/wishlist'
+      fullPath: '/penyewa/wishlist'
+      preLoaderRoute: typeof protectedPenyewaWishlistRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(public)/properti/$propertyId': {
@@ -413,6 +581,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/rpc/$'
       preLoaderRoute: typeof ApiRpcSplatRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/owner/properties/$id': {
+      id: '/owner/properties/$id'
+      path: '/$id'
+      fullPath: '/owner/properties/$id'
+      preLoaderRoute: typeof OwnerPropertiesIdRouteImport
+      parentRoute: typeof OwnerPropertiesRoute
     }
     '/owner/properties/new': {
       id: '/owner/properties/new'
@@ -490,11 +665,32 @@ const PropertiesRouteWithChildren = PropertiesRoute._addFileChildren(
   PropertiesRouteChildren,
 )
 
+interface protectedAdminRouteRouteChildren {
+  protectedAdminBookingsRoute: typeof protectedAdminBookingsRoute
+  protectedAdminKonfigurasiRoute: typeof protectedAdminKonfigurasiRoute
+  protectedAdminUsersRoute: typeof protectedAdminUsersRoute
+  protectedAdminVerificationRoute: typeof protectedAdminVerificationRoute
+  protectedAdminIndexRoute: typeof protectedAdminIndexRoute
+}
+
+const protectedAdminRouteRouteChildren: protectedAdminRouteRouteChildren = {
+  protectedAdminBookingsRoute: protectedAdminBookingsRoute,
+  protectedAdminKonfigurasiRoute: protectedAdminKonfigurasiRoute,
+  protectedAdminUsersRoute: protectedAdminUsersRoute,
+  protectedAdminVerificationRoute: protectedAdminVerificationRoute,
+  protectedAdminIndexRoute: protectedAdminIndexRoute,
+}
+
+const protectedAdminRouteRouteWithChildren =
+  protectedAdminRouteRoute._addFileChildren(protectedAdminRouteRouteChildren)
+
 interface OwnerPropertiesRouteChildren {
+  OwnerPropertiesIdRoute: typeof OwnerPropertiesIdRoute
   OwnerPropertiesNewRoute: typeof OwnerPropertiesNewRoute
 }
 
 const OwnerPropertiesRouteChildren: OwnerPropertiesRouteChildren = {
+  OwnerPropertiesIdRoute: OwnerPropertiesIdRoute,
   OwnerPropertiesNewRoute: OwnerPropertiesNewRoute,
 }
 
@@ -543,12 +739,15 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRouteWithChildren,
   AboutRoute: AboutRoute,
   McpRoute: McpRoute,
+  PengaturanRoute: PengaturanRoute,
   PropertiesRoute: PropertiesRouteWithChildren,
+  protectedAdminRouteRoute: protectedAdminRouteRouteWithChildren,
   ApiSplatRoute: ApiSplatRoute,
   OwnerPropertiesRoute: OwnerPropertiesRouteWithChildren,
   protectedPemilikDashboardRouteRoute:
     protectedPemilikDashboardRouteRouteWithChildren,
   protectedPenyewaBookingRoute: protectedPenyewaBookingRouteWithChildren,
+  protectedPenyewaWishlistRoute: protectedPenyewaWishlistRoute,
   publicPropertiPropertyIdRoute: publicPropertiPropertyIdRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,

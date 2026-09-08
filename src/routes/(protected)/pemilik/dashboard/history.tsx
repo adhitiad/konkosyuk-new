@@ -1,6 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
-import { History, Hash, Calendar, User } from 'lucide-react'
+import { useState } from 'react'
+import {
+  History,
+  Hash,
+  Calendar,
+  User,
+  ChevronDown,
+  ChevronUp,
+} from 'lucide-react'
 import type { InferRouterOutputs } from '@orpc/server'
 import type router from '#/orpc/router'
 import { orpc } from '#/orpc/client'
@@ -14,6 +22,14 @@ export const Route = createFileRoute('/(protected)/pemilik/dashboard/history')({
 
 type RouterOutput = InferRouterOutputs<typeof router>
 type BookingOutput = RouterOutput['getDaftarRequestBooking'][number]
+
+const REFUND_LABELS: Record<string, string> = {
+  BELUM_REFUND: 'Belum Refund',
+  MENUNGGU_PROSES: 'Menunggu Proses',
+  SEDANG_DIPROSES: 'Sedang Diproses',
+  BERHASIL: 'Berhasil',
+  GAGAL: 'Gagal',
+}
 
 const STATUS_LABELS: Record<
   string,
@@ -115,6 +131,7 @@ function BookingHistoryContent() {
 }
 
 function BookingHistoryCard({ booking }: { booking: BookingOutput }) {
+  const [expanded, setExpanded] = useState(false)
   const statusLabel = STATUS_LABELS[booking.status_booking] || {
     label: booking.status_booking,
     variant: 'outline' as const,
@@ -152,6 +169,82 @@ function BookingHistoryCard({ booking }: { booking: BookingOutput }) {
             Rp{Number(booking.total_harga).toLocaleString('id-ID')}
           </span>
         </div>
+
+        <button
+          type="button"
+          className="flex w-full items-center justify-center gap-1 pt-1 text-xs font-medium text-[var(--sea-ink-soft)] hover:text-[var(--sea-ink)]"
+          onClick={() => setExpanded((prev) => !prev)}
+        >
+          {expanded ? 'Tutup Detail' : 'Lihat Detail'}
+          {expanded ? (
+            <ChevronUp className="h-3.5 w-3.5" />
+          ) : (
+            <ChevronDown className="h-3.5 w-3.5" />
+          )}
+        </button>
+
+        {expanded && (
+          <div className="space-y-2 rounded-lg border border-[var(--line)] bg-neutral-50 p-3 text-xs text-[var(--sea-ink-soft)]">
+            <div className="flex justify-between">
+              <span>ID Booking</span>
+              <span className="font-mono">{booking.id}</span>
+            </div>
+            {booking.jumlahDP && Number(booking.jumlahDP) > 0 && (
+              <div className="flex justify-between">
+                <span>DP Dibayar</span>
+                <span>
+                  Rp{Number(booking.jumlahDP).toLocaleString('id-ID')} ·{' '}
+                  {booking.tanggalBayarDP
+                    ? new Date(booking.tanggalBayarDP).toLocaleDateString(
+                        'id-ID',
+                      )
+                    : '-'}
+                </span>
+              </div>
+            )}
+            {booking.jumlahPelunasan && Number(booking.jumlahPelunasan) > 0 && (
+              <div className="flex justify-between">
+                <span>Pelunasan</span>
+                <span>
+                  Rp{Number(booking.jumlahPelunasan).toLocaleString('id-ID')} ·{' '}
+                  {booking.tanggalPelunasan
+                    ? new Date(booking.tanggalPelunasan).toLocaleDateString(
+                        'id-ID',
+                      )
+                    : '-'}
+                </span>
+              </div>
+            )}
+            <div className="flex justify-between">
+              <span>Harga Satuan</span>
+              <span>
+                Rp{Number(booking.unit.price).toLocaleString('id-ID')}/bulan
+              </span>
+            </div>
+            {booking.alasanPenolakan && (
+              <div className="flex justify-between gap-3">
+                <span className="shrink-0">Alasan</span>
+                <span className="text-right">{booking.alasanPenolakan}</span>
+              </div>
+            )}
+            {booking.statusRefundDP &&
+              booking.statusRefundDP !== 'BELUM_REFUND' && (
+                <div className="flex justify-between">
+                  <span>Status Refund DP</span>
+                  <span>
+                    {REFUND_LABELS[booking.statusRefundDP] ??
+                      booking.statusRefundDP}
+                  </span>
+                </div>
+              )}
+            <div className="flex justify-between">
+              <span>Dibuat pada</span>
+              <span>
+                {new Date(booking.created_at).toLocaleDateString('id-ID')}
+              </span>
+            </div>
+          </div>
+        )}
       </CardContent>
     </Card>
   )
