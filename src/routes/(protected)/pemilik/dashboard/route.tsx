@@ -4,7 +4,13 @@ import {
   Outlet,
   createFileRoute,
 } from '@tanstack/react-router'
-import { LayoutDashboard, CheckCircle, Clock, History } from 'lucide-react'
+import {
+  LayoutDashboard,
+  CheckCircle,
+  Clock,
+  History,
+  CalendarClock,
+} from 'lucide-react'
 import { authClient } from '#/lib/auth-client'
 
 export const Route = createFileRoute('/(protected)/pemilik/dashboard')({
@@ -47,6 +53,11 @@ function DashboardLayout() {
     { to: '/pemilik/dashboard', label: 'Ringkasan', icon: LayoutDashboard },
     { to: '/pemilik/dashboard/requests', label: 'Permintaan', icon: Clock },
     { to: '/pemilik/dashboard/active', label: 'Aktif', icon: CheckCircle },
+    {
+      to: '/pemilik/dashboard/expirations',
+      label: 'Jatuh Tempo',
+      icon: CalendarClock,
+    },
     { to: '/pemilik/dashboard/history', label: 'Riwayat', icon: History },
   ]
 

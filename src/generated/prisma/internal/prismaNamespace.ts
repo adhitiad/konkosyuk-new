@@ -479,6 +479,7 @@ export const ModelName = {
   RefundRequest: 'RefundRequest',
   PlatformConfig: 'PlatformConfig',
   PaymentTransaction: 'PaymentTransaction',
+  Transaction: 'Transaction',
   Property: 'Property',
   UnitProperti: 'UnitProperti',
   Fasilitas: 'Fasilitas',
@@ -499,7 +500,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "accounts" | "ad_packages" | "analytics_events" | "app_settings" | "audit_logs" | "balance_logs" | "booking_requests" | "bookings" | "campus_areas" | "chart_of_accounts" | "chat_rooms" | "damage_reports" | "experiment_assignments" | "experiments" | "favorites" | "feature_flags" | "feedbacks" | "general_ledger" | "group_booking_members" | "group_bookings" | "inspection_items" | "inspection_photos" | "inspection_templates" | "inspections" | "kyc_verifications" | "loyalty_transactions" | "maintenance_reports" | "maintenance_tickets" | "messages" | "nearby_places" | "neighborhood_insights" | "neighborhood_places" | "notification_settings" | "notifications" | "owner_bank_accounts" | "payment_gateway_configs" | "payment_gateway_credentials" | "payment_transactions" | "payments" | "platform_settings" | "popular_areas" | "pricing_analytics" | "pricing_suggestions" | "properties" | "property_ads" | "property_comparisons" | "property_ratings" | "property_rules" | "property_similarities" | "property_tags" | "push_subscriptions" | "referrals" | "refund_requests" | "review_replies" | "reviews" | "reward_redemptions" | "rewards" | "rooms" | "room_facilities" | "roommate_preferences" | "saved_searches" | "seasonal_pricing_rules" | "sessions" | "tags" | "twoFactor" | "unit_pricing_tiers" | "units" | "user_contracts" | "user_interest_vectors" | "user_notification_preferences" | "users" | "verifications" | "wa_session" | "webhook_events" | "wishlists" | "withdrawals" | "booking" | "payment" | "kycRequest" | "refundRequest" | "platformConfig" | "paymentTransaction" | "property" | "unitProperti" | "fasilitas" | "fotoProperti" | "pemesanan"
+    modelProps: "accounts" | "ad_packages" | "analytics_events" | "app_settings" | "audit_logs" | "balance_logs" | "booking_requests" | "bookings" | "campus_areas" | "chart_of_accounts" | "chat_rooms" | "damage_reports" | "experiment_assignments" | "experiments" | "favorites" | "feature_flags" | "feedbacks" | "general_ledger" | "group_booking_members" | "group_bookings" | "inspection_items" | "inspection_photos" | "inspection_templates" | "inspections" | "kyc_verifications" | "loyalty_transactions" | "maintenance_reports" | "maintenance_tickets" | "messages" | "nearby_places" | "neighborhood_insights" | "neighborhood_places" | "notification_settings" | "notifications" | "owner_bank_accounts" | "payment_gateway_configs" | "payment_gateway_credentials" | "payment_transactions" | "payments" | "platform_settings" | "popular_areas" | "pricing_analytics" | "pricing_suggestions" | "properties" | "property_ads" | "property_comparisons" | "property_ratings" | "property_rules" | "property_similarities" | "property_tags" | "push_subscriptions" | "referrals" | "refund_requests" | "review_replies" | "reviews" | "reward_redemptions" | "rewards" | "rooms" | "room_facilities" | "roommate_preferences" | "saved_searches" | "seasonal_pricing_rules" | "sessions" | "tags" | "twoFactor" | "unit_pricing_tiers" | "units" | "user_contracts" | "user_interest_vectors" | "user_notification_preferences" | "users" | "verifications" | "wa_session" | "webhook_events" | "wishlists" | "withdrawals" | "booking" | "payment" | "kycRequest" | "refundRequest" | "platformConfig" | "paymentTransaction" | "transaction" | "property" | "unitProperti" | "fasilitas" | "fotoProperti" | "pemesanan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -6571,6 +6572,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Transaction: {
+      payload: Prisma.$TransactionPayload<ExtArgs>
+      fields: Prisma.TransactionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TransactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TransactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>
+        }
+        findFirst: {
+          args: Prisma.TransactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TransactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>
+        }
+        findMany: {
+          args: Prisma.TransactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>[]
+        }
+        create: {
+          args: Prisma.TransactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>
+        }
+        createMany: {
+          args: Prisma.TransactionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TransactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>[]
+        }
+        delete: {
+          args: Prisma.TransactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>
+        }
+        update: {
+          args: Prisma.TransactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>
+        }
+        deleteMany: {
+          args: Prisma.TransactionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TransactionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TransactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>[]
+        }
+        upsert: {
+          args: Prisma.TransactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>
+        }
+        aggregate: {
+          args: Prisma.TransactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTransaction>
+        }
+        groupBy: {
+          args: Prisma.TransactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TransactionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TransactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TransactionCountAggregateOutputType> | number
+        }
+      }
+    }
     Property: {
       payload: Prisma.$PropertyPayload<ExtArgs>
       fields: Prisma.PropertyFieldRefs
@@ -8301,6 +8376,21 @@ export const PaymentTransactionScalarFieldEnum = {
 export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalarFieldEnum)[keyof typeof PaymentTransactionScalarFieldEnum]
 
 
+export const TransactionScalarFieldEnum = {
+  id: 'id',
+  pemesananId: 'pemesananId',
+  amount: 'amount',
+  paymentMethod: 'paymentMethod',
+  externalId: 'externalId',
+  status: 'status',
+  snapshotData: 'snapshotData',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
+
+
 export const PropertyScalarFieldEnum = {
   id: 'id',
   nama_properti: 'nama_properti',
@@ -8361,8 +8451,7 @@ export type FotoPropertiScalarFieldEnum = (typeof FotoPropertiScalarFieldEnum)[k
 
 export const PemesananScalarFieldEnum = {
   id: 'id',
-  unit_properti_id: 'unit_properti_id',
-  property_id: 'property_id',
+  room_id: 'room_id',
   tenant_id: 'tenant_id',
   jumlah_penghuni: 'jumlah_penghuni',
   tanggal_mulai: 'tanggal_mulai',
@@ -9447,6 +9536,20 @@ export type ListEnumStatusTransaksiFieldRefInput<$PrismaModel> = FieldRefInputTy
 
 
 /**
+ * Reference to a field of type 'TransactionStatus'
+ */
+export type EnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'TransactionStatus[]'
+ */
+export type ListEnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'TipeProperti'
  */
 export type EnumTipePropertiFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipeProperti'>
@@ -9748,6 +9851,7 @@ export type GlobalOmitConfig = {
   refundRequest?: Prisma.RefundRequestOmit
   platformConfig?: Prisma.PlatformConfigOmit
   paymentTransaction?: Prisma.PaymentTransactionOmit
+  transaction?: Prisma.TransactionOmit
   property?: Prisma.PropertyOmit
   unitProperti?: Prisma.UnitPropertiOmit
   fasilitas?: Prisma.FasilitasOmit

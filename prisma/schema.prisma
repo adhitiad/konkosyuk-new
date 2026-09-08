@@ -1081,6 +1081,7 @@ model rooms {
   created_at   DateTime     @default(now()) @db.Timestamp(6)
   updated_at   DateTime     @default(now()) @db.Timestamp(6)
   properties   properties   @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "rooms_property_id_properties_id_fk")
+  pemesanans   Pemesanan[]
 
   @@index([property_id])
   @@index([status])
@@ -1535,6 +1536,23 @@ model PaymentTransaction {
   @@index([status])
 }
 
+model Transaction {
+  id            String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  pemesananId   String           @db.Uuid
+  amount        Decimal          @db.Decimal(12, 2)
+  paymentMethod String
+  externalId    String?          @unique
+  status        TransactionStatus @default(PENDING)
+  snapshotData  Json?            @default("{}")
+  created_at    DateTime         @default(now()) @db.Timestamp(6)
+  updated_at    DateTime         @default(now()) @db.Timestamp(6)
+  pemesanan     Pemesanan         @relation(fields: [pemesananId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Transaction_pemesanan_id_Pemesanan_id_fk")
+
+  @@index([pemesananId])
+  @@index([status])
+  @@index([externalId])
+}
+
 model Property {
   id             String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   nama_properti  String
@@ -1551,7 +1569,6 @@ model Property {
   fasilitas      Fasilitas[]
   foto_propertis FotoProperti[]
   users          users          @relation("Property_pemilik", fields: [pemilik_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Property_pemilik_id_users_id_fk")
-  pemesanans     Pemesanan[]
 
   @@index([pemilik_id])
   @@index([tipe_properti])
@@ -1571,7 +1588,6 @@ model UnitProperti {
   updated_at          DateTime           @default(now()) @db.Timestamp(6)
   property            Property           @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "UnitProperti_property_id_Property_id_fk")
   fasilitas           Fasilitas[]
-  pemesanans          Pemesanan[]
 
   @@index([property_id])
   @@index([status_ketersediaan])
@@ -1607,24 +1623,22 @@ model FotoProperti {
 }
 
 model Pemesanan {
-  id               String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  unit_properti_id String          @db.Uuid
-  property_id      String          @db.Uuid
-  tenant_id        String          @db.Uuid
-  jumlah_penghuni  Int
-  tanggal_mulai    DateTime        @db.Timestamp(6)
-  tanggal_selesai  DateTime?       @db.Timestamp(6)
-  total_harga      Decimal         @db.Decimal(12, 2)
-  status           StatusPemesanan @default(MENUNGGU_PERSETUJUAN)
-  catatan          String?
-  created_at       DateTime         @default(now()) @db.Timestamp(6)
-  updated_at       DateTime         @default(now()) @db.Timestamp(6)
-  unit_properti    UnitProperti    @relation(fields: [unit_properti_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Pemesanan_unit_properti_id_UnitProperti_id_fk")
-  property         Property        @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Pemesanan_property_id_Property_id_fk")
-  tenant           users           @relation("PemesananTenant", fields: [tenant_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Pemesanan_tenant_id_users_id_fk")
+  id              String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  room_id         String          @db.Uuid
+  tenant_id       String          @db.Uuid
+  jumlah_penghuni Int
+  tanggal_mulai   DateTime        @db.Timestamp(6)
+  tanggal_selesai DateTime?       @db.Timestamp(6)
+  total_harga     Decimal         @db.Decimal(12, 2)
+  status          StatusPemesanan @default(MENUNGGU_PERSETUJUAN)
+  catatan         String?
+  created_at      DateTime        @default(now()) @db.Timestamp(6)
+  updated_at      DateTime        @default(now()) @db.Timestamp(6)
+  room            rooms           @relation(fields: [room_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Pemesanan_room_id_rooms_id_fk")
+  tenant          users           @relation("PemesananTenant", fields: [tenant_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Pemesanan_tenant_id_users_id_fk")
+  transactions    Transaction[]
 
-  @@index([property_id])
-  @@index([unit_properti_id])
+  @@index([room_id])
   @@index([tenant_id])
   @@index([status])
 }
@@ -2021,6 +2035,10 @@ enum InsightSource {
 }
 
 enum NotificationType {
+  BOOKING_APPROVED
+  BOOKING_REJECTED
+  PAYMENT_SUCCESS
+  NEW_MESSAGE
   booking
   payment
   maintenance
@@ -2212,6 +2230,13 @@ enum StatusTransaksi {
   BERHASIL
   GAGAL
   DIBATALKAN
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  EXPIRED
 }
 
 enum MetodePembayaran {

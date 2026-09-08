@@ -6,8 +6,7 @@ export type StatusPemesanan = z.infer<typeof StatusPemesananSchema>
 
 export interface PemesananWithRelations {
   id: string
-  property_id: string
-  unit_properti_id: string
+  room_id: string
   tenant_id: string
   nama_unit: string
   nama_properti: string

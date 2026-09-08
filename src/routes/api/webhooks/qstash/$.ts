@@ -108,7 +108,6 @@ async function handle({ request }: { request: Request }) {
 
       let updatedPayment = null
       let updatedBooking = null
-      let updatedPemesanan = null
 
       if (bookingId) {
         const booking = await tx.booking.findUnique({
@@ -159,35 +158,6 @@ async function handle({ request }: { request: Request }) {
         })
 
         if (updatedPayment.count > 0 && booking) {
-          const pemesanan = await tx.pemesanan.findFirst({
-            where: { unit_properti_id: booking.unit_id },
-          })
-
-          if (pemesanan) {
-            let nextPemesananStatus: string | undefined
-            if (status === 'BERHASIL') {
-              nextPemesananStatus = 'DITERIMA'
-            } else if (status === 'GAGAL') {
-              nextPemesananStatus = 'MENUNGGU_PERSETUJUAN'
-            }
-
-            if (
-              nextPemesananStatus &&
-              pemesanan.status !== nextPemesananStatus
-            ) {
-              updatedPemesanan = await tx.pemesanan.update({
-                where: { id: pemesanan.id },
-                data: {
-                  status: nextPemesananStatus as
-                    | 'MENUNGGU_PERSETUJUAN'
-                    | 'DITERIMA'
-                    | 'DITOLAK'
-                    | 'DIBATALKAN',
-                },
-                select: { id: true, status: true },
-              })
-            }
-          }
         }
       }
 
@@ -212,7 +182,6 @@ async function handle({ request }: { request: Request }) {
         transaction: updatedTransaction,
         payment: updatedPayment,
         booking: updatedBooking,
-        pemesanan: updatedPemesanan,
       }
     })
 
@@ -223,7 +192,7 @@ async function handle({ request }: { request: Request }) {
         transaction_id: transactionId,
         status,
         booking_status: result.booking?.status_booking,
-        pemesanan_status: result.pemesanan?.status,
+        pemesanan_status: undefined,
         message: 'Payment status updated',
       }),
       {

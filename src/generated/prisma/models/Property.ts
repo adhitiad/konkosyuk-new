@@ -272,7 +272,6 @@ export type PropertyWhereInput = {
   fasilitas?: Prisma.FasilitasListRelationFilter
   foto_propertis?: Prisma.FotoPropertiListRelationFilter
   users?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.usersWhereInput>
-  pemesanans?: Prisma.PemesananListRelationFilter
 }
 
 export type PropertyOrderByWithRelationInput = {
@@ -291,7 +290,6 @@ export type PropertyOrderByWithRelationInput = {
   fasilitas?: Prisma.FasilitasOrderByRelationAggregateInput
   foto_propertis?: Prisma.FotoPropertiOrderByRelationAggregateInput
   users?: Prisma.usersOrderByWithRelationInput
-  pemesanans?: Prisma.PemesananOrderByRelationAggregateInput
 }
 
 export type PropertyWhereUniqueInput = Prisma.AtLeast<{
@@ -313,7 +311,6 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   fasilitas?: Prisma.FasilitasListRelationFilter
   foto_propertis?: Prisma.FotoPropertiListRelationFilter
   users?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.usersWhereInput>
-  pemesanans?: Prisma.PemesananListRelationFilter
 }, "id">
 
 export type PropertyOrderByWithAggregationInput = {
@@ -367,7 +364,6 @@ export type PropertyCreateInput = {
   fasilitas?: Prisma.FasilitasCreateNestedManyWithoutPropertyInput
   foto_propertis?: Prisma.FotoPropertiCreateNestedManyWithoutPropertyInput
   users: Prisma.usersCreateNestedOneWithoutPropertis_wizardInput
-  pemesanans?: Prisma.PemesananCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateInput = {
@@ -385,7 +381,6 @@ export type PropertyUncheckedCreateInput = {
   unit_propertis?: Prisma.UnitPropertiUncheckedCreateNestedManyWithoutPropertyInput
   fasilitas?: Prisma.FasilitasUncheckedCreateNestedManyWithoutPropertyInput
   foto_propertis?: Prisma.FotoPropertiUncheckedCreateNestedManyWithoutPropertyInput
-  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUpdateInput = {
@@ -403,7 +398,6 @@ export type PropertyUpdateInput = {
   fasilitas?: Prisma.FasilitasUpdateManyWithoutPropertyNestedInput
   foto_propertis?: Prisma.FotoPropertiUpdateManyWithoutPropertyNestedInput
   users?: Prisma.usersUpdateOneRequiredWithoutPropertis_wizardNestedInput
-  pemesanans?: Prisma.PemesananUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateInput = {
@@ -421,7 +415,6 @@ export type PropertyUncheckedUpdateInput = {
   unit_propertis?: Prisma.UnitPropertiUncheckedUpdateManyWithoutPropertyNestedInput
   fasilitas?: Prisma.FasilitasUncheckedUpdateManyWithoutPropertyNestedInput
   foto_propertis?: Prisma.FotoPropertiUncheckedUpdateManyWithoutPropertyNestedInput
-  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateManyInput = {
@@ -624,20 +617,6 @@ export type PropertyUpdateOneRequiredWithoutFoto_propertisNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PropertyUpdateToOneWithWhereWithoutFoto_propertisInput, Prisma.PropertyUpdateWithoutFoto_propertisInput>, Prisma.PropertyUncheckedUpdateWithoutFoto_propertisInput>
 }
 
-export type PropertyCreateNestedOneWithoutPemesanansInput = {
-  create?: Prisma.XOR<Prisma.PropertyCreateWithoutPemesanansInput, Prisma.PropertyUncheckedCreateWithoutPemesanansInput>
-  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutPemesanansInput
-  connect?: Prisma.PropertyWhereUniqueInput
-}
-
-export type PropertyUpdateOneRequiredWithoutPemesanansNestedInput = {
-  create?: Prisma.XOR<Prisma.PropertyCreateWithoutPemesanansInput, Prisma.PropertyUncheckedCreateWithoutPemesanansInput>
-  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutPemesanansInput
-  upsert?: Prisma.PropertyUpsertWithoutPemesanansInput
-  connect?: Prisma.PropertyWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PropertyUpdateToOneWithWhereWithoutPemesanansInput, Prisma.PropertyUpdateWithoutPemesanansInput>, Prisma.PropertyUncheckedUpdateWithoutPemesanansInput>
-}
-
 export type PropertyCreateWithoutUsersInput = {
   id?: string
   nama_properti: string
@@ -652,7 +631,6 @@ export type PropertyCreateWithoutUsersInput = {
   unit_propertis?: Prisma.UnitPropertiCreateNestedManyWithoutPropertyInput
   fasilitas?: Prisma.FasilitasCreateNestedManyWithoutPropertyInput
   foto_propertis?: Prisma.FotoPropertiCreateNestedManyWithoutPropertyInput
-  pemesanans?: Prisma.PemesananCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutUsersInput = {
@@ -669,7 +647,6 @@ export type PropertyUncheckedCreateWithoutUsersInput = {
   unit_propertis?: Prisma.UnitPropertiUncheckedCreateNestedManyWithoutPropertyInput
   fasilitas?: Prisma.FasilitasUncheckedCreateNestedManyWithoutPropertyInput
   foto_propertis?: Prisma.FotoPropertiUncheckedCreateNestedManyWithoutPropertyInput
-  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutUsersInput = {
@@ -729,7 +706,6 @@ export type PropertyCreateWithoutUnit_propertisInput = {
   fasilitas?: Prisma.FasilitasCreateNestedManyWithoutPropertyInput
   foto_propertis?: Prisma.FotoPropertiCreateNestedManyWithoutPropertyInput
   users: Prisma.usersCreateNestedOneWithoutPropertis_wizardInput
-  pemesanans?: Prisma.PemesananCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutUnit_propertisInput = {
@@ -746,7 +722,6 @@ export type PropertyUncheckedCreateWithoutUnit_propertisInput = {
   updated_at?: Date | string
   fasilitas?: Prisma.FasilitasUncheckedCreateNestedManyWithoutPropertyInput
   foto_propertis?: Prisma.FotoPropertiUncheckedCreateNestedManyWithoutPropertyInput
-  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutUnit_propertisInput = {
@@ -779,7 +754,6 @@ export type PropertyUpdateWithoutUnit_propertisInput = {
   fasilitas?: Prisma.FasilitasUpdateManyWithoutPropertyNestedInput
   foto_propertis?: Prisma.FotoPropertiUpdateManyWithoutPropertyNestedInput
   users?: Prisma.usersUpdateOneRequiredWithoutPropertis_wizardNestedInput
-  pemesanans?: Prisma.PemesananUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutUnit_propertisInput = {
@@ -796,7 +770,6 @@ export type PropertyUncheckedUpdateWithoutUnit_propertisInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fasilitas?: Prisma.FasilitasUncheckedUpdateManyWithoutPropertyNestedInput
   foto_propertis?: Prisma.FotoPropertiUncheckedUpdateManyWithoutPropertyNestedInput
-  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateWithoutFasilitasInput = {
@@ -813,7 +786,6 @@ export type PropertyCreateWithoutFasilitasInput = {
   unit_propertis?: Prisma.UnitPropertiCreateNestedManyWithoutPropertyInput
   foto_propertis?: Prisma.FotoPropertiCreateNestedManyWithoutPropertyInput
   users: Prisma.usersCreateNestedOneWithoutPropertis_wizardInput
-  pemesanans?: Prisma.PemesananCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutFasilitasInput = {
@@ -830,7 +802,6 @@ export type PropertyUncheckedCreateWithoutFasilitasInput = {
   updated_at?: Date | string
   unit_propertis?: Prisma.UnitPropertiUncheckedCreateNestedManyWithoutPropertyInput
   foto_propertis?: Prisma.FotoPropertiUncheckedCreateNestedManyWithoutPropertyInput
-  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutFasilitasInput = {
@@ -863,7 +834,6 @@ export type PropertyUpdateWithoutFasilitasInput = {
   unit_propertis?: Prisma.UnitPropertiUpdateManyWithoutPropertyNestedInput
   foto_propertis?: Prisma.FotoPropertiUpdateManyWithoutPropertyNestedInput
   users?: Prisma.usersUpdateOneRequiredWithoutPropertis_wizardNestedInput
-  pemesanans?: Prisma.PemesananUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutFasilitasInput = {
@@ -880,7 +850,6 @@ export type PropertyUncheckedUpdateWithoutFasilitasInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_propertis?: Prisma.UnitPropertiUncheckedUpdateManyWithoutPropertyNestedInput
   foto_propertis?: Prisma.FotoPropertiUncheckedUpdateManyWithoutPropertyNestedInput
-  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateWithoutFoto_propertisInput = {
@@ -897,7 +866,6 @@ export type PropertyCreateWithoutFoto_propertisInput = {
   unit_propertis?: Prisma.UnitPropertiCreateNestedManyWithoutPropertyInput
   fasilitas?: Prisma.FasilitasCreateNestedManyWithoutPropertyInput
   users: Prisma.usersCreateNestedOneWithoutPropertis_wizardInput
-  pemesanans?: Prisma.PemesananCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutFoto_propertisInput = {
@@ -914,7 +882,6 @@ export type PropertyUncheckedCreateWithoutFoto_propertisInput = {
   updated_at?: Date | string
   unit_propertis?: Prisma.UnitPropertiUncheckedCreateNestedManyWithoutPropertyInput
   fasilitas?: Prisma.FasilitasUncheckedCreateNestedManyWithoutPropertyInput
-  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutFoto_propertisInput = {
@@ -947,7 +914,6 @@ export type PropertyUpdateWithoutFoto_propertisInput = {
   unit_propertis?: Prisma.UnitPropertiUpdateManyWithoutPropertyNestedInput
   fasilitas?: Prisma.FasilitasUpdateManyWithoutPropertyNestedInput
   users?: Prisma.usersUpdateOneRequiredWithoutPropertis_wizardNestedInput
-  pemesanans?: Prisma.PemesananUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutFoto_propertisInput = {
@@ -964,91 +930,6 @@ export type PropertyUncheckedUpdateWithoutFoto_propertisInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_propertis?: Prisma.UnitPropertiUncheckedUpdateManyWithoutPropertyNestedInput
   fasilitas?: Prisma.FasilitasUncheckedUpdateManyWithoutPropertyNestedInput
-  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutPropertyNestedInput
-}
-
-export type PropertyCreateWithoutPemesanansInput = {
-  id?: string
-  nama_properti: string
-  deskripsi?: string | null
-  alamat_lengkap: string
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tipe_properti: $Enums.TipeProperti
-  status?: $Enums.StatusProperti
-  created_at?: Date | string
-  updated_at?: Date | string
-  unit_propertis?: Prisma.UnitPropertiCreateNestedManyWithoutPropertyInput
-  fasilitas?: Prisma.FasilitasCreateNestedManyWithoutPropertyInput
-  foto_propertis?: Prisma.FotoPropertiCreateNestedManyWithoutPropertyInput
-  users: Prisma.usersCreateNestedOneWithoutPropertis_wizardInput
-}
-
-export type PropertyUncheckedCreateWithoutPemesanansInput = {
-  id?: string
-  nama_properti: string
-  deskripsi?: string | null
-  alamat_lengkap: string
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tipe_properti: $Enums.TipeProperti
-  status?: $Enums.StatusProperti
-  pemilik_id: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  unit_propertis?: Prisma.UnitPropertiUncheckedCreateNestedManyWithoutPropertyInput
-  fasilitas?: Prisma.FasilitasUncheckedCreateNestedManyWithoutPropertyInput
-  foto_propertis?: Prisma.FotoPropertiUncheckedCreateNestedManyWithoutPropertyInput
-}
-
-export type PropertyCreateOrConnectWithoutPemesanansInput = {
-  where: Prisma.PropertyWhereUniqueInput
-  create: Prisma.XOR<Prisma.PropertyCreateWithoutPemesanansInput, Prisma.PropertyUncheckedCreateWithoutPemesanansInput>
-}
-
-export type PropertyUpsertWithoutPemesanansInput = {
-  update: Prisma.XOR<Prisma.PropertyUpdateWithoutPemesanansInput, Prisma.PropertyUncheckedUpdateWithoutPemesanansInput>
-  create: Prisma.XOR<Prisma.PropertyCreateWithoutPemesanansInput, Prisma.PropertyUncheckedCreateWithoutPemesanansInput>
-  where?: Prisma.PropertyWhereInput
-}
-
-export type PropertyUpdateToOneWithWhereWithoutPemesanansInput = {
-  where?: Prisma.PropertyWhereInput
-  data: Prisma.XOR<Prisma.PropertyUpdateWithoutPemesanansInput, Prisma.PropertyUncheckedUpdateWithoutPemesanansInput>
-}
-
-export type PropertyUpdateWithoutPemesanansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nama_properti?: Prisma.StringFieldUpdateOperationsInput | string
-  deskripsi?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  alamat_lengkap?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tipe_properti?: Prisma.EnumTipePropertiFieldUpdateOperationsInput | $Enums.TipeProperti
-  status?: Prisma.EnumStatusPropertiFieldUpdateOperationsInput | $Enums.StatusProperti
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_propertis?: Prisma.UnitPropertiUpdateManyWithoutPropertyNestedInput
-  fasilitas?: Prisma.FasilitasUpdateManyWithoutPropertyNestedInput
-  foto_propertis?: Prisma.FotoPropertiUpdateManyWithoutPropertyNestedInput
-  users?: Prisma.usersUpdateOneRequiredWithoutPropertis_wizardNestedInput
-}
-
-export type PropertyUncheckedUpdateWithoutPemesanansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nama_properti?: Prisma.StringFieldUpdateOperationsInput | string
-  deskripsi?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  alamat_lengkap?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tipe_properti?: Prisma.EnumTipePropertiFieldUpdateOperationsInput | $Enums.TipeProperti
-  status?: Prisma.EnumStatusPropertiFieldUpdateOperationsInput | $Enums.StatusProperti
-  pemilik_id?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_propertis?: Prisma.UnitPropertiUncheckedUpdateManyWithoutPropertyNestedInput
-  fasilitas?: Prisma.FasilitasUncheckedUpdateManyWithoutPropertyNestedInput
-  foto_propertis?: Prisma.FotoPropertiUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateManyUsersInput = {
@@ -1078,7 +959,6 @@ export type PropertyUpdateWithoutUsersInput = {
   unit_propertis?: Prisma.UnitPropertiUpdateManyWithoutPropertyNestedInput
   fasilitas?: Prisma.FasilitasUpdateManyWithoutPropertyNestedInput
   foto_propertis?: Prisma.FotoPropertiUpdateManyWithoutPropertyNestedInput
-  pemesanans?: Prisma.PemesananUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutUsersInput = {
@@ -1095,7 +975,6 @@ export type PropertyUncheckedUpdateWithoutUsersInput = {
   unit_propertis?: Prisma.UnitPropertiUncheckedUpdateManyWithoutPropertyNestedInput
   fasilitas?: Prisma.FasilitasUncheckedUpdateManyWithoutPropertyNestedInput
   foto_propertis?: Prisma.FotoPropertiUncheckedUpdateManyWithoutPropertyNestedInput
-  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateManyWithoutUsersInput = {
@@ -1120,14 +999,12 @@ export type PropertyCountOutputType = {
   unit_propertis: number
   fasilitas: number
   foto_propertis: number
-  pemesanans: number
 }
 
 export type PropertyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   unit_propertis?: boolean | PropertyCountOutputTypeCountUnit_propertisArgs
   fasilitas?: boolean | PropertyCountOutputTypeCountFasilitasArgs
   foto_propertis?: boolean | PropertyCountOutputTypeCountFoto_propertisArgs
-  pemesanans?: boolean | PropertyCountOutputTypeCountPemesanansArgs
 }
 
 /**
@@ -1161,13 +1038,6 @@ export type PropertyCountOutputTypeCountFoto_propertisArgs<ExtArgs extends runti
   where?: Prisma.FotoPropertiWhereInput
 }
 
-/**
- * PropertyCountOutputType without action
- */
-export type PropertyCountOutputTypeCountPemesanansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PemesananWhereInput
-}
-
 
 export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1185,7 +1055,6 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   fasilitas?: boolean | Prisma.Property$fasilitasArgs<ExtArgs>
   foto_propertis?: boolean | Prisma.Property$foto_propertisArgs<ExtArgs>
   users?: boolean | Prisma.usersDefaultArgs<ExtArgs>
-  pemesanans?: boolean | Prisma.Property$pemesanansArgs<ExtArgs>
   _count?: boolean | Prisma.PropertyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["property"]>
 
@@ -1239,7 +1108,6 @@ export type PropertyInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   fasilitas?: boolean | Prisma.Property$fasilitasArgs<ExtArgs>
   foto_propertis?: boolean | Prisma.Property$foto_propertisArgs<ExtArgs>
   users?: boolean | Prisma.usersDefaultArgs<ExtArgs>
-  pemesanans?: boolean | Prisma.Property$pemesanansArgs<ExtArgs>
   _count?: boolean | Prisma.PropertyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PropertyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1256,7 +1124,6 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     fasilitas: Prisma.$FasilitasPayload<ExtArgs>[]
     foto_propertis: Prisma.$FotoPropertiPayload<ExtArgs>[]
     users: Prisma.$usersPayload<ExtArgs>
-    pemesanans: Prisma.$PemesananPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1668,7 +1535,6 @@ export interface Prisma__PropertyClient<T, Null = never, ExtArgs extends runtime
   fasilitas<T extends Prisma.Property$fasilitasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$fasilitasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FasilitasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   foto_propertis<T extends Prisma.Property$foto_propertisArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$foto_propertisArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FotoPropertiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.usersDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.usersDefaultArgs<ExtArgs>>): Prisma.Prisma__usersClient<runtime.Types.Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  pemesanans<T extends Prisma.Property$pemesanansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$pemesanansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PemesananPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2179,30 +2045,6 @@ export type Property$foto_propertisArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.FotoPropertiScalarFieldEnum | Prisma.FotoPropertiScalarFieldEnum[]
-}
-
-/**
- * Property.pemesanans
- */
-export type Property$pemesanansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Pemesanan
-   */
-  select?: Prisma.PemesananSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Pemesanan
-   */
-  omit?: Prisma.PemesananOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PemesananInclude<ExtArgs> | null
-  where?: Prisma.PemesananWhereInput
-  orderBy?: Prisma.PemesananOrderByWithRelationInput | Prisma.PemesananOrderByWithRelationInput[]
-  cursor?: Prisma.PemesananWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PemesananScalarFieldEnum | Prisma.PemesananScalarFieldEnum[]
 }
 
 /**

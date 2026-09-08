@@ -15,7 +15,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
 import { Skeleton } from '#/components/ui/skeleton'
 import { PropertyImageGallery } from '#/components/property/PropertyImageGallery'
 import { PropertyMap } from '#/components/property/PropertyMap'
-import { UnitCard } from '#/components/property/UnitCard'
 import {
   getTipePropertiLabel,
   getStatusPropertiLabel,
@@ -43,19 +42,32 @@ export const Route = createFileRoute('/(public)/properti/$propertyId')({
         input: { id: params.propertyId },
       }),
     )
+    return { propertyId: params.propertyId }
   },
-  head: () => ({
-    meta: [
-      {
-        title: 'Detail Properti — Konkosyuk',
-      },
-      {
-        name: 'description',
-        content:
-          'Cari kos nyaman di seluruh Indonesia. Booking langsung, harga transparan, tanpa perantara ribet.',
-      },
-    ],
-  }),
+  head: ({ params }) => {
+    const title = `Detail Properti — Konkosyuk`
+    const description =
+      'Cari kos nyaman di seluruh Indonesia. Booking langsung, harga transparan, tanpa perantara ribet.'
+    const image = '/og-image.png'
+    const url = `/properti/${params.propertyId}`
+
+    return {
+      meta: [
+        { title },
+        { name: 'description', content: description },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:image', content: image },
+        { property: 'og:url', content: url },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:description', content: description },
+        { name: 'twitter:image', content: image },
+      ],
+      links: [{ rel: 'canonical', href: url }],
+    }
+  },
 })
 
 function formatWhatsAppLink(phone: string | null): string | null {
@@ -226,7 +238,21 @@ function PropertyDetailPage() {
               {property.unit_propertis.length > 0 ? (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   {property.unit_propertis.map((unit) => (
-                    <UnitCard key={unit.id} unit={unit} />
+                    <Card key={unit.id}>
+                      <CardHeader>
+                        <CardTitle className="text-base">
+                          {unit.nama_unit}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-1 text-sm">
+                        <p>
+                          Harga bulanan: Rp
+                          {Number(unit.harga_bulanan).toLocaleString('id-ID')}
+                        </p>
+                        <p>Kapasitas: {unit.kapasitas} orang</p>
+                        <p>Status: {unit.status_ketersediaan}</p>
+                      </CardContent>
+                    </Card>
                   ))}
                 </div>
               ) : (

@@ -258,7 +258,6 @@ export type UnitPropertiWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"UnitProperti"> | Date | string
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   fasilitas?: Prisma.FasilitasListRelationFilter
-  pemesanans?: Prisma.PemesananListRelationFilter
 }
 
 export type UnitPropertiOrderByWithRelationInput = {
@@ -273,7 +272,6 @@ export type UnitPropertiOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrder
   property?: Prisma.PropertyOrderByWithRelationInput
   fasilitas?: Prisma.FasilitasOrderByRelationAggregateInput
-  pemesanans?: Prisma.PemesananOrderByRelationAggregateInput
 }
 
 export type UnitPropertiWhereUniqueInput = Prisma.AtLeast<{
@@ -291,7 +289,6 @@ export type UnitPropertiWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeFilter<"UnitProperti"> | Date | string
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   fasilitas?: Prisma.FasilitasListRelationFilter
-  pemesanans?: Prisma.PemesananListRelationFilter
 }, "id">
 
 export type UnitPropertiOrderByWithAggregationInput = {
@@ -337,7 +334,6 @@ export type UnitPropertiCreateInput = {
   updated_at?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutUnit_propertisInput
   fasilitas?: Prisma.FasilitasCreateNestedManyWithoutUnitInput
-  pemesanans?: Prisma.PemesananCreateNestedManyWithoutUnit_propertiInput
 }
 
 export type UnitPropertiUncheckedCreateInput = {
@@ -351,7 +347,6 @@ export type UnitPropertiUncheckedCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   fasilitas?: Prisma.FasilitasUncheckedCreateNestedManyWithoutUnitInput
-  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutUnit_propertiInput
 }
 
 export type UnitPropertiUpdateInput = {
@@ -365,7 +360,6 @@ export type UnitPropertiUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutUnit_propertisNestedInput
   fasilitas?: Prisma.FasilitasUpdateManyWithoutUnitNestedInput
-  pemesanans?: Prisma.PemesananUpdateManyWithoutUnit_propertiNestedInput
 }
 
 export type UnitPropertiUncheckedUpdateInput = {
@@ -379,7 +373,6 @@ export type UnitPropertiUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fasilitas?: Prisma.FasilitasUncheckedUpdateManyWithoutUnitNestedInput
-  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutUnit_propertiNestedInput
 }
 
 export type UnitPropertiCreateManyInput = {
@@ -480,11 +473,6 @@ export type UnitPropertiNullableScalarRelationFilter = {
   isNot?: Prisma.UnitPropertiWhereInput | null
 }
 
-export type UnitPropertiScalarRelationFilter = {
-  is?: Prisma.UnitPropertiWhereInput
-  isNot?: Prisma.UnitPropertiWhereInput
-}
-
 export type UnitPropertiCreateNestedManyWithoutPropertyInput = {
   create?: Prisma.XOR<Prisma.UnitPropertiCreateWithoutPropertyInput, Prisma.UnitPropertiUncheckedCreateWithoutPropertyInput> | Prisma.UnitPropertiCreateWithoutPropertyInput[] | Prisma.UnitPropertiUncheckedCreateWithoutPropertyInput[]
   connectOrCreate?: Prisma.UnitPropertiCreateOrConnectWithoutPropertyInput | Prisma.UnitPropertiCreateOrConnectWithoutPropertyInput[]
@@ -547,20 +535,6 @@ export type UnitPropertiUpdateOneWithoutFasilitasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UnitPropertiUpdateToOneWithWhereWithoutFasilitasInput, Prisma.UnitPropertiUpdateWithoutFasilitasInput>, Prisma.UnitPropertiUncheckedUpdateWithoutFasilitasInput>
 }
 
-export type UnitPropertiCreateNestedOneWithoutPemesanansInput = {
-  create?: Prisma.XOR<Prisma.UnitPropertiCreateWithoutPemesanansInput, Prisma.UnitPropertiUncheckedCreateWithoutPemesanansInput>
-  connectOrCreate?: Prisma.UnitPropertiCreateOrConnectWithoutPemesanansInput
-  connect?: Prisma.UnitPropertiWhereUniqueInput
-}
-
-export type UnitPropertiUpdateOneRequiredWithoutPemesanansNestedInput = {
-  create?: Prisma.XOR<Prisma.UnitPropertiCreateWithoutPemesanansInput, Prisma.UnitPropertiUncheckedCreateWithoutPemesanansInput>
-  connectOrCreate?: Prisma.UnitPropertiCreateOrConnectWithoutPemesanansInput
-  upsert?: Prisma.UnitPropertiUpsertWithoutPemesanansInput
-  connect?: Prisma.UnitPropertiWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UnitPropertiUpdateToOneWithWhereWithoutPemesanansInput, Prisma.UnitPropertiUpdateWithoutPemesanansInput>, Prisma.UnitPropertiUncheckedUpdateWithoutPemesanansInput>
-}
-
 export type UnitPropertiCreateWithoutPropertyInput = {
   id?: string
   nama_unit: string
@@ -571,7 +545,6 @@ export type UnitPropertiCreateWithoutPropertyInput = {
   created_at?: Date | string
   updated_at?: Date | string
   fasilitas?: Prisma.FasilitasCreateNestedManyWithoutUnitInput
-  pemesanans?: Prisma.PemesananCreateNestedManyWithoutUnit_propertiInput
 }
 
 export type UnitPropertiUncheckedCreateWithoutPropertyInput = {
@@ -584,7 +557,6 @@ export type UnitPropertiUncheckedCreateWithoutPropertyInput = {
   created_at?: Date | string
   updated_at?: Date | string
   fasilitas?: Prisma.FasilitasUncheckedCreateNestedManyWithoutUnitInput
-  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutUnit_propertiInput
 }
 
 export type UnitPropertiCreateOrConnectWithoutPropertyInput = {
@@ -638,7 +610,6 @@ export type UnitPropertiCreateWithoutFasilitasInput = {
   created_at?: Date | string
   updated_at?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutUnit_propertisInput
-  pemesanans?: Prisma.PemesananCreateNestedManyWithoutUnit_propertiInput
 }
 
 export type UnitPropertiUncheckedCreateWithoutFasilitasInput = {
@@ -651,7 +622,6 @@ export type UnitPropertiUncheckedCreateWithoutFasilitasInput = {
   status_ketersediaan?: $Enums.StatusKetersediaan
   created_at?: Date | string
   updated_at?: Date | string
-  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutUnit_propertiInput
 }
 
 export type UnitPropertiCreateOrConnectWithoutFasilitasInput = {
@@ -680,7 +650,6 @@ export type UnitPropertiUpdateWithoutFasilitasInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutUnit_propertisNestedInput
-  pemesanans?: Prisma.PemesananUpdateManyWithoutUnit_propertiNestedInput
 }
 
 export type UnitPropertiUncheckedUpdateWithoutFasilitasInput = {
@@ -693,75 +662,6 @@ export type UnitPropertiUncheckedUpdateWithoutFasilitasInput = {
   status_ketersediaan?: Prisma.EnumStatusKetersediaanFieldUpdateOperationsInput | $Enums.StatusKetersediaan
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutUnit_propertiNestedInput
-}
-
-export type UnitPropertiCreateWithoutPemesanansInput = {
-  id?: string
-  nama_unit: string
-  luas_meter: runtime.Decimal | runtime.DecimalJsLike | number | string
-  harga_bulanan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  kapasitas: number
-  status_ketersediaan?: $Enums.StatusKetersediaan
-  created_at?: Date | string
-  updated_at?: Date | string
-  property: Prisma.PropertyCreateNestedOneWithoutUnit_propertisInput
-  fasilitas?: Prisma.FasilitasCreateNestedManyWithoutUnitInput
-}
-
-export type UnitPropertiUncheckedCreateWithoutPemesanansInput = {
-  id?: string
-  property_id: string
-  nama_unit: string
-  luas_meter: runtime.Decimal | runtime.DecimalJsLike | number | string
-  harga_bulanan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  kapasitas: number
-  status_ketersediaan?: $Enums.StatusKetersediaan
-  created_at?: Date | string
-  updated_at?: Date | string
-  fasilitas?: Prisma.FasilitasUncheckedCreateNestedManyWithoutUnitInput
-}
-
-export type UnitPropertiCreateOrConnectWithoutPemesanansInput = {
-  where: Prisma.UnitPropertiWhereUniqueInput
-  create: Prisma.XOR<Prisma.UnitPropertiCreateWithoutPemesanansInput, Prisma.UnitPropertiUncheckedCreateWithoutPemesanansInput>
-}
-
-export type UnitPropertiUpsertWithoutPemesanansInput = {
-  update: Prisma.XOR<Prisma.UnitPropertiUpdateWithoutPemesanansInput, Prisma.UnitPropertiUncheckedUpdateWithoutPemesanansInput>
-  create: Prisma.XOR<Prisma.UnitPropertiCreateWithoutPemesanansInput, Prisma.UnitPropertiUncheckedCreateWithoutPemesanansInput>
-  where?: Prisma.UnitPropertiWhereInput
-}
-
-export type UnitPropertiUpdateToOneWithWhereWithoutPemesanansInput = {
-  where?: Prisma.UnitPropertiWhereInput
-  data: Prisma.XOR<Prisma.UnitPropertiUpdateWithoutPemesanansInput, Prisma.UnitPropertiUncheckedUpdateWithoutPemesanansInput>
-}
-
-export type UnitPropertiUpdateWithoutPemesanansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nama_unit?: Prisma.StringFieldUpdateOperationsInput | string
-  luas_meter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  harga_bulanan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  kapasitas?: Prisma.IntFieldUpdateOperationsInput | number
-  status_ketersediaan?: Prisma.EnumStatusKetersediaanFieldUpdateOperationsInput | $Enums.StatusKetersediaan
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  property?: Prisma.PropertyUpdateOneRequiredWithoutUnit_propertisNestedInput
-  fasilitas?: Prisma.FasilitasUpdateManyWithoutUnitNestedInput
-}
-
-export type UnitPropertiUncheckedUpdateWithoutPemesanansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  property_id?: Prisma.StringFieldUpdateOperationsInput | string
-  nama_unit?: Prisma.StringFieldUpdateOperationsInput | string
-  luas_meter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  harga_bulanan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  kapasitas?: Prisma.IntFieldUpdateOperationsInput | number
-  status_ketersediaan?: Prisma.EnumStatusKetersediaanFieldUpdateOperationsInput | $Enums.StatusKetersediaan
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  fasilitas?: Prisma.FasilitasUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitPropertiCreateManyPropertyInput = {
@@ -785,7 +685,6 @@ export type UnitPropertiUpdateWithoutPropertyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fasilitas?: Prisma.FasilitasUpdateManyWithoutUnitNestedInput
-  pemesanans?: Prisma.PemesananUpdateManyWithoutUnit_propertiNestedInput
 }
 
 export type UnitPropertiUncheckedUpdateWithoutPropertyInput = {
@@ -798,7 +697,6 @@ export type UnitPropertiUncheckedUpdateWithoutPropertyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fasilitas?: Prisma.FasilitasUncheckedUpdateManyWithoutUnitNestedInput
-  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutUnit_propertiNestedInput
 }
 
 export type UnitPropertiUncheckedUpdateManyWithoutPropertyInput = {
@@ -819,12 +717,10 @@ export type UnitPropertiUncheckedUpdateManyWithoutPropertyInput = {
 
 export type UnitPropertiCountOutputType = {
   fasilitas: number
-  pemesanans: number
 }
 
 export type UnitPropertiCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fasilitas?: boolean | UnitPropertiCountOutputTypeCountFasilitasArgs
-  pemesanans?: boolean | UnitPropertiCountOutputTypeCountPemesanansArgs
 }
 
 /**
@@ -844,13 +740,6 @@ export type UnitPropertiCountOutputTypeCountFasilitasArgs<ExtArgs extends runtim
   where?: Prisma.FasilitasWhereInput
 }
 
-/**
- * UnitPropertiCountOutputType without action
- */
-export type UnitPropertiCountOutputTypeCountPemesanansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PemesananWhereInput
-}
-
 
 export type UnitPropertiSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -864,7 +753,6 @@ export type UnitPropertiSelect<ExtArgs extends runtime.Types.Extensions.Internal
   updated_at?: boolean
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   fasilitas?: boolean | Prisma.UnitProperti$fasilitasArgs<ExtArgs>
-  pemesanans?: boolean | Prisma.UnitProperti$pemesanansArgs<ExtArgs>
   _count?: boolean | Prisma.UnitPropertiCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unitProperti"]>
 
@@ -910,7 +798,6 @@ export type UnitPropertiOmit<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type UnitPropertiInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   fasilitas?: boolean | Prisma.UnitProperti$fasilitasArgs<ExtArgs>
-  pemesanans?: boolean | Prisma.UnitProperti$pemesanansArgs<ExtArgs>
   _count?: boolean | Prisma.UnitPropertiCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UnitPropertiIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -925,7 +812,6 @@ export type $UnitPropertiPayload<ExtArgs extends runtime.Types.Extensions.Intern
   objects: {
     property: Prisma.$PropertyPayload<ExtArgs>
     fasilitas: Prisma.$FasilitasPayload<ExtArgs>[]
-    pemesanans: Prisma.$PemesananPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1333,7 +1219,6 @@ export interface Prisma__UnitPropertiClient<T, Null = never, ExtArgs extends run
   readonly [Symbol.toStringTag]: "PrismaPromise"
   property<T extends Prisma.PropertyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   fasilitas<T extends Prisma.UnitProperti$fasilitasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitProperti$fasilitasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FasilitasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  pemesanans<T extends Prisma.UnitProperti$pemesanansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitProperti$pemesanansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PemesananPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1794,30 +1679,6 @@ export type UnitProperti$fasilitasArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.FasilitasScalarFieldEnum | Prisma.FasilitasScalarFieldEnum[]
-}
-
-/**
- * UnitProperti.pemesanans
- */
-export type UnitProperti$pemesanansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Pemesanan
-   */
-  select?: Prisma.PemesananSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Pemesanan
-   */
-  omit?: Prisma.PemesananOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PemesananInclude<ExtArgs> | null
-  where?: Prisma.PemesananWhereInput
-  orderBy?: Prisma.PemesananOrderByWithRelationInput | Prisma.PemesananOrderByWithRelationInput[]
-  cursor?: Prisma.PemesananWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PemesananScalarFieldEnum | Prisma.PemesananScalarFieldEnum[]
 }
 
 /**

@@ -428,6 +428,11 @@ export type PlatformConfig = Prisma.PlatformConfigModel
  */
 export type PaymentTransaction = Prisma.PaymentTransactionModel
 /**
+ * Model Transaction
+ * 
+ */
+export type Transaction = Prisma.TransactionModel
+/**
  * Model Property
  * 
  */

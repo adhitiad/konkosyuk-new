@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { ChevronLeft, User, Hash, LogIn } from 'lucide-react'
+import { ChevronLeft, Hash, LogIn } from 'lucide-react'
 import { format, addDays } from 'date-fns'
 
 import { authClient } from '#/lib/auth-client'
@@ -17,16 +17,16 @@ export const Route = createFileRoute('/(protected)/penyewa/booking/baru')({
   component: BookingFormPage,
   validateSearch: (search: Record<string, unknown>) => ({
     property_id: (search.property_id ?? '') as string,
-    unit_id: (search.unit_id ?? '') as string,
+    room_id: (search.room_id ?? '') as string,
   }),
 })
 
 function BookingFormPage() {
   const { data: session, isPending } = authClient.useSession()
-  const { property_id, unit_id } = Route.useSearch()
+  const { property_id, room_id } = Route.useSearch()
   const redirect = `/penyewa/booking/baru?property_id=${encodeURIComponent(
     property_id,
-  )}&unit_id=${encodeURIComponent(unit_id)}`
+  )}&room_id=${encodeURIComponent(room_id)}`
 
   if (isPending) {
     return (
@@ -65,7 +65,7 @@ function BookingFormPage() {
 }
 
 function BookingFormContent() {
-  const { property_id, unit_id } = Route.useSearch()
+  const { property_id, room_id } = Route.useSearch()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
 
@@ -86,7 +86,7 @@ function BookingFormContent() {
     }),
   )
 
-  const unit = property?.unit_propertis.find((u) => u.id === unit_id)
+  const room = property?.rooms?.find((r) => r.id === room_id)
 
   const minEndDate = tanggalMulai
     ? format(addDays(new Date(tanggalMulai), 30), 'yyyy-MM-dd')
@@ -94,7 +94,7 @@ function BookingFormContent() {
 
   const createMutation = useMutation({
     mutationFn: async (input: {
-      unit_properti_id: string
+      room_id: string
       tanggal_mulai: Date
       tanggal_selesai?: Date
       jumlah_penghuni: number
@@ -117,13 +117,13 @@ function BookingFormContent() {
     e.preventDefault()
     setError(null)
 
-    if (!unit) {
-      setError('Unit properti tidak ditemukan')
+    if (!room) {
+      setError('Kamar tidak ditemukan')
       return
     }
 
-    if (unit.status_ketersediaan !== 'TERSEDIA') {
-      setError('Unit ini tidak tersedia')
+    if (room.status !== 'available') {
+      setError('Kamar ini tidak tersedia')
       return
     }
 
@@ -157,16 +157,9 @@ function BookingFormContent() {
       return
     }
 
-    if (penghuni > unit.kapasitas) {
-      setError(
-        `Kapasitas unit adalah ${unit.kapasitas} orang. Kurangi jumlah penghuni.`,
-      )
-      return
-    }
-
     try {
       await createMutation.mutateAsync({
-        unit_properti_id: unit.id,
+        room_id: room.id,
         tanggal_mulai: start,
         tanggal_selesai: end,
         jumlah_penghuni: penghuni,
@@ -197,7 +190,7 @@ function BookingFormContent() {
     )
   }
 
-  if (!property || !unit) {
+  if (!property || !room) {
     return (
       <main className="page-wrap py-8">
         <Link
@@ -208,7 +201,7 @@ function BookingFormContent() {
           Kembali
         </Link>
         <p className="text-sm text-[var(--sea-ink-soft)]">
-          Properti atau unit tidak ditemukan.
+          Properti atau kamar tidak ditemukan.
         </p>
       </main>
     )
@@ -232,31 +225,27 @@ function BookingFormContent() {
             Ajukan Pemesanan
           </h1>
           <p className="mt-1 text-sm text-[var(--sea-ink-soft)]">
-            Isi formulir di bawah untuk mengajukan pemesanan unit{' '}
-            {unit.nama_unit} di {property.nama_properti}.
+            Isi formulir di bawah untuk mengajukan pemesanan kamar {room.name}{' '}
+            di {property.nama_properti}.
           </p>
         </div>
 
         <Card className="mb-6">
           <CardHeader>
-            <CardTitle className="text-base">Ringkasan Unit</CardTitle>
+            <CardTitle className="text-base">Ringkasan Kamar</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
             <div className="flex items-center gap-2 text-[var(--sea-ink-soft)]">
               <Hash className="h-4 w-4" />
-              <span>Nama Unit: {unit.nama_unit}</span>
+              <span>Nama Kamar: {room.name}</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-[var(--sea-ink-soft)]">
                 Harga per bulan
               </span>
               <span className="font-semibold text-[var(--lagoon-deep)]">
-                Rp{Number(unit.harga_bulanan).toLocaleString('id-ID')}
+                Rp{Number(room.price).toLocaleString('id-ID')}
               </span>
-            </div>
-            <div className="flex items-center gap-2 text-[var(--sea-ink-soft)]">
-              <User className="h-4 w-4" />
-              <span>Kapasitas maksimal: {unit.kapasitas} orang</span>
             </div>
           </CardContent>
         </Card>
@@ -312,14 +301,10 @@ function BookingFormContent() {
                   id="jumlah-penghuni"
                   type="number"
                   min={1}
-                  max={unit.kapasitas}
                   value={jumlahPenghuni}
                   onChange={(e) => setJumlahPenghuni(e.target.value)}
                   required
                 />
-                <p className="mt-1 text-xs text-[var(--sea-ink-soft)]">
-                  Kapasitas unit: {unit.kapasitas} orang.
-                </p>
               </div>
 
               <div>

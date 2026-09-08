@@ -38,8 +38,7 @@ export type PemesananSumAggregateOutputType = {
 
 export type PemesananMinAggregateOutputType = {
   id: string | null
-  unit_properti_id: string | null
-  property_id: string | null
+  room_id: string | null
   tenant_id: string | null
   jumlah_penghuni: number | null
   tanggal_mulai: Date | null
@@ -53,8 +52,7 @@ export type PemesananMinAggregateOutputType = {
 
 export type PemesananMaxAggregateOutputType = {
   id: string | null
-  unit_properti_id: string | null
-  property_id: string | null
+  room_id: string | null
   tenant_id: string | null
   jumlah_penghuni: number | null
   tanggal_mulai: Date | null
@@ -68,8 +66,7 @@ export type PemesananMaxAggregateOutputType = {
 
 export type PemesananCountAggregateOutputType = {
   id: number
-  unit_properti_id: number
-  property_id: number
+  room_id: number
   tenant_id: number
   jumlah_penghuni: number
   tanggal_mulai: number
@@ -95,8 +92,7 @@ export type PemesananSumAggregateInputType = {
 
 export type PemesananMinAggregateInputType = {
   id?: true
-  unit_properti_id?: true
-  property_id?: true
+  room_id?: true
   tenant_id?: true
   jumlah_penghuni?: true
   tanggal_mulai?: true
@@ -110,8 +106,7 @@ export type PemesananMinAggregateInputType = {
 
 export type PemesananMaxAggregateInputType = {
   id?: true
-  unit_properti_id?: true
-  property_id?: true
+  room_id?: true
   tenant_id?: true
   jumlah_penghuni?: true
   tanggal_mulai?: true
@@ -125,8 +120,7 @@ export type PemesananMaxAggregateInputType = {
 
 export type PemesananCountAggregateInputType = {
   id?: true
-  unit_properti_id?: true
-  property_id?: true
+  room_id?: true
   tenant_id?: true
   jumlah_penghuni?: true
   tanggal_mulai?: true
@@ -227,8 +221,7 @@ export type PemesananGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 
 export type PemesananGroupByOutputType = {
   id: string
-  unit_properti_id: string
-  property_id: string
+  room_id: string
   tenant_id: string
   jumlah_penghuni: number
   tanggal_mulai: Date
@@ -265,8 +258,7 @@ export type PemesananWhereInput = {
   OR?: Prisma.PemesananWhereInput[]
   NOT?: Prisma.PemesananWhereInput | Prisma.PemesananWhereInput[]
   id?: Prisma.UuidFilter<"Pemesanan"> | string
-  unit_properti_id?: Prisma.UuidFilter<"Pemesanan"> | string
-  property_id?: Prisma.UuidFilter<"Pemesanan"> | string
+  room_id?: Prisma.UuidFilter<"Pemesanan"> | string
   tenant_id?: Prisma.UuidFilter<"Pemesanan"> | string
   jumlah_penghuni?: Prisma.IntFilter<"Pemesanan"> | number
   tanggal_mulai?: Prisma.DateTimeFilter<"Pemesanan"> | Date | string
@@ -276,15 +268,14 @@ export type PemesananWhereInput = {
   catatan?: Prisma.StringNullableFilter<"Pemesanan"> | string | null
   created_at?: Prisma.DateTimeFilter<"Pemesanan"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Pemesanan"> | Date | string
-  unit_properti?: Prisma.XOR<Prisma.UnitPropertiScalarRelationFilter, Prisma.UnitPropertiWhereInput>
-  property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
+  room?: Prisma.XOR<Prisma.RoomsScalarRelationFilter, Prisma.roomsWhereInput>
   tenant?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.usersWhereInput>
+  transactions?: Prisma.TransactionListRelationFilter
 }
 
 export type PemesananOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  unit_properti_id?: Prisma.SortOrder
-  property_id?: Prisma.SortOrder
+  room_id?: Prisma.SortOrder
   tenant_id?: Prisma.SortOrder
   jumlah_penghuni?: Prisma.SortOrder
   tanggal_mulai?: Prisma.SortOrder
@@ -294,9 +285,9 @@ export type PemesananOrderByWithRelationInput = {
   catatan?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  unit_properti?: Prisma.UnitPropertiOrderByWithRelationInput
-  property?: Prisma.PropertyOrderByWithRelationInput
+  room?: Prisma.roomsOrderByWithRelationInput
   tenant?: Prisma.usersOrderByWithRelationInput
+  transactions?: Prisma.TransactionOrderByRelationAggregateInput
 }
 
 export type PemesananWhereUniqueInput = Prisma.AtLeast<{
@@ -304,8 +295,7 @@ export type PemesananWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.PemesananWhereInput | Prisma.PemesananWhereInput[]
   OR?: Prisma.PemesananWhereInput[]
   NOT?: Prisma.PemesananWhereInput | Prisma.PemesananWhereInput[]
-  unit_properti_id?: Prisma.UuidFilter<"Pemesanan"> | string
-  property_id?: Prisma.UuidFilter<"Pemesanan"> | string
+  room_id?: Prisma.UuidFilter<"Pemesanan"> | string
   tenant_id?: Prisma.UuidFilter<"Pemesanan"> | string
   jumlah_penghuni?: Prisma.IntFilter<"Pemesanan"> | number
   tanggal_mulai?: Prisma.DateTimeFilter<"Pemesanan"> | Date | string
@@ -315,15 +305,14 @@ export type PemesananWhereUniqueInput = Prisma.AtLeast<{
   catatan?: Prisma.StringNullableFilter<"Pemesanan"> | string | null
   created_at?: Prisma.DateTimeFilter<"Pemesanan"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Pemesanan"> | Date | string
-  unit_properti?: Prisma.XOR<Prisma.UnitPropertiScalarRelationFilter, Prisma.UnitPropertiWhereInput>
-  property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
+  room?: Prisma.XOR<Prisma.RoomsScalarRelationFilter, Prisma.roomsWhereInput>
   tenant?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.usersWhereInput>
+  transactions?: Prisma.TransactionListRelationFilter
 }, "id">
 
 export type PemesananOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  unit_properti_id?: Prisma.SortOrder
-  property_id?: Prisma.SortOrder
+  room_id?: Prisma.SortOrder
   tenant_id?: Prisma.SortOrder
   jumlah_penghuni?: Prisma.SortOrder
   tanggal_mulai?: Prisma.SortOrder
@@ -345,8 +334,7 @@ export type PemesananScalarWhereWithAggregatesInput = {
   OR?: Prisma.PemesananScalarWhereWithAggregatesInput[]
   NOT?: Prisma.PemesananScalarWhereWithAggregatesInput | Prisma.PemesananScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"Pemesanan"> | string
-  unit_properti_id?: Prisma.UuidWithAggregatesFilter<"Pemesanan"> | string
-  property_id?: Prisma.UuidWithAggregatesFilter<"Pemesanan"> | string
+  room_id?: Prisma.UuidWithAggregatesFilter<"Pemesanan"> | string
   tenant_id?: Prisma.UuidWithAggregatesFilter<"Pemesanan"> | string
   jumlah_penghuni?: Prisma.IntWithAggregatesFilter<"Pemesanan"> | number
   tanggal_mulai?: Prisma.DateTimeWithAggregatesFilter<"Pemesanan"> | Date | string
@@ -368,15 +356,14 @@ export type PemesananCreateInput = {
   catatan?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_properti: Prisma.UnitPropertiCreateNestedOneWithoutPemesanansInput
-  property: Prisma.PropertyCreateNestedOneWithoutPemesanansInput
+  room: Prisma.roomsCreateNestedOneWithoutPemesanansInput
   tenant: Prisma.usersCreateNestedOneWithoutPemesanansInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutPemesananInput
 }
 
 export type PemesananUncheckedCreateInput = {
   id?: string
-  unit_properti_id: string
-  property_id: string
+  room_id: string
   tenant_id: string
   jumlah_penghuni: number
   tanggal_mulai: Date | string
@@ -386,6 +373,7 @@ export type PemesananUncheckedCreateInput = {
   catatan?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutPemesananInput
 }
 
 export type PemesananUpdateInput = {
@@ -398,15 +386,14 @@ export type PemesananUpdateInput = {
   catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_properti?: Prisma.UnitPropertiUpdateOneRequiredWithoutPemesanansNestedInput
-  property?: Prisma.PropertyUpdateOneRequiredWithoutPemesanansNestedInput
+  room?: Prisma.roomsUpdateOneRequiredWithoutPemesanansNestedInput
   tenant?: Prisma.usersUpdateOneRequiredWithoutPemesanansNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutPemesananNestedInput
 }
 
 export type PemesananUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  unit_properti_id?: Prisma.StringFieldUpdateOperationsInput | string
-  property_id?: Prisma.StringFieldUpdateOperationsInput | string
+  room_id?: Prisma.StringFieldUpdateOperationsInput | string
   tenant_id?: Prisma.StringFieldUpdateOperationsInput | string
   jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
   tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -416,12 +403,12 @@ export type PemesananUncheckedUpdateInput = {
   catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutPemesananNestedInput
 }
 
 export type PemesananCreateManyInput = {
   id?: string
-  unit_properti_id: string
-  property_id: string
+  room_id: string
   tenant_id: string
   jumlah_penghuni: number
   tanggal_mulai: Date | string
@@ -447,8 +434,7 @@ export type PemesananUpdateManyMutationInput = {
 
 export type PemesananUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  unit_properti_id?: Prisma.StringFieldUpdateOperationsInput | string
-  property_id?: Prisma.StringFieldUpdateOperationsInput | string
+  room_id?: Prisma.StringFieldUpdateOperationsInput | string
   tenant_id?: Prisma.StringFieldUpdateOperationsInput | string
   jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
   tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -470,10 +456,14 @@ export type PemesananOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type PemesananScalarRelationFilter = {
+  is?: Prisma.PemesananWhereInput
+  isNot?: Prisma.PemesananWhereInput
+}
+
 export type PemesananCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  unit_properti_id?: Prisma.SortOrder
-  property_id?: Prisma.SortOrder
+  room_id?: Prisma.SortOrder
   tenant_id?: Prisma.SortOrder
   jumlah_penghuni?: Prisma.SortOrder
   tanggal_mulai?: Prisma.SortOrder
@@ -492,8 +482,7 @@ export type PemesananAvgOrderByAggregateInput = {
 
 export type PemesananMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  unit_properti_id?: Prisma.SortOrder
-  property_id?: Prisma.SortOrder
+  room_id?: Prisma.SortOrder
   tenant_id?: Prisma.SortOrder
   jumlah_penghuni?: Prisma.SortOrder
   tanggal_mulai?: Prisma.SortOrder
@@ -507,8 +496,7 @@ export type PemesananMaxOrderByAggregateInput = {
 
 export type PemesananMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  unit_properti_id?: Prisma.SortOrder
-  property_id?: Prisma.SortOrder
+  room_id?: Prisma.SortOrder
   tenant_id?: Prisma.SortOrder
   jumlah_penghuni?: Prisma.SortOrder
   tanggal_mulai?: Prisma.SortOrder
@@ -523,6 +511,48 @@ export type PemesananMinOrderByAggregateInput = {
 export type PemesananSumOrderByAggregateInput = {
   jumlah_penghuni?: Prisma.SortOrder
   total_harga?: Prisma.SortOrder
+}
+
+export type PemesananCreateNestedManyWithoutRoomInput = {
+  create?: Prisma.XOR<Prisma.PemesananCreateWithoutRoomInput, Prisma.PemesananUncheckedCreateWithoutRoomInput> | Prisma.PemesananCreateWithoutRoomInput[] | Prisma.PemesananUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutRoomInput | Prisma.PemesananCreateOrConnectWithoutRoomInput[]
+  createMany?: Prisma.PemesananCreateManyRoomInputEnvelope
+  connect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
+}
+
+export type PemesananUncheckedCreateNestedManyWithoutRoomInput = {
+  create?: Prisma.XOR<Prisma.PemesananCreateWithoutRoomInput, Prisma.PemesananUncheckedCreateWithoutRoomInput> | Prisma.PemesananCreateWithoutRoomInput[] | Prisma.PemesananUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutRoomInput | Prisma.PemesananCreateOrConnectWithoutRoomInput[]
+  createMany?: Prisma.PemesananCreateManyRoomInputEnvelope
+  connect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
+}
+
+export type PemesananUpdateManyWithoutRoomNestedInput = {
+  create?: Prisma.XOR<Prisma.PemesananCreateWithoutRoomInput, Prisma.PemesananUncheckedCreateWithoutRoomInput> | Prisma.PemesananCreateWithoutRoomInput[] | Prisma.PemesananUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutRoomInput | Prisma.PemesananCreateOrConnectWithoutRoomInput[]
+  upsert?: Prisma.PemesananUpsertWithWhereUniqueWithoutRoomInput | Prisma.PemesananUpsertWithWhereUniqueWithoutRoomInput[]
+  createMany?: Prisma.PemesananCreateManyRoomInputEnvelope
+  set?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
+  disconnect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
+  delete?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
+  connect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
+  update?: Prisma.PemesananUpdateWithWhereUniqueWithoutRoomInput | Prisma.PemesananUpdateWithWhereUniqueWithoutRoomInput[]
+  updateMany?: Prisma.PemesananUpdateManyWithWhereWithoutRoomInput | Prisma.PemesananUpdateManyWithWhereWithoutRoomInput[]
+  deleteMany?: Prisma.PemesananScalarWhereInput | Prisma.PemesananScalarWhereInput[]
+}
+
+export type PemesananUncheckedUpdateManyWithoutRoomNestedInput = {
+  create?: Prisma.XOR<Prisma.PemesananCreateWithoutRoomInput, Prisma.PemesananUncheckedCreateWithoutRoomInput> | Prisma.PemesananCreateWithoutRoomInput[] | Prisma.PemesananUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutRoomInput | Prisma.PemesananCreateOrConnectWithoutRoomInput[]
+  upsert?: Prisma.PemesananUpsertWithWhereUniqueWithoutRoomInput | Prisma.PemesananUpsertWithWhereUniqueWithoutRoomInput[]
+  createMany?: Prisma.PemesananCreateManyRoomInputEnvelope
+  set?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
+  disconnect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
+  delete?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
+  connect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
+  update?: Prisma.PemesananUpdateWithWhereUniqueWithoutRoomInput | Prisma.PemesananUpdateWithWhereUniqueWithoutRoomInput[]
+  updateMany?: Prisma.PemesananUpdateManyWithWhereWithoutRoomInput | Prisma.PemesananUpdateManyWithWhereWithoutRoomInput[]
+  deleteMany?: Prisma.PemesananScalarWhereInput | Prisma.PemesananScalarWhereInput[]
 }
 
 export type PemesananCreateNestedManyWithoutTenantInput = {
@@ -567,92 +597,93 @@ export type PemesananUncheckedUpdateManyWithoutTenantNestedInput = {
   deleteMany?: Prisma.PemesananScalarWhereInput | Prisma.PemesananScalarWhereInput[]
 }
 
-export type PemesananCreateNestedManyWithoutPropertyInput = {
-  create?: Prisma.XOR<Prisma.PemesananCreateWithoutPropertyInput, Prisma.PemesananUncheckedCreateWithoutPropertyInput> | Prisma.PemesananCreateWithoutPropertyInput[] | Prisma.PemesananUncheckedCreateWithoutPropertyInput[]
-  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutPropertyInput | Prisma.PemesananCreateOrConnectWithoutPropertyInput[]
-  createMany?: Prisma.PemesananCreateManyPropertyInputEnvelope
-  connect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
+export type PemesananCreateNestedOneWithoutTransactionsInput = {
+  create?: Prisma.XOR<Prisma.PemesananCreateWithoutTransactionsInput, Prisma.PemesananUncheckedCreateWithoutTransactionsInput>
+  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutTransactionsInput
+  connect?: Prisma.PemesananWhereUniqueInput
 }
 
-export type PemesananUncheckedCreateNestedManyWithoutPropertyInput = {
-  create?: Prisma.XOR<Prisma.PemesananCreateWithoutPropertyInput, Prisma.PemesananUncheckedCreateWithoutPropertyInput> | Prisma.PemesananCreateWithoutPropertyInput[] | Prisma.PemesananUncheckedCreateWithoutPropertyInput[]
-  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutPropertyInput | Prisma.PemesananCreateOrConnectWithoutPropertyInput[]
-  createMany?: Prisma.PemesananCreateManyPropertyInputEnvelope
-  connect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-}
-
-export type PemesananUpdateManyWithoutPropertyNestedInput = {
-  create?: Prisma.XOR<Prisma.PemesananCreateWithoutPropertyInput, Prisma.PemesananUncheckedCreateWithoutPropertyInput> | Prisma.PemesananCreateWithoutPropertyInput[] | Prisma.PemesananUncheckedCreateWithoutPropertyInput[]
-  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutPropertyInput | Prisma.PemesananCreateOrConnectWithoutPropertyInput[]
-  upsert?: Prisma.PemesananUpsertWithWhereUniqueWithoutPropertyInput | Prisma.PemesananUpsertWithWhereUniqueWithoutPropertyInput[]
-  createMany?: Prisma.PemesananCreateManyPropertyInputEnvelope
-  set?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  disconnect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  delete?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  connect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  update?: Prisma.PemesananUpdateWithWhereUniqueWithoutPropertyInput | Prisma.PemesananUpdateWithWhereUniqueWithoutPropertyInput[]
-  updateMany?: Prisma.PemesananUpdateManyWithWhereWithoutPropertyInput | Prisma.PemesananUpdateManyWithWhereWithoutPropertyInput[]
-  deleteMany?: Prisma.PemesananScalarWhereInput | Prisma.PemesananScalarWhereInput[]
-}
-
-export type PemesananUncheckedUpdateManyWithoutPropertyNestedInput = {
-  create?: Prisma.XOR<Prisma.PemesananCreateWithoutPropertyInput, Prisma.PemesananUncheckedCreateWithoutPropertyInput> | Prisma.PemesananCreateWithoutPropertyInput[] | Prisma.PemesananUncheckedCreateWithoutPropertyInput[]
-  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutPropertyInput | Prisma.PemesananCreateOrConnectWithoutPropertyInput[]
-  upsert?: Prisma.PemesananUpsertWithWhereUniqueWithoutPropertyInput | Prisma.PemesananUpsertWithWhereUniqueWithoutPropertyInput[]
-  createMany?: Prisma.PemesananCreateManyPropertyInputEnvelope
-  set?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  disconnect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  delete?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  connect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  update?: Prisma.PemesananUpdateWithWhereUniqueWithoutPropertyInput | Prisma.PemesananUpdateWithWhereUniqueWithoutPropertyInput[]
-  updateMany?: Prisma.PemesananUpdateManyWithWhereWithoutPropertyInput | Prisma.PemesananUpdateManyWithWhereWithoutPropertyInput[]
-  deleteMany?: Prisma.PemesananScalarWhereInput | Prisma.PemesananScalarWhereInput[]
-}
-
-export type PemesananCreateNestedManyWithoutUnit_propertiInput = {
-  create?: Prisma.XOR<Prisma.PemesananCreateWithoutUnit_propertiInput, Prisma.PemesananUncheckedCreateWithoutUnit_propertiInput> | Prisma.PemesananCreateWithoutUnit_propertiInput[] | Prisma.PemesananUncheckedCreateWithoutUnit_propertiInput[]
-  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutUnit_propertiInput | Prisma.PemesananCreateOrConnectWithoutUnit_propertiInput[]
-  createMany?: Prisma.PemesananCreateManyUnit_propertiInputEnvelope
-  connect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-}
-
-export type PemesananUncheckedCreateNestedManyWithoutUnit_propertiInput = {
-  create?: Prisma.XOR<Prisma.PemesananCreateWithoutUnit_propertiInput, Prisma.PemesananUncheckedCreateWithoutUnit_propertiInput> | Prisma.PemesananCreateWithoutUnit_propertiInput[] | Prisma.PemesananUncheckedCreateWithoutUnit_propertiInput[]
-  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutUnit_propertiInput | Prisma.PemesananCreateOrConnectWithoutUnit_propertiInput[]
-  createMany?: Prisma.PemesananCreateManyUnit_propertiInputEnvelope
-  connect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-}
-
-export type PemesananUpdateManyWithoutUnit_propertiNestedInput = {
-  create?: Prisma.XOR<Prisma.PemesananCreateWithoutUnit_propertiInput, Prisma.PemesananUncheckedCreateWithoutUnit_propertiInput> | Prisma.PemesananCreateWithoutUnit_propertiInput[] | Prisma.PemesananUncheckedCreateWithoutUnit_propertiInput[]
-  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutUnit_propertiInput | Prisma.PemesananCreateOrConnectWithoutUnit_propertiInput[]
-  upsert?: Prisma.PemesananUpsertWithWhereUniqueWithoutUnit_propertiInput | Prisma.PemesananUpsertWithWhereUniqueWithoutUnit_propertiInput[]
-  createMany?: Prisma.PemesananCreateManyUnit_propertiInputEnvelope
-  set?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  disconnect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  delete?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  connect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  update?: Prisma.PemesananUpdateWithWhereUniqueWithoutUnit_propertiInput | Prisma.PemesananUpdateWithWhereUniqueWithoutUnit_propertiInput[]
-  updateMany?: Prisma.PemesananUpdateManyWithWhereWithoutUnit_propertiInput | Prisma.PemesananUpdateManyWithWhereWithoutUnit_propertiInput[]
-  deleteMany?: Prisma.PemesananScalarWhereInput | Prisma.PemesananScalarWhereInput[]
-}
-
-export type PemesananUncheckedUpdateManyWithoutUnit_propertiNestedInput = {
-  create?: Prisma.XOR<Prisma.PemesananCreateWithoutUnit_propertiInput, Prisma.PemesananUncheckedCreateWithoutUnit_propertiInput> | Prisma.PemesananCreateWithoutUnit_propertiInput[] | Prisma.PemesananUncheckedCreateWithoutUnit_propertiInput[]
-  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutUnit_propertiInput | Prisma.PemesananCreateOrConnectWithoutUnit_propertiInput[]
-  upsert?: Prisma.PemesananUpsertWithWhereUniqueWithoutUnit_propertiInput | Prisma.PemesananUpsertWithWhereUniqueWithoutUnit_propertiInput[]
-  createMany?: Prisma.PemesananCreateManyUnit_propertiInputEnvelope
-  set?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  disconnect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  delete?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  connect?: Prisma.PemesananWhereUniqueInput | Prisma.PemesananWhereUniqueInput[]
-  update?: Prisma.PemesananUpdateWithWhereUniqueWithoutUnit_propertiInput | Prisma.PemesananUpdateWithWhereUniqueWithoutUnit_propertiInput[]
-  updateMany?: Prisma.PemesananUpdateManyWithWhereWithoutUnit_propertiInput | Prisma.PemesananUpdateManyWithWhereWithoutUnit_propertiInput[]
-  deleteMany?: Prisma.PemesananScalarWhereInput | Prisma.PemesananScalarWhereInput[]
+export type PemesananUpdateOneRequiredWithoutTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.PemesananCreateWithoutTransactionsInput, Prisma.PemesananUncheckedCreateWithoutTransactionsInput>
+  connectOrCreate?: Prisma.PemesananCreateOrConnectWithoutTransactionsInput
+  upsert?: Prisma.PemesananUpsertWithoutTransactionsInput
+  connect?: Prisma.PemesananWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PemesananUpdateToOneWithWhereWithoutTransactionsInput, Prisma.PemesananUpdateWithoutTransactionsInput>, Prisma.PemesananUncheckedUpdateWithoutTransactionsInput>
 }
 
 export type EnumStatusPemesananFieldUpdateOperationsInput = {
   set?: $Enums.StatusPemesanan
+}
+
+export type PemesananCreateWithoutRoomInput = {
+  id?: string
+  jumlah_penghuni: number
+  tanggal_mulai: Date | string
+  tanggal_selesai?: Date | string | null
+  total_harga: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.StatusPemesanan
+  catatan?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  tenant: Prisma.usersCreateNestedOneWithoutPemesanansInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutPemesananInput
+}
+
+export type PemesananUncheckedCreateWithoutRoomInput = {
+  id?: string
+  tenant_id: string
+  jumlah_penghuni: number
+  tanggal_mulai: Date | string
+  tanggal_selesai?: Date | string | null
+  total_harga: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.StatusPemesanan
+  catatan?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutPemesananInput
+}
+
+export type PemesananCreateOrConnectWithoutRoomInput = {
+  where: Prisma.PemesananWhereUniqueInput
+  create: Prisma.XOR<Prisma.PemesananCreateWithoutRoomInput, Prisma.PemesananUncheckedCreateWithoutRoomInput>
+}
+
+export type PemesananCreateManyRoomInputEnvelope = {
+  data: Prisma.PemesananCreateManyRoomInput | Prisma.PemesananCreateManyRoomInput[]
+  skipDuplicates?: boolean
+}
+
+export type PemesananUpsertWithWhereUniqueWithoutRoomInput = {
+  where: Prisma.PemesananWhereUniqueInput
+  update: Prisma.XOR<Prisma.PemesananUpdateWithoutRoomInput, Prisma.PemesananUncheckedUpdateWithoutRoomInput>
+  create: Prisma.XOR<Prisma.PemesananCreateWithoutRoomInput, Prisma.PemesananUncheckedCreateWithoutRoomInput>
+}
+
+export type PemesananUpdateWithWhereUniqueWithoutRoomInput = {
+  where: Prisma.PemesananWhereUniqueInput
+  data: Prisma.XOR<Prisma.PemesananUpdateWithoutRoomInput, Prisma.PemesananUncheckedUpdateWithoutRoomInput>
+}
+
+export type PemesananUpdateManyWithWhereWithoutRoomInput = {
+  where: Prisma.PemesananScalarWhereInput
+  data: Prisma.XOR<Prisma.PemesananUpdateManyMutationInput, Prisma.PemesananUncheckedUpdateManyWithoutRoomInput>
+}
+
+export type PemesananScalarWhereInput = {
+  AND?: Prisma.PemesananScalarWhereInput | Prisma.PemesananScalarWhereInput[]
+  OR?: Prisma.PemesananScalarWhereInput[]
+  NOT?: Prisma.PemesananScalarWhereInput | Prisma.PemesananScalarWhereInput[]
+  id?: Prisma.UuidFilter<"Pemesanan"> | string
+  room_id?: Prisma.UuidFilter<"Pemesanan"> | string
+  tenant_id?: Prisma.UuidFilter<"Pemesanan"> | string
+  jumlah_penghuni?: Prisma.IntFilter<"Pemesanan"> | number
+  tanggal_mulai?: Prisma.DateTimeFilter<"Pemesanan"> | Date | string
+  tanggal_selesai?: Prisma.DateTimeNullableFilter<"Pemesanan"> | Date | string | null
+  total_harga?: Prisma.DecimalFilter<"Pemesanan"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumStatusPemesananFilter<"Pemesanan"> | $Enums.StatusPemesanan
+  catatan?: Prisma.StringNullableFilter<"Pemesanan"> | string | null
+  created_at?: Prisma.DateTimeFilter<"Pemesanan"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Pemesanan"> | Date | string
 }
 
 export type PemesananCreateWithoutTenantInput = {
@@ -665,14 +696,13 @@ export type PemesananCreateWithoutTenantInput = {
   catatan?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_properti: Prisma.UnitPropertiCreateNestedOneWithoutPemesanansInput
-  property: Prisma.PropertyCreateNestedOneWithoutPemesanansInput
+  room: Prisma.roomsCreateNestedOneWithoutPemesanansInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutPemesananInput
 }
 
 export type PemesananUncheckedCreateWithoutTenantInput = {
   id?: string
-  unit_properti_id: string
-  property_id: string
+  room_id: string
   jumlah_penghuni: number
   tanggal_mulai: Date | string
   tanggal_selesai?: Date | string | null
@@ -681,6 +711,7 @@ export type PemesananUncheckedCreateWithoutTenantInput = {
   catatan?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutPemesananInput
 }
 
 export type PemesananCreateOrConnectWithoutTenantInput = {
@@ -709,25 +740,7 @@ export type PemesananUpdateManyWithWhereWithoutTenantInput = {
   data: Prisma.XOR<Prisma.PemesananUpdateManyMutationInput, Prisma.PemesananUncheckedUpdateManyWithoutTenantInput>
 }
 
-export type PemesananScalarWhereInput = {
-  AND?: Prisma.PemesananScalarWhereInput | Prisma.PemesananScalarWhereInput[]
-  OR?: Prisma.PemesananScalarWhereInput[]
-  NOT?: Prisma.PemesananScalarWhereInput | Prisma.PemesananScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Pemesanan"> | string
-  unit_properti_id?: Prisma.UuidFilter<"Pemesanan"> | string
-  property_id?: Prisma.UuidFilter<"Pemesanan"> | string
-  tenant_id?: Prisma.UuidFilter<"Pemesanan"> | string
-  jumlah_penghuni?: Prisma.IntFilter<"Pemesanan"> | number
-  tanggal_mulai?: Prisma.DateTimeFilter<"Pemesanan"> | Date | string
-  tanggal_selesai?: Prisma.DateTimeNullableFilter<"Pemesanan"> | Date | string | null
-  total_harga?: Prisma.DecimalFilter<"Pemesanan"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: Prisma.EnumStatusPemesananFilter<"Pemesanan"> | $Enums.StatusPemesanan
-  catatan?: Prisma.StringNullableFilter<"Pemesanan"> | string | null
-  created_at?: Prisma.DateTimeFilter<"Pemesanan"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"Pemesanan"> | Date | string
-}
-
-export type PemesananCreateWithoutPropertyInput = {
+export type PemesananCreateWithoutTransactionsInput = {
   id?: string
   jumlah_penghuni: number
   tanggal_mulai: Date | string
@@ -737,13 +750,13 @@ export type PemesananCreateWithoutPropertyInput = {
   catatan?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_properti: Prisma.UnitPropertiCreateNestedOneWithoutPemesanansInput
+  room: Prisma.roomsCreateNestedOneWithoutPemesanansInput
   tenant: Prisma.usersCreateNestedOneWithoutPemesanansInput
 }
 
-export type PemesananUncheckedCreateWithoutPropertyInput = {
+export type PemesananUncheckedCreateWithoutTransactionsInput = {
   id?: string
-  unit_properti_id: string
+  room_id: string
   tenant_id: string
   jumlah_penghuni: number
   tanggal_mulai: Date | string
@@ -755,49 +768,52 @@ export type PemesananUncheckedCreateWithoutPropertyInput = {
   updated_at?: Date | string
 }
 
-export type PemesananCreateOrConnectWithoutPropertyInput = {
+export type PemesananCreateOrConnectWithoutTransactionsInput = {
   where: Prisma.PemesananWhereUniqueInput
-  create: Prisma.XOR<Prisma.PemesananCreateWithoutPropertyInput, Prisma.PemesananUncheckedCreateWithoutPropertyInput>
+  create: Prisma.XOR<Prisma.PemesananCreateWithoutTransactionsInput, Prisma.PemesananUncheckedCreateWithoutTransactionsInput>
 }
 
-export type PemesananCreateManyPropertyInputEnvelope = {
-  data: Prisma.PemesananCreateManyPropertyInput | Prisma.PemesananCreateManyPropertyInput[]
-  skipDuplicates?: boolean
+export type PemesananUpsertWithoutTransactionsInput = {
+  update: Prisma.XOR<Prisma.PemesananUpdateWithoutTransactionsInput, Prisma.PemesananUncheckedUpdateWithoutTransactionsInput>
+  create: Prisma.XOR<Prisma.PemesananCreateWithoutTransactionsInput, Prisma.PemesananUncheckedCreateWithoutTransactionsInput>
+  where?: Prisma.PemesananWhereInput
 }
 
-export type PemesananUpsertWithWhereUniqueWithoutPropertyInput = {
-  where: Prisma.PemesananWhereUniqueInput
-  update: Prisma.XOR<Prisma.PemesananUpdateWithoutPropertyInput, Prisma.PemesananUncheckedUpdateWithoutPropertyInput>
-  create: Prisma.XOR<Prisma.PemesananCreateWithoutPropertyInput, Prisma.PemesananUncheckedCreateWithoutPropertyInput>
+export type PemesananUpdateToOneWithWhereWithoutTransactionsInput = {
+  where?: Prisma.PemesananWhereInput
+  data: Prisma.XOR<Prisma.PemesananUpdateWithoutTransactionsInput, Prisma.PemesananUncheckedUpdateWithoutTransactionsInput>
 }
 
-export type PemesananUpdateWithWhereUniqueWithoutPropertyInput = {
-  where: Prisma.PemesananWhereUniqueInput
-  data: Prisma.XOR<Prisma.PemesananUpdateWithoutPropertyInput, Prisma.PemesananUncheckedUpdateWithoutPropertyInput>
+export type PemesananUpdateWithoutTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
+  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumStatusPemesananFieldUpdateOperationsInput | $Enums.StatusPemesanan
+  catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  room?: Prisma.roomsUpdateOneRequiredWithoutPemesanansNestedInput
+  tenant?: Prisma.usersUpdateOneRequiredWithoutPemesanansNestedInput
 }
 
-export type PemesananUpdateManyWithWhereWithoutPropertyInput = {
-  where: Prisma.PemesananScalarWhereInput
-  data: Prisma.XOR<Prisma.PemesananUpdateManyMutationInput, Prisma.PemesananUncheckedUpdateManyWithoutPropertyInput>
+export type PemesananUncheckedUpdateWithoutTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  room_id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenant_id?: Prisma.StringFieldUpdateOperationsInput | string
+  jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
+  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumStatusPemesananFieldUpdateOperationsInput | $Enums.StatusPemesanan
+  catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type PemesananCreateWithoutUnit_propertiInput = {
+export type PemesananCreateManyRoomInput = {
   id?: string
-  jumlah_penghuni: number
-  tanggal_mulai: Date | string
-  tanggal_selesai?: Date | string | null
-  total_harga: runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: $Enums.StatusPemesanan
-  catatan?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  property: Prisma.PropertyCreateNestedOneWithoutPemesanansInput
-  tenant: Prisma.usersCreateNestedOneWithoutPemesanansInput
-}
-
-export type PemesananUncheckedCreateWithoutUnit_propertiInput = {
-  id?: string
-  property_id: string
   tenant_id: string
   jumlah_penghuni: number
   tanggal_mulai: Date | string
@@ -809,36 +825,50 @@ export type PemesananUncheckedCreateWithoutUnit_propertiInput = {
   updated_at?: Date | string
 }
 
-export type PemesananCreateOrConnectWithoutUnit_propertiInput = {
-  where: Prisma.PemesananWhereUniqueInput
-  create: Prisma.XOR<Prisma.PemesananCreateWithoutUnit_propertiInput, Prisma.PemesananUncheckedCreateWithoutUnit_propertiInput>
+export type PemesananUpdateWithoutRoomInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
+  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumStatusPemesananFieldUpdateOperationsInput | $Enums.StatusPemesanan
+  catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.usersUpdateOneRequiredWithoutPemesanansNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutPemesananNestedInput
 }
 
-export type PemesananCreateManyUnit_propertiInputEnvelope = {
-  data: Prisma.PemesananCreateManyUnit_propertiInput | Prisma.PemesananCreateManyUnit_propertiInput[]
-  skipDuplicates?: boolean
+export type PemesananUncheckedUpdateWithoutRoomInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenant_id?: Prisma.StringFieldUpdateOperationsInput | string
+  jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
+  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumStatusPemesananFieldUpdateOperationsInput | $Enums.StatusPemesanan
+  catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutPemesananNestedInput
 }
 
-export type PemesananUpsertWithWhereUniqueWithoutUnit_propertiInput = {
-  where: Prisma.PemesananWhereUniqueInput
-  update: Prisma.XOR<Prisma.PemesananUpdateWithoutUnit_propertiInput, Prisma.PemesananUncheckedUpdateWithoutUnit_propertiInput>
-  create: Prisma.XOR<Prisma.PemesananCreateWithoutUnit_propertiInput, Prisma.PemesananUncheckedCreateWithoutUnit_propertiInput>
-}
-
-export type PemesananUpdateWithWhereUniqueWithoutUnit_propertiInput = {
-  where: Prisma.PemesananWhereUniqueInput
-  data: Prisma.XOR<Prisma.PemesananUpdateWithoutUnit_propertiInput, Prisma.PemesananUncheckedUpdateWithoutUnit_propertiInput>
-}
-
-export type PemesananUpdateManyWithWhereWithoutUnit_propertiInput = {
-  where: Prisma.PemesananScalarWhereInput
-  data: Prisma.XOR<Prisma.PemesananUpdateManyMutationInput, Prisma.PemesananUncheckedUpdateManyWithoutUnit_propertiInput>
+export type PemesananUncheckedUpdateManyWithoutRoomInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenant_id?: Prisma.StringFieldUpdateOperationsInput | string
+  jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
+  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumStatusPemesananFieldUpdateOperationsInput | $Enums.StatusPemesanan
+  catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PemesananCreateManyTenantInput = {
   id?: string
-  unit_properti_id: string
-  property_id: string
+  room_id: string
   jumlah_penghuni: number
   tanggal_mulai: Date | string
   tanggal_selesai?: Date | string | null
@@ -859,14 +889,13 @@ export type PemesananUpdateWithoutTenantInput = {
   catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_properti?: Prisma.UnitPropertiUpdateOneRequiredWithoutPemesanansNestedInput
-  property?: Prisma.PropertyUpdateOneRequiredWithoutPemesanansNestedInput
+  room?: Prisma.roomsUpdateOneRequiredWithoutPemesanansNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutPemesananNestedInput
 }
 
 export type PemesananUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  unit_properti_id?: Prisma.StringFieldUpdateOperationsInput | string
-  property_id?: Prisma.StringFieldUpdateOperationsInput | string
+  room_id?: Prisma.StringFieldUpdateOperationsInput | string
   jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
   tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -875,12 +904,12 @@ export type PemesananUncheckedUpdateWithoutTenantInput = {
   catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutPemesananNestedInput
 }
 
 export type PemesananUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  unit_properti_id?: Prisma.StringFieldUpdateOperationsInput | string
-  property_id?: Prisma.StringFieldUpdateOperationsInput | string
+  room_id?: Prisma.StringFieldUpdateOperationsInput | string
   jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
   tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -891,124 +920,40 @@ export type PemesananUncheckedUpdateManyWithoutTenantInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type PemesananCreateManyPropertyInput = {
-  id?: string
-  unit_properti_id: string
-  tenant_id: string
-  jumlah_penghuni: number
-  tanggal_mulai: Date | string
-  tanggal_selesai?: Date | string | null
-  total_harga: runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: $Enums.StatusPemesanan
-  catatan?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+
+/**
+ * Count Type PemesananCountOutputType
+ */
+
+export type PemesananCountOutputType = {
+  transactions: number
 }
 
-export type PemesananUpdateWithoutPropertyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
-  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: Prisma.EnumStatusPemesananFieldUpdateOperationsInput | $Enums.StatusPemesanan
-  catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_properti?: Prisma.UnitPropertiUpdateOneRequiredWithoutPemesanansNestedInput
-  tenant?: Prisma.usersUpdateOneRequiredWithoutPemesanansNestedInput
+export type PemesananCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  transactions?: boolean | PemesananCountOutputTypeCountTransactionsArgs
 }
 
-export type PemesananUncheckedUpdateWithoutPropertyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  unit_properti_id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenant_id?: Prisma.StringFieldUpdateOperationsInput | string
-  jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
-  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: Prisma.EnumStatusPemesananFieldUpdateOperationsInput | $Enums.StatusPemesanan
-  catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+/**
+ * PemesananCountOutputType without action
+ */
+export type PemesananCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PemesananCountOutputType
+   */
+  select?: Prisma.PemesananCountOutputTypeSelect<ExtArgs> | null
 }
 
-export type PemesananUncheckedUpdateManyWithoutPropertyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  unit_properti_id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenant_id?: Prisma.StringFieldUpdateOperationsInput | string
-  jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
-  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: Prisma.EnumStatusPemesananFieldUpdateOperationsInput | $Enums.StatusPemesanan
-  catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+/**
+ * PemesananCountOutputType without action
+ */
+export type PemesananCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TransactionWhereInput
 }
-
-export type PemesananCreateManyUnit_propertiInput = {
-  id?: string
-  property_id: string
-  tenant_id: string
-  jumlah_penghuni: number
-  tanggal_mulai: Date | string
-  tanggal_selesai?: Date | string | null
-  total_harga: runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: $Enums.StatusPemesanan
-  catatan?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-}
-
-export type PemesananUpdateWithoutUnit_propertiInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
-  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: Prisma.EnumStatusPemesananFieldUpdateOperationsInput | $Enums.StatusPemesanan
-  catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  property?: Prisma.PropertyUpdateOneRequiredWithoutPemesanansNestedInput
-  tenant?: Prisma.usersUpdateOneRequiredWithoutPemesanansNestedInput
-}
-
-export type PemesananUncheckedUpdateWithoutUnit_propertiInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  property_id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenant_id?: Prisma.StringFieldUpdateOperationsInput | string
-  jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
-  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: Prisma.EnumStatusPemesananFieldUpdateOperationsInput | $Enums.StatusPemesanan
-  catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type PemesananUncheckedUpdateManyWithoutUnit_propertiInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  property_id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenant_id?: Prisma.StringFieldUpdateOperationsInput | string
-  jumlah_penghuni?: Prisma.IntFieldUpdateOperationsInput | number
-  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tanggal_selesai?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: Prisma.EnumStatusPemesananFieldUpdateOperationsInput | $Enums.StatusPemesanan
-  catatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 
 
 export type PemesananSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  unit_properti_id?: boolean
-  property_id?: boolean
+  room_id?: boolean
   tenant_id?: boolean
   jumlah_penghuni?: boolean
   tanggal_mulai?: boolean
@@ -1018,15 +963,15 @@ export type PemesananSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   catatan?: boolean
   created_at?: boolean
   updated_at?: boolean
-  unit_properti?: boolean | Prisma.UnitPropertiDefaultArgs<ExtArgs>
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.roomsDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.usersDefaultArgs<ExtArgs>
+  transactions?: boolean | Prisma.Pemesanan$transactionsArgs<ExtArgs>
+  _count?: boolean | Prisma.PemesananCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pemesanan"]>
 
 export type PemesananSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  unit_properti_id?: boolean
-  property_id?: boolean
+  room_id?: boolean
   tenant_id?: boolean
   jumlah_penghuni?: boolean
   tanggal_mulai?: boolean
@@ -1036,15 +981,13 @@ export type PemesananSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   catatan?: boolean
   created_at?: boolean
   updated_at?: boolean
-  unit_properti?: boolean | Prisma.UnitPropertiDefaultArgs<ExtArgs>
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.roomsDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.usersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pemesanan"]>
 
 export type PemesananSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  unit_properti_id?: boolean
-  property_id?: boolean
+  room_id?: boolean
   tenant_id?: boolean
   jumlah_penghuni?: boolean
   tanggal_mulai?: boolean
@@ -1054,15 +997,13 @@ export type PemesananSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   catatan?: boolean
   created_at?: boolean
   updated_at?: boolean
-  unit_properti?: boolean | Prisma.UnitPropertiDefaultArgs<ExtArgs>
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.roomsDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.usersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pemesanan"]>
 
 export type PemesananSelectScalar = {
   id?: boolean
-  unit_properti_id?: boolean
-  property_id?: boolean
+  room_id?: boolean
   tenant_id?: boolean
   jumlah_penghuni?: boolean
   tanggal_mulai?: boolean
@@ -1074,34 +1015,32 @@ export type PemesananSelectScalar = {
   updated_at?: boolean
 }
 
-export type PemesananOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "unit_properti_id" | "property_id" | "tenant_id" | "jumlah_penghuni" | "tanggal_mulai" | "tanggal_selesai" | "total_harga" | "status" | "catatan" | "created_at" | "updated_at", ExtArgs["result"]["pemesanan"]>
+export type PemesananOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "room_id" | "tenant_id" | "jumlah_penghuni" | "tanggal_mulai" | "tanggal_selesai" | "total_harga" | "status" | "catatan" | "created_at" | "updated_at", ExtArgs["result"]["pemesanan"]>
 export type PemesananInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  unit_properti?: boolean | Prisma.UnitPropertiDefaultArgs<ExtArgs>
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.roomsDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.usersDefaultArgs<ExtArgs>
+  transactions?: boolean | Prisma.Pemesanan$transactionsArgs<ExtArgs>
+  _count?: boolean | Prisma.PemesananCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PemesananIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  unit_properti?: boolean | Prisma.UnitPropertiDefaultArgs<ExtArgs>
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.roomsDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.usersDefaultArgs<ExtArgs>
 }
 export type PemesananIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  unit_properti?: boolean | Prisma.UnitPropertiDefaultArgs<ExtArgs>
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.roomsDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.usersDefaultArgs<ExtArgs>
 }
 
 export type $PemesananPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Pemesanan"
   objects: {
-    unit_properti: Prisma.$UnitPropertiPayload<ExtArgs>
-    property: Prisma.$PropertyPayload<ExtArgs>
+    room: Prisma.$roomsPayload<ExtArgs>
     tenant: Prisma.$usersPayload<ExtArgs>
+    transactions: Prisma.$TransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    unit_properti_id: string
-    property_id: string
+    room_id: string
     tenant_id: string
     jumlah_penghuni: number
     tanggal_mulai: Date
@@ -1505,9 +1444,9 @@ readonly fields: PemesananFieldRefs;
  */
 export interface Prisma__PemesananClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  unit_properti<T extends Prisma.UnitPropertiDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitPropertiDefaultArgs<ExtArgs>>): Prisma.Prisma__UnitPropertiClient<runtime.Types.Result.GetResult<Prisma.$UnitPropertiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  property<T extends Prisma.PropertyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  room<T extends Prisma.roomsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.roomsDefaultArgs<ExtArgs>>): Prisma.Prisma__roomsClient<runtime.Types.Result.GetResult<Prisma.$roomsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tenant<T extends Prisma.usersDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.usersDefaultArgs<ExtArgs>>): Prisma.Prisma__usersClient<runtime.Types.Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  transactions<T extends Prisma.Pemesanan$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Pemesanan$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1538,8 +1477,7 @@ export interface Prisma__PemesananClient<T, Null = never, ExtArgs extends runtim
  */
 export interface PemesananFieldRefs {
   readonly id: Prisma.FieldRef<"Pemesanan", 'String'>
-  readonly unit_properti_id: Prisma.FieldRef<"Pemesanan", 'String'>
-  readonly property_id: Prisma.FieldRef<"Pemesanan", 'String'>
+  readonly room_id: Prisma.FieldRef<"Pemesanan", 'String'>
   readonly tenant_id: Prisma.FieldRef<"Pemesanan", 'String'>
   readonly jumlah_penghuni: Prisma.FieldRef<"Pemesanan", 'Int'>
   readonly tanggal_mulai: Prisma.FieldRef<"Pemesanan", 'DateTime'>
@@ -1947,6 +1885,30 @@ export type PemesananDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Limit how many Pemesanans to delete.
    */
   limit?: number
+}
+
+/**
+ * Pemesanan.transactions
+ */
+export type Pemesanan$transactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Transaction
+   */
+  select?: Prisma.TransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Transaction
+   */
+  omit?: Prisma.TransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null
+  where?: Prisma.TransactionWhereInput
+  orderBy?: Prisma.TransactionOrderByWithRelationInput | Prisma.TransactionOrderByWithRelationInput[]
+  cursor?: Prisma.TransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
 }
 
 /**

@@ -12,6 +12,7 @@ import {
 import { calculateDpAmount } from '#/lib/services/platform-config.js'
 import { scheduleBookingExpiry } from '#/lib/services/booking-expiry.js'
 import { logAudit } from '#/lib/services/audit'
+import { createBookingNotification } from '#/lib/services/notifications'
 
 import {
   createBookingSchema,
@@ -559,6 +560,14 @@ export const konfirmasiPembayaranDP = withSession
       select: bookingSelect,
     })
 
+    await createBookingNotification({
+      userId: booking.units.properties.owner_id,
+      type: 'booking',
+      title: 'Konfirmasi DP Baru',
+      message: `Penyewa mengonfirmasi pembayaran DP untuk unit ${booking.units.name}`,
+      referenceId: booking.id,
+    })
+
     return serializeBooking(updated)
   })
 
@@ -599,6 +608,14 @@ export const setujuiBooking = requireOwnerOrAdmin
         tanggalBayarDP: booking.tanggalBayarDP ?? new Date(),
       },
       select: bookingSelect,
+    })
+
+    await createBookingNotification({
+      userId: booking.penyewa_id,
+      type: 'booking',
+      title: 'DP Disetujui',
+      message: `DP booking Anda untuk unit ${booking.units.name} telah disetujui oleh pemilik. Silakan lanjutkan pelunasan.`,
+      referenceId: booking.id,
     })
 
     await logAudit({
@@ -654,6 +671,14 @@ export const tolakBooking = requireOwnerOrAdmin
       return bookingUpdate
     })
 
+    await createBookingNotification({
+      userId: booking.penyewa_id,
+      type: 'booking',
+      title: 'Booking Ditolak',
+      message: `Booking Anda untuk unit ${booking.units.name} ditolak oleh pemilik.${input.alasan ? ` Alasan: ${input.alasan}` : ''}`,
+      referenceId: booking.id,
+    })
+
     await logAudit({
       adminId: context.user.id,
       action: 'reject_booking',
@@ -706,6 +731,14 @@ export const batalkanBooking = withSession
       })
 
       return bookingUpdate
+    })
+
+    await createBookingNotification({
+      userId: booking.units.properties.owner_id,
+      type: 'booking',
+      title: 'Booking Dibatalkan',
+      message: `Penyewa membatalkan booking untuk unit ${booking.units.name}.${input.alasan ? ` Alasan: ${input.alasan}` : ''}`,
+      referenceId: booking.id,
     })
 
     return serializeBooking(updated)
@@ -1064,7 +1097,6 @@ export const processPaymentWebhook = os
 
       let updatedPayment = null
       let updatedBooking = null
-      let updatedPemesanan = null
 
       if (bookingId) {
         const booking = await tx.booking.findUnique({
@@ -1114,33 +1146,6 @@ export const processPaymentWebhook = os
         })
 
         if (updatedPayment.count > 0) {
-          const pemesanan = await tx.pemesanan.findFirst({
-            where: {
-              property_id: booking ? undefined : undefined,
-              unit_properti_id: booking?.unit_id,
-            },
-          })
-
-          if (pemesanan) {
-            let nextPemesananStatus:
-              'MENUNGGU_PERSETUJUAN' | 'DITERIMA' | undefined
-            if (input.status === 'BERHASIL') {
-              nextPemesananStatus = 'DITERIMA'
-            } else if (input.status === 'GAGAL') {
-              nextPemesananStatus = 'MENUNGGU_PERSETUJUAN'
-            }
-
-            if (
-              nextPemesananStatus &&
-              pemesanan.status !== nextPemesananStatus
-            ) {
-              updatedPemesanan = await tx.pemesanan.update({
-                where: { id: pemesanan.id },
-                data: { status: nextPemesananStatus },
-                select: { id: true, status: true },
-              })
-            }
-          }
         }
       }
 
@@ -1165,7 +1170,6 @@ export const processPaymentWebhook = os
         transaction: updatedTransaction,
         payment: updatedPayment,
         booking: updatedBooking,
-        pemesanan: updatedPemesanan,
       }
     })
 
@@ -1175,7 +1179,7 @@ export const processPaymentWebhook = os
       transaction_id: input.transaction_id,
       status: input.status,
       booking_status: result.booking?.status_booking,
-      pemesanan_status: result.pemesanan?.status,
+      pemesanan_status: undefined,
       message: 'Payment status updated',
     }
   })
@@ -1233,6 +1237,14 @@ export const konfirmasiPelunasan = withSession
         status_booking: 'AKTIF',
       },
       select: bookingSelect,
+    })
+
+    await createBookingNotification({
+      userId: booking.units.properties.owner_id,
+      type: 'payment',
+      title: 'Pelunasan Dikonfirmasi',
+      message: `Penyewa mengonfirmasi pelunasan untuk unit ${booking.units.name}. Booking sekarang aktif.`,
+      referenceId: booking.id,
     })
 
     return serializeBooking(updated)

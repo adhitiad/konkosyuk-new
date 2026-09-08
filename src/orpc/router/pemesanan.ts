@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { os } from '#/orpc/server'
 import { prisma } from '#/db'
 import { auth } from '#/lib/auth'
+import { createNotification } from '#/lib/services/notifications'
 
 import type { PemesananWithRelations } from '#/types/pemesanan'
 
@@ -39,14 +40,18 @@ const requireOwner = withSession.use(async ({ context, next }) => {
 })
 
 const pemesananInclude = {
-  unit_properti: {
-    select: { id: true, nama_unit: true, harga_bulanan: true },
-  },
-  property: {
+  room: {
     select: {
       id: true,
-      nama_properti: true,
-      pemilik_id: true,
+      name: true,
+      price: true,
+      properties: {
+        select: {
+          id: true,
+          name: true,
+          owner_id: true,
+        },
+      },
     },
   },
   tenant: {
@@ -56,8 +61,7 @@ const pemesananInclude = {
 
 type PemesananRow = {
   id: string
-  property_id: string
-  unit_properti_id: string
+  room_id: string
   tenant_id: string
   jumlah_penghuni: number
   tanggal_mulai: Date
@@ -67,19 +71,20 @@ type PemesananRow = {
   catatan: string | null
   created_at: Date
   updated_at: Date
-  unit_properti: { nama_unit: string }
-  property: { nama_properti: string }
+  room: {
+    name: string
+    properties: { name: string }
+  }
   tenant: { name: string }
 }
 
 function toPemesananWithRelations(p: PemesananRow): PemesananWithRelations {
   return {
     id: p.id,
-    property_id: p.property_id,
-    unit_properti_id: p.unit_properti_id,
+    room_id: p.room_id,
     tenant_id: p.tenant_id,
-    nama_unit: p.unit_properti.nama_unit,
-    nama_properti: p.property.nama_properti,
+    nama_unit: p.room.name,
+    nama_properti: p.room.properties.name,
     nama_tenant: p.tenant.name,
     jumlah_penghuni: p.jumlah_penghuni,
     tanggal_mulai: p.tanggal_mulai,
@@ -122,8 +127,10 @@ export const listPemesananProperti = withSession
   .handler(async ({ input, context }) => {
     const pemesanans = await prisma.pemesanan.findMany({
       where: {
-        property: {
-          pemilik_id: context.user.id,
+        room: {
+          properties: {
+            owner_id: context.user.id,
+          },
         },
         ...(input.status ? { status: input.status } : {}),
       },
@@ -136,25 +143,31 @@ export const listPemesananProperti = withSession
 export const ajukanPemesanan = withSession
   .input(AjukanPemesananInput)
   .handler(async ({ input, context }) => {
-    const unit = await prisma.unitProperti.findUnique({
-      where: { id: input.unit_properti_id },
+    const room = await prisma.rooms.findUnique({
+      where: { id: input.room_id },
       select: {
         id: true,
         property_id: true,
-        harga_bulanan: true,
-        status_ketersediaan: true,
+        price: true,
+        status: true,
+        properties: {
+          select: {
+            owner_id: true,
+            name: true,
+          },
+        },
       },
     })
 
-    if (!unit) {
+    if (!room) {
       throw new ORPCError('NOT_FOUND', {
-        message: 'Unit properti tidak ditemukan',
+        message: 'Kamar tidak ditemukan',
       })
     }
 
-    if (unit.status_ketersediaan !== 'TERSEDIA') {
+    if (room.status !== 'available') {
       throw new ORPCError('BAD_REQUEST', {
-        message: 'Unit tidak tersedia',
+        message: 'Kamar tidak tersedia',
       })
     }
 
@@ -163,7 +176,7 @@ export const ajukanPemesanan = withSession
 
     const existing = await prisma.pemesanan.findMany({
       where: {
-        unit_properti_id: input.unit_properti_id,
+        room_id: input.room_id,
         status: { in: ['MENUNGGU_PERSETUJUAN', 'DITERIMA'] },
         select: {
           id: true,
@@ -176,18 +189,17 @@ export const ajukanPemesanan = withSession
     for (const e of existing) {
       if (overlaps(start, end, e.tanggal_mulai, e.tanggal_selesai)) {
         throw new ORPCError('CONFLICT', {
-          message: 'Unit sudah dipesan pada periode ini',
+          message: 'Kamar sudah dipesan pada periode ini',
         })
       }
     }
 
-    const monthly = Number(unit.harga_bulanan)
+    const monthly = Number(room.price)
     const total = computeTotalPrice(monthly, start, end)
 
     const pemesanan = await prisma.pemesanan.create({
       data: {
-        unit_properti_id: unit.id,
-        property_id: unit.property_id,
+        room_id: room.id,
         tenant_id: context.user.id,
         jumlah_penghuni: input.jumlah_penghuni,
         tanggal_mulai: start,
@@ -197,6 +209,14 @@ export const ajukanPemesanan = withSession
         catatan: input.catatan,
       },
       include: pemesananInclude,
+    })
+
+    await createNotification({
+      userId: room.properties.owner_id,
+      type: 'booking',
+      title: 'Pemesanan Baru',
+      message: `Ada pemesanan baru untuk ${room.properties.name} dari tenant.`,
+      referenceId: pemesanan.id,
     })
 
     return toPemesananWithRelations(pemesanan)
@@ -226,7 +246,15 @@ export const setujuiPemesanan = requireOwner
       select: {
         id: true,
         status: true,
-        property: { select: { pemilik_id: true } },
+        room: {
+          select: {
+            properties: {
+              select: {
+                owner_id: true,
+              },
+            },
+          },
+        },
       },
     })
 
@@ -236,7 +264,7 @@ export const setujuiPemesanan = requireOwner
       })
     }
 
-    if (existing.property.pemilik_id !== context.user.id) {
+    if (existing.room.properties.owner_id !== context.user.id) {
       throw new ORPCError('FORBIDDEN', {
         message: 'Hanya pemilik properti yang dapat menyetujui pemesanan ini',
       })
@@ -246,6 +274,14 @@ export const setujuiPemesanan = requireOwner
       where: { id: input.id },
       data: { status: 'DITERIMA' },
       include: pemesananInclude,
+    })
+
+    await createNotification({
+      userId: updated.tenant.id,
+      type: 'BOOKING_APPROVED',
+      title: 'Pemesanan Disetujui',
+      message: `Pemesanan untuk ${updated.room.properties.name} - ${updated.room.name} telah disetujui oleh pemilik.`,
+      referenceId: updated.id,
     })
 
     return toPemesananWithRelations(updated)
@@ -259,7 +295,15 @@ export const tolakPemesanan = requireOwner
       select: {
         id: true,
         status: true,
-        property: { select: { pemilik_id: true } },
+        room: {
+          select: {
+            properties: {
+              select: {
+                owner_id: true,
+              },
+            },
+          },
+        },
       },
     })
 
@@ -269,7 +313,7 @@ export const tolakPemesanan = requireOwner
       })
     }
 
-    if (existing.property.pemilik_id !== context.user.id) {
+    if (existing.room.properties.owner_id !== context.user.id) {
       throw new ORPCError('FORBIDDEN', {
         message: 'Hanya pemilik properti yang dapat menolak pemesanan ini',
       })
@@ -279,6 +323,14 @@ export const tolakPemesanan = requireOwner
       where: { id: input.id },
       data: { status: 'DITOLAK' },
       include: pemesananInclude,
+    })
+
+    await createNotification({
+      userId: updated.tenant.id,
+      type: 'BOOKING_REJECTED',
+      title: 'Pemesanan Ditolak',
+      message: `Pemesanan untuk ${updated.room.properties.name} - ${updated.room.name} telah ditolak oleh pemilik.`,
+      referenceId: updated.id,
     })
 
     return toPemesananWithRelations(updated)
@@ -319,6 +371,14 @@ export const batalPemesanan = withSession
       where: { id: input.id },
       data: { status: 'DIBATALKAN' },
       include: pemesananInclude,
+    })
+
+    await createNotification({
+      userId: updated.room.properties.owner_id,
+      type: 'booking',
+      title: 'Pemesanan Dibatalkan',
+      message: `Pemesanan untuk ${updated.room.properties.name} - ${updated.room.name} telah dibatalkan oleh tenant.`,
+      referenceId: updated.id,
     })
 
     return toPemesananWithRelations(updated)

@@ -536,6 +536,10 @@ export type InsightSource = (typeof InsightSource)[keyof typeof InsightSource]
 
 
 export const NotificationType = {
+  BOOKING_APPROVED: 'BOOKING_APPROVED',
+  BOOKING_REJECTED: 'BOOKING_REJECTED',
+  PAYMENT_SUCCESS: 'PAYMENT_SUCCESS',
+  NEW_MESSAGE: 'NEW_MESSAGE',
   booking: 'booking',
   payment: 'payment',
   maintenance: 'maintenance',
@@ -790,6 +794,16 @@ export const StatusTransaksi = {
 } as const
 
 export type StatusTransaksi = (typeof StatusTransaksi)[keyof typeof StatusTransaksi]
+
+
+export const TransactionStatus = {
+  PENDING: 'PENDING',
+  SUCCESS: 'SUCCESS',
+  FAILED: 'FAILED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]
 
 
 export const MetodePembayaran = {

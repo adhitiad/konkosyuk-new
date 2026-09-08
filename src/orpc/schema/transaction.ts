@@ -50,6 +50,22 @@ export const createPaymentSchema = z.object({
   bukti_transfer_url: z.string().url().optional(),
 })
 
+export const createPemesananPaymentSchema = z.object({
+  pemesanan_id: z.string().uuid(),
+  payment_method: z.enum(['TRANSFER', 'E_WALLET', 'CREDIT_CARD', 'VA']),
+  amount: z.number().min(0),
+})
+
+export const PemesananPaymentWebhookPayloadSchema = z.object({
+  event_id: z.string().min(1),
+  transaction_id: z.string().uuid(),
+  status: z.enum(['PENDING', 'SUCCESS', 'FAILED', 'EXPIRED']),
+  amount: z.number().min(0).optional(),
+  paid_at: z.coerce.date().optional(),
+  external_id: z.string().optional(),
+  snapshot_data: z.record(z.string(), z.unknown()).optional(),
+})
+
 export const verifyPaymentSchema = z.object({
   payment_id: z.string().uuid(),
   status_pembayaran: StatusPembayaranSchema,

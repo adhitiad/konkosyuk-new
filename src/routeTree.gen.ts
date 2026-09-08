@@ -33,10 +33,12 @@ import { Route as protectedPenyewaWishlistRouteImport } from './routes/(protecte
 import { Route as publicPropertiPropertyIdRouteImport } from './routes/(public)/properti/$propertyId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiRpcSplatRouteImport } from './routes/api.rpc.$'
+import { Route as ApiWebhooksPaymentRouteImport } from './routes/api/webhooks/payment'
 import { Route as OwnerPropertiesIdRouteImport } from './routes/owner.properties.$id'
 import { Route as OwnerPropertiesNewRouteImport } from './routes/owner.properties.new'
 import { Route as protectedPemilikDashboardIndexRouteImport } from './routes/(protected)/pemilik/dashboard/index'
 import { Route as protectedPemilikDashboardActiveRouteImport } from './routes/(protected)/pemilik/dashboard/active'
+import { Route as protectedPemilikDashboardExpirationsRouteImport } from './routes/(protected)/pemilik/dashboard/expirations'
 import { Route as protectedPemilikDashboardHistoryRouteImport } from './routes/(protected)/pemilik/dashboard/history'
 import { Route as protectedPemilikDashboardRequestsRouteImport } from './routes/(protected)/pemilik/dashboard/requests'
 import { Route as protectedPenyewaBookingBaruRouteImport } from './routes/(protected)/penyewa/booking/baru'
@@ -166,6 +168,11 @@ const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   path: '/api/rpc/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiWebhooksPaymentRoute = ApiWebhooksPaymentRouteImport.update({
+  id: '/api/webhooks/payment',
+  path: '/api/webhooks/payment',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OwnerPropertiesIdRoute = OwnerPropertiesIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -186,6 +193,12 @@ const protectedPemilikDashboardActiveRoute =
   protectedPemilikDashboardActiveRouteImport.update({
     id: '/active',
     path: '/active',
+    getParentRoute: () => protectedPemilikDashboardRouteRoute,
+  } as any)
+const protectedPemilikDashboardExpirationsRoute =
+  protectedPemilikDashboardExpirationsRouteImport.update({
+    id: '/expirations',
+    path: '/expirations',
     getParentRoute: () => protectedPemilikDashboardRouteRoute,
   } as any)
 const protectedPemilikDashboardHistoryRoute =
@@ -235,10 +248,12 @@ export interface FileRoutesByFullPath {
   '/properti/$propertyId': typeof publicPropertiPropertyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/api/webhooks/payment': typeof ApiWebhooksPaymentRoute
   '/owner/properties/$id': typeof OwnerPropertiesIdRoute
   '/owner/properties/new': typeof OwnerPropertiesNewRoute
   '/admin/': typeof protectedAdminIndexRoute
   '/pemilik/dashboard/active': typeof protectedPemilikDashboardActiveRoute
+  '/pemilik/dashboard/expirations': typeof protectedPemilikDashboardExpirationsRoute
   '/pemilik/dashboard/history': typeof protectedPemilikDashboardHistoryRoute
   '/pemilik/dashboard/requests': typeof protectedPemilikDashboardRequestsRoute
   '/penyewa/booking/baru': typeof protectedPenyewaBookingBaruRoute
@@ -266,10 +281,12 @@ export interface FileRoutesByTo {
   '/properti/$propertyId': typeof publicPropertiPropertyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/api/webhooks/payment': typeof ApiWebhooksPaymentRoute
   '/owner/properties/$id': typeof OwnerPropertiesIdRoute
   '/owner/properties/new': typeof OwnerPropertiesNewRoute
   '/admin': typeof protectedAdminIndexRoute
   '/pemilik/dashboard/active': typeof protectedPemilikDashboardActiveRoute
+  '/pemilik/dashboard/expirations': typeof protectedPemilikDashboardExpirationsRoute
   '/pemilik/dashboard/history': typeof protectedPemilikDashboardHistoryRoute
   '/pemilik/dashboard/requests': typeof protectedPemilikDashboardRequestsRoute
   '/penyewa/booking/baru': typeof protectedPenyewaBookingBaruRoute
@@ -301,10 +318,12 @@ export interface FileRoutesById {
   '/(public)/properti/$propertyId': typeof publicPropertiPropertyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/api/webhooks/payment': typeof ApiWebhooksPaymentRoute
   '/owner/properties/$id': typeof OwnerPropertiesIdRoute
   '/owner/properties/new': typeof OwnerPropertiesNewRoute
   '/(protected)/admin/': typeof protectedAdminIndexRoute
   '/(protected)/pemilik/dashboard/active': typeof protectedPemilikDashboardActiveRoute
+  '/(protected)/pemilik/dashboard/expirations': typeof protectedPemilikDashboardExpirationsRoute
   '/(protected)/pemilik/dashboard/history': typeof protectedPemilikDashboardHistoryRoute
   '/(protected)/pemilik/dashboard/requests': typeof protectedPemilikDashboardRequestsRoute
   '/(protected)/penyewa/booking/baru': typeof protectedPenyewaBookingBaruRoute
@@ -336,10 +355,12 @@ export interface FileRouteTypes {
     | '/properti/$propertyId'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/api/webhooks/payment'
     | '/owner/properties/$id'
     | '/owner/properties/new'
     | '/admin/'
     | '/pemilik/dashboard/active'
+    | '/pemilik/dashboard/expirations'
     | '/pemilik/dashboard/history'
     | '/pemilik/dashboard/requests'
     | '/penyewa/booking/baru'
@@ -367,10 +388,12 @@ export interface FileRouteTypes {
     | '/properti/$propertyId'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/api/webhooks/payment'
     | '/owner/properties/$id'
     | '/owner/properties/new'
     | '/admin'
     | '/pemilik/dashboard/active'
+    | '/pemilik/dashboard/expirations'
     | '/pemilik/dashboard/history'
     | '/pemilik/dashboard/requests'
     | '/penyewa/booking/baru'
@@ -401,10 +424,12 @@ export interface FileRouteTypes {
     | '/(public)/properti/$propertyId'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/api/webhooks/payment'
     | '/owner/properties/$id'
     | '/owner/properties/new'
     | '/(protected)/admin/'
     | '/(protected)/pemilik/dashboard/active'
+    | '/(protected)/pemilik/dashboard/expirations'
     | '/(protected)/pemilik/dashboard/history'
     | '/(protected)/pemilik/dashboard/requests'
     | '/(protected)/penyewa/booking/baru'
@@ -429,6 +454,7 @@ export interface RootRouteChildren {
   publicPropertiPropertyIdRoute: typeof publicPropertiPropertyIdRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
+  ApiWebhooksPaymentRoute: typeof ApiWebhooksPaymentRoute
   ApiWebhooksQstashSplatRoute: typeof ApiWebhooksQstashSplatRoute
 }
 
@@ -602,6 +628,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiRpcSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/webhooks/payment': {
+      id: '/api/webhooks/payment'
+      path: '/api/webhooks/payment'
+      fullPath: '/api/webhooks/payment'
+      preLoaderRoute: typeof ApiWebhooksPaymentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/owner/properties/$id': {
       id: '/owner/properties/$id'
       path: '/$id'
@@ -628,6 +661,13 @@ declare module '@tanstack/react-router' {
       path: '/active'
       fullPath: '/pemilik/dashboard/active'
       preLoaderRoute: typeof protectedPemilikDashboardActiveRouteImport
+      parentRoute: typeof protectedPemilikDashboardRouteRoute
+    }
+    '/(protected)/pemilik/dashboard/expirations': {
+      id: '/(protected)/pemilik/dashboard/expirations'
+      path: '/expirations'
+      fullPath: '/pemilik/dashboard/expirations'
+      preLoaderRoute: typeof protectedPemilikDashboardExpirationsRouteImport
       parentRoute: typeof protectedPemilikDashboardRouteRoute
     }
     '/(protected)/pemilik/dashboard/history': {
@@ -720,6 +760,7 @@ const OwnerPropertiesRouteWithChildren = OwnerPropertiesRoute._addFileChildren(
 
 interface protectedPemilikDashboardRouteRouteChildren {
   protectedPemilikDashboardActiveRoute: typeof protectedPemilikDashboardActiveRoute
+  protectedPemilikDashboardExpirationsRoute: typeof protectedPemilikDashboardExpirationsRoute
   protectedPemilikDashboardHistoryRoute: typeof protectedPemilikDashboardHistoryRoute
   protectedPemilikDashboardRequestsRoute: typeof protectedPemilikDashboardRequestsRoute
   protectedPemilikDashboardIndexRoute: typeof protectedPemilikDashboardIndexRoute
@@ -728,6 +769,8 @@ interface protectedPemilikDashboardRouteRouteChildren {
 const protectedPemilikDashboardRouteRouteChildren: protectedPemilikDashboardRouteRouteChildren =
   {
     protectedPemilikDashboardActiveRoute: protectedPemilikDashboardActiveRoute,
+    protectedPemilikDashboardExpirationsRoute:
+      protectedPemilikDashboardExpirationsRoute,
     protectedPemilikDashboardHistoryRoute:
       protectedPemilikDashboardHistoryRoute,
     protectedPemilikDashboardRequestsRoute:
@@ -772,17 +815,9 @@ const rootRouteChildren: RootRouteChildren = {
   publicPropertiPropertyIdRoute: publicPropertiPropertyIdRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
+  ApiWebhooksPaymentRoute: ApiWebhooksPaymentRoute,
   ApiWebhooksQstashSplatRoute: ApiWebhooksQstashSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

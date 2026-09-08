@@ -152,7 +152,7 @@ function BookingListContent() {
         <Button asChild>
           <Link
             to="/penyewa/booking/baru"
-            search={{ property_id: '', unit_id: '' }}
+            search={{ property_id: '', room_id: '' }}
           >
             <ClipboardList className="h-4 w-4" />
             Ajukan Pemesanan Baru
@@ -303,7 +303,7 @@ function EmptyState() {
             <Button asChild variant="outline">
               <Link
                 to="/penyewa/booking/baru"
-                search={{ property_id: '', unit_id: '' }}
+                search={{ property_id: '', room_id: '' }}
               >
                 <ClipboardList className="h-4 w-4" />
                 Ajukan Pemesanan Baru

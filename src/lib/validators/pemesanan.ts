@@ -11,7 +11,7 @@ export type StatusPemesanan = z.infer<typeof StatusPemesananSchema>
 
 export const AjukanPemesananInput = z
   .object({
-    unit_properti_id: z.string().uuid('Unit properti tidak valid'),
+    room_id: z.string().uuid('Kamar tidak valid'),
     tanggal_mulai: z.date({ message: 'Tanggal mulai diperlukan' }),
     tanggal_selesai: z.date().optional(),
     jumlah_penghuni: z

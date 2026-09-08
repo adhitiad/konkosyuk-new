@@ -12,6 +12,7 @@ import {
 } from './ui/sheet'
 import ParaglideLocaleSwitcher from './LocaleSwitcher.tsx'
 import ThemeToggle from './ThemeToggle'
+import NotificationSheet from './notifications/NotificationSheet.tsx'
 
 type NavItem = {
   label: string
@@ -62,6 +63,7 @@ export default function Header() {
             <BetterAuthHeader />
             <ParaglideLocaleSwitcher />
           </div>
+          <NotificationSheet />
           <ThemeToggle />
           <MobileMenuButton onClick={() => setOpen(true)} />
         </div>

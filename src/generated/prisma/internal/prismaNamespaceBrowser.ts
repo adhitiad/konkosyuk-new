@@ -133,6 +133,7 @@ export const ModelName = {
   RefundRequest: 'RefundRequest',
   PlatformConfig: 'PlatformConfig',
   PaymentTransaction: 'PaymentTransaction',
+  Transaction: 'Transaction',
   Property: 'Property',
   UnitProperti: 'UnitProperti',
   Fasilitas: 'Fasilitas',
@@ -1477,6 +1478,21 @@ export const PaymentTransactionScalarFieldEnum = {
 export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalarFieldEnum)[keyof typeof PaymentTransactionScalarFieldEnum]
 
 
+export const TransactionScalarFieldEnum = {
+  id: 'id',
+  pemesananId: 'pemesananId',
+  amount: 'amount',
+  paymentMethod: 'paymentMethod',
+  externalId: 'externalId',
+  status: 'status',
+  snapshotData: 'snapshotData',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
+
+
 export const PropertyScalarFieldEnum = {
   id: 'id',
   nama_properti: 'nama_properti',
@@ -1537,8 +1553,7 @@ export type FotoPropertiScalarFieldEnum = (typeof FotoPropertiScalarFieldEnum)[k
 
 export const PemesananScalarFieldEnum = {
   id: 'id',
-  unit_properti_id: 'unit_properti_id',
-  property_id: 'property_id',
+  room_id: 'room_id',
   tenant_id: 'tenant_id',
   jumlah_penghuni: 'jumlah_penghuni',
   tanggal_mulai: 'tanggal_mulai',

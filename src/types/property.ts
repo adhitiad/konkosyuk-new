@@ -30,8 +30,20 @@ export interface PropertyWithRelations {
   created_at: Date
   updated_at: Date
   unit_propertis: UnitPropertiWithRelations[]
+  rooms?: RoomWithRelations[]
   fasilitas: FasilitasWithRelations[]
   foto_propertis: FotoPropertiWithRelations[]
+}
+
+export interface RoomWithRelations {
+  id: string
+  property_id: string
+  name: string
+  price: string
+  status: 'available' | 'booked' | 'maintenance'
+  facilities: string[]
+  created_at: Date
+  updated_at: Date
 }
 
 export interface UnitPropertiWithRelations {
