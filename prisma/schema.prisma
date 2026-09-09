@@ -545,6 +545,38 @@ model messages {
   @@index([sender_id])
 }
 
+model Conversation {
+  id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  bookingId      String?   @db.Uuid @unique
+  propertyId     String?   @db.Uuid
+  userId         String    @db.Uuid
+  ownerId        String    @db.Uuid
+  lastMessageAt  DateTime?
+  createdAt      DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime  @updatedAt @db.Timestamp(6)
+  booking        Booking?  @relation("BookingConversation", fields: [bookingId], references: [id], onDelete: SetNull)
+  property       Property? @relation("PropertyConversations", fields: [propertyId], references: [id], onDelete: SetNull)
+  user           users     @relation("UserConversationsAsUser", fields: [userId], references: [id], onDelete: Cascade)
+  owner          users     @relation("UserConversationsAsOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  messages       Message[] @relation("ConversationMessages")
+
+  @@index([userId, ownerId])
+  @@index([bookingId])
+}
+
+model Message {
+  id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  conversationId String    @db.Uuid
+  senderId       String    @db.Uuid
+  content        String    @db.VarChar(2000)
+  isRead         Boolean   @default(false)
+  createdAt      DateTime  @default(now()) @db.Timestamp(6)
+  conversation   Conversation @relation("ConversationMessages", fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         users     @relation("UserSentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, createdAt])
+}
+
 model nearby_places {
   id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   property_id String     @db.Uuid
@@ -1361,6 +1393,9 @@ model users {
   kyc_requests                                       KycRequest[]                   @relation("KycRequest_user_id")
    propertis_wizard                                   Property[]                     @relation("Property_pemilik")
    pemesanans                                         Pemesanan[]                   @relation("PemesananTenant")
+  sentMessages                                       Message[]                      @relation("UserSentMessages")
+  conversationsAsUser                                Conversation[]                 @relation("UserConversationsAsUser")
+  conversationsAsOwner                               Conversation[]                 @relation("UserConversationsAsOwner")
 
    @@index([is_active])
 }
@@ -1467,6 +1502,7 @@ model Booking {
   transaction          Transaction?
   previousBooking      Booking?           @relation("BookingExtension", fields: [previous_booking_id], references: [id], onDelete: NoAction, map: "Booking_previous_booking_id_Booking_id_fk")
   nextBooking          Booking?           @relation("BookingExtension", map: "Booking_next_booking_id_Booking_id_fk")
+  conversation         Conversation?      @relation("BookingConversation")
 
   @@index([penyewa_id])
   @@index([unit_id])
@@ -1583,6 +1619,7 @@ model Property {
   fasilitas      Fasilitas[]
   foto_propertis FotoProperti[]
   users          users          @relation("Property_pemilik", fields: [pemilik_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Property_pemilik_id_users_id_fk")
+  conversations  Conversation[] @relation("PropertyConversations")
 
   @@index([pemilik_id])
   @@index([tipe_properti])

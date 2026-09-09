@@ -39,6 +39,8 @@ import {
   PaymentWebhookSchema,
   getPaymentDeadlineSchema,
   getBookingDetailSchema,
+  extendBookingSchema,
+  getBookingExtensionHistorySchema,
 } from '#/orpc/schema/transaction'
 
 const withSession = os.use(async ({ context, next }) => {
@@ -202,6 +204,195 @@ export const checkRoomAvailability = withSession
       available: conflicting.length === 0,
       conflictingBookings: conflicting,
     }
+  })
+
+export const extendBooking = withSession
+  .input(extendBookingSchema)
+  .handler(async ({ input, context }) => {
+    const existingBooking = await prisma.booking.findUnique({
+      where: { id: input.bookingId },
+      include: {
+        units: { select: { id: true, property_id: true } },
+        users: { select: { id: true, name: true } },
+      },
+    })
+
+    if (!existingBooking) {
+      throw new ORPCError('NOT_FOUND', { message: 'Booking tidak ditemukan' })
+    }
+
+    if (existingBooking.penyewa_id !== context.user.id) {
+      throw new ORPCError('FORBIDDEN', {
+        message: 'Anda tidak memiliki akses ke booking ini',
+      })
+    }
+
+    if (
+      existingBooking.status_booking !== 'ACTIVE' &&
+      existingBooking.status_booking !== 'COMPLETED'
+    ) {
+      throw new ORPCError('BAD_REQUEST', {
+        message:
+          'Booking harus berstatus ACTIVE atau COMPLETED untuk diperpanjang',
+      })
+    }
+
+    const newCheckInDate = new Date(input.newCheckInDate)
+    const oldCheckOutDate = new Date(existingBooking.check_out_date)
+
+    if (newCheckInDate < oldCheckOutDate) {
+      throw new ORPCError('BAD_REQUEST', {
+        message:
+          'Tanggal check-in baru harus >= tanggal check-out booking lama',
+      })
+    }
+
+    const newCheckOutDate = calculateCheckOutDate(
+      newCheckInDate,
+      input.newRentalPeriod,
+    )
+
+    const availability = await prisma.$transaction(
+      async (tx) => {
+        const conflicting = await tx.booking.findMany({
+          where: {
+            unit_id: existingBooking.unit_id,
+            status_booking: { in: ['PENDING_PAYMENT', 'CONFIRMED', 'ACTIVE'] },
+            OR: [
+              {
+                check_in_date: { lt: newCheckOutDate },
+                check_out_date: { gt: newCheckInDate },
+              },
+            ],
+          },
+        })
+
+        if (conflicting.length > 0) {
+          return { available: false as const }
+        }
+
+        const newBooking = await tx.booking.create({
+          data: {
+            unit_id: existingBooking.unit_id,
+            penyewa_id: existingBooking.penyewa_id,
+            tanggal_mulai: newCheckInDate,
+            tanggal_selesai: newCheckOutDate,
+            total_harga: existingBooking.total_harga,
+            status_booking: 'PENDING_PAYMENT',
+            payment_deadline: new Date(Date.now() + 7 * 60 * 60 * 1000),
+            rental_period: input.newRentalPeriod,
+            check_in_date: newCheckInDate,
+            check_out_date: newCheckOutDate,
+            previous_booking_id: existingBooking.id,
+          },
+        })
+
+        await tx.booking.update({
+          where: { id: existingBooking.id },
+          data: { next_booking_id: newBooking.id },
+        })
+
+        return { available: true as const, newBooking }
+      },
+      { isolationLevel: 'Serializable' },
+    )
+
+    if (!availability.available) {
+      throw new ORPCError('CONFLICT', {
+        message: 'Kamar tidak tersedia untuk periode yang dipilih',
+      })
+    }
+
+    const newBooking = availability.newBooking
+
+    await createBookingNotification({
+      userId: existingBooking.penyewa_id,
+      type: 'booking',
+      title: 'Perpanjangan Booking',
+      message:
+        'Booking perpanjangan Anda berhasil dibuat, silakan bayar dalam 7 jam',
+      referenceId: newBooking.id,
+    })
+
+    return {
+      newBookingId: newBooking.id,
+      paymentDeadline: newBooking.payment_deadline,
+    }
+  })
+
+export const getBookingExtensionHistory = withSession
+  .input(getBookingExtensionHistorySchema)
+  .handler(async ({ input, context }) => {
+    const rootBooking = await prisma.booking.findUnique({
+      where: { id: input.bookingId },
+      select: { penyewa_id: true },
+    })
+
+    if (!rootBooking) {
+      throw new ORPCError('NOT_FOUND', { message: 'Booking tidak ditemukan' })
+    }
+
+    if (rootBooking.penyewa_id !== context.user.id) {
+      throw new ORPCError('FORBIDDEN', {
+        message: 'Anda tidak memiliki akses ke booking ini',
+      })
+    }
+
+    const visited = new Set<string>()
+    const chain: Array<{
+      id: string
+      check_in_date: Date
+      check_out_date: Date
+      rental_period: string
+      status_booking: string
+      previous_booking_id: string | null
+      next_booking_id: string | null
+    }> = []
+
+    let current: string | null = input.bookingId
+
+    while (current && !visited.has(current)) {
+      visited.add(current)
+
+      const bookingResult: {
+        id: string
+        check_in_date: Date
+        check_out_date: Date
+        rental_period: string
+        status_booking: string
+        previous_booking_id: string | null
+        next_booking_id: string | null
+      } | null = await prisma.booking.findUnique({
+        where: { id: current },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          rental_period: true,
+          status_booking: true,
+          previous_booking_id: true,
+          next_booking_id: true,
+        },
+      })
+
+      if (!bookingResult) {
+        break
+      }
+
+      chain.push({
+        id: bookingResult.id,
+        check_in_date: bookingResult.check_in_date,
+        check_out_date: bookingResult.check_out_date,
+        rental_period: bookingResult.rental_period,
+        status_booking: bookingResult.status_booking,
+        previous_booking_id: bookingResult.previous_booking_id,
+        next_booking_id: bookingResult.next_booking_id,
+      })
+
+      current = bookingResult.next_booking_id
+    }
+
+    return chain
   })
 
 export const createPayment = withSession
@@ -451,6 +642,11 @@ const bookingSelect = {
   transaksiDP_id: true,
   transaksiPelunasan_id: true,
   transaksiRefund_id: true,
+  rental_period: true,
+  check_in_date: true,
+  check_out_date: true,
+  previous_booking_id: true,
+  next_booking_id: true,
   units: {
     select: {
       id: true,
@@ -537,6 +733,11 @@ function serializeBooking(raw: BookingRecord) {
     transaksiDP: serializeTransaction(raw.transaksiDP),
     transaksiPelunasan: serializeTransaction(raw.transaksiPelunasan),
     transaksiRefund: serializeTransaction(raw.transaksiRefund),
+    rental_period: raw.rental_period,
+    check_in_date: raw.check_in_date,
+    check_out_date: raw.check_out_date,
+    previous_booking_id: raw.previous_booking_id,
+    next_booking_id: raw.next_booking_id,
     unit: {
       id: raw.units.id,
       name: raw.units.name,

@@ -426,6 +426,8 @@ export const ModelName = {
   maintenance_reports: 'maintenance_reports',
   maintenance_tickets: 'maintenance_tickets',
   messages: 'messages',
+  Conversation: 'Conversation',
+  Message: 'Message',
   nearby_places: 'nearby_places',
   neighborhood_insights: 'neighborhood_insights',
   neighborhood_places: 'neighborhood_places',
@@ -500,7 +502,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "accounts" | "ad_packages" | "analytics_events" | "app_settings" | "audit_logs" | "balance_logs" | "booking_requests" | "bookings" | "campus_areas" | "chart_of_accounts" | "chat_rooms" | "damage_reports" | "experiment_assignments" | "experiments" | "favorites" | "feature_flags" | "feedbacks" | "general_ledger" | "group_booking_members" | "group_bookings" | "inspection_items" | "inspection_photos" | "inspection_templates" | "inspections" | "kyc_verifications" | "loyalty_transactions" | "maintenance_reports" | "maintenance_tickets" | "messages" | "nearby_places" | "neighborhood_insights" | "neighborhood_places" | "notification_settings" | "notifications" | "owner_bank_accounts" | "payment_gateway_configs" | "payment_gateway_credentials" | "payment_transactions" | "payments" | "platform_settings" | "popular_areas" | "pricing_analytics" | "pricing_suggestions" | "properties" | "property_ads" | "property_comparisons" | "property_ratings" | "property_rules" | "property_similarities" | "property_tags" | "push_subscriptions" | "referrals" | "refund_requests" | "review_replies" | "reviews" | "reward_redemptions" | "rewards" | "rooms" | "room_facilities" | "roommate_preferences" | "saved_searches" | "seasonal_pricing_rules" | "sessions" | "tags" | "twoFactor" | "unit_pricing_tiers" | "units" | "user_contracts" | "user_interest_vectors" | "user_notification_preferences" | "users" | "verifications" | "wa_session" | "webhook_events" | "wishlists" | "withdrawals" | "booking" | "payment" | "kycRequest" | "refundRequest" | "platformConfig" | "paymentTransaction" | "transaction" | "property" | "unitProperti" | "fasilitas" | "fotoProperti" | "pemesanan"
+    modelProps: "accounts" | "ad_packages" | "analytics_events" | "app_settings" | "audit_logs" | "balance_logs" | "booking_requests" | "bookings" | "campus_areas" | "chart_of_accounts" | "chat_rooms" | "damage_reports" | "experiment_assignments" | "experiments" | "favorites" | "feature_flags" | "feedbacks" | "general_ledger" | "group_booking_members" | "group_bookings" | "inspection_items" | "inspection_photos" | "inspection_templates" | "inspections" | "kyc_verifications" | "loyalty_transactions" | "maintenance_reports" | "maintenance_tickets" | "messages" | "conversation" | "message" | "nearby_places" | "neighborhood_insights" | "neighborhood_places" | "notification_settings" | "notifications" | "owner_bank_accounts" | "payment_gateway_configs" | "payment_gateway_credentials" | "payment_transactions" | "payments" | "platform_settings" | "popular_areas" | "pricing_analytics" | "pricing_suggestions" | "properties" | "property_ads" | "property_comparisons" | "property_ratings" | "property_rules" | "property_similarities" | "property_tags" | "push_subscriptions" | "referrals" | "refund_requests" | "review_replies" | "reviews" | "reward_redemptions" | "rewards" | "rooms" | "room_facilities" | "roommate_preferences" | "saved_searches" | "seasonal_pricing_rules" | "sessions" | "tags" | "twoFactor" | "unit_pricing_tiers" | "units" | "user_contracts" | "user_interest_vectors" | "user_notification_preferences" | "users" | "verifications" | "wa_session" | "webhook_events" | "wishlists" | "withdrawals" | "booking" | "payment" | "kycRequest" | "refundRequest" | "platformConfig" | "paymentTransaction" | "transaction" | "property" | "unitProperti" | "fasilitas" | "fotoProperti" | "pemesanan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2647,6 +2649,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.messagesCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.MessagesCountAggregateOutputType> | number
+        }
+      }
+    }
+    Conversation: {
+      payload: Prisma.$ConversationPayload<ExtArgs>
+      fields: Prisma.ConversationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ConversationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ConversationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
+        }
+        findFirst: {
+          args: Prisma.ConversationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ConversationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
+        }
+        findMany: {
+          args: Prisma.ConversationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>[]
+        }
+        create: {
+          args: Prisma.ConversationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
+        }
+        createMany: {
+          args: Prisma.ConversationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ConversationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>[]
+        }
+        delete: {
+          args: Prisma.ConversationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
+        }
+        update: {
+          args: Prisma.ConversationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
+        }
+        deleteMany: {
+          args: Prisma.ConversationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ConversationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ConversationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>[]
+        }
+        upsert: {
+          args: Prisma.ConversationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
+        }
+        aggregate: {
+          args: Prisma.ConversationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateConversation>
+        }
+        groupBy: {
+          args: Prisma.ConversationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConversationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ConversationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConversationCountAggregateOutputType> | number
+        }
+      }
+    }
+    Message: {
+      payload: Prisma.$MessagePayload<ExtArgs>
+      fields: Prisma.MessageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MessageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MessageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessagePayload>
+        }
+        findFirst: {
+          args: Prisma.MessageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MessageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessagePayload>
+        }
+        findMany: {
+          args: Prisma.MessageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessagePayload>[]
+        }
+        create: {
+          args: Prisma.MessageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessagePayload>
+        }
+        createMany: {
+          args: Prisma.MessageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MessageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessagePayload>[]
+        }
+        delete: {
+          args: Prisma.MessageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessagePayload>
+        }
+        update: {
+          args: Prisma.MessageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessagePayload>
+        }
+        deleteMany: {
+          args: Prisma.MessageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MessageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MessageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessagePayload>[]
+        }
+        upsert: {
+          args: Prisma.MessageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessagePayload>
+        }
+        aggregate: {
+          args: Prisma.MessageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMessage>
+        }
+        groupBy: {
+          args: Prisma.MessageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MessageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MessageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MessageCountAggregateOutputType> | number
         }
       }
     }
@@ -7532,6 +7682,32 @@ export const MessagesScalarFieldEnum = {
 export type MessagesScalarFieldEnum = (typeof MessagesScalarFieldEnum)[keyof typeof MessagesScalarFieldEnum]
 
 
+export const ConversationScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  propertyId: 'propertyId',
+  userId: 'userId',
+  ownerId: 'ownerId',
+  lastMessageAt: 'lastMessageAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
+
+
+export const MessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  senderId: 'senderId',
+  content: 'content',
+  isRead: 'isRead',
+  createdAt: 'createdAt'
+} as const
+
+export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
 export const Nearby_placesScalarFieldEnum = {
   id: 'id',
   property_id: 'property_id',
@@ -9821,6 +9997,8 @@ export type GlobalOmitConfig = {
   maintenance_reports?: Prisma.maintenance_reportsOmit
   maintenance_tickets?: Prisma.maintenance_ticketsOmit
   messages?: Prisma.messagesOmit
+  conversation?: Prisma.ConversationOmit
+  message?: Prisma.MessageOmit
   nearby_places?: Prisma.nearby_placesOmit
   neighborhood_insights?: Prisma.neighborhood_insightsOmit
   neighborhood_places?: Prisma.neighborhood_placesOmit

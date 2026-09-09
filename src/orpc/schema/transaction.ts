@@ -183,3 +183,18 @@ export const PaymentWebhookSchema = z.object({
   channel: z.string().min(1).optional(),
   metadata: z.record(z.string(), z.unknown()).optional(),
 })
+
+export const extendBookingSchema = z.object({
+  bookingId: z.string().uuid(),
+  newRentalPeriod: z.enum([
+    'ONE_MONTH',
+    'THREE_MONTHS',
+    'SIX_MONTHS',
+    'ONE_YEAR',
+  ]),
+  newCheckInDate: z.coerce.date(),
+})
+
+export const getBookingExtensionHistorySchema = z.object({
+  bookingId: z.string().uuid(),
+})

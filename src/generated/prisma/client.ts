@@ -187,6 +187,16 @@ export type maintenance_tickets = Prisma.maintenance_ticketsModel
  */
 export type messages = Prisma.messagesModel
 /**
+ * Model Conversation
+ * 
+ */
+export type Conversation = Prisma.ConversationModel
+/**
+ * Model Message
+ * 
+ */
+export type Message = Prisma.MessageModel
+/**
  * Model nearby_places
  * 
  */

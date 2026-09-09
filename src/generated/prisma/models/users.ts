@@ -450,6 +450,9 @@ export type usersWhereInput = {
   kyc_requests?: Prisma.KycRequestListRelationFilter
   propertis_wizard?: Prisma.PropertyListRelationFilter
   pemesanans?: Prisma.PemesananListRelationFilter
+  sentMessages?: Prisma.MessageListRelationFilter
+  conversationsAsUser?: Prisma.ConversationListRelationFilter
+  conversationsAsOwner?: Prisma.ConversationListRelationFilter
 }
 
 export type usersOrderByWithRelationInput = {
@@ -530,6 +533,9 @@ export type usersOrderByWithRelationInput = {
   kyc_requests?: Prisma.KycRequestOrderByRelationAggregateInput
   propertis_wizard?: Prisma.PropertyOrderByRelationAggregateInput
   pemesanans?: Prisma.PemesananOrderByRelationAggregateInput
+  sentMessages?: Prisma.MessageOrderByRelationAggregateInput
+  conversationsAsUser?: Prisma.ConversationOrderByRelationAggregateInput
+  conversationsAsOwner?: Prisma.ConversationOrderByRelationAggregateInput
 }
 
 export type usersWhereUniqueInput = Prisma.AtLeast<{
@@ -613,6 +619,9 @@ export type usersWhereUniqueInput = Prisma.AtLeast<{
   kyc_requests?: Prisma.KycRequestListRelationFilter
   propertis_wizard?: Prisma.PropertyListRelationFilter
   pemesanans?: Prisma.PemesananListRelationFilter
+  sentMessages?: Prisma.MessageListRelationFilter
+  conversationsAsUser?: Prisma.ConversationListRelationFilter
+  conversationsAsOwner?: Prisma.ConversationListRelationFilter
 }, "id" | "email" | "referral_code">
 
 export type usersOrderByWithAggregationInput = {
@@ -761,6 +770,9 @@ export type usersCreateInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateInput = {
@@ -841,6 +853,9 @@ export type usersUncheckedCreateInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUpdateInput = {
@@ -921,6 +936,9 @@ export type usersUpdateInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateInput = {
@@ -1001,6 +1019,9 @@ export type usersUncheckedUpdateInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateManyInput = {
@@ -1561,6 +1582,48 @@ export type usersUpdateOneWithoutMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutMessagesInput, Prisma.usersUpdateWithoutMessagesInput>, Prisma.usersUncheckedUpdateWithoutMessagesInput>
 }
 
+export type usersCreateNestedOneWithoutConversationsAsUserInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutConversationsAsUserInput, Prisma.usersUncheckedCreateWithoutConversationsAsUserInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutConversationsAsUserInput
+  connect?: Prisma.usersWhereUniqueInput
+}
+
+export type usersCreateNestedOneWithoutConversationsAsOwnerInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutConversationsAsOwnerInput, Prisma.usersUncheckedCreateWithoutConversationsAsOwnerInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutConversationsAsOwnerInput
+  connect?: Prisma.usersWhereUniqueInput
+}
+
+export type usersUpdateOneRequiredWithoutConversationsAsUserNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutConversationsAsUserInput, Prisma.usersUncheckedCreateWithoutConversationsAsUserInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutConversationsAsUserInput
+  upsert?: Prisma.usersUpsertWithoutConversationsAsUserInput
+  connect?: Prisma.usersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutConversationsAsUserInput, Prisma.usersUpdateWithoutConversationsAsUserInput>, Prisma.usersUncheckedUpdateWithoutConversationsAsUserInput>
+}
+
+export type usersUpdateOneRequiredWithoutConversationsAsOwnerNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutConversationsAsOwnerInput, Prisma.usersUncheckedCreateWithoutConversationsAsOwnerInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutConversationsAsOwnerInput
+  upsert?: Prisma.usersUpsertWithoutConversationsAsOwnerInput
+  connect?: Prisma.usersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutConversationsAsOwnerInput, Prisma.usersUpdateWithoutConversationsAsOwnerInput>, Prisma.usersUncheckedUpdateWithoutConversationsAsOwnerInput>
+}
+
+export type usersCreateNestedOneWithoutSentMessagesInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutSentMessagesInput, Prisma.usersUncheckedCreateWithoutSentMessagesInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutSentMessagesInput
+  connect?: Prisma.usersWhereUniqueInput
+}
+
+export type usersUpdateOneRequiredWithoutSentMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutSentMessagesInput, Prisma.usersUncheckedCreateWithoutSentMessagesInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutSentMessagesInput
+  upsert?: Prisma.usersUpsertWithoutSentMessagesInput
+  connect?: Prisma.usersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutSentMessagesInput, Prisma.usersUpdateWithoutSentMessagesInput>, Prisma.usersUncheckedUpdateWithoutSentMessagesInput>
+}
+
 export type usersCreateNestedOneWithoutNeighborhood_insightsInput = {
   create?: Prisma.XOR<Prisma.usersCreateWithoutNeighborhood_insightsInput, Prisma.usersUncheckedCreateWithoutNeighborhood_insightsInput>
   connectOrCreate?: Prisma.usersCreateOrConnectWithoutNeighborhood_insightsInput
@@ -2048,6 +2111,9 @@ export type usersCreateWithoutAccountsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutAccountsInput = {
@@ -2127,6 +2193,9 @@ export type usersUncheckedCreateWithoutAccountsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutAccountsInput = {
@@ -2222,6 +2291,9 @@ export type usersUpdateWithoutAccountsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutAccountsInput = {
@@ -2301,6 +2373,9 @@ export type usersUncheckedUpdateWithoutAccountsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutAnalytics_eventsInput = {
@@ -2380,6 +2455,9 @@ export type usersCreateWithoutAnalytics_eventsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutAnalytics_eventsInput = {
@@ -2459,6 +2537,9 @@ export type usersUncheckedCreateWithoutAnalytics_eventsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutAnalytics_eventsInput = {
@@ -2554,6 +2635,9 @@ export type usersUpdateWithoutAnalytics_eventsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutAnalytics_eventsInput = {
@@ -2633,6 +2717,9 @@ export type usersUncheckedUpdateWithoutAnalytics_eventsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutAudit_logsInput = {
@@ -2712,6 +2799,9 @@ export type usersCreateWithoutAudit_logsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutAudit_logsInput = {
@@ -2791,6 +2881,9 @@ export type usersUncheckedCreateWithoutAudit_logsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutAudit_logsInput = {
@@ -2886,6 +2979,9 @@ export type usersUpdateWithoutAudit_logsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutAudit_logsInput = {
@@ -2965,6 +3061,9 @@ export type usersUncheckedUpdateWithoutAudit_logsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutBalance_logsInput = {
@@ -3044,6 +3143,9 @@ export type usersCreateWithoutBalance_logsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutBalance_logsInput = {
@@ -3123,6 +3225,9 @@ export type usersUncheckedCreateWithoutBalance_logsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutBalance_logsInput = {
@@ -3218,6 +3323,9 @@ export type usersUpdateWithoutBalance_logsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutBalance_logsInput = {
@@ -3297,6 +3405,9 @@ export type usersUncheckedUpdateWithoutBalance_logsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutBooking_requestsInput = {
@@ -3376,6 +3487,9 @@ export type usersCreateWithoutBooking_requestsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutBooking_requestsInput = {
@@ -3455,6 +3569,9 @@ export type usersUncheckedCreateWithoutBooking_requestsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutBooking_requestsInput = {
@@ -3550,6 +3667,9 @@ export type usersUpdateWithoutBooking_requestsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutBooking_requestsInput = {
@@ -3629,6 +3749,9 @@ export type usersUncheckedUpdateWithoutBooking_requestsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutBookingsInput = {
@@ -3708,6 +3831,9 @@ export type usersCreateWithoutBookingsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutBookingsInput = {
@@ -3787,6 +3913,9 @@ export type usersUncheckedCreateWithoutBookingsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutBookingsInput = {
@@ -3882,6 +4011,9 @@ export type usersUpdateWithoutBookingsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutBookingsInput = {
@@ -3961,6 +4093,9 @@ export type usersUncheckedUpdateWithoutBookingsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
@@ -4040,6 +4175,9 @@ export type usersCreateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
@@ -4119,6 +4257,9 @@ export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_owner_idTousersInpu
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
@@ -4203,6 +4344,9 @@ export type usersCreateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
@@ -4282,6 +4426,9 @@ export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_tenant_idTousersInp
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
@@ -4377,6 +4524,9 @@ export type usersUpdateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
@@ -4456,6 +4606,9 @@ export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_owner_idTousersInpu
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUpsertWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
@@ -4546,6 +4699,9 @@ export type usersUpdateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
@@ -4625,6 +4781,9 @@ export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_tenant_idTousersInp
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutDamage_reports_damage_reports_reported_byTousersInput = {
@@ -4704,6 +4863,9 @@ export type usersCreateWithoutDamage_reports_damage_reports_reported_byTousersIn
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutDamage_reports_damage_reports_reported_byTousersInput = {
@@ -4783,6 +4945,9 @@ export type usersUncheckedCreateWithoutDamage_reports_damage_reports_reported_by
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutDamage_reports_damage_reports_reported_byTousersInput = {
@@ -4867,6 +5032,9 @@ export type usersCreateWithoutDamage_reports_damage_reports_resolved_byTousersIn
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutDamage_reports_damage_reports_resolved_byTousersInput = {
@@ -4946,6 +5114,9 @@ export type usersUncheckedCreateWithoutDamage_reports_damage_reports_resolved_by
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutDamage_reports_damage_reports_resolved_byTousersInput = {
@@ -5041,6 +5212,9 @@ export type usersUpdateWithoutDamage_reports_damage_reports_reported_byTousersIn
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_reported_byTousersInput = {
@@ -5120,6 +5294,9 @@ export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_reported_by
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUpsertWithoutDamage_reports_damage_reports_resolved_byTousersInput = {
@@ -5210,6 +5387,9 @@ export type usersUpdateWithoutDamage_reports_damage_reports_resolved_byTousersIn
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_resolved_byTousersInput = {
@@ -5289,6 +5469,9 @@ export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_resolved_by
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutExperiment_assignmentsInput = {
@@ -5368,6 +5551,9 @@ export type usersCreateWithoutExperiment_assignmentsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutExperiment_assignmentsInput = {
@@ -5447,6 +5633,9 @@ export type usersUncheckedCreateWithoutExperiment_assignmentsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutExperiment_assignmentsInput = {
@@ -5542,6 +5731,9 @@ export type usersUpdateWithoutExperiment_assignmentsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutExperiment_assignmentsInput = {
@@ -5621,6 +5813,9 @@ export type usersUncheckedUpdateWithoutExperiment_assignmentsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutFavoritesInput = {
@@ -5700,6 +5895,9 @@ export type usersCreateWithoutFavoritesInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutFavoritesInput = {
@@ -5779,6 +5977,9 @@ export type usersUncheckedCreateWithoutFavoritesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutFavoritesInput = {
@@ -5874,6 +6075,9 @@ export type usersUpdateWithoutFavoritesInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutFavoritesInput = {
@@ -5953,6 +6157,9 @@ export type usersUncheckedUpdateWithoutFavoritesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutFeedbacksInput = {
@@ -6032,6 +6239,9 @@ export type usersCreateWithoutFeedbacksInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutFeedbacksInput = {
@@ -6111,6 +6321,9 @@ export type usersUncheckedCreateWithoutFeedbacksInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutFeedbacksInput = {
@@ -6206,6 +6419,9 @@ export type usersUpdateWithoutFeedbacksInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutFeedbacksInput = {
@@ -6285,6 +6501,9 @@ export type usersUncheckedUpdateWithoutFeedbacksInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutGeneral_ledgerInput = {
@@ -6364,6 +6583,9 @@ export type usersCreateWithoutGeneral_ledgerInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutGeneral_ledgerInput = {
@@ -6443,6 +6665,9 @@ export type usersUncheckedCreateWithoutGeneral_ledgerInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutGeneral_ledgerInput = {
@@ -6538,6 +6763,9 @@ export type usersUpdateWithoutGeneral_ledgerInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutGeneral_ledgerInput = {
@@ -6617,6 +6845,9 @@ export type usersUncheckedUpdateWithoutGeneral_ledgerInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutGroup_booking_membersInput = {
@@ -6696,6 +6927,9 @@ export type usersCreateWithoutGroup_booking_membersInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutGroup_booking_membersInput = {
@@ -6775,6 +7009,9 @@ export type usersUncheckedCreateWithoutGroup_booking_membersInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutGroup_booking_membersInput = {
@@ -6870,6 +7107,9 @@ export type usersUpdateWithoutGroup_booking_membersInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutGroup_booking_membersInput = {
@@ -6949,6 +7189,9 @@ export type usersUncheckedUpdateWithoutGroup_booking_membersInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutGroup_bookingsInput = {
@@ -7028,6 +7271,9 @@ export type usersCreateWithoutGroup_bookingsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutGroup_bookingsInput = {
@@ -7107,6 +7353,9 @@ export type usersUncheckedCreateWithoutGroup_bookingsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutGroup_bookingsInput = {
@@ -7202,6 +7451,9 @@ export type usersUpdateWithoutGroup_bookingsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutGroup_bookingsInput = {
@@ -7281,6 +7533,9 @@ export type usersUncheckedUpdateWithoutGroup_bookingsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutInspections_inspections_performed_byTousersInput = {
@@ -7360,6 +7615,9 @@ export type usersCreateWithoutInspections_inspections_performed_byTousersInput =
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutInspections_inspections_performed_byTousersInput = {
@@ -7439,6 +7697,9 @@ export type usersUncheckedCreateWithoutInspections_inspections_performed_byTouse
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutInspections_inspections_performed_byTousersInput = {
@@ -7523,6 +7784,9 @@ export type usersCreateWithoutInspections_inspections_witness_idTousersInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutInspections_inspections_witness_idTousersInput = {
@@ -7602,6 +7866,9 @@ export type usersUncheckedCreateWithoutInspections_inspections_witness_idTousers
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutInspections_inspections_witness_idTousersInput = {
@@ -7697,6 +7964,9 @@ export type usersUpdateWithoutInspections_inspections_performed_byTousersInput =
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutInspections_inspections_performed_byTousersInput = {
@@ -7776,6 +8046,9 @@ export type usersUncheckedUpdateWithoutInspections_inspections_performed_byTouse
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUpsertWithoutInspections_inspections_witness_idTousersInput = {
@@ -7866,6 +8139,9 @@ export type usersUpdateWithoutInspections_inspections_witness_idTousersInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutInspections_inspections_witness_idTousersInput = {
@@ -7945,6 +8221,9 @@ export type usersUncheckedUpdateWithoutInspections_inspections_witness_idTousers
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutKyc_verificationsInput = {
@@ -8024,6 +8303,9 @@ export type usersCreateWithoutKyc_verificationsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutKyc_verificationsInput = {
@@ -8103,6 +8385,9 @@ export type usersUncheckedCreateWithoutKyc_verificationsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutKyc_verificationsInput = {
@@ -8198,6 +8483,9 @@ export type usersUpdateWithoutKyc_verificationsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutKyc_verificationsInput = {
@@ -8277,6 +8565,9 @@ export type usersUncheckedUpdateWithoutKyc_verificationsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutLoyalty_transactionsInput = {
@@ -8356,6 +8647,9 @@ export type usersCreateWithoutLoyalty_transactionsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutLoyalty_transactionsInput = {
@@ -8435,6 +8729,9 @@ export type usersUncheckedCreateWithoutLoyalty_transactionsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutLoyalty_transactionsInput = {
@@ -8530,6 +8827,9 @@ export type usersUpdateWithoutLoyalty_transactionsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutLoyalty_transactionsInput = {
@@ -8609,6 +8909,9 @@ export type usersUncheckedUpdateWithoutLoyalty_transactionsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutMaintenance_reportsInput = {
@@ -8688,6 +8991,9 @@ export type usersCreateWithoutMaintenance_reportsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutMaintenance_reportsInput = {
@@ -8767,6 +9073,9 @@ export type usersUncheckedCreateWithoutMaintenance_reportsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutMaintenance_reportsInput = {
@@ -8862,6 +9171,9 @@ export type usersUpdateWithoutMaintenance_reportsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutMaintenance_reportsInput = {
@@ -8941,6 +9253,9 @@ export type usersUncheckedUpdateWithoutMaintenance_reportsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutMaintenance_ticketsInput = {
@@ -9020,6 +9335,9 @@ export type usersCreateWithoutMaintenance_ticketsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutMaintenance_ticketsInput = {
@@ -9099,6 +9417,9 @@ export type usersUncheckedCreateWithoutMaintenance_ticketsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutMaintenance_ticketsInput = {
@@ -9194,6 +9515,9 @@ export type usersUpdateWithoutMaintenance_ticketsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutMaintenance_ticketsInput = {
@@ -9273,6 +9597,9 @@ export type usersUncheckedUpdateWithoutMaintenance_ticketsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutMessagesInput = {
@@ -9352,6 +9679,9 @@ export type usersCreateWithoutMessagesInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutMessagesInput = {
@@ -9431,6 +9761,9 @@ export type usersUncheckedCreateWithoutMessagesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutMessagesInput = {
@@ -9526,6 +9859,9 @@ export type usersUpdateWithoutMessagesInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutMessagesInput = {
@@ -9605,6 +9941,1041 @@ export type usersUncheckedUpdateWithoutMessagesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+}
+
+export type usersCreateWithoutConversationsAsUserInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+}
+
+export type usersUncheckedCreateWithoutConversationsAsUserInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsUncheckedCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsUncheckedCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsUncheckedCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsUncheckedCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesUncheckedCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksUncheckedCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerUncheckedCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesUncheckedCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsUncheckedCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesUncheckedCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesUncheckedCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesUncheckedCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsUncheckedCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorUncheckedCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+}
+
+export type usersCreateOrConnectWithoutConversationsAsUserInput = {
+  where: Prisma.usersWhereUniqueInput
+  create: Prisma.XOR<Prisma.usersCreateWithoutConversationsAsUserInput, Prisma.usersUncheckedCreateWithoutConversationsAsUserInput>
+}
+
+export type usersCreateWithoutConversationsAsOwnerInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+}
+
+export type usersUncheckedCreateWithoutConversationsAsOwnerInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsUncheckedCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsUncheckedCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsUncheckedCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsUncheckedCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesUncheckedCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksUncheckedCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerUncheckedCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesUncheckedCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsUncheckedCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesUncheckedCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesUncheckedCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesUncheckedCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsUncheckedCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorUncheckedCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type usersCreateOrConnectWithoutConversationsAsOwnerInput = {
+  where: Prisma.usersWhereUniqueInput
+  create: Prisma.XOR<Prisma.usersCreateWithoutConversationsAsOwnerInput, Prisma.usersUncheckedCreateWithoutConversationsAsOwnerInput>
+}
+
+export type usersUpsertWithoutConversationsAsUserInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutConversationsAsUserInput, Prisma.usersUncheckedUpdateWithoutConversationsAsUserInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutConversationsAsUserInput, Prisma.usersUncheckedCreateWithoutConversationsAsUserInput>
+  where?: Prisma.usersWhereInput
+}
+
+export type usersUpdateToOneWithWhereWithoutConversationsAsUserInput = {
+  where?: Prisma.usersWhereInput
+  data: Prisma.XOR<Prisma.usersUpdateWithoutConversationsAsUserInput, Prisma.usersUncheckedUpdateWithoutConversationsAsUserInput>
+}
+
+export type usersUpdateWithoutConversationsAsUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+}
+
+export type usersUncheckedUpdateWithoutConversationsAsUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUncheckedUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUncheckedUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUncheckedUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUncheckedUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUncheckedUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUncheckedUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUncheckedUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUncheckedUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUncheckedUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUncheckedUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUncheckedUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUncheckedUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUncheckedUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUncheckedUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+}
+
+export type usersUpsertWithoutConversationsAsOwnerInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutConversationsAsOwnerInput, Prisma.usersUncheckedUpdateWithoutConversationsAsOwnerInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutConversationsAsOwnerInput, Prisma.usersUncheckedCreateWithoutConversationsAsOwnerInput>
+  where?: Prisma.usersWhereInput
+}
+
+export type usersUpdateToOneWithWhereWithoutConversationsAsOwnerInput = {
+  where?: Prisma.usersWhereInput
+  data: Prisma.XOR<Prisma.usersUpdateWithoutConversationsAsOwnerInput, Prisma.usersUncheckedUpdateWithoutConversationsAsOwnerInput>
+}
+
+export type usersUpdateWithoutConversationsAsOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+}
+
+export type usersUncheckedUpdateWithoutConversationsAsOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUncheckedUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUncheckedUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUncheckedUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUncheckedUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUncheckedUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUncheckedUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUncheckedUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUncheckedUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUncheckedUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUncheckedUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUncheckedUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUncheckedUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUncheckedUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUncheckedUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type usersCreateWithoutSentMessagesInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+}
+
+export type usersUncheckedCreateWithoutSentMessagesInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsUncheckedCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsUncheckedCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsUncheckedCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsUncheckedCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesUncheckedCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksUncheckedCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerUncheckedCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesUncheckedCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsUncheckedCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesUncheckedCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesUncheckedCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesUncheckedCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsUncheckedCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorUncheckedCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+}
+
+export type usersCreateOrConnectWithoutSentMessagesInput = {
+  where: Prisma.usersWhereUniqueInput
+  create: Prisma.XOR<Prisma.usersCreateWithoutSentMessagesInput, Prisma.usersUncheckedCreateWithoutSentMessagesInput>
+}
+
+export type usersUpsertWithoutSentMessagesInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutSentMessagesInput, Prisma.usersUncheckedUpdateWithoutSentMessagesInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutSentMessagesInput, Prisma.usersUncheckedCreateWithoutSentMessagesInput>
+  where?: Prisma.usersWhereInput
+}
+
+export type usersUpdateToOneWithWhereWithoutSentMessagesInput = {
+  where?: Prisma.usersWhereInput
+  data: Prisma.XOR<Prisma.usersUpdateWithoutSentMessagesInput, Prisma.usersUncheckedUpdateWithoutSentMessagesInput>
+}
+
+export type usersUpdateWithoutSentMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+}
+
+export type usersUncheckedUpdateWithoutSentMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUncheckedUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUncheckedUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUncheckedUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUncheckedUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUncheckedUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUncheckedUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUncheckedUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUncheckedUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUncheckedUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUncheckedUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUncheckedUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUncheckedUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUncheckedUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUncheckedUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutNeighborhood_insightsInput = {
@@ -9684,6 +11055,9 @@ export type usersCreateWithoutNeighborhood_insightsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutNeighborhood_insightsInput = {
@@ -9763,6 +11137,9 @@ export type usersUncheckedCreateWithoutNeighborhood_insightsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutNeighborhood_insightsInput = {
@@ -9858,6 +11235,9 @@ export type usersUpdateWithoutNeighborhood_insightsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutNeighborhood_insightsInput = {
@@ -9937,6 +11317,9 @@ export type usersUncheckedUpdateWithoutNeighborhood_insightsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutNotificationsInput = {
@@ -10016,6 +11399,9 @@ export type usersCreateWithoutNotificationsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutNotificationsInput = {
@@ -10095,6 +11481,9 @@ export type usersUncheckedCreateWithoutNotificationsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutNotificationsInput = {
@@ -10190,6 +11579,9 @@ export type usersUpdateWithoutNotificationsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutNotificationsInput = {
@@ -10269,6 +11661,9 @@ export type usersUncheckedUpdateWithoutNotificationsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutOwner_bank_accountsInput = {
@@ -10348,6 +11743,9 @@ export type usersCreateWithoutOwner_bank_accountsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutOwner_bank_accountsInput = {
@@ -10427,6 +11825,9 @@ export type usersUncheckedCreateWithoutOwner_bank_accountsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutOwner_bank_accountsInput = {
@@ -10522,6 +11923,9 @@ export type usersUpdateWithoutOwner_bank_accountsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutOwner_bank_accountsInput = {
@@ -10601,6 +12005,9 @@ export type usersUncheckedUpdateWithoutOwner_bank_accountsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutPropertiesInput = {
@@ -10680,6 +12087,9 @@ export type usersCreateWithoutPropertiesInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutPropertiesInput = {
@@ -10759,6 +12169,9 @@ export type usersUncheckedCreateWithoutPropertiesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutPropertiesInput = {
@@ -10854,6 +12267,9 @@ export type usersUpdateWithoutPropertiesInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutPropertiesInput = {
@@ -10933,6 +12349,9 @@ export type usersUncheckedUpdateWithoutPropertiesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutProperty_comparisonsInput = {
@@ -11012,6 +12431,9 @@ export type usersCreateWithoutProperty_comparisonsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutProperty_comparisonsInput = {
@@ -11091,6 +12513,9 @@ export type usersUncheckedCreateWithoutProperty_comparisonsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutProperty_comparisonsInput = {
@@ -11186,6 +12611,9 @@ export type usersUpdateWithoutProperty_comparisonsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutProperty_comparisonsInput = {
@@ -11265,6 +12693,9 @@ export type usersUncheckedUpdateWithoutProperty_comparisonsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutPush_subscriptionsInput = {
@@ -11344,6 +12775,9 @@ export type usersCreateWithoutPush_subscriptionsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutPush_subscriptionsInput = {
@@ -11423,6 +12857,9 @@ export type usersUncheckedCreateWithoutPush_subscriptionsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutPush_subscriptionsInput = {
@@ -11518,6 +12955,9 @@ export type usersUpdateWithoutPush_subscriptionsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutPush_subscriptionsInput = {
@@ -11597,6 +13037,9 @@ export type usersUncheckedUpdateWithoutPush_subscriptionsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutReferrals_referrals_referee_idTousersInput = {
@@ -11676,6 +13119,9 @@ export type usersCreateWithoutReferrals_referrals_referee_idTousersInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutReferrals_referrals_referee_idTousersInput = {
@@ -11755,6 +13201,9 @@ export type usersUncheckedCreateWithoutReferrals_referrals_referee_idTousersInpu
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutReferrals_referrals_referee_idTousersInput = {
@@ -11839,6 +13288,9 @@ export type usersCreateWithoutReferrals_referrals_referrer_idTousersInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutReferrals_referrals_referrer_idTousersInput = {
@@ -11918,6 +13370,9 @@ export type usersUncheckedCreateWithoutReferrals_referrals_referrer_idTousersInp
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutReferrals_referrals_referrer_idTousersInput = {
@@ -12013,6 +13468,9 @@ export type usersUpdateWithoutReferrals_referrals_referee_idTousersInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReferrals_referrals_referee_idTousersInput = {
@@ -12092,6 +13550,9 @@ export type usersUncheckedUpdateWithoutReferrals_referrals_referee_idTousersInpu
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUpsertWithoutReferrals_referrals_referrer_idTousersInput = {
@@ -12182,6 +13643,9 @@ export type usersUpdateWithoutReferrals_referrals_referrer_idTousersInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReferrals_referrals_referrer_idTousersInput = {
@@ -12261,6 +13725,9 @@ export type usersUncheckedUpdateWithoutReferrals_referrals_referrer_idTousersInp
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutRefund_requests_refund_requests_reviewed_byTousersInput = {
@@ -12340,6 +13807,9 @@ export type usersCreateWithoutRefund_requests_refund_requests_reviewed_byTousers
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutRefund_requests_refund_requests_reviewed_byTousersInput = {
@@ -12419,6 +13889,9 @@ export type usersUncheckedCreateWithoutRefund_requests_refund_requests_reviewed_
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutRefund_requests_refund_requests_reviewed_byTousersInput = {
@@ -12503,6 +13976,9 @@ export type usersCreateWithoutRefund_requests_refund_requests_user_idTousersInpu
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutRefund_requests_refund_requests_user_idTousersInput = {
@@ -12582,6 +14058,9 @@ export type usersUncheckedCreateWithoutRefund_requests_refund_requests_user_idTo
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutRefund_requests_refund_requests_user_idTousersInput = {
@@ -12677,6 +14156,9 @@ export type usersUpdateWithoutRefund_requests_refund_requests_reviewed_byTousers
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_reviewed_byTousersInput = {
@@ -12756,6 +14238,9 @@ export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_reviewed_
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUpsertWithoutRefund_requests_refund_requests_user_idTousersInput = {
@@ -12846,6 +14331,9 @@ export type usersUpdateWithoutRefund_requests_refund_requests_user_idTousersInpu
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_user_idTousersInput = {
@@ -12925,6 +14413,9 @@ export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_user_idTo
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutReview_repliesInput = {
@@ -13004,6 +14495,9 @@ export type usersCreateWithoutReview_repliesInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutReview_repliesInput = {
@@ -13083,6 +14577,9 @@ export type usersUncheckedCreateWithoutReview_repliesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutReview_repliesInput = {
@@ -13178,6 +14675,9 @@ export type usersUpdateWithoutReview_repliesInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReview_repliesInput = {
@@ -13257,6 +14757,9 @@ export type usersUncheckedUpdateWithoutReview_repliesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutReviews_reviews_created_by_idTousersInput = {
@@ -13336,6 +14839,9 @@ export type usersCreateWithoutReviews_reviews_created_by_idTousersInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutReviews_reviews_created_by_idTousersInput = {
@@ -13415,6 +14921,9 @@ export type usersUncheckedCreateWithoutReviews_reviews_created_by_idTousersInput
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutReviews_reviews_created_by_idTousersInput = {
@@ -13499,6 +15008,9 @@ export type usersCreateWithoutReviews_reviews_reviewed_user_idTousersInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutReviews_reviews_reviewed_user_idTousersInput = {
@@ -13578,6 +15090,9 @@ export type usersUncheckedCreateWithoutReviews_reviews_reviewed_user_idTousersIn
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutReviews_reviews_reviewed_user_idTousersInput = {
@@ -13673,6 +15188,9 @@ export type usersUpdateWithoutReviews_reviews_created_by_idTousersInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReviews_reviews_created_by_idTousersInput = {
@@ -13752,6 +15270,9 @@ export type usersUncheckedUpdateWithoutReviews_reviews_created_by_idTousersInput
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUpsertWithoutReviews_reviews_reviewed_user_idTousersInput = {
@@ -13842,6 +15363,9 @@ export type usersUpdateWithoutReviews_reviews_reviewed_user_idTousersInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReviews_reviews_reviewed_user_idTousersInput = {
@@ -13921,6 +15445,9 @@ export type usersUncheckedUpdateWithoutReviews_reviews_reviewed_user_idTousersIn
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutReward_redemptionsInput = {
@@ -14000,6 +15527,9 @@ export type usersCreateWithoutReward_redemptionsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutReward_redemptionsInput = {
@@ -14079,6 +15609,9 @@ export type usersUncheckedCreateWithoutReward_redemptionsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutReward_redemptionsInput = {
@@ -14174,6 +15707,9 @@ export type usersUpdateWithoutReward_redemptionsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReward_redemptionsInput = {
@@ -14253,6 +15789,9 @@ export type usersUncheckedUpdateWithoutReward_redemptionsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutRoommate_preferencesInput = {
@@ -14332,6 +15871,9 @@ export type usersCreateWithoutRoommate_preferencesInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutRoommate_preferencesInput = {
@@ -14411,6 +15953,9 @@ export type usersUncheckedCreateWithoutRoommate_preferencesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutRoommate_preferencesInput = {
@@ -14506,6 +16051,9 @@ export type usersUpdateWithoutRoommate_preferencesInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutRoommate_preferencesInput = {
@@ -14585,6 +16133,9 @@ export type usersUncheckedUpdateWithoutRoommate_preferencesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutSaved_searchesInput = {
@@ -14664,6 +16215,9 @@ export type usersCreateWithoutSaved_searchesInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutSaved_searchesInput = {
@@ -14743,6 +16297,9 @@ export type usersUncheckedCreateWithoutSaved_searchesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutSaved_searchesInput = {
@@ -14838,6 +16395,9 @@ export type usersUpdateWithoutSaved_searchesInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutSaved_searchesInput = {
@@ -14917,6 +16477,9 @@ export type usersUncheckedUpdateWithoutSaved_searchesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutSessionsInput = {
@@ -14996,6 +16559,9 @@ export type usersCreateWithoutSessionsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutSessionsInput = {
@@ -15075,6 +16641,9 @@ export type usersUncheckedCreateWithoutSessionsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutSessionsInput = {
@@ -15170,6 +16739,9 @@ export type usersUpdateWithoutSessionsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutSessionsInput = {
@@ -15249,6 +16821,9 @@ export type usersUncheckedUpdateWithoutSessionsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutTwoFactorInput = {
@@ -15328,6 +16903,9 @@ export type usersCreateWithoutTwoFactorInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutTwoFactorInput = {
@@ -15407,6 +16985,9 @@ export type usersUncheckedCreateWithoutTwoFactorInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutTwoFactorInput = {
@@ -15502,6 +17083,9 @@ export type usersUpdateWithoutTwoFactorInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutTwoFactorInput = {
@@ -15581,6 +17165,9 @@ export type usersUncheckedUpdateWithoutTwoFactorInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutUser_contractsInput = {
@@ -15660,6 +17247,9 @@ export type usersCreateWithoutUser_contractsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutUser_contractsInput = {
@@ -15739,6 +17329,9 @@ export type usersUncheckedCreateWithoutUser_contractsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutUser_contractsInput = {
@@ -15834,6 +17427,9 @@ export type usersUpdateWithoutUser_contractsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutUser_contractsInput = {
@@ -15913,6 +17509,9 @@ export type usersUncheckedUpdateWithoutUser_contractsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutUser_interest_vectorsInput = {
@@ -15992,6 +17591,9 @@ export type usersCreateWithoutUser_interest_vectorsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutUser_interest_vectorsInput = {
@@ -16071,6 +17673,9 @@ export type usersUncheckedCreateWithoutUser_interest_vectorsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutUser_interest_vectorsInput = {
@@ -16166,6 +17771,9 @@ export type usersUpdateWithoutUser_interest_vectorsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutUser_interest_vectorsInput = {
@@ -16245,6 +17853,9 @@ export type usersUncheckedUpdateWithoutUser_interest_vectorsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutUser_notification_preferencesInput = {
@@ -16324,6 +17935,9 @@ export type usersCreateWithoutUser_notification_preferencesInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutUser_notification_preferencesInput = {
@@ -16403,6 +18017,9 @@ export type usersUncheckedCreateWithoutUser_notification_preferencesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutUser_notification_preferencesInput = {
@@ -16498,6 +18115,9 @@ export type usersUpdateWithoutUser_notification_preferencesInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutUser_notification_preferencesInput = {
@@ -16577,6 +18197,9 @@ export type usersUncheckedUpdateWithoutUser_notification_preferencesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutWishlistsInput = {
@@ -16656,6 +18279,9 @@ export type usersCreateWithoutWishlistsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutWishlistsInput = {
@@ -16735,6 +18361,9 @@ export type usersUncheckedCreateWithoutWishlistsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutWishlistsInput = {
@@ -16830,6 +18459,9 @@ export type usersUpdateWithoutWishlistsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutWishlistsInput = {
@@ -16909,6 +18541,9 @@ export type usersUncheckedUpdateWithoutWishlistsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutWithdrawalsInput = {
@@ -16988,6 +18623,9 @@ export type usersCreateWithoutWithdrawalsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutWithdrawalsInput = {
@@ -17067,6 +18705,9 @@ export type usersUncheckedCreateWithoutWithdrawalsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutWithdrawalsInput = {
@@ -17162,6 +18803,9 @@ export type usersUpdateWithoutWithdrawalsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutWithdrawalsInput = {
@@ -17241,6 +18885,9 @@ export type usersUncheckedUpdateWithoutWithdrawalsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutTransaksi_bookingsInput = {
@@ -17320,6 +18967,9 @@ export type usersCreateWithoutTransaksi_bookingsInput = {
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutTransaksi_bookingsInput = {
@@ -17399,6 +19049,9 @@ export type usersUncheckedCreateWithoutTransaksi_bookingsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutTransaksi_bookingsInput = {
@@ -17494,6 +19147,9 @@ export type usersUpdateWithoutTransaksi_bookingsInput = {
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutTransaksi_bookingsInput = {
@@ -17573,6 +19229,9 @@ export type usersUncheckedUpdateWithoutTransaksi_bookingsInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutKyc_requestsInput = {
@@ -17652,6 +19311,9 @@ export type usersCreateWithoutKyc_requestsInput = {
   transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutKyc_requestsInput = {
@@ -17731,6 +19393,9 @@ export type usersUncheckedCreateWithoutKyc_requestsInput = {
   transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutKyc_requestsInput = {
@@ -17826,6 +19491,9 @@ export type usersUpdateWithoutKyc_requestsInput = {
   transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutKyc_requestsInput = {
@@ -17905,6 +19573,9 @@ export type usersUncheckedUpdateWithoutKyc_requestsInput = {
   transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutPropertis_wizardInput = {
@@ -17984,6 +19655,9 @@ export type usersCreateWithoutPropertis_wizardInput = {
   transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutPropertis_wizardInput = {
@@ -18063,6 +19737,9 @@ export type usersUncheckedCreateWithoutPropertis_wizardInput = {
   transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutPropertis_wizardInput = {
@@ -18158,6 +19835,9 @@ export type usersUpdateWithoutPropertis_wizardInput = {
   transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutPropertis_wizardInput = {
@@ -18237,6 +19917,9 @@ export type usersUncheckedUpdateWithoutPropertis_wizardInput = {
   transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersCreateWithoutPemesanansInput = {
@@ -18316,6 +19999,9 @@ export type usersCreateWithoutPemesanansInput = {
   transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
   kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
 }
 
 export type usersUncheckedCreateWithoutPemesanansInput = {
@@ -18395,6 +20081,9 @@ export type usersUncheckedCreateWithoutPemesanansInput = {
   transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
   kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
   propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type usersCreateOrConnectWithoutPemesanansInput = {
@@ -18490,6 +20179,9 @@ export type usersUpdateWithoutPemesanansInput = {
   transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
   kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
 }
 
 export type usersUncheckedUpdateWithoutPemesanansInput = {
@@ -18569,6 +20261,9 @@ export type usersUncheckedUpdateWithoutPemesanansInput = {
   transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 
@@ -18624,6 +20319,9 @@ export type UsersCountOutputType = {
   kyc_requests: number
   propertis_wizard: number
   pemesanans: number
+  sentMessages: number
+  conversationsAsUser: number
+  conversationsAsOwner: number
 }
 
 export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -18674,6 +20372,9 @@ export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   kyc_requests?: boolean | UsersCountOutputTypeCountKyc_requestsArgs
   propertis_wizard?: boolean | UsersCountOutputTypeCountPropertis_wizardArgs
   pemesanans?: boolean | UsersCountOutputTypeCountPemesanansArgs
+  sentMessages?: boolean | UsersCountOutputTypeCountSentMessagesArgs
+  conversationsAsUser?: boolean | UsersCountOutputTypeCountConversationsAsUserArgs
+  conversationsAsOwner?: boolean | UsersCountOutputTypeCountConversationsAsOwnerArgs
 }
 
 /**
@@ -19015,6 +20716,27 @@ export type UsersCountOutputTypeCountPemesanansArgs<ExtArgs extends runtime.Type
   where?: Prisma.PemesananWhereInput
 }
 
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountSentMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageWhereInput
+}
+
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountConversationsAsUserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConversationWhereInput
+}
+
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountConversationsAsOwnerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConversationWhereInput
+}
+
 
 export type usersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -19094,6 +20816,9 @@ export type usersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   kyc_requests?: boolean | Prisma.users$kyc_requestsArgs<ExtArgs>
   propertis_wizard?: boolean | Prisma.users$propertis_wizardArgs<ExtArgs>
   pemesanans?: boolean | Prisma.users$pemesanansArgs<ExtArgs>
+  sentMessages?: boolean | Prisma.users$sentMessagesArgs<ExtArgs>
+  conversationsAsUser?: boolean | Prisma.users$conversationsAsUserArgs<ExtArgs>
+  conversationsAsOwner?: boolean | Prisma.users$conversationsAsOwnerArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["users"]>
 
@@ -19239,6 +20964,9 @@ export type usersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   kyc_requests?: boolean | Prisma.users$kyc_requestsArgs<ExtArgs>
   propertis_wizard?: boolean | Prisma.users$propertis_wizardArgs<ExtArgs>
   pemesanans?: boolean | Prisma.users$pemesanansArgs<ExtArgs>
+  sentMessages?: boolean | Prisma.users$sentMessagesArgs<ExtArgs>
+  conversationsAsUser?: boolean | Prisma.users$conversationsAsUserArgs<ExtArgs>
+  conversationsAsOwner?: boolean | Prisma.users$conversationsAsOwnerArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type usersIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -19297,6 +21025,9 @@ export type $usersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     kyc_requests: Prisma.$KycRequestPayload<ExtArgs>[]
     propertis_wizard: Prisma.$PropertyPayload<ExtArgs>[]
     pemesanans: Prisma.$PemesananPayload<ExtArgs>[]
+    sentMessages: Prisma.$MessagePayload<ExtArgs>[]
+    conversationsAsUser: Prisma.$ConversationPayload<ExtArgs>[]
+    conversationsAsOwner: Prisma.$ConversationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -19770,6 +21501,9 @@ export interface Prisma__usersClient<T, Null = never, ExtArgs extends runtime.Ty
   kyc_requests<T extends Prisma.users$kyc_requestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$kyc_requestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$KycRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   propertis_wizard<T extends Prisma.users$propertis_wizardArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$propertis_wizardArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pemesanans<T extends Prisma.users$pemesanansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$pemesanansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PemesananPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sentMessages<T extends Prisma.users$sentMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  conversationsAsUser<T extends Prisma.users$conversationsAsUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$conversationsAsUserArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  conversationsAsOwner<T extends Prisma.users$conversationsAsOwnerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$conversationsAsOwnerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21401,6 +23135,78 @@ export type users$pemesanansArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.PemesananScalarFieldEnum | Prisma.PemesananScalarFieldEnum[]
+}
+
+/**
+ * users.sentMessages
+ */
+export type users$sentMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Message
+   */
+  select?: Prisma.MessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Message
+   */
+  omit?: Prisma.MessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageInclude<ExtArgs> | null
+  where?: Prisma.MessageWhereInput
+  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
+  cursor?: Prisma.MessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
+}
+
+/**
+ * users.conversationsAsUser
+ */
+export type users$conversationsAsUserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Conversation
+   */
+  select?: Prisma.ConversationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Conversation
+   */
+  omit?: Prisma.ConversationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConversationInclude<ExtArgs> | null
+  where?: Prisma.ConversationWhereInput
+  orderBy?: Prisma.ConversationOrderByWithRelationInput | Prisma.ConversationOrderByWithRelationInput[]
+  cursor?: Prisma.ConversationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConversationScalarFieldEnum | Prisma.ConversationScalarFieldEnum[]
+}
+
+/**
+ * users.conversationsAsOwner
+ */
+export type users$conversationsAsOwnerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Conversation
+   */
+  select?: Prisma.ConversationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Conversation
+   */
+  omit?: Prisma.ConversationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConversationInclude<ExtArgs> | null
+  where?: Prisma.ConversationWhereInput
+  orderBy?: Prisma.ConversationOrderByWithRelationInput | Prisma.ConversationOrderByWithRelationInput[]
+  cursor?: Prisma.ConversationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConversationScalarFieldEnum | Prisma.ConversationScalarFieldEnum[]
 }
 
 /**

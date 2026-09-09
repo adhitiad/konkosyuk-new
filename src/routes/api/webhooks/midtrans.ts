@@ -74,6 +74,7 @@ async function handle({ request }: { request: Request }) {
         select: {
           id: true,
           status_booking: true,
+          previous_booking_id: true,
           users: {
             select: {
               id: true,
@@ -125,6 +126,20 @@ async function handle({ request }: { request: Request }) {
         })
       }
 
+      if (transaction.booking.previous_booking_id) {
+        const previousBooking = await tx.booking.findUnique({
+          where: { id: transaction.booking.previous_booking_id },
+          select: { id: true, status_booking: true },
+        })
+
+        if (previousBooking && previousBooking.status_booking === 'ACTIVE') {
+          await tx.booking.update({
+            where: { id: previousBooking.id },
+            data: { status_booking: 'COMPLETED' },
+          })
+        }
+      }
+
       await createNotification({
         userId: transaction.booking.users.id,
         type: 'PAYMENT_SUCCESS',
@@ -132,6 +147,16 @@ async function handle({ request }: { request: Request }) {
         message: `Pembayaran untuk booking ${transaction.booking.id} telah berhasil.`,
         referenceId: transaction.bookingId,
       })
+
+      if (transaction.booking.previous_booking_id) {
+        await createNotification({
+          userId: transaction.booking.users.id,
+          type: 'PAYMENT_SUCCESS',
+          title: 'Perpanjangan Sewa Berhasil',
+          message: 'Perpanjangan sewa berhasil',
+          referenceId: transaction.bookingId,
+        })
+      }
     })
   } else if (transactionStatus === 'expire') {
     await prisma.transaction.update({

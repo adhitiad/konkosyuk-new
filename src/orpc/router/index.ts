@@ -37,6 +37,8 @@ import {
   getPaymentDeadline,
   getBookingDetail,
   checkRoomAvailability,
+  extendBooking,
+  getBookingExtensionHistory,
 } from './transactions'
 import {
   createPayment,
@@ -150,6 +152,8 @@ export default {
   getPaymentDeadline,
   getBookingDetail,
   checkRoomAvailability,
+  extendBooking,
+  getBookingExtensionHistory,
   getUserLocale,
   setUserLocale,
   searchLocations,

@@ -5,6 +5,8 @@ import { ArrowLeft, Calendar, User, Hash } from 'lucide-react'
 import { orpc } from '#/orpc/client'
 import { BookingStatusBadge } from '#/components/booking/BookingStatusBadge'
 import { PaymentDeadlineCard } from '#/components/booking/PaymentDeadlineCard'
+import { BookingTimeline } from '#/components/booking/BookingTimeline'
+import { ExtendBookingDialog } from '#/components/booking/ExtendBookingDialog'
 import { Button } from '#/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
 import {
@@ -72,6 +74,10 @@ function BookingDetailPage() {
 
   const isPendingPayment = booking.status_booking === 'PENDING_PAYMENT'
   const isExpired = booking.status_booking === 'EXPIRED'
+  const canExtend =
+    (booking.status_booking === 'ACTIVE' ||
+      booking.status_booking === 'COMPLETED') &&
+    !booking.next_booking_id
 
   return (
     <main className="page-wrap py-8">
@@ -165,11 +171,22 @@ function BookingDetailPage() {
           <Button className="w-full">Bayar Sekarang</Button>
         )}
 
+        {canExtend && (
+          <ExtendBookingDialog
+            bookingId={booking.id}
+            currentCheckOutDate={new Date(booking.tanggal_selesai)}
+          >
+            <Button className="w-full">Perpanjang Sewa</Button>
+          </ExtendBookingDialog>
+        )}
+
         {isExpired && (
           <Button asChild variant="secondary" className="w-full">
             <Link to="/properties">Booking Ulang</Link>
           </Button>
         )}
+
+        <BookingTimeline bookingId={booking.id} />
       </div>
     </main>
   )
