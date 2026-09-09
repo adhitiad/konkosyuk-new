@@ -76,10 +76,16 @@ async function handle({ request }: { request: Request }) {
     const transaction = await tx.transaction.findUnique({
       where: { id: transactionId },
       include: {
-        pemesanan: {
+        booking: {
           select: {
             id: true,
-            status: true,
+            status_booking: true,
+            users: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
           },
         },
       },
@@ -99,8 +105,8 @@ async function handle({ request }: { request: Request }) {
             : status === 'FAILED'
               ? 'FAILED'
               : 'EXPIRED',
-        snapshotData: {
-          ...((transaction.snapshotData ?? {}) as Record<string, unknown>),
+        webhookPayload: {
+          ...((transaction.webhookPayload ?? {}) as Record<string, unknown>),
           webhook_status: status,
           webhook_paid_at: paidAt?.toISOString() ?? null,
           webhook_provider: provider,
@@ -110,43 +116,35 @@ async function handle({ request }: { request: Request }) {
       },
     })
 
-    let updatedPemesanan = null
+    let updatedBooking = null
 
     if (
       status === 'SUCCESS' &&
-      transaction.pemesanan.status === 'MENUNGGU_PERSETUJUAN'
+      transaction.booking.status_booking === 'PENDING_PAYMENT'
     ) {
-      updatedPemesanan = await tx.pemesanan.update({
-        where: { id: transaction.pemesananId },
-        data: { status: 'DITERIMA' },
+      updatedBooking = await tx.booking.update({
+        where: { id: transaction.bookingId },
+        data: { status_booking: 'ACTIVE' },
         include: {
-          room: {
+          users: {
             select: {
               id: true,
               name: true,
+            },
+          },
+          units: {
+            select: {
+              id: true,
+              nama_unit: true,
               properties: {
                 select: {
                   id: true,
-                  name: true,
+                  nama_properti: true,
                 },
               },
             },
           },
-          tenant: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
         },
-      })
-
-      await createNotification({
-        userId: updatedPemesanan.tenant.id,
-        type: 'PAYMENT_SUCCESS',
-        title: 'Pembayaran Berhasil',
-        message: `Pembayaran untuk kamar ${updatedPemesanan.room.name} di ${updatedPemesanan.room.properties.name} telah berhasil.`,
-        referenceId: updatedPemesanan.id,
       })
     }
 
@@ -161,15 +159,25 @@ async function handle({ request }: { request: Request }) {
           previous_status: previousStatus,
           new_status: status,
           transaction_id: transactionId,
-          pemesanan_id: transaction.pemesananId,
+          booking_id: transaction.bookingId,
         },
         processed_at: new Date(),
       },
     })
 
+    if (status === 'SUCCESS') {
+      await createNotification({
+        userId: transaction.booking.users.id,
+        type: 'PAYMENT_SUCCESS',
+        title: 'Pembayaran Berhasil',
+        message: `Pembayaran untuk booking ${transaction.booking.id} telah berhasil.`,
+        referenceId: transaction.bookingId,
+      })
+    }
+
     return {
       transaction: updatedTransaction,
-      pemesanan: updatedPemesanan,
+      booking: updatedBooking,
     }
   })
 
@@ -179,7 +187,7 @@ async function handle({ request }: { request: Request }) {
       idempotent: false,
       transaction_id: transactionId,
       status,
-      pemesanan_status: result.pemesanan?.status,
+      booking_status: result.booking?.status_booking,
       message: 'Payment status updated',
     }),
     {

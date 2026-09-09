@@ -27,19 +27,20 @@ export type AggregateTransaction = {
 }
 
 export type TransactionAvgAggregateOutputType = {
-  amount: runtime.Decimal | null
+  amount: number | null
 }
 
 export type TransactionSumAggregateOutputType = {
-  amount: runtime.Decimal | null
+  amount: number | null
 }
 
 export type TransactionMinAggregateOutputType = {
   id: string | null
-  pemesananId: string | null
-  amount: runtime.Decimal | null
+  bookingId: string | null
+  amount: number | null
   paymentMethod: string | null
-  externalId: string | null
+  midtransOrderId: string | null
+  midtransTransactionId: string | null
   status: $Enums.TransactionStatus | null
   created_at: Date | null
   updated_at: Date | null
@@ -47,10 +48,11 @@ export type TransactionMinAggregateOutputType = {
 
 export type TransactionMaxAggregateOutputType = {
   id: string | null
-  pemesananId: string | null
-  amount: runtime.Decimal | null
+  bookingId: string | null
+  amount: number | null
   paymentMethod: string | null
-  externalId: string | null
+  midtransOrderId: string | null
+  midtransTransactionId: string | null
   status: $Enums.TransactionStatus | null
   created_at: Date | null
   updated_at: Date | null
@@ -58,12 +60,13 @@ export type TransactionMaxAggregateOutputType = {
 
 export type TransactionCountAggregateOutputType = {
   id: number
-  pemesananId: number
+  bookingId: number
   amount: number
   paymentMethod: number
-  externalId: number
+  midtransOrderId: number
+  midtransTransactionId: number
   status: number
-  snapshotData: number
+  webhookPayload: number
   created_at: number
   updated_at: number
   _all: number
@@ -80,10 +83,11 @@ export type TransactionSumAggregateInputType = {
 
 export type TransactionMinAggregateInputType = {
   id?: true
-  pemesananId?: true
+  bookingId?: true
   amount?: true
   paymentMethod?: true
-  externalId?: true
+  midtransOrderId?: true
+  midtransTransactionId?: true
   status?: true
   created_at?: true
   updated_at?: true
@@ -91,10 +95,11 @@ export type TransactionMinAggregateInputType = {
 
 export type TransactionMaxAggregateInputType = {
   id?: true
-  pemesananId?: true
+  bookingId?: true
   amount?: true
   paymentMethod?: true
-  externalId?: true
+  midtransOrderId?: true
+  midtransTransactionId?: true
   status?: true
   created_at?: true
   updated_at?: true
@@ -102,12 +107,13 @@ export type TransactionMaxAggregateInputType = {
 
 export type TransactionCountAggregateInputType = {
   id?: true
-  pemesananId?: true
+  bookingId?: true
   amount?: true
   paymentMethod?: true
-  externalId?: true
+  midtransOrderId?: true
+  midtransTransactionId?: true
   status?: true
-  snapshotData?: true
+  webhookPayload?: true
   created_at?: true
   updated_at?: true
   _all?: true
@@ -201,12 +207,13 @@ export type TransactionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type TransactionGroupByOutputType = {
   id: string
-  pemesananId: string
-  amount: runtime.Decimal
-  paymentMethod: string
-  externalId: string | null
+  bookingId: string
+  amount: number
+  paymentMethod: string | null
+  midtransOrderId: string
+  midtransTransactionId: string | null
   status: $Enums.TransactionStatus
-  snapshotData: runtime.JsonValue | null
+  webhookPayload: runtime.JsonValue | null
   created_at: Date
   updated_at: Date
   _count: TransactionCountAggregateOutputType | null
@@ -235,55 +242,59 @@ export type TransactionWhereInput = {
   AND?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[]
   OR?: Prisma.TransactionWhereInput[]
   NOT?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[]
-  id?: Prisma.UuidFilter<"Transaction"> | string
-  pemesananId?: Prisma.UuidFilter<"Transaction"> | string
-  amount?: Prisma.DecimalFilter<"Transaction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod?: Prisma.StringFilter<"Transaction"> | string
-  externalId?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  id?: Prisma.StringFilter<"Transaction"> | string
+  bookingId?: Prisma.UuidFilter<"Transaction"> | string
+  amount?: Prisma.IntFilter<"Transaction"> | number
+  paymentMethod?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  midtransOrderId?: Prisma.StringFilter<"Transaction"> | string
+  midtransTransactionId?: Prisma.StringNullableFilter<"Transaction"> | string | null
   status?: Prisma.EnumTransactionStatusFilter<"Transaction"> | $Enums.TransactionStatus
-  snapshotData?: Prisma.JsonNullableFilter<"Transaction">
+  webhookPayload?: Prisma.JsonNullableFilter<"Transaction">
   created_at?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Transaction"> | Date | string
-  pemesanan?: Prisma.XOR<Prisma.PemesananScalarRelationFilter, Prisma.PemesananWhereInput>
+  booking?: Prisma.XOR<Prisma.BookingScalarRelationFilter, Prisma.BookingWhereInput>
 }
 
 export type TransactionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  pemesananId?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  paymentMethod?: Prisma.SortOrder
-  externalId?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
+  midtransOrderId?: Prisma.SortOrder
+  midtransTransactionId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
-  snapshotData?: Prisma.SortOrderInput | Prisma.SortOrder
+  webhookPayload?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  pemesanan?: Prisma.PemesananOrderByWithRelationInput
+  booking?: Prisma.BookingOrderByWithRelationInput
 }
 
 export type TransactionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  externalId?: string
+  bookingId?: string
+  midtransOrderId?: string
   AND?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[]
   OR?: Prisma.TransactionWhereInput[]
   NOT?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[]
-  pemesananId?: Prisma.UuidFilter<"Transaction"> | string
-  amount?: Prisma.DecimalFilter<"Transaction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod?: Prisma.StringFilter<"Transaction"> | string
+  amount?: Prisma.IntFilter<"Transaction"> | number
+  paymentMethod?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  midtransTransactionId?: Prisma.StringNullableFilter<"Transaction"> | string | null
   status?: Prisma.EnumTransactionStatusFilter<"Transaction"> | $Enums.TransactionStatus
-  snapshotData?: Prisma.JsonNullableFilter<"Transaction">
+  webhookPayload?: Prisma.JsonNullableFilter<"Transaction">
   created_at?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Transaction"> | Date | string
-  pemesanan?: Prisma.XOR<Prisma.PemesananScalarRelationFilter, Prisma.PemesananWhereInput>
-}, "id" | "externalId">
+  booking?: Prisma.XOR<Prisma.BookingScalarRelationFilter, Prisma.BookingWhereInput>
+}, "id" | "bookingId" | "midtransOrderId">
 
 export type TransactionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  pemesananId?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  paymentMethod?: Prisma.SortOrder
-  externalId?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
+  midtransOrderId?: Prisma.SortOrder
+  midtransTransactionId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
-  snapshotData?: Prisma.SortOrderInput | Prisma.SortOrder
+  webhookPayload?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   _count?: Prisma.TransactionCountOrderByAggregateInput
@@ -297,108 +308,122 @@ export type TransactionScalarWhereWithAggregatesInput = {
   AND?: Prisma.TransactionScalarWhereWithAggregatesInput | Prisma.TransactionScalarWhereWithAggregatesInput[]
   OR?: Prisma.TransactionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TransactionScalarWhereWithAggregatesInput | Prisma.TransactionScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"Transaction"> | string
-  pemesananId?: Prisma.UuidWithAggregatesFilter<"Transaction"> | string
-  amount?: Prisma.DecimalWithAggregatesFilter<"Transaction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
-  externalId?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
+  id?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
+  bookingId?: Prisma.UuidWithAggregatesFilter<"Transaction"> | string
+  amount?: Prisma.IntWithAggregatesFilter<"Transaction"> | number
+  paymentMethod?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
+  midtransOrderId?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
+  midtransTransactionId?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
   status?: Prisma.EnumTransactionStatusWithAggregatesFilter<"Transaction"> | $Enums.TransactionStatus
-  snapshotData?: Prisma.JsonNullableWithAggregatesFilter<"Transaction">
+  webhookPayload?: Prisma.JsonNullableWithAggregatesFilter<"Transaction">
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Transaction"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"Transaction"> | Date | string
 }
 
 export type TransactionCreateInput = {
   id?: string
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
-  externalId?: string | null
+  amount: number
+  paymentMethod?: string | null
+  midtransOrderId: string
+  midtransTransactionId?: string | null
   status?: $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  webhookPayload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   created_at?: Date | string
   updated_at?: Date | string
-  pemesanan: Prisma.PemesananCreateNestedOneWithoutTransactionsInput
+  booking: Prisma.BookingCreateNestedOneWithoutTransactionInput
 }
 
 export type TransactionUncheckedCreateInput = {
   id?: string
-  pemesananId: string
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
-  externalId?: string | null
+  bookingId: string
+  amount: number
+  paymentMethod?: string | null
+  midtransOrderId: string
+  midtransTransactionId?: string | null
   status?: $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  webhookPayload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   created_at?: Date | string
   updated_at?: Date | string
 }
 
 export type TransactionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  midtransOrderId?: Prisma.StringFieldUpdateOperationsInput | string
+  midtransTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  webhookPayload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  pemesanan?: Prisma.PemesananUpdateOneRequiredWithoutTransactionsNestedInput
+  booking?: Prisma.BookingUpdateOneRequiredWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  pemesananId?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookingId?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  midtransOrderId?: Prisma.StringFieldUpdateOperationsInput | string
+  midtransTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  webhookPayload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TransactionCreateManyInput = {
   id?: string
-  pemesananId: string
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
-  externalId?: string | null
+  bookingId: string
+  amount: number
+  paymentMethod?: string | null
+  midtransOrderId: string
+  midtransTransactionId?: string | null
   status?: $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  webhookPayload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   created_at?: Date | string
   updated_at?: Date | string
 }
 
 export type TransactionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  midtransOrderId?: Prisma.StringFieldUpdateOperationsInput | string
+  midtransTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  webhookPayload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TransactionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  pemesananId?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookingId?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  midtransOrderId?: Prisma.StringFieldUpdateOperationsInput | string
+  midtransTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  webhookPayload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type TransactionNullableScalarRelationFilter = {
+  is?: Prisma.TransactionWhereInput | null
+  isNot?: Prisma.TransactionWhereInput | null
+}
+
 export type TransactionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  pemesananId?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
-  externalId?: Prisma.SortOrder
+  midtransOrderId?: Prisma.SortOrder
+  midtransTransactionId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  snapshotData?: Prisma.SortOrder
+  webhookPayload?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -409,10 +434,11 @@ export type TransactionAvgOrderByAggregateInput = {
 
 export type TransactionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  pemesananId?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
-  externalId?: Prisma.SortOrder
+  midtransOrderId?: Prisma.SortOrder
+  midtransTransactionId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -420,10 +446,11 @@ export type TransactionMaxOrderByAggregateInput = {
 
 export type TransactionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  pemesananId?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
-  externalId?: Prisma.SortOrder
+  midtransOrderId?: Prisma.SortOrder
+  midtransTransactionId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -433,165 +460,102 @@ export type TransactionSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
 }
 
-export type TransactionListRelationFilter = {
-  every?: Prisma.TransactionWhereInput
-  some?: Prisma.TransactionWhereInput
-  none?: Prisma.TransactionWhereInput
+export type TransactionCreateNestedOneWithoutBookingInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutBookingInput, Prisma.TransactionUncheckedCreateWithoutBookingInput>
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutBookingInput
+  connect?: Prisma.TransactionWhereUniqueInput
 }
 
-export type TransactionOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
+export type TransactionUncheckedCreateNestedOneWithoutBookingInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutBookingInput, Prisma.TransactionUncheckedCreateWithoutBookingInput>
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutBookingInput
+  connect?: Prisma.TransactionWhereUniqueInput
+}
+
+export type TransactionUpdateOneWithoutBookingNestedInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutBookingInput, Prisma.TransactionUncheckedCreateWithoutBookingInput>
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutBookingInput
+  upsert?: Prisma.TransactionUpsertWithoutBookingInput
+  disconnect?: Prisma.TransactionWhereInput | boolean
+  delete?: Prisma.TransactionWhereInput | boolean
+  connect?: Prisma.TransactionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TransactionUpdateToOneWithWhereWithoutBookingInput, Prisma.TransactionUpdateWithoutBookingInput>, Prisma.TransactionUncheckedUpdateWithoutBookingInput>
+}
+
+export type TransactionUncheckedUpdateOneWithoutBookingNestedInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutBookingInput, Prisma.TransactionUncheckedCreateWithoutBookingInput>
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutBookingInput
+  upsert?: Prisma.TransactionUpsertWithoutBookingInput
+  disconnect?: Prisma.TransactionWhereInput | boolean
+  delete?: Prisma.TransactionWhereInput | boolean
+  connect?: Prisma.TransactionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TransactionUpdateToOneWithWhereWithoutBookingInput, Prisma.TransactionUpdateWithoutBookingInput>, Prisma.TransactionUncheckedUpdateWithoutBookingInput>
 }
 
 export type EnumTransactionStatusFieldUpdateOperationsInput = {
   set?: $Enums.TransactionStatus
 }
 
-export type TransactionCreateNestedManyWithoutPemesananInput = {
-  create?: Prisma.XOR<Prisma.TransactionCreateWithoutPemesananInput, Prisma.TransactionUncheckedCreateWithoutPemesananInput> | Prisma.TransactionCreateWithoutPemesananInput[] | Prisma.TransactionUncheckedCreateWithoutPemesananInput[]
-  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutPemesananInput | Prisma.TransactionCreateOrConnectWithoutPemesananInput[]
-  createMany?: Prisma.TransactionCreateManyPemesananInputEnvelope
-  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-}
-
-export type TransactionUncheckedCreateNestedManyWithoutPemesananInput = {
-  create?: Prisma.XOR<Prisma.TransactionCreateWithoutPemesananInput, Prisma.TransactionUncheckedCreateWithoutPemesananInput> | Prisma.TransactionCreateWithoutPemesananInput[] | Prisma.TransactionUncheckedCreateWithoutPemesananInput[]
-  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutPemesananInput | Prisma.TransactionCreateOrConnectWithoutPemesananInput[]
-  createMany?: Prisma.TransactionCreateManyPemesananInputEnvelope
-  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-}
-
-export type TransactionUpdateManyWithoutPemesananNestedInput = {
-  create?: Prisma.XOR<Prisma.TransactionCreateWithoutPemesananInput, Prisma.TransactionUncheckedCreateWithoutPemesananInput> | Prisma.TransactionCreateWithoutPemesananInput[] | Prisma.TransactionUncheckedCreateWithoutPemesananInput[]
-  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutPemesananInput | Prisma.TransactionCreateOrConnectWithoutPemesananInput[]
-  upsert?: Prisma.TransactionUpsertWithWhereUniqueWithoutPemesananInput | Prisma.TransactionUpsertWithWhereUniqueWithoutPemesananInput[]
-  createMany?: Prisma.TransactionCreateManyPemesananInputEnvelope
-  set?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  disconnect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  delete?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  update?: Prisma.TransactionUpdateWithWhereUniqueWithoutPemesananInput | Prisma.TransactionUpdateWithWhereUniqueWithoutPemesananInput[]
-  updateMany?: Prisma.TransactionUpdateManyWithWhereWithoutPemesananInput | Prisma.TransactionUpdateManyWithWhereWithoutPemesananInput[]
-  deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
-}
-
-export type TransactionUncheckedUpdateManyWithoutPemesananNestedInput = {
-  create?: Prisma.XOR<Prisma.TransactionCreateWithoutPemesananInput, Prisma.TransactionUncheckedCreateWithoutPemesananInput> | Prisma.TransactionCreateWithoutPemesananInput[] | Prisma.TransactionUncheckedCreateWithoutPemesananInput[]
-  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutPemesananInput | Prisma.TransactionCreateOrConnectWithoutPemesananInput[]
-  upsert?: Prisma.TransactionUpsertWithWhereUniqueWithoutPemesananInput | Prisma.TransactionUpsertWithWhereUniqueWithoutPemesananInput[]
-  createMany?: Prisma.TransactionCreateManyPemesananInputEnvelope
-  set?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  disconnect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  delete?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  update?: Prisma.TransactionUpdateWithWhereUniqueWithoutPemesananInput | Prisma.TransactionUpdateWithWhereUniqueWithoutPemesananInput[]
-  updateMany?: Prisma.TransactionUpdateManyWithWhereWithoutPemesananInput | Prisma.TransactionUpdateManyWithWhereWithoutPemesananInput[]
-  deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
-}
-
-export type TransactionCreateWithoutPemesananInput = {
+export type TransactionCreateWithoutBookingInput = {
   id?: string
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
-  externalId?: string | null
+  amount: number
+  paymentMethod?: string | null
+  midtransOrderId: string
+  midtransTransactionId?: string | null
   status?: $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  webhookPayload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   created_at?: Date | string
   updated_at?: Date | string
 }
 
-export type TransactionUncheckedCreateWithoutPemesananInput = {
+export type TransactionUncheckedCreateWithoutBookingInput = {
   id?: string
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
-  externalId?: string | null
+  amount: number
+  paymentMethod?: string | null
+  midtransOrderId: string
+  midtransTransactionId?: string | null
   status?: $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  webhookPayload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   created_at?: Date | string
   updated_at?: Date | string
 }
 
-export type TransactionCreateOrConnectWithoutPemesananInput = {
+export type TransactionCreateOrConnectWithoutBookingInput = {
   where: Prisma.TransactionWhereUniqueInput
-  create: Prisma.XOR<Prisma.TransactionCreateWithoutPemesananInput, Prisma.TransactionUncheckedCreateWithoutPemesananInput>
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutBookingInput, Prisma.TransactionUncheckedCreateWithoutBookingInput>
 }
 
-export type TransactionCreateManyPemesananInputEnvelope = {
-  data: Prisma.TransactionCreateManyPemesananInput | Prisma.TransactionCreateManyPemesananInput[]
-  skipDuplicates?: boolean
+export type TransactionUpsertWithoutBookingInput = {
+  update: Prisma.XOR<Prisma.TransactionUpdateWithoutBookingInput, Prisma.TransactionUncheckedUpdateWithoutBookingInput>
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutBookingInput, Prisma.TransactionUncheckedCreateWithoutBookingInput>
+  where?: Prisma.TransactionWhereInput
 }
 
-export type TransactionUpsertWithWhereUniqueWithoutPemesananInput = {
-  where: Prisma.TransactionWhereUniqueInput
-  update: Prisma.XOR<Prisma.TransactionUpdateWithoutPemesananInput, Prisma.TransactionUncheckedUpdateWithoutPemesananInput>
-  create: Prisma.XOR<Prisma.TransactionCreateWithoutPemesananInput, Prisma.TransactionUncheckedCreateWithoutPemesananInput>
+export type TransactionUpdateToOneWithWhereWithoutBookingInput = {
+  where?: Prisma.TransactionWhereInput
+  data: Prisma.XOR<Prisma.TransactionUpdateWithoutBookingInput, Prisma.TransactionUncheckedUpdateWithoutBookingInput>
 }
 
-export type TransactionUpdateWithWhereUniqueWithoutPemesananInput = {
-  where: Prisma.TransactionWhereUniqueInput
-  data: Prisma.XOR<Prisma.TransactionUpdateWithoutPemesananInput, Prisma.TransactionUncheckedUpdateWithoutPemesananInput>
-}
-
-export type TransactionUpdateManyWithWhereWithoutPemesananInput = {
-  where: Prisma.TransactionScalarWhereInput
-  data: Prisma.XOR<Prisma.TransactionUpdateManyMutationInput, Prisma.TransactionUncheckedUpdateManyWithoutPemesananInput>
-}
-
-export type TransactionScalarWhereInput = {
-  AND?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
-  OR?: Prisma.TransactionScalarWhereInput[]
-  NOT?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Transaction"> | string
-  pemesananId?: Prisma.UuidFilter<"Transaction"> | string
-  amount?: Prisma.DecimalFilter<"Transaction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod?: Prisma.StringFilter<"Transaction"> | string
-  externalId?: Prisma.StringNullableFilter<"Transaction"> | string | null
-  status?: Prisma.EnumTransactionStatusFilter<"Transaction"> | $Enums.TransactionStatus
-  snapshotData?: Prisma.JsonNullableFilter<"Transaction">
-  created_at?: Prisma.DateTimeFilter<"Transaction"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"Transaction"> | Date | string
-}
-
-export type TransactionCreateManyPemesananInput = {
-  id?: string
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
-  externalId?: string | null
-  status?: $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  created_at?: Date | string
-  updated_at?: Date | string
-}
-
-export type TransactionUpdateWithoutPemesananInput = {
+export type TransactionUpdateWithoutBookingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  midtransOrderId?: Prisma.StringFieldUpdateOperationsInput | string
+  midtransTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  webhookPayload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type TransactionUncheckedUpdateWithoutPemesananInput = {
+export type TransactionUncheckedUpdateWithoutBookingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  midtransOrderId?: Prisma.StringFieldUpdateOperationsInput | string
+  midtransTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type TransactionUncheckedUpdateManyWithoutPemesananInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
-  snapshotData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  webhookPayload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -600,79 +564,84 @@ export type TransactionUncheckedUpdateManyWithoutPemesananInput = {
 
 export type TransactionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  pemesananId?: boolean
+  bookingId?: boolean
   amount?: boolean
   paymentMethod?: boolean
-  externalId?: boolean
+  midtransOrderId?: boolean
+  midtransTransactionId?: boolean
   status?: boolean
-  snapshotData?: boolean
+  webhookPayload?: boolean
   created_at?: boolean
   updated_at?: boolean
-  pemesanan?: boolean | Prisma.PemesananDefaultArgs<ExtArgs>
+  booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
 export type TransactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  pemesananId?: boolean
+  bookingId?: boolean
   amount?: boolean
   paymentMethod?: boolean
-  externalId?: boolean
+  midtransOrderId?: boolean
+  midtransTransactionId?: boolean
   status?: boolean
-  snapshotData?: boolean
+  webhookPayload?: boolean
   created_at?: boolean
   updated_at?: boolean
-  pemesanan?: boolean | Prisma.PemesananDefaultArgs<ExtArgs>
+  booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
 export type TransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  pemesananId?: boolean
+  bookingId?: boolean
   amount?: boolean
   paymentMethod?: boolean
-  externalId?: boolean
+  midtransOrderId?: boolean
+  midtransTransactionId?: boolean
   status?: boolean
-  snapshotData?: boolean
+  webhookPayload?: boolean
   created_at?: boolean
   updated_at?: boolean
-  pemesanan?: boolean | Prisma.PemesananDefaultArgs<ExtArgs>
+  booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
 export type TransactionSelectScalar = {
   id?: boolean
-  pemesananId?: boolean
+  bookingId?: boolean
   amount?: boolean
   paymentMethod?: boolean
-  externalId?: boolean
+  midtransOrderId?: boolean
+  midtransTransactionId?: boolean
   status?: boolean
-  snapshotData?: boolean
+  webhookPayload?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type TransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pemesananId" | "amount" | "paymentMethod" | "externalId" | "status" | "snapshotData" | "created_at" | "updated_at", ExtArgs["result"]["transaction"]>
+export type TransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bookingId" | "amount" | "paymentMethod" | "midtransOrderId" | "midtransTransactionId" | "status" | "webhookPayload" | "created_at" | "updated_at", ExtArgs["result"]["transaction"]>
 export type TransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  pemesanan?: boolean | Prisma.PemesananDefaultArgs<ExtArgs>
+  booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
 }
 export type TransactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  pemesanan?: boolean | Prisma.PemesananDefaultArgs<ExtArgs>
+  booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
 }
 export type TransactionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  pemesanan?: boolean | Prisma.PemesananDefaultArgs<ExtArgs>
+  booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
 }
 
 export type $TransactionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Transaction"
   objects: {
-    pemesanan: Prisma.$PemesananPayload<ExtArgs>
+    booking: Prisma.$BookingPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    pemesananId: string
-    amount: runtime.Decimal
-    paymentMethod: string
-    externalId: string | null
+    bookingId: string
+    amount: number
+    paymentMethod: string | null
+    midtransOrderId: string
+    midtransTransactionId: string | null
     status: $Enums.TransactionStatus
-    snapshotData: runtime.JsonValue | null
+    webhookPayload: runtime.JsonValue | null
     created_at: Date
     updated_at: Date
   }, ExtArgs["result"]["transaction"]>
@@ -1069,7 +1038,7 @@ readonly fields: TransactionFieldRefs;
  */
 export interface Prisma__TransactionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  pemesanan<T extends Prisma.PemesananDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PemesananDefaultArgs<ExtArgs>>): Prisma.Prisma__PemesananClient<runtime.Types.Result.GetResult<Prisma.$PemesananPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  booking<T extends Prisma.BookingDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BookingDefaultArgs<ExtArgs>>): Prisma.Prisma__BookingClient<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1100,12 +1069,13 @@ export interface Prisma__TransactionClient<T, Null = never, ExtArgs extends runt
  */
 export interface TransactionFieldRefs {
   readonly id: Prisma.FieldRef<"Transaction", 'String'>
-  readonly pemesananId: Prisma.FieldRef<"Transaction", 'String'>
-  readonly amount: Prisma.FieldRef<"Transaction", 'Decimal'>
+  readonly bookingId: Prisma.FieldRef<"Transaction", 'String'>
+  readonly amount: Prisma.FieldRef<"Transaction", 'Int'>
   readonly paymentMethod: Prisma.FieldRef<"Transaction", 'String'>
-  readonly externalId: Prisma.FieldRef<"Transaction", 'String'>
+  readonly midtransOrderId: Prisma.FieldRef<"Transaction", 'String'>
+  readonly midtransTransactionId: Prisma.FieldRef<"Transaction", 'String'>
   readonly status: Prisma.FieldRef<"Transaction", 'TransactionStatus'>
-  readonly snapshotData: Prisma.FieldRef<"Transaction", 'Json'>
+  readonly webhookPayload: Prisma.FieldRef<"Transaction", 'Json'>
   readonly created_at: Prisma.FieldRef<"Transaction", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"Transaction", 'DateTime'>
 }

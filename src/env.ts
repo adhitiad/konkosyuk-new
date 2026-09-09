@@ -4,6 +4,8 @@ import { z } from 'zod'
 export const env = createEnv({
   server: {
     SERVER_URL: z.string().url().optional(),
+    MIDTRANS_SERVER_KEY: z.string().min(1).optional(),
+    MIDTRANS_IS_PRODUCTION: z.enum(['true', 'false']).optional(),
   },
 
   /**
@@ -14,6 +16,7 @@ export const env = createEnv({
 
   client: {
     VITE_APP_TITLE: z.string().min(1).optional(),
+    VITE_MIDTRANS_CLIENT_KEY: z.string().min(1).optional(),
   },
 
   /**

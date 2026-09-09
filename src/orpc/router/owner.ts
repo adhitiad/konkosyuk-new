@@ -50,7 +50,7 @@ export const getUpcomingExpirations = requireOwnerOrAdmin
     const bookings = await prisma.booking.findMany({
       where: {
         ...ownerWhere,
-        status_booking: 'AKTIF',
+        status_booking: 'ACTIVE',
         tanggal_selesai: {
           gte: now,
           lte: deadline,
@@ -155,7 +155,7 @@ export const getMonthlyRevenue = requireOwnerOrAdmin
                 properties: {
                   select: {
                     id: true,
-                    nama_properti: true,
+                    name: true,
                   },
                 },
               },
@@ -169,7 +169,7 @@ export const getMonthlyRevenue = requireOwnerOrAdmin
                 properties: {
                   select: {
                     id: true,
-                    nama_properti: true,
+                    name: true,
                   },
                 },
               },
@@ -220,7 +220,7 @@ export const getMonthlyRevenue = requireOwnerOrAdmin
       } else {
         grouped.set(key, {
           propertyId: property.id,
-          propertyName: property.nama_properti,
+          propertyName: property.name,
           totalRevenue: amount,
           transactionCount: 1,
         })

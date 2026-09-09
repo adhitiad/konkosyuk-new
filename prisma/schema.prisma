@@ -1075,7 +1075,7 @@ model rooms {
   id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   property_id  String       @db.Uuid
   name         String
-  status       RoomStatus   @default(available)
+  status       RoomStatus   @default(AVAILABLE)
   price        Decimal      @db.Decimal(12, 2)
   facilities   Json?        @default("[]")
   created_at   DateTime     @default(now()) @db.Timestamp(6)
@@ -1436,7 +1436,7 @@ model Booking {
   tanggal_mulai        DateTime          @db.Timestamp(6)
   tanggal_selesai      DateTime          @db.Timestamp(6)
   total_harga          Decimal           @db.Decimal(12, 2)
-  status_booking       StatusBooking     @default(MENUNGGU_PEMBAYARAN_DP)
+  status_booking       StatusBooking     @default(PENDING_PAYMENT)
   jumlahDP             Decimal           @default(0) @db.Decimal(12, 2)
   jumlahPelunasan      Decimal           @default(0) @db.Decimal(12, 2)
   tanggalBayarDP       DateTime?         @db.Timestamp(6)
@@ -1447,6 +1447,14 @@ model Booking {
   transaksiDP_id       String?           @unique
   transaksiPelunasan_id String?          @unique
   transaksiRefund_id   String?           @unique
+  payment_deadline     DateTime          @db.Timestamp(6)
+  cancelled_at         DateTime?         @db.Timestamp(6)
+  cancelled_reason     String?
+  rental_period        BookingRentalPeriod
+  check_in_date        DateTime          @db.Timestamp(6)
+  check_out_date       DateTime          @db.Timestamp(6)
+  previous_booking_id  String?           @db.Uuid @unique
+  next_booking_id      String?           @db.Uuid @unique
   created_at           DateTime          @default(now()) @db.Timestamp(6)
   updated_at           DateTime          @default(now()) @db.Timestamp(6)
   units                units             @relation("Booking_unit_id", fields: [unit_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "Booking_unit_id_units_id_fk")
@@ -1456,12 +1464,17 @@ model Booking {
   transaksiDP          PaymentTransaction? @relation("BookingDP", fields: [transaksiDP_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
   transaksiPelunasan   PaymentTransaction? @relation("BookingPelunasan", fields: [transaksiPelunasan_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
   transaksiRefund      PaymentTransaction? @relation("BookingRefund", fields: [transaksiRefund_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
+  transaction          Transaction?
+  previousBooking      Booking?           @relation("BookingExtension", fields: [previous_booking_id], references: [id], onDelete: NoAction, map: "Booking_previous_booking_id_Booking_id_fk")
+  nextBooking          Booking?           @relation("BookingExtension", map: "Booking_next_booking_id_Booking_id_fk")
 
   @@index([penyewa_id])
   @@index([unit_id])
   @@index([transaksiDP_id])
   @@index([transaksiPelunasan_id])
   @@index([transaksiRefund_id])
+  @@index([previous_booking_id])
+  @@index([next_booking_id])
 }
 
 model Payment {
@@ -1537,20 +1550,21 @@ model PaymentTransaction {
 }
 
 model Transaction {
-  id            String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  pemesananId   String           @db.Uuid
-  amount        Decimal          @db.Decimal(12, 2)
-  paymentMethod String
-  externalId    String?          @unique
-  status        TransactionStatus @default(PENDING)
-  snapshotData  Json?            @default("{}")
-  created_at    DateTime         @default(now()) @db.Timestamp(6)
-  updated_at    DateTime         @default(now()) @db.Timestamp(6)
-  pemesanan     Pemesanan         @relation(fields: [pemesananId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Transaction_pemesanan_id_Pemesanan_id_fk")
+  id                     String           @id @default(cuid())
+  bookingId              String           @db.Uuid @unique
+  amount                 Int
+  paymentMethod          String?
+  midtransOrderId        String           @unique
+  midtransTransactionId  String?
+  status                 TransactionStatus @default(PENDING)
+  webhookPayload         Json?
+  created_at             DateTime         @default(now()) @db.Timestamp(6)
+  updated_at             DateTime         @default(now()) @db.Timestamp(6)
+  booking                Booking          @relation(fields: [bookingId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-  @@index([pemesananId])
+  @@index([bookingId])
   @@index([status])
-  @@index([externalId])
+  @@index([midtransOrderId])
 }
 
 model Property {
@@ -1636,9 +1650,9 @@ model Pemesanan {
   updated_at      DateTime        @default(now()) @db.Timestamp(6)
   room            rooms           @relation(fields: [room_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Pemesanan_room_id_rooms_id_fk")
   tenant          users           @relation("PemesananTenant", fields: [tenant_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Pemesanan_tenant_id_users_id_fk")
-  transactions    Transaction[]
 
   @@index([room_id])
+  @@unique([room_id])
   @@index([tenant_id])
   @@index([status])
 }
@@ -1769,9 +1783,10 @@ enum UnitStatus {
 }
 
 enum RoomStatus {
-  available
-  booked
-  maintenance
+  AVAILABLE
+  RESERVED
+  OCCUPIED
+  MAINTENANCE
 }
 
 enum TicketStatus {
@@ -2200,15 +2215,20 @@ enum AccountType {
 }
 
 enum StatusBooking {
-  MENUNGGU_PEMBAYARAN_DP
-  MENUNGGU_VERIFIKASI_DP
-  MENUNGGU_PERSETUJUAN
-  MENUNGGU_PELUNASAN
-  AKTIF
-  SELESAI
-  PROSES_REFUND_DP
-  SELESAI_DITOLAK
-  DIBATALKAN
+  DRAFT
+  PENDING_PAYMENT
+  CONFIRMED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+  EXPIRED
+}
+
+enum BookingRentalPeriod {
+  ONE_MONTH
+  THREE_MONTHS
+  SIX_MONTHS
+  ONE_YEAR
 }
 
 enum StatusRefundDP {

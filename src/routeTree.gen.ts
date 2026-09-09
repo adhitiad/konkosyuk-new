@@ -20,6 +20,7 @@ import { Route as protectedAdminRouteRouteImport } from './routes/(protected)/ad
 import { Route as AuthSignInRouteImport } from './routes/_auth.sign-in'
 import { Route as AuthSignUpRouteImport } from './routes/_auth.sign-up'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
+import { Route as BookingBookingIdRouteImport } from './routes/booking/$bookingId'
 import { Route as OwnerPropertiesRouteImport } from './routes/owner.properties'
 import { Route as PropertiesIdRouteImport } from './routes/properties/$id'
 import { Route as protectedAdminIndexRouteImport } from './routes/(protected)/admin/index'
@@ -32,7 +33,9 @@ import { Route as protectedPenyewaBookingRouteImport } from './routes/(protected
 import { Route as protectedPenyewaWishlistRouteImport } from './routes/(protected)/penyewa/wishlist'
 import { Route as publicPropertiPropertyIdRouteImport } from './routes/(public)/properti/$propertyId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as ApiCronCancelExpiredBookingsRouteImport } from './routes/api/cron/cancel-expired-bookings'
 import { Route as ApiRpcSplatRouteImport } from './routes/api.rpc.$'
+import { Route as ApiWebhooksMidtransRouteImport } from './routes/api/webhooks/midtrans'
 import { Route as ApiWebhooksPaymentRouteImport } from './routes/api/webhooks/payment'
 import { Route as OwnerPropertiesIdRouteImport } from './routes/owner.properties.$id'
 import { Route as OwnerPropertiesNewRouteImport } from './routes/owner.properties.new'
@@ -96,6 +99,11 @@ const AuthSignUpRoute = AuthSignUpRouteImport.update({
 const ApiSplatRoute = ApiSplatRouteImport.update({
   id: '/api/$',
   path: '/api/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingBookingIdRoute = BookingBookingIdRouteImport.update({
+  id: '/booking/$bookingId',
+  path: '/booking/$bookingId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OwnerPropertiesRoute = OwnerPropertiesRouteImport.update({
@@ -163,9 +171,20 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCronCancelExpiredBookingsRoute =
+  ApiCronCancelExpiredBookingsRouteImport.update({
+    id: '/api/cron/cancel-expired-bookings',
+    path: '/api/cron/cancel-expired-bookings',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWebhooksMidtransRoute = ApiWebhooksMidtransRouteImport.update({
+  id: '/api/webhooks/midtrans',
+  path: '/api/webhooks/midtrans',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiWebhooksPaymentRoute = ApiWebhooksPaymentRouteImport.update({
@@ -236,6 +255,7 @@ export interface FileRoutesByFullPath {
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
   '/api/$': typeof ApiSplatRoute
+  '/booking/$bookingId': typeof BookingBookingIdRoute
   '/owner/properties': typeof OwnerPropertiesRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
   '/pemilik/dashboard': typeof protectedPemilikDashboardRouteRouteWithChildren
@@ -247,7 +267,9 @@ export interface FileRoutesByFullPath {
   '/penyewa/wishlist': typeof protectedPenyewaWishlistRoute
   '/properti/$propertyId': typeof publicPropertiPropertyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/cron/cancel-expired-bookings': typeof ApiCronCancelExpiredBookingsRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/api/webhooks/midtrans': typeof ApiWebhooksMidtransRoute
   '/api/webhooks/payment': typeof ApiWebhooksPaymentRoute
   '/owner/properties/$id': typeof OwnerPropertiesIdRoute
   '/owner/properties/new': typeof OwnerPropertiesNewRoute
@@ -270,6 +292,7 @@ export interface FileRoutesByTo {
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
   '/api/$': typeof ApiSplatRoute
+  '/booking/$bookingId': typeof BookingBookingIdRoute
   '/owner/properties': typeof OwnerPropertiesRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
   '/admin/bookings': typeof protectedAdminBookingsRoute
@@ -280,7 +303,9 @@ export interface FileRoutesByTo {
   '/penyewa/wishlist': typeof protectedPenyewaWishlistRoute
   '/properti/$propertyId': typeof publicPropertiPropertyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/cron/cancel-expired-bookings': typeof ApiCronCancelExpiredBookingsRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/api/webhooks/midtrans': typeof ApiWebhooksMidtransRoute
   '/api/webhooks/payment': typeof ApiWebhooksPaymentRoute
   '/owner/properties/$id': typeof OwnerPropertiesIdRoute
   '/owner/properties/new': typeof OwnerPropertiesNewRoute
@@ -306,6 +331,7 @@ export interface FileRoutesById {
   '/_auth/sign-in': typeof AuthSignInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
   '/api/$': typeof ApiSplatRoute
+  '/booking/$bookingId': typeof BookingBookingIdRoute
   '/owner/properties': typeof OwnerPropertiesRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
   '/(protected)/pemilik/dashboard': typeof protectedPemilikDashboardRouteRouteWithChildren
@@ -317,7 +343,9 @@ export interface FileRoutesById {
   '/(protected)/penyewa/wishlist': typeof protectedPenyewaWishlistRoute
   '/(public)/properti/$propertyId': typeof publicPropertiPropertyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/cron/cancel-expired-bookings': typeof ApiCronCancelExpiredBookingsRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/api/webhooks/midtrans': typeof ApiWebhooksMidtransRoute
   '/api/webhooks/payment': typeof ApiWebhooksPaymentRoute
   '/owner/properties/$id': typeof OwnerPropertiesIdRoute
   '/owner/properties/new': typeof OwnerPropertiesNewRoute
@@ -343,6 +371,7 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/api/$'
+    | '/booking/$bookingId'
     | '/owner/properties'
     | '/properties/$id'
     | '/pemilik/dashboard'
@@ -354,7 +383,9 @@ export interface FileRouteTypes {
     | '/penyewa/wishlist'
     | '/properti/$propertyId'
     | '/api/auth/$'
+    | '/api/cron/cancel-expired-bookings'
     | '/api/rpc/$'
+    | '/api/webhooks/midtrans'
     | '/api/webhooks/payment'
     | '/owner/properties/$id'
     | '/owner/properties/new'
@@ -377,6 +408,7 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/api/$'
+    | '/booking/$bookingId'
     | '/owner/properties'
     | '/properties/$id'
     | '/admin/bookings'
@@ -387,7 +419,9 @@ export interface FileRouteTypes {
     | '/penyewa/wishlist'
     | '/properti/$propertyId'
     | '/api/auth/$'
+    | '/api/cron/cancel-expired-bookings'
     | '/api/rpc/$'
+    | '/api/webhooks/midtrans'
     | '/api/webhooks/payment'
     | '/owner/properties/$id'
     | '/owner/properties/new'
@@ -412,6 +446,7 @@ export interface FileRouteTypes {
     | '/_auth/sign-in'
     | '/_auth/sign-up'
     | '/api/$'
+    | '/booking/$bookingId'
     | '/owner/properties'
     | '/properties/$id'
     | '/(protected)/pemilik/dashboard'
@@ -423,7 +458,9 @@ export interface FileRouteTypes {
     | '/(protected)/penyewa/wishlist'
     | '/(public)/properti/$propertyId'
     | '/api/auth/$'
+    | '/api/cron/cancel-expired-bookings'
     | '/api/rpc/$'
+    | '/api/webhooks/midtrans'
     | '/api/webhooks/payment'
     | '/owner/properties/$id'
     | '/owner/properties/new'
@@ -447,13 +484,16 @@ export interface RootRouteChildren {
   PropertiesRoute: typeof PropertiesRouteWithChildren
   protectedAdminRouteRoute: typeof protectedAdminRouteRouteWithChildren
   ApiSplatRoute: typeof ApiSplatRoute
+  BookingBookingIdRoute: typeof BookingBookingIdRoute
   OwnerPropertiesRoute: typeof OwnerPropertiesRouteWithChildren
   protectedPemilikDashboardRouteRoute: typeof protectedPemilikDashboardRouteRouteWithChildren
   protectedPenyewaBookingRoute: typeof protectedPenyewaBookingRouteWithChildren
   protectedPenyewaWishlistRoute: typeof protectedPenyewaWishlistRoute
   publicPropertiPropertyIdRoute: typeof publicPropertiPropertyIdRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiCronCancelExpiredBookingsRoute: typeof ApiCronCancelExpiredBookingsRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
+  ApiWebhooksMidtransRoute: typeof ApiWebhooksMidtransRoute
   ApiWebhooksPaymentRoute: typeof ApiWebhooksPaymentRoute
   ApiWebhooksQstashSplatRoute: typeof ApiWebhooksQstashSplatRoute
 }
@@ -535,6 +575,13 @@ declare module '@tanstack/react-router' {
       path: '/api/$'
       fullPath: '/api/$'
       preLoaderRoute: typeof ApiSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking/$bookingId': {
+      id: '/booking/$bookingId'
+      path: '/booking/$bookingId'
+      fullPath: '/booking/$bookingId'
+      preLoaderRoute: typeof BookingBookingIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/owner/properties': {
@@ -621,11 +668,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/cron/cancel-expired-bookings': {
+      id: '/api/cron/cancel-expired-bookings'
+      path: '/api/cron/cancel-expired-bookings'
+      fullPath: '/api/cron/cancel-expired-bookings'
+      preLoaderRoute: typeof ApiCronCancelExpiredBookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/rpc/$': {
       id: '/api/rpc/$'
       path: '/api/rpc/$'
       fullPath: '/api/rpc/$'
       preLoaderRoute: typeof ApiRpcSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/webhooks/midtrans': {
+      id: '/api/webhooks/midtrans'
+      path: '/api/webhooks/midtrans'
+      fullPath: '/api/webhooks/midtrans'
+      preLoaderRoute: typeof ApiWebhooksMidtransRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/webhooks/payment': {
@@ -807,6 +868,7 @@ const rootRouteChildren: RootRouteChildren = {
   PropertiesRoute: PropertiesRouteWithChildren,
   protectedAdminRouteRoute: protectedAdminRouteRouteWithChildren,
   ApiSplatRoute: ApiSplatRoute,
+  BookingBookingIdRoute: BookingBookingIdRoute,
   OwnerPropertiesRoute: OwnerPropertiesRouteWithChildren,
   protectedPemilikDashboardRouteRoute:
     protectedPemilikDashboardRouteRouteWithChildren,
@@ -814,10 +876,21 @@ const rootRouteChildren: RootRouteChildren = {
   protectedPenyewaWishlistRoute: protectedPenyewaWishlistRoute,
   publicPropertiPropertyIdRoute: publicPropertiPropertyIdRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiCronCancelExpiredBookingsRoute: ApiCronCancelExpiredBookingsRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
+  ApiWebhooksMidtransRoute: ApiWebhooksMidtransRoute,
   ApiWebhooksPaymentRoute: ApiWebhooksPaymentRoute,
   ApiWebhooksQstashSplatRoute: ApiWebhooksQstashSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

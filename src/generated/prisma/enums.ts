@@ -180,9 +180,10 @@ export type UnitStatus = (typeof UnitStatus)[keyof typeof UnitStatus]
 
 
 export const RoomStatus = {
-  available: 'available',
-  booked: 'booked',
-  maintenance: 'maintenance'
+  AVAILABLE: 'AVAILABLE',
+  RESERVED: 'RESERVED',
+  OCCUPIED: 'OCCUPIED',
+  MAINTENANCE: 'MAINTENANCE'
 } as const
 
 export type RoomStatus = (typeof RoomStatus)[keyof typeof RoomStatus]
@@ -752,18 +753,26 @@ export type AccountType = (typeof AccountType)[keyof typeof AccountType]
 
 
 export const StatusBooking = {
-  MENUNGGU_PEMBAYARAN_DP: 'MENUNGGU_PEMBAYARAN_DP',
-  MENUNGGU_VERIFIKASI_DP: 'MENUNGGU_VERIFIKASI_DP',
-  MENUNGGU_PERSETUJUAN: 'MENUNGGU_PERSETUJUAN',
-  MENUNGGU_PELUNASAN: 'MENUNGGU_PELUNASAN',
-  AKTIF: 'AKTIF',
-  SELESAI: 'SELESAI',
-  PROSES_REFUND_DP: 'PROSES_REFUND_DP',
-  SELESAI_DITOLAK: 'SELESAI_DITOLAK',
-  DIBATALKAN: 'DIBATALKAN'
+  DRAFT: 'DRAFT',
+  PENDING_PAYMENT: 'PENDING_PAYMENT',
+  CONFIRMED: 'CONFIRMED',
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  EXPIRED: 'EXPIRED'
 } as const
 
 export type StatusBooking = (typeof StatusBooking)[keyof typeof StatusBooking]
+
+
+export const BookingRentalPeriod = {
+  ONE_MONTH: 'ONE_MONTH',
+  THREE_MONTHS: 'THREE_MONTHS',
+  SIX_MONTHS: 'SIX_MONTHS',
+  ONE_YEAR: 'ONE_YEAR'
+} as const
+
+export type BookingRentalPeriod = (typeof BookingRentalPeriod)[keyof typeof BookingRentalPeriod]
 
 
 export const StatusRefundDP = {

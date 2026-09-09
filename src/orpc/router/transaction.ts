@@ -3,8 +3,12 @@ import { z } from 'zod'
 import { os } from '#/orpc/server'
 import { prisma } from '#/db'
 import { auth } from '#/lib/auth'
+import { createSnapTransaction } from '#/lib/midtrans'
+import { createNotification } from '#/lib/services/notifications'
 
 import {
+  getTransactionStatusSchema,
+  createMidtransPaymentSchema,
   createPemesananPaymentSchema,
   PemesananPaymentWebhookPayloadSchema,
 } from '#/orpc/schema/transaction'
@@ -23,71 +27,288 @@ const withSession = os.use(async ({ context, next }) => {
   })
 })
 
-function generateMockPaymentToken(pemesananId: string): string {
+function generateMidtransOrderId(bookingId: string): string {
   const ts = Date.now().toString(36)
   const rand = Math.random().toString(36).slice(2, 8)
-  return `midtrans-mock-${pemesananId.slice(0, 8)}-${ts}-${rand}`
+  return `ORDER-${bookingId.slice(0, 8)}-${ts}-${rand}`.toUpperCase()
 }
 
-export const createPayment = withSession
-  .input(createPemesananPaymentSchema)
+function generateKonkosOrderId(bookingId: string): string {
+  const ts = Date.now().toString(36)
+  const rand = Math.random().toString(36).slice(2, 8)
+  return `KONKOS-${bookingId.slice(0, 8)}-${ts}-${rand}`.toUpperCase()
+}
+
+export const createMidtransPayment = withSession
+  .input(createMidtransPaymentSchema)
   .handler(async ({ input, context }) => {
-    const pemesanan = await prisma.pemesanan.findUnique({
-      where: { id: input.pemesanan_id },
+    const booking = await prisma.booking.findUnique({
+      where: { id: input.booking_id },
       select: {
         id: true,
         total_harga: true,
-        status: true,
-        tenant_id: true,
+        status_booking: true,
+        payment_deadline: true,
+        penyewa_id: true,
+        users: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+        units: {
+          select: {
+            id: true,
+            name: true,
+            properties: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
       },
     })
 
-    if (!pemesanan) {
+    if (!booking) {
       throw new ORPCError('NOT_FOUND', {
-        message: 'Pemesanan tidak ditemukan',
+        message: 'Booking tidak ditemukan',
       })
     }
 
-    if (pemesanan.tenant_id !== context.user.id) {
+    if (booking.penyewa_id !== context.user.id) {
       throw new ORPCError('FORBIDDEN', {
-        message: 'Anda tidak memiliki akses ke pemesanan ini',
+        message: 'Anda tidak memiliki akses ke booking ini',
       })
     }
 
-    const expectedAmount = Number(pemesanan.total_harga)
-    if (input.amount < expectedAmount) {
+    if (booking.status_booking !== 'PENDING_PAYMENT') {
       throw new ORPCError('BAD_REQUEST', {
-        message: `Jumlah pembayaran kurang dari total pemesanan (Rp${expectedAmount.toLocaleString('id-ID')})`,
+        message: 'Booking tidak bisa dibayar',
       })
     }
 
-    const token = generateMockPaymentToken(pemesanan.id)
-    const paymentUrl = `${process.env.SERVER_URL ?? 'http://localhost:3000'}/mock-payment/${token}`
+    if (new Date() > new Date(booking.payment_deadline)) {
+      throw new ORPCError('BAD_REQUEST', {
+        message: 'Booking sudah expired, silakan booking ulang',
+      })
+    }
+
+    const expectedAmount = Number(booking.total_harga)
+    const midtransOrderId = generateKonkosOrderId(booking.id)
+
+    let snapResult: { token: string; redirect_url: string } | null = null
+    try {
+      snapResult = await createSnapTransaction({
+        orderId: midtransOrderId,
+        grossAmount: expectedAmount,
+        customerDetails: {
+          first_name: booking.users.name,
+          email: booking.users.email,
+        },
+        itemDetails: [
+          {
+            id: booking.id,
+            name: `${booking.units.name} - ${booking.units.properties.name}`,
+            price: expectedAmount,
+            quantity: 1,
+          },
+        ],
+      })
+    } catch (error) {
+      console.error(
+        '[createMidtransPayment] Gagal membuat transaksi Midtrans:',
+        error,
+      )
+      throw new ORPCError('BAD_GATEWAY', {
+        message: 'Gagal membuat transaksi pembayaran Midtrans',
+      })
+    }
 
     const transaction = await prisma.transaction.create({
       data: {
-        pemesananId: pemesanan.id,
-        amount: input.amount,
-        paymentMethod: input.payment_method,
-        externalId: token,
+        bookingId: booking.id,
+        amount: expectedAmount,
+        paymentMethod: null,
+        midtransOrderId,
         status: 'PENDING',
-        snapshotData: {
-          payment_url: paymentUrl,
-          token,
-          provider: 'mock_midtrans',
-          simulated: true,
+        webhookPayload: {
+          payment_url: snapResult.redirect_url,
+          token: snapResult.token,
+          provider: 'midtrans',
+          simulated: false,
         },
       },
     })
 
     return {
       transaction_id: transaction.id,
-      external_id: transaction.externalId,
-      payment_url: paymentUrl,
-      token,
+      external_id: transaction.midtransOrderId,
+      payment_url: snapResult.redirect_url,
+      token: snapResult.token,
       amount: Number(transaction.amount),
       status: transaction.status,
       expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+    }
+  })
+
+export const createPayment = withSession
+  .input(createPemesananPaymentSchema)
+  .handler(async ({ input, context }) => {
+    const booking = await prisma.booking.findUnique({
+      where: { id: input.pemesanan_id },
+      select: {
+        id: true,
+        total_harga: true,
+        status_booking: true,
+        penyewa_id: true,
+        users: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+        units: {
+          select: {
+            id: true,
+            name: true,
+            properties: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    })
+
+    if (!booking) {
+      throw new ORPCError('NOT_FOUND', {
+        message: 'Booking tidak ditemukan',
+      })
+    }
+
+    if (booking.penyewa_id !== context.user.id) {
+      throw new ORPCError('FORBIDDEN', {
+        message: 'Anda tidak memiliki akses ke booking ini',
+      })
+    }
+
+    const expectedAmount = Number(booking.total_harga)
+    if (input.amount < expectedAmount) {
+      throw new ORPCError('BAD_REQUEST', {
+        message: `Jumlah pembayaran kurang dari total booking (Rp${expectedAmount.toLocaleString('id-ID')})`,
+      })
+    }
+
+    const midtransOrderId = generateMidtransOrderId(booking.id)
+
+    let snapResult: { token: string; redirect_url: string } | null = null
+    try {
+      snapResult = await createSnapTransaction({
+        orderId: midtransOrderId,
+        grossAmount: input.amount,
+        customerDetails: {
+          first_name: booking.users.name,
+          email: booking.users.email,
+        },
+        itemDetails: [
+          {
+            id: booking.id,
+            name: `Pembayaran ${booking.units.name} - ${booking.units.properties.name}`,
+            price: input.amount,
+            quantity: 1,
+          },
+        ],
+      })
+    } catch (error) {
+      console.error('[createPayment] Gagal membuat transaksi Midtrans:', error)
+      throw new ORPCError('BAD_GATEWAY', {
+        message: 'Gagal membuat transaksi pembayaran',
+      })
+    }
+
+    const transaction = await prisma.transaction.create({
+      data: {
+        bookingId: booking.id,
+        amount: input.amount,
+        paymentMethod: input.payment_method,
+        midtransOrderId,
+        status: 'PENDING',
+        webhookPayload: {
+          payment_url: snapResult.redirect_url,
+          token: snapResult.token,
+          provider: 'midtrans',
+          simulated: false,
+        },
+      },
+    })
+
+    return {
+      transaction_id: transaction.id,
+      external_id: transaction.midtransOrderId,
+      payment_url: snapResult.redirect_url,
+      token: snapResult.token,
+      amount: Number(transaction.amount),
+      status: transaction.status,
+      expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+    }
+  })
+
+export const getTransactionStatus = withSession
+  .input(getTransactionStatusSchema)
+  .handler(async ({ input, context }) => {
+    const booking = await prisma.booking.findUnique({
+      where: { id: input.booking_id },
+      select: {
+        id: true,
+        penyewa_id: true,
+        transaction: {
+          select: {
+            id: true,
+            status: true,
+            amount: true,
+            paymentMethod: true,
+            midtransOrderId: true,
+            created_at: true,
+            updated_at: true,
+          },
+        },
+      },
+    })
+
+    if (!booking) {
+      throw new ORPCError('NOT_FOUND', {
+        message: 'Booking tidak ditemukan',
+      })
+    }
+
+    if (booking.penyewa_id !== context.user.id) {
+      throw new ORPCError('FORBIDDEN', {
+        message: 'Anda tidak memiliki akses ke booking ini',
+      })
+    }
+
+    const transaction = booking.transaction
+
+    if (!transaction) {
+      throw new ORPCError('NOT_FOUND', {
+        message: 'Transaksi tidak ditemukan',
+      })
+    }
+
+    return {
+      transaction_id: transaction.id,
+      status: transaction.status,
+      amount: Number(transaction.amount),
+      payment_method: transaction.paymentMethod,
+      external_id: transaction.midtransOrderId,
+      created_at: transaction.created_at,
+      updated_at: transaction.updated_at,
     }
   })
 
@@ -97,12 +318,17 @@ export const getPaymentStatus = withSession
     const transaction = await prisma.transaction.findUnique({
       where: { id: input.transaction_id },
       include: {
-        pemesanan: {
+        booking: {
           select: {
             id: true,
-            status: true,
+            status_booking: true,
             total_harga: true,
-            tenant_id: true,
+            users: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
           },
         },
       },
@@ -114,7 +340,7 @@ export const getPaymentStatus = withSession
       })
     }
 
-    if (transaction.pemesanan.tenant_id !== context.user.id) {
+    if (transaction.booking.users.id !== context.user.id) {
       throw new ORPCError('FORBIDDEN', {
         message: 'Anda tidak memiliki akses ke transaksi ini',
       })
@@ -122,13 +348,13 @@ export const getPaymentStatus = withSession
 
     return {
       transaction_id: transaction.id,
-      external_id: transaction.externalId,
+      external_id: transaction.midtransOrderId,
       amount: Number(transaction.amount),
       payment_method: transaction.paymentMethod,
       status: transaction.status,
-      pemesanan_id: transaction.pemesananId,
-      pemesanan_status: transaction.pemesanan.status,
-      snapshot: transaction.snapshotData,
+      booking_id: transaction.bookingId,
+      booking_status: transaction.booking.status_booking,
+      snapshot: transaction.webhookPayload,
       created_at: transaction.created_at,
       updated_at: transaction.updated_at,
     }
@@ -140,10 +366,16 @@ export const processPaymentWebhook = os
     const transaction = await prisma.transaction.findUnique({
       where: { id: input.transaction_id },
       include: {
-        pemesanan: {
+        booking: {
           select: {
             id: true,
-            status: true,
+            status_booking: true,
+            users: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
           },
         },
       },
@@ -165,26 +397,35 @@ export const processPaymentWebhook = os
             : input.status === 'FAILED'
               ? 'FAILED'
               : 'EXPIRED',
-        snapshotData: {
-          ...((transaction.snapshotData ?? {}) as Record<string, unknown>),
+        midtransTransactionId:
+          input.external_id ?? transaction.midtransTransactionId,
+        webhookPayload: {
+          ...((transaction.webhookPayload ?? {}) as Record<string, unknown>),
           webhook_status: input.status,
           webhook_paid_at: input.paid_at?.toISOString() ?? null,
+          webhook_provider: 'midtrans',
           webhook_external_id: input.external_id,
         },
       },
     })
 
-    let updatedPemesanan = null
+    let updatedBooking = null
 
     if (
       input.status === 'SUCCESS' &&
-      transaction.pemesanan.status === 'MENUNGGU_PERSETUJUAN'
+      transaction.booking.status_booking === 'PENDING_PAYMENT'
     ) {
-      updatedPemesanan = await prisma.pemesanan.update({
-        where: { id: transaction.pemesananId },
-        data: { status: 'DITERIMA' },
+      updatedBooking = await prisma.booking.update({
+        where: { id: transaction.bookingId },
+        data: { status_booking: 'ACTIVE' },
         include: {
-          room: {
+          users: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+          units: {
             select: {
               id: true,
               name: true,
@@ -196,19 +437,21 @@ export const processPaymentWebhook = os
               },
             },
           },
-          tenant: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
         },
+      })
+
+      await createNotification({
+        userId: transaction.booking.users.id,
+        type: 'PAYMENT_SUCCESS',
+        title: 'Pembayaran Berhasil',
+        message: `Pembayaran untuk booking ${transaction.booking.id} telah berhasil.`,
+        referenceId: transaction.booking.id,
       })
     }
 
     return {
       transaction: updatedTransaction,
-      pemesanan: updatedPemesanan,
+      booking: updatedBooking,
       previous_status: previousStatus,
     }
   })

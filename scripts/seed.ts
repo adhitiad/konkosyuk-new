@@ -82,25 +82,25 @@ const SEED_PROPERTIES = [
     rooms: [
       {
         name: 'Kamar 1A',
-        status: RoomStatus.available,
+        status: RoomStatus.AVAILABLE,
         price: 1_650_000,
         facilities: ['AC', 'Kamar mandi dalam', 'WiFi'],
       },
       {
         name: 'Kamar 1B',
-        status: RoomStatus.booked,
+        status: RoomStatus.RESERVED,
         price: 1_700_000,
         facilities: ['AC', 'Kamar mandi dalam', 'WiFi', 'Lemari'],
       },
       {
         name: 'Kamar 2A',
-        status: RoomStatus.available,
+        status: RoomStatus.AVAILABLE,
         price: 1_500_000,
         facilities: ['Kipas angin', 'Kamar mandi dalam', 'WiFi'],
       },
       {
         name: 'Kamar 2B',
-        status: RoomStatus.maintenance,
+        status: RoomStatus.MAINTENANCE,
         price: 1_550_000,
         facilities: ['AC', 'Kamar mandi dalam'],
       },
@@ -121,31 +121,31 @@ const SEED_PROPERTIES = [
     rooms: [
       {
         name: 'Room A1',
-        status: RoomStatus.available,
+        status: RoomStatus.AVAILABLE,
         price: 1_800_000,
         facilities: ['AC', 'WiFi', 'Kamar mandi dalam'],
       },
       {
         name: 'Room A2',
-        status: RoomStatus.available,
+        status: RoomStatus.AVAILABLE,
         price: 1_750_000,
         facilities: ['Kipas angin', 'WiFi', 'Kamar mandi luar'],
       },
       {
         name: 'Room B1',
-        status: RoomStatus.booked,
+        status: RoomStatus.RESERVED,
         price: 2_000_000,
         facilities: ['AC', 'WiFi', 'Kamar mandi dalam', 'Lemari'],
       },
       {
         name: 'Room B2',
-        status: RoomStatus.maintenance,
+        status: RoomStatus.MAINTENANCE,
         price: 1_900_000,
         facilities: ['AC', 'WiFi'],
       },
       {
         name: 'Room C1',
-        status: RoomStatus.available,
+        status: RoomStatus.AVAILABLE,
         price: 2_100_000,
         facilities: ['AC', 'WiFi', 'Kamar mandi dalam', 'Lemari', 'TV'],
       },

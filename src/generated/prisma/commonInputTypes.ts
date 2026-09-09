@@ -1459,6 +1459,13 @@ export type EnumStatusRefundDPNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumStatusRefundDPNullableFilter<$PrismaModel> | $Enums.StatusRefundDP | null
 }
 
+export type EnumBookingRentalPeriodFilter<$PrismaModel = never> = {
+  equals?: $Enums.BookingRentalPeriod | Prisma.EnumBookingRentalPeriodFieldRefInput<$PrismaModel>
+  in?: $Enums.BookingRentalPeriod[] | Prisma.ListEnumBookingRentalPeriodFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BookingRentalPeriod[] | Prisma.ListEnumBookingRentalPeriodFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBookingRentalPeriodFilter<$PrismaModel> | $Enums.BookingRentalPeriod
+}
+
 export type EnumStatusBookingWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.StatusBooking | Prisma.EnumStatusBookingFieldRefInput<$PrismaModel>
   in?: $Enums.StatusBooking[] | Prisma.ListEnumStatusBookingFieldRefInput<$PrismaModel>
@@ -1477,6 +1484,16 @@ export type EnumStatusRefundDPNullableWithAggregatesFilter<$PrismaModel = never>
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumStatusRefundDPNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumStatusRefundDPNullableFilter<$PrismaModel>
+}
+
+export type EnumBookingRentalPeriodWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BookingRentalPeriod | Prisma.EnumBookingRentalPeriodFieldRefInput<$PrismaModel>
+  in?: $Enums.BookingRentalPeriod[] | Prisma.ListEnumBookingRentalPeriodFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BookingRentalPeriod[] | Prisma.ListEnumBookingRentalPeriodFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBookingRentalPeriodWithAggregatesFilter<$PrismaModel> | $Enums.BookingRentalPeriod
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBookingRentalPeriodFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBookingRentalPeriodFilter<$PrismaModel>
 }
 
 export type EnumMetodePembayaranFilter<$PrismaModel = never> = {
@@ -3066,6 +3083,13 @@ export type NestedEnumStatusRefundDPNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumStatusRefundDPNullableFilter<$PrismaModel> | $Enums.StatusRefundDP | null
 }
 
+export type NestedEnumBookingRentalPeriodFilter<$PrismaModel = never> = {
+  equals?: $Enums.BookingRentalPeriod | Prisma.EnumBookingRentalPeriodFieldRefInput<$PrismaModel>
+  in?: $Enums.BookingRentalPeriod[] | Prisma.ListEnumBookingRentalPeriodFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BookingRentalPeriod[] | Prisma.ListEnumBookingRentalPeriodFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBookingRentalPeriodFilter<$PrismaModel> | $Enums.BookingRentalPeriod
+}
+
 export type NestedEnumStatusBookingWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.StatusBooking | Prisma.EnumStatusBookingFieldRefInput<$PrismaModel>
   in?: $Enums.StatusBooking[] | Prisma.ListEnumStatusBookingFieldRefInput<$PrismaModel>
@@ -3084,6 +3108,16 @@ export type NestedEnumStatusRefundDPNullableWithAggregatesFilter<$PrismaModel = 
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumStatusRefundDPNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumStatusRefundDPNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumBookingRentalPeriodWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BookingRentalPeriod | Prisma.EnumBookingRentalPeriodFieldRefInput<$PrismaModel>
+  in?: $Enums.BookingRentalPeriod[] | Prisma.ListEnumBookingRentalPeriodFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BookingRentalPeriod[] | Prisma.ListEnumBookingRentalPeriodFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBookingRentalPeriodWithAggregatesFilter<$PrismaModel> | $Enums.BookingRentalPeriod
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBookingRentalPeriodFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBookingRentalPeriodFilter<$PrismaModel>
 }
 
 export type NestedEnumMetodePembayaranFilter<$PrismaModel = never> = {

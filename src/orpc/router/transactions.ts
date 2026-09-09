@@ -13,6 +13,8 @@ import { calculateDpAmount } from '#/lib/services/platform-config.js'
 import { scheduleBookingExpiry } from '#/lib/services/booking-expiry.js'
 import { logAudit } from '#/lib/services/audit'
 import { createBookingNotification } from '#/lib/services/notifications'
+import { differenceInHours } from 'date-fns'
+import { calculateCheckOutDate } from '#/lib/booking-dates'
 
 import {
   createBookingSchema,
@@ -35,6 +37,8 @@ import {
   createPaymentLinkSchema,
   getPaymentStatusSchema,
   PaymentWebhookSchema,
+  getPaymentDeadlineSchema,
+  getBookingDetailSchema,
 } from '#/orpc/schema/transaction'
 
 const withSession = os.use(async ({ context, next }) => {
@@ -89,14 +93,23 @@ export const createTransaksiBooking = withSession
       })
     }
 
+    const checkInDate = new Date(input.check_in_date)
+    const checkOutDate = calculateCheckOutDate(checkInDate, input.rental_period)
+
+    if (checkInDate < new Date()) {
+      throw new ORPCError('BAD_REQUEST', {
+        message: 'Tanggal check-in tidak boleh di masa lalu',
+      })
+    }
+
     const overlapping = await prisma.booking.findMany({
       where: {
         unit_id: input.unit_id,
-        status_booking: { in: ['MENUNGGU_PEMBAYARAN_DP', 'AKTIF'] },
+        status_booking: { in: ['PENDING_PAYMENT', 'CONFIRMED', 'ACTIVE'] },
         OR: [
           {
-            tanggal_mulai: { lt: input.tanggal_selesai },
-            tanggal_selesai: { gt: input.tanggal_mulai },
+            check_in_date: { lt: checkOutDate },
+            check_out_date: { gt: checkInDate },
           },
         ],
       },
@@ -107,15 +120,28 @@ export const createTransaksiBooking = withSession
       })
     }
 
-    const booking = await prisma.booking.create({
-      data: {
-        unit_id: input.unit_id,
-        penyewa_id: input.penyewa_id,
-        tanggal_mulai: input.tanggal_mulai,
-        tanggal_selesai: input.tanggal_selesai,
-        total_harga: input.total_harga,
-        status_booking: input.status_booking ?? 'MENUNGGU_PEMBAYARAN_DP',
-      },
+    const booking = await prisma.$transaction(async (tx) => {
+      const created = await tx.booking.create({
+        data: {
+          unit_id: input.unit_id,
+          penyewa_id: input.penyewa_id,
+          tanggal_mulai: checkInDate,
+          tanggal_selesai: checkOutDate,
+          total_harga: input.total_harga,
+          status_booking: input.status_booking ?? 'PENDING_PAYMENT',
+          payment_deadline: new Date(Date.now() + 24 * 60 * 60 * 1000),
+          rental_period: input.rental_period,
+          check_in_date: checkInDate,
+          check_out_date: checkOutDate,
+        },
+      })
+
+      await tx.units.update({
+        where: { id: input.unit_id },
+        data: { status: 'reserved' },
+      })
+
+      return created
     })
 
     const dpAmount = await calculateDpAmount(Number(input.total_harga))
@@ -144,6 +170,38 @@ export const createTransaksiBooking = withSession
     await scheduleBookingExpiry(booking.id)
 
     return updatedBooking
+  })
+
+export const checkRoomAvailability = withSession
+  .input(
+    z.object({
+      unit_id: z.string().uuid(),
+      check_in_date: z.coerce.date(),
+      check_out_date: z.coerce.date(),
+    }),
+  )
+  .handler(async ({ input }) => {
+    const conflicting = await prisma.booking.findMany({
+      where: {
+        unit_id: input.unit_id,
+        status_booking: { in: ['PENDING_PAYMENT', 'CONFIRMED', 'ACTIVE'] },
+        OR: [
+          {
+            check_in_date: { lt: input.check_out_date },
+            check_out_date: { gt: input.check_in_date },
+          },
+        ],
+      },
+      include: {
+        units: true,
+        users: true,
+      },
+    })
+
+    return {
+      available: conflicting.length === 0,
+      conflictingBookings: conflicting,
+    }
   })
 
 export const createPayment = withSession
@@ -204,7 +262,7 @@ export const verifyPayment = requireOwnerOrAdmin
       await prisma.booking.update({
         where: { id: payment.booking_id },
         data: {
-          status_booking: 'AKTIF',
+          status_booking: 'ACTIVE',
         },
       })
     }
@@ -386,6 +444,9 @@ const bookingSelect = {
   tanggalPelunasan: true,
   tanggalDitolak: true,
   alasanPenolakan: true,
+  payment_deadline: true,
+  cancelled_at: true,
+  cancelled_reason: true,
   statusRefundDP: true,
   transaksiDP_id: true,
   transaksiPelunasan_id: true,
@@ -526,12 +587,7 @@ function isOwnerOrAdminOfBooking(
   return isOwnerOf(booking, user.id) || isAdminRole(user.role)
 }
 
-const REJECTABLE_STATUSES: readonly string[] = [
-  'MENUNGGU_PEMBAYARAN_DP',
-  'MENUNGGU_VERIFIKASI_DP',
-  'MENUNGGU_PERSETUJUAN',
-  'MENUNGGU_PELUNASAN',
-]
+const REJECTABLE_STATUSES: readonly string[] = ['PENDING_PAYMENT', 'CONFIRMED']
 
 export const konfirmasiPembayaranDP = withSession
   .input(konfirmasiPembayaranDPSchema)
@@ -545,7 +601,7 @@ export const konfirmasiPembayaranDP = withSession
         message: 'Not authorized to confirm this booking',
       })
     }
-    if (booking.status_booking !== 'MENUNGGU_PEMBAYARAN_DP') {
+    if (booking.status_booking !== 'PENDING_PAYMENT') {
       throw new ORPCError('BAD_REQUEST', {
         message: 'DP confirmation is not allowed for this booking status',
       })
@@ -554,7 +610,7 @@ export const konfirmasiPembayaranDP = withSession
     const updated = await prisma.booking.update({
       where: { id: input.booking_id },
       data: {
-        status_booking: 'MENUNGGU_VERIFIKASI_DP',
+        status_booking: 'PENDING_PAYMENT',
         tanggalBayarDP: new Date(),
       },
       select: bookingSelect,
@@ -583,7 +639,7 @@ export const setujuiBooking = requireOwnerOrAdmin
         message: 'Owner or admin required for this booking',
       })
     }
-    if (booking.status_booking !== 'MENUNGGU_VERIFIKASI_DP') {
+    if (booking.status_booking !== 'PENDING_PAYMENT') {
       throw new ORPCError('BAD_REQUEST', {
         message: 'Booking is not awaiting DP verification',
       })
@@ -604,7 +660,7 @@ export const setujuiBooking = requireOwnerOrAdmin
     const updated = await prisma.booking.update({
       where: { id: input.booking_id },
       data: {
-        status_booking: 'MENUNGGU_PELUNASAN',
+        status_booking: 'CONFIRMED',
         tanggalBayarDP: booking.tanggalBayarDP ?? new Date(),
       },
       select: bookingSelect,
@@ -655,9 +711,11 @@ export const tolakBooking = requireOwnerOrAdmin
       const bookingUpdate = await tx.booking.update({
         where: { id: input.booking_id },
         data: {
-          status_booking: 'PROSES_REFUND_DP',
+          status_booking: 'CANCELLED',
           alasanPenolakan: input.alasan,
           tanggalDitolak: new Date(),
+          cancelled_at: new Date(),
+          cancelled_reason: input.alasan,
           ...(dpNeedsRefund ? { statusRefundDP: 'MENUNGGU_PROSES' } : {}),
         },
         select: bookingSelect,
@@ -717,9 +775,11 @@ export const batalkanBooking = withSession
       const bookingUpdate = await tx.booking.update({
         where: { id: input.booking_id },
         data: {
-          status_booking: 'DIBATALKAN',
+          status_booking: 'CANCELLED',
           alasanPenolakan: input.alasan,
           tanggalDitolak: new Date(),
+          cancelled_at: new Date(),
+          cancelled_reason: input.alasan,
           ...(dpNeedsRefund ? { statusRefundDP: 'MENUNGGU_PROSES' } : {}),
         },
         select: bookingSelect,
@@ -1105,11 +1165,11 @@ export const processPaymentWebhook = os
         })
 
         if (booking) {
-          let nextBookingStatus: 'AKTIF' | 'MENUNGGU_PEMBAYARAN_DP' | undefined
+          let nextBookingStatus: 'ACTIVE' | 'PENDING_PAYMENT' | undefined
           if (input.status === 'BERHASIL') {
-            nextBookingStatus = 'AKTIF'
+            nextBookingStatus = 'ACTIVE'
           } else if (input.status === 'GAGAL') {
-            nextBookingStatus = 'MENUNGGU_PEMBAYARAN_DP'
+            nextBookingStatus = 'PENDING_PAYMENT'
           }
 
           if (
@@ -1196,7 +1256,7 @@ export const konfirmasiPelunasan = withSession
         message: 'Not authorized to confirm this booking',
       })
     }
-    if (booking.status_booking !== 'MENUNGGU_PELUNASAN') {
+    if (booking.status_booking !== 'CONFIRMED') {
       throw new ORPCError('BAD_REQUEST', {
         message: 'Booking is not awaiting settlement',
       })
@@ -1234,7 +1294,7 @@ export const konfirmasiPelunasan = withSession
         jumlahPelunasan: remaining,
         transaksiPelunasan_id: transaksiPelunasanId,
         tanggalPelunasan: new Date(),
-        status_booking: 'AKTIF',
+        status_booking: 'ACTIVE',
       },
       select: bookingSelect,
     })
@@ -1311,25 +1371,25 @@ export const getStatistikPemilik = requireOwnerOrAdmin.handler(
     ] = await Promise.all([
       prisma.booking.count({
         where: isAdmin
-          ? { status_booking: 'MENUNGGU_PERSETUJUAN' }
+          ? { status_booking: 'CONFIRMED' }
           : {
               units: { properties: { owner_id: ownerId } },
-              status_booking: 'MENUNGGU_PERSETUJUAN',
+              status_booking: 'CONFIRMED',
             },
       }),
       prisma.booking.count({
         where: isAdmin
-          ? { status_booking: 'AKTIF' }
+          ? { status_booking: 'ACTIVE' }
           : {
               units: { properties: { owner_id: ownerId } },
-              status_booking: 'AKTIF',
+              status_booking: 'ACTIVE',
             },
       }),
       prisma.booking.aggregate({
         where: {
           ...ownerWhere,
           status_booking: {
-            in: ['AKTIF', 'SELESAI', 'MENUNGGU_PELUNASAN'],
+            in: ['ACTIVE', 'COMPLETED', 'CONFIRMED'],
           },
           tanggalBayarDP: { not: null },
           tanggalPelunasan: { gte: firstOfMonth },
@@ -1389,10 +1449,10 @@ export const getBookingAktif = requireOwnerOrAdmin.handler(
 
     const bookings = await prisma.booking.findMany({
       where: isAdmin
-        ? { status_booking: 'AKTIF' }
+        ? { status_booking: 'ACTIVE' }
         : {
             units: { properties: { owner_id: ownerId } },
-            status_booking: 'AKTIF',
+            status_booking: 'ACTIVE',
           },
       select: bookingSelect,
       orderBy: { tanggal_mulai: 'desc' },
@@ -1403,3 +1463,43 @@ export const getBookingAktif = requireOwnerOrAdmin.handler(
 )
 
 export const ajukanBooking = createTransaksiBooking
+
+export const getPaymentDeadline = withSession
+  .input(getPaymentDeadlineSchema)
+  .handler(async ({ input, context }) => {
+    const booking = await loadBooking(input.booking_id)
+    if (!booking) {
+      throw new ORPCError('NOT_FOUND', { message: 'Booking not found' })
+    }
+    if (!canAccessBooking(booking, context.user)) {
+      throw new ORPCError('FORBIDDEN', {
+        message: 'Not authorized to view this booking deadline',
+      })
+    }
+
+    const deadline = booking.payment_deadline
+    const now = new Date()
+    const timeRemaining = differenceInHours(deadline, now)
+    const isExpired = timeRemaining <= 0
+
+    return {
+      deadline: deadline.toISOString(),
+      timeRemaining,
+      isExpired,
+    }
+  })
+
+export const getBookingDetail = withSession
+  .input(getBookingDetailSchema)
+  .handler(async ({ input, context }) => {
+    const booking = await loadBooking(input.booking_id)
+    if (!booking) {
+      throw new ORPCError('NOT_FOUND', { message: 'Booking not found' })
+    }
+    if (!canAccessBooking(booking, context.user)) {
+      throw new ORPCError('FORBIDDEN', {
+        message: 'Not authorized to view this booking',
+      })
+    }
+    return serializeBooking(booking)
+  })

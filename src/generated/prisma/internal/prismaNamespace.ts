@@ -8302,6 +8302,14 @@ export const BookingScalarFieldEnum = {
   transaksiDP_id: 'transaksiDP_id',
   transaksiPelunasan_id: 'transaksiPelunasan_id',
   transaksiRefund_id: 'transaksiRefund_id',
+  payment_deadline: 'payment_deadline',
+  cancelled_at: 'cancelled_at',
+  cancelled_reason: 'cancelled_reason',
+  rental_period: 'rental_period',
+  check_in_date: 'check_in_date',
+  check_out_date: 'check_out_date',
+  previous_booking_id: 'previous_booking_id',
+  next_booking_id: 'next_booking_id',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -8378,12 +8386,13 @@ export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalar
 
 export const TransactionScalarFieldEnum = {
   id: 'id',
-  pemesananId: 'pemesananId',
+  bookingId: 'bookingId',
   amount: 'amount',
   paymentMethod: 'paymentMethod',
-  externalId: 'externalId',
+  midtransOrderId: 'midtransOrderId',
+  midtransTransactionId: 'midtransTransactionId',
   status: 'status',
-  snapshotData: 'snapshotData',
+  webhookPayload: 'webhookPayload',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -9448,6 +9457,20 @@ export type EnumStatusRefundDPFieldRefInput<$PrismaModel> = FieldRefInputType<$P
  * Reference to a field of type 'StatusRefundDP[]'
  */
 export type ListEnumStatusRefundDPFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusRefundDP[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BookingRentalPeriod'
+ */
+export type EnumBookingRentalPeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingRentalPeriod'>
+    
+
+
+/**
+ * Reference to a field of type 'BookingRentalPeriod[]'
+ */
+export type ListEnumBookingRentalPeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingRentalPeriod[]'>
     
 
 

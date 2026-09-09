@@ -52,17 +52,17 @@ export const getStatistikPlatform = requireAdmin.handler(async () => {
     prisma.properties.count(),
     prisma.units.count(),
     prisma.booking.count(),
-    prisma.booking.count({ where: { status_booking: 'AKTIF' } }),
+    prisma.booking.count({ where: { status_booking: 'ACTIVE' } }),
     prisma.users.count(),
     prisma.booking.aggregate({
       where: {
-        status_booking: { in: ['AKTIF', 'SELESAI', 'MENUNGGU_PELUNASAN'] },
+        status_booking: { in: ['ACTIVE', 'COMPLETED', 'CONFIRMED'] },
         tanggalBayarDP: { not: null },
       },
       _sum: { total_harga: true },
     }),
     prisma.booking.count({
-      where: { status_booking: 'MENUNGGU_PERSETUJUAN' },
+      where: { status_booking: 'CONFIRMED' },
     }),
   ])
 

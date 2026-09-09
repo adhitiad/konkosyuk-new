@@ -28,7 +28,7 @@ const createMockBooking = (overrides = {}) => ({
   id: 'booking-1',
   unit_id: 'unit-1',
   penyewa_id: 'tenant-1',
-  status_booking: 'MENUNGGU_PEMBAYARAN_DP',
+  status_booking: 'PENDING_PAYMENT',
   jumlahDP: '500000',
   statusRefundDP: 'BELUM_REFUND',
   transaksiDP_id: 'tx-1',
@@ -68,7 +68,7 @@ describe('tolakBooking refund logic', () => {
 
   it('should set statusRefundDP to MENUNGGU_PROSES when DP exists and needs refund', async () => {
     const booking = createMockBooking({
-      status_booking: 'MENUNGGU_PEMBAYARAN_DP',
+      status_booking: 'PENDING_PAYMENT',
       transaksiDP_id: 'tx-1',
       jumlahDP: '500000',
       statusRefundDP: 'BELUM_REFUND',
@@ -80,7 +80,7 @@ describe('tolakBooking refund logic', () => {
 
   it('should not set statusRefundDP when DP amount is zero', async () => {
     const booking = createMockBooking({
-      status_booking: 'MENUNGGU_PEMBAYARAN_DP',
+      status_booking: 'PENDING_PAYMENT',
       transaksiDP_id: 'tx-1',
       jumlahDP: '0',
       statusRefundDP: 'BELUM_REFUND',
@@ -92,7 +92,7 @@ describe('tolakBooking refund logic', () => {
 
   it('should not set statusRefundDP when DP is already refunded', async () => {
     const booking = createMockBooking({
-      status_booking: 'MENUNGGU_PEMBAYARAN_DP',
+      status_booking: 'PENDING_PAYMENT',
       transaksiDP_id: 'tx-1',
       jumlahDP: '500000',
       statusRefundDP: 'BERHASIL',
@@ -104,7 +104,7 @@ describe('tolakBooking refund logic', () => {
 
   it('should not set statusRefundDP when there is no DP transaction', async () => {
     const booking = createMockBooking({
-      status_booking: 'MENUNGGU_PEMBAYARAN_DP',
+      status_booking: 'PENDING_PAYMENT',
       transaksiDP_id: null,
       jumlahDP: '0',
       statusRefundDP: 'BELUM_REFUND',

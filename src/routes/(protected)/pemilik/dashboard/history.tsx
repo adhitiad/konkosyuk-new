@@ -81,12 +81,7 @@ function BookingHistoryContent() {
   const { data: bookings, isLoading } = useQuery(
     orpc.getDaftarRequestBooking.queryOptions({
       input: {
-        statuses: [
-          'SELESAI',
-          'SELESAI_DITOLAK',
-          'DIBATALKAN',
-          'PROSES_REFUND_DP',
-        ],
+        statuses: ['COMPLETED', 'CANCELLED'],
       },
     }),
   )

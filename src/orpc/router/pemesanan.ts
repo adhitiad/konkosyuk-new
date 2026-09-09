@@ -165,7 +165,7 @@ export const ajukanPemesanan = withSession
       })
     }
 
-    if (room.status !== 'available') {
+    if (room.status !== 'AVAILABLE') {
       throw new ORPCError('BAD_REQUEST', {
         message: 'Kamar tidak tersedia',
       })

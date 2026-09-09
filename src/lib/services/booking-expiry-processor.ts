@@ -28,7 +28,7 @@ export async function processBookingExpiry(
     return { bookingId, expired: false, reason: 'Booking not found' }
   }
 
-  if (booking.status_booking !== 'MENUNGGU_PEMBAYARAN_DP') {
+  if (booking.status_booking !== 'PENDING_PAYMENT') {
     return {
       bookingId,
       expired: false,
@@ -48,7 +48,7 @@ export async function processBookingExpiry(
     await tx.booking.update({
       where: { id: bookingId },
       data: {
-        status_booking: 'DIBATALKAN',
+        status_booking: 'CANCELLED',
         alasanPenolakan:
           'Booking dibatalkan karena DP tidak dibayar dalam waktu yang ditentukan',
         tanggalDitolak: new Date(),

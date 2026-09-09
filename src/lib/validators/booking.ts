@@ -1,15 +1,13 @@
 import { z } from 'zod'
 
 export const StatusBookingSchema = z.enum([
-  'MENUNGGU_PEMBAYARAN_DP',
-  'MENUNGGU_VERIFIKASI_DP',
-  'MENUNGGU_PERSETUJUAN',
-  'MENUNGGU_PELUNASAN',
-  'AKTIF',
-  'SELESAI',
-  'PROSES_REFUND_DP',
-  'SELESAI_DITOLAK',
-  'DIBATALKAN',
+  'DRAFT',
+  'PENDING_PAYMENT',
+  'CONFIRMED',
+  'ACTIVE',
+  'COMPLETED',
+  'CANCELLED',
+  'EXPIRED',
 ])
 
 export type StatusBooking = z.infer<typeof StatusBookingSchema>

@@ -1,15 +1,13 @@
 import { z } from 'zod'
 
 export const StatusBookingSchema = z.enum([
-  'MENUNGGU_PEMBAYARAN_DP',
-  'MENUNGGU_VERIFIKASI_DP',
-  'MENUNGGU_PERSETUJUAN',
-  'MENUNGGU_PELUNASAN',
-  'AKTIF',
-  'SELESAI',
-  'PROSES_REFUND_DP',
-  'SELESAI_DITOLAK',
-  'DIBATALKAN',
+  'DRAFT',
+  'PENDING_PAYMENT',
+  'CONFIRMED',
+  'ACTIVE',
+  'COMPLETED',
+  'CANCELLED',
+  'EXPIRED',
 ])
 
 export const MetodePembayaranSchema = z.enum([
@@ -41,6 +39,15 @@ export const createBookingSchema = z.object({
   tanggal_selesai: z.coerce.date(),
   total_harga: z.number().min(0),
   status_booking: StatusBookingSchema.optional(),
+  rental_period: z.enum([
+    'ONE_MONTH',
+    'THREE_MONTHS',
+    'SIX_MONTHS',
+    'ONE_YEAR',
+  ]),
+  check_in_date: z.coerce.date().refine((date) => date >= new Date(), {
+    message: 'Tanggal check-in tidak boleh di masa lalu',
+  }),
 })
 
 export const createPaymentSchema = z.object({
@@ -48,6 +55,14 @@ export const createPaymentSchema = z.object({
   jumlah_bayar: z.number().min(0),
   metode_pembayaran: MetodePembayaranSchema,
   bukti_transfer_url: z.string().url().optional(),
+})
+
+export const getTransactionStatusSchema = z.object({
+  booking_id: z.string().uuid(),
+})
+
+export const createMidtransPaymentSchema = z.object({
+  booking_id: z.string().uuid(),
 })
 
 export const createPemesananPaymentSchema = z.object({
@@ -120,6 +135,14 @@ export const listDaftarRequestBookingSchema = z.object({
 export const batalkanBookingSchema = z.object({
   booking_id: z.string().uuid(),
   alasan: z.string().min(1),
+})
+
+export const getPaymentDeadlineSchema = z.object({
+  booking_id: z.string().uuid(),
+})
+
+export const getBookingDetailSchema = z.object({
+  booking_id: z.string().uuid(),
 })
 
 export const refundSchema = z.object({

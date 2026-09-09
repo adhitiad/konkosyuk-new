@@ -118,9 +118,9 @@ async function handle({ request }: { request: Request }) {
         if (booking) {
           let nextBookingStatus: string | undefined
           if (status === 'BERHASIL') {
-            nextBookingStatus = 'AKTIF'
+            nextBookingStatus = 'ACTIVE'
           } else if (status === 'GAGAL') {
-            nextBookingStatus = 'MENUNGGU_PEMBAYARAN_DP'
+            nextBookingStatus = 'PENDING_PAYMENT'
           }
 
           if (
@@ -131,7 +131,7 @@ async function handle({ request }: { request: Request }) {
               where: { id: bookingId },
               data: {
                 status_booking: nextBookingStatus as
-                  'AKTIF' | 'MENUNGGU_PEMBAYARAN_DP',
+                  'ACTIVE' | 'PENDING_PAYMENT' | 'ACTIVE' | 'PENDING_PAYMENT',
                 ...(status === 'BERHASIL'
                   ? { tanggalBayarDP: paidAt ?? new Date() }
                   : {}),

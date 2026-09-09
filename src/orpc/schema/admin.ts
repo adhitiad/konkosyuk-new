@@ -12,15 +12,13 @@ export const updateKonfigurasiPlatformSchema = z.object({
 export const getAllBookingsSchema = z.object({
   status: z
     .enum([
-      'MENUNGGU_PEMBAYARAN_DP',
-      'MENUNGGU_VERIFIKASI_DP',
-      'MENUNGGU_PERSETUJUAN',
-      'MENUNGGU_PELUNASAN',
-      'AKTIF',
-      'SELESAI',
-      'PROSES_REFUND_DP',
-      'SELESAI_DITOLAK',
-      'DIBATALKAN',
+      'DRAFT',
+      'PENDING_PAYMENT',
+      'CONFIRMED',
+      'ACTIVE',
+      'COMPLETED',
+      'CANCELLED',
+      'EXPIRED',
     ])
     .optional(),
   search: z.string().optional(),

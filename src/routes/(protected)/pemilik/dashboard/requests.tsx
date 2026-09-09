@@ -98,7 +98,7 @@ function BookingRequestsContent() {
   const { data: bookings, isLoading } = useQuery(
     orpc.getDaftarRequestBooking.queryOptions({
       input: {
-        statuses: ['MENUNGGU_PERSETUJUAN', 'MENUNGGU_VERIFIKASI_DP'],
+        statuses: ['PENDING_PAYMENT'],
       },
     }),
   )

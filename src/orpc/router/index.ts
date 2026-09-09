@@ -34,11 +34,16 @@ import {
   refund,
   getRefundStatus,
   prosesRefundDP,
+  getPaymentDeadline,
+  getBookingDetail,
+  checkRoomAvailability,
 } from './transactions'
 import {
   createPayment,
   getPaymentStatus,
   processPaymentWebhook,
+  createMidtransPayment,
+  getTransactionStatus,
 } from './transaction'
 import { searchLocations, reverseGeocode } from './geocoding'
 import { addTodo, listTodos } from './todos'
@@ -126,6 +131,8 @@ export default {
   getBookingSaya,
   getDaftarRequestBooking,
   createPayment,
+  createMidtransPayment,
+  getTransactionStatus,
   createPaymentLink,
   getPaymentStatus,
   processPaymentWebhook,
@@ -140,6 +147,9 @@ export default {
   refund,
   prosesRefundDP,
   getRefundStatus,
+  getPaymentDeadline,
+  getBookingDetail,
+  checkRoomAvailability,
   getUserLocale,
   setUserLocale,
   searchLocations,

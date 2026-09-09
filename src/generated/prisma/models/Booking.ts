@@ -56,6 +56,14 @@ export type BookingMinAggregateOutputType = {
   transaksiDP_id: string | null
   transaksiPelunasan_id: string | null
   transaksiRefund_id: string | null
+  payment_deadline: Date | null
+  cancelled_at: Date | null
+  cancelled_reason: string | null
+  rental_period: $Enums.BookingRentalPeriod | null
+  check_in_date: Date | null
+  check_out_date: Date | null
+  previous_booking_id: string | null
+  next_booking_id: string | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -78,6 +86,14 @@ export type BookingMaxAggregateOutputType = {
   transaksiDP_id: string | null
   transaksiPelunasan_id: string | null
   transaksiRefund_id: string | null
+  payment_deadline: Date | null
+  cancelled_at: Date | null
+  cancelled_reason: string | null
+  rental_period: $Enums.BookingRentalPeriod | null
+  check_in_date: Date | null
+  check_out_date: Date | null
+  previous_booking_id: string | null
+  next_booking_id: string | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -100,6 +116,14 @@ export type BookingCountAggregateOutputType = {
   transaksiDP_id: number
   transaksiPelunasan_id: number
   transaksiRefund_id: number
+  payment_deadline: number
+  cancelled_at: number
+  cancelled_reason: number
+  rental_period: number
+  check_in_date: number
+  check_out_date: number
+  previous_booking_id: number
+  next_booking_id: number
   created_at: number
   updated_at: number
   _all: number
@@ -136,6 +160,14 @@ export type BookingMinAggregateInputType = {
   transaksiDP_id?: true
   transaksiPelunasan_id?: true
   transaksiRefund_id?: true
+  payment_deadline?: true
+  cancelled_at?: true
+  cancelled_reason?: true
+  rental_period?: true
+  check_in_date?: true
+  check_out_date?: true
+  previous_booking_id?: true
+  next_booking_id?: true
   created_at?: true
   updated_at?: true
 }
@@ -158,6 +190,14 @@ export type BookingMaxAggregateInputType = {
   transaksiDP_id?: true
   transaksiPelunasan_id?: true
   transaksiRefund_id?: true
+  payment_deadline?: true
+  cancelled_at?: true
+  cancelled_reason?: true
+  rental_period?: true
+  check_in_date?: true
+  check_out_date?: true
+  previous_booking_id?: true
+  next_booking_id?: true
   created_at?: true
   updated_at?: true
 }
@@ -180,6 +220,14 @@ export type BookingCountAggregateInputType = {
   transaksiDP_id?: true
   transaksiPelunasan_id?: true
   transaksiRefund_id?: true
+  payment_deadline?: true
+  cancelled_at?: true
+  cancelled_reason?: true
+  rental_period?: true
+  check_in_date?: true
+  check_out_date?: true
+  previous_booking_id?: true
+  next_booking_id?: true
   created_at?: true
   updated_at?: true
   _all?: true
@@ -289,6 +337,14 @@ export type BookingGroupByOutputType = {
   transaksiDP_id: string | null
   transaksiPelunasan_id: string | null
   transaksiRefund_id: string | null
+  payment_deadline: Date
+  cancelled_at: Date | null
+  cancelled_reason: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date
+  check_out_date: Date
+  previous_booking_id: string | null
+  next_booking_id: string | null
   created_at: Date
   updated_at: Date
   _count: BookingCountAggregateOutputType | null
@@ -334,6 +390,14 @@ export type BookingWhereInput = {
   transaksiDP_id?: Prisma.StringNullableFilter<"Booking"> | string | null
   transaksiPelunasan_id?: Prisma.StringNullableFilter<"Booking"> | string | null
   transaksiRefund_id?: Prisma.StringNullableFilter<"Booking"> | string | null
+  payment_deadline?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  cancelled_at?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
+  cancelled_reason?: Prisma.StringNullableFilter<"Booking"> | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFilter<"Booking"> | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  check_out_date?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  previous_booking_id?: Prisma.UuidNullableFilter<"Booking"> | string | null
+  next_booking_id?: Prisma.UuidNullableFilter<"Booking"> | string | null
   created_at?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Booking"> | Date | string
   units?: Prisma.XOR<Prisma.UnitsScalarRelationFilter, Prisma.unitsWhereInput>
@@ -343,6 +407,9 @@ export type BookingWhereInput = {
   transaksiDP?: Prisma.XOR<Prisma.PaymentTransactionNullableScalarRelationFilter, Prisma.PaymentTransactionWhereInput> | null
   transaksiPelunasan?: Prisma.XOR<Prisma.PaymentTransactionNullableScalarRelationFilter, Prisma.PaymentTransactionWhereInput> | null
   transaksiRefund?: Prisma.XOR<Prisma.PaymentTransactionNullableScalarRelationFilter, Prisma.PaymentTransactionWhereInput> | null
+  transaction?: Prisma.XOR<Prisma.TransactionNullableScalarRelationFilter, Prisma.TransactionWhereInput> | null
+  previousBooking?: Prisma.XOR<Prisma.BookingNullableScalarRelationFilter, Prisma.BookingWhereInput> | null
+  nextBooking?: Prisma.XOR<Prisma.BookingNullableScalarRelationFilter, Prisma.BookingWhereInput> | null
 }
 
 export type BookingOrderByWithRelationInput = {
@@ -363,6 +430,14 @@ export type BookingOrderByWithRelationInput = {
   transaksiDP_id?: Prisma.SortOrderInput | Prisma.SortOrder
   transaksiPelunasan_id?: Prisma.SortOrderInput | Prisma.SortOrder
   transaksiRefund_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  payment_deadline?: Prisma.SortOrder
+  cancelled_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  cancelled_reason?: Prisma.SortOrderInput | Prisma.SortOrder
+  rental_period?: Prisma.SortOrder
+  check_in_date?: Prisma.SortOrder
+  check_out_date?: Prisma.SortOrder
+  previous_booking_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  next_booking_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   units?: Prisma.unitsOrderByWithRelationInput
@@ -372,6 +447,9 @@ export type BookingOrderByWithRelationInput = {
   transaksiDP?: Prisma.PaymentTransactionOrderByWithRelationInput
   transaksiPelunasan?: Prisma.PaymentTransactionOrderByWithRelationInput
   transaksiRefund?: Prisma.PaymentTransactionOrderByWithRelationInput
+  transaction?: Prisma.TransactionOrderByWithRelationInput
+  previousBooking?: Prisma.BookingOrderByWithRelationInput
+  nextBooking?: Prisma.BookingOrderByWithRelationInput
 }
 
 export type BookingWhereUniqueInput = Prisma.AtLeast<{
@@ -379,6 +457,8 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   transaksiDP_id?: string
   transaksiPelunasan_id?: string
   transaksiRefund_id?: string
+  previous_booking_id?: string
+  next_booking_id?: string
   AND?: Prisma.BookingWhereInput | Prisma.BookingWhereInput[]
   OR?: Prisma.BookingWhereInput[]
   NOT?: Prisma.BookingWhereInput | Prisma.BookingWhereInput[]
@@ -395,6 +475,12 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   tanggalDitolak?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   alasanPenolakan?: Prisma.StringNullableFilter<"Booking"> | string | null
   statusRefundDP?: Prisma.EnumStatusRefundDPNullableFilter<"Booking"> | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  cancelled_at?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
+  cancelled_reason?: Prisma.StringNullableFilter<"Booking"> | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFilter<"Booking"> | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  check_out_date?: Prisma.DateTimeFilter<"Booking"> | Date | string
   created_at?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Booking"> | Date | string
   units?: Prisma.XOR<Prisma.UnitsScalarRelationFilter, Prisma.unitsWhereInput>
@@ -404,7 +490,10 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   transaksiDP?: Prisma.XOR<Prisma.PaymentTransactionNullableScalarRelationFilter, Prisma.PaymentTransactionWhereInput> | null
   transaksiPelunasan?: Prisma.XOR<Prisma.PaymentTransactionNullableScalarRelationFilter, Prisma.PaymentTransactionWhereInput> | null
   transaksiRefund?: Prisma.XOR<Prisma.PaymentTransactionNullableScalarRelationFilter, Prisma.PaymentTransactionWhereInput> | null
-}, "id" | "transaksiDP_id" | "transaksiPelunasan_id" | "transaksiRefund_id">
+  transaction?: Prisma.XOR<Prisma.TransactionNullableScalarRelationFilter, Prisma.TransactionWhereInput> | null
+  previousBooking?: Prisma.XOR<Prisma.BookingNullableScalarRelationFilter, Prisma.BookingWhereInput> | null
+  nextBooking?: Prisma.XOR<Prisma.BookingNullableScalarRelationFilter, Prisma.BookingWhereInput> | null
+}, "id" | "transaksiDP_id" | "transaksiPelunasan_id" | "transaksiRefund_id" | "previous_booking_id" | "next_booking_id">
 
 export type BookingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -424,6 +513,14 @@ export type BookingOrderByWithAggregationInput = {
   transaksiDP_id?: Prisma.SortOrderInput | Prisma.SortOrder
   transaksiPelunasan_id?: Prisma.SortOrderInput | Prisma.SortOrder
   transaksiRefund_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  payment_deadline?: Prisma.SortOrder
+  cancelled_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  cancelled_reason?: Prisma.SortOrderInput | Prisma.SortOrder
+  rental_period?: Prisma.SortOrder
+  check_in_date?: Prisma.SortOrder
+  check_out_date?: Prisma.SortOrder
+  previous_booking_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  next_booking_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   _count?: Prisma.BookingCountOrderByAggregateInput
@@ -454,6 +551,14 @@ export type BookingScalarWhereWithAggregatesInput = {
   transaksiDP_id?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
   transaksiPelunasan_id?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
   transaksiRefund_id?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  payment_deadline?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
+  cancelled_at?: Prisma.DateTimeNullableWithAggregatesFilter<"Booking"> | Date | string | null
+  cancelled_reason?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodWithAggregatesFilter<"Booking"> | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
+  check_out_date?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
+  previous_booking_id?: Prisma.UuidNullableWithAggregatesFilter<"Booking"> | string | null
+  next_booking_id?: Prisma.UuidNullableWithAggregatesFilter<"Booking"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
 }
@@ -471,6 +576,13 @@ export type BookingCreateInput = {
   tanggalDitolak?: Date | string | null
   alasanPenolakan?: string | null
   statusRefundDP?: $Enums.StatusRefundDP | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   units: Prisma.unitsCreateNestedOneWithoutTransaksi_bookingsInput
@@ -480,6 +592,9 @@ export type BookingCreateInput = {
   transaksiDP?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingDPInput
   transaksiPelunasan?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingPelunasanInput
   transaksiRefund?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingRefundInput
+  transaction?: Prisma.TransactionCreateNestedOneWithoutBookingInput
+  previousBooking?: Prisma.BookingCreateNestedOneWithoutNextBookingInput
+  nextBooking?: Prisma.BookingCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingUncheckedCreateInput = {
@@ -500,10 +615,20 @@ export type BookingUncheckedCreateInput = {
   transaksiDP_id?: string | null
   transaksiPelunasan_id?: string | null
   transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingsInput
   refund_requests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutBookingsInput
+  transaction?: Prisma.TransactionUncheckedCreateNestedOneWithoutBookingInput
+  nextBooking?: Prisma.BookingUncheckedCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingUpdateInput = {
@@ -519,6 +644,13 @@ export type BookingUpdateInput = {
   tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   units?: Prisma.unitsUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
@@ -528,6 +660,9 @@ export type BookingUpdateInput = {
   transaksiDP?: Prisma.PaymentTransactionUpdateOneWithoutBookingDPNestedInput
   transaksiPelunasan?: Prisma.PaymentTransactionUpdateOneWithoutBookingPelunasanNestedInput
   transaksiRefund?: Prisma.PaymentTransactionUpdateOneWithoutBookingRefundNestedInput
+  transaction?: Prisma.TransactionUpdateOneWithoutBookingNestedInput
+  previousBooking?: Prisma.BookingUpdateOneWithoutNextBookingNestedInput
+  nextBooking?: Prisma.BookingUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingUncheckedUpdateInput = {
@@ -548,10 +683,20 @@ export type BookingUncheckedUpdateInput = {
   transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingsNestedInput
   refund_requests?: Prisma.RefundRequestUncheckedUpdateManyWithoutBookingsNestedInput
+  transaction?: Prisma.TransactionUncheckedUpdateOneWithoutBookingNestedInput
+  nextBooking?: Prisma.BookingUncheckedUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingCreateManyInput = {
@@ -572,6 +717,14 @@ export type BookingCreateManyInput = {
   transaksiDP_id?: string | null
   transaksiPelunasan_id?: string | null
   transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -589,6 +742,13 @@ export type BookingUpdateManyMutationInput = {
   tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -611,6 +771,14 @@ export type BookingUncheckedUpdateManyInput = {
   transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -623,6 +791,11 @@ export type BookingListRelationFilter = {
 
 export type BookingOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type BookingNullableScalarRelationFilter = {
+  is?: Prisma.BookingWhereInput | null
+  isNot?: Prisma.BookingWhereInput | null
 }
 
 export type BookingCountOrderByAggregateInput = {
@@ -643,6 +816,14 @@ export type BookingCountOrderByAggregateInput = {
   transaksiDP_id?: Prisma.SortOrder
   transaksiPelunasan_id?: Prisma.SortOrder
   transaksiRefund_id?: Prisma.SortOrder
+  payment_deadline?: Prisma.SortOrder
+  cancelled_at?: Prisma.SortOrder
+  cancelled_reason?: Prisma.SortOrder
+  rental_period?: Prisma.SortOrder
+  check_in_date?: Prisma.SortOrder
+  check_out_date?: Prisma.SortOrder
+  previous_booking_id?: Prisma.SortOrder
+  next_booking_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -671,6 +852,14 @@ export type BookingMaxOrderByAggregateInput = {
   transaksiDP_id?: Prisma.SortOrder
   transaksiPelunasan_id?: Prisma.SortOrder
   transaksiRefund_id?: Prisma.SortOrder
+  payment_deadline?: Prisma.SortOrder
+  cancelled_at?: Prisma.SortOrder
+  cancelled_reason?: Prisma.SortOrder
+  rental_period?: Prisma.SortOrder
+  check_in_date?: Prisma.SortOrder
+  check_out_date?: Prisma.SortOrder
+  previous_booking_id?: Prisma.SortOrder
+  next_booking_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -693,6 +882,14 @@ export type BookingMinOrderByAggregateInput = {
   transaksiDP_id?: Prisma.SortOrder
   transaksiPelunasan_id?: Prisma.SortOrder
   transaksiRefund_id?: Prisma.SortOrder
+  payment_deadline?: Prisma.SortOrder
+  cancelled_at?: Prisma.SortOrder
+  cancelled_reason?: Prisma.SortOrder
+  rental_period?: Prisma.SortOrder
+  check_in_date?: Prisma.SortOrder
+  check_out_date?: Prisma.SortOrder
+  previous_booking_id?: Prisma.SortOrder
+  next_booking_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -706,11 +903,6 @@ export type BookingSumOrderByAggregateInput = {
 export type BookingScalarRelationFilter = {
   is?: Prisma.BookingWhereInput
   isNot?: Prisma.BookingWhereInput
-}
-
-export type BookingNullableScalarRelationFilter = {
-  is?: Prisma.BookingWhereInput | null
-  isNot?: Prisma.BookingWhereInput | null
 }
 
 export type BookingCreateNestedManyWithoutUnitsInput = {
@@ -797,12 +989,64 @@ export type BookingUncheckedUpdateManyWithoutUsersNestedInput = {
   deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
 }
 
+export type BookingCreateNestedOneWithoutNextBookingInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutNextBookingInput, Prisma.BookingUncheckedCreateWithoutNextBookingInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutNextBookingInput
+  connect?: Prisma.BookingWhereUniqueInput
+}
+
+export type BookingCreateNestedOneWithoutPreviousBookingInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutPreviousBookingInput, Prisma.BookingUncheckedCreateWithoutPreviousBookingInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPreviousBookingInput
+  connect?: Prisma.BookingWhereUniqueInput
+}
+
+export type BookingUncheckedCreateNestedOneWithoutPreviousBookingInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutPreviousBookingInput, Prisma.BookingUncheckedCreateWithoutPreviousBookingInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPreviousBookingInput
+  connect?: Prisma.BookingWhereUniqueInput
+}
+
 export type EnumStatusBookingFieldUpdateOperationsInput = {
   set?: $Enums.StatusBooking
 }
 
 export type NullableEnumStatusRefundDPFieldUpdateOperationsInput = {
   set?: $Enums.StatusRefundDP | null
+}
+
+export type EnumBookingRentalPeriodFieldUpdateOperationsInput = {
+  set?: $Enums.BookingRentalPeriod
+}
+
+export type BookingUpdateOneWithoutNextBookingNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutNextBookingInput, Prisma.BookingUncheckedCreateWithoutNextBookingInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutNextBookingInput
+  upsert?: Prisma.BookingUpsertWithoutNextBookingInput
+  disconnect?: Prisma.BookingWhereInput | boolean
+  delete?: Prisma.BookingWhereInput | boolean
+  connect?: Prisma.BookingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutNextBookingInput, Prisma.BookingUpdateWithoutNextBookingInput>, Prisma.BookingUncheckedUpdateWithoutNextBookingInput>
+}
+
+export type BookingUpdateOneWithoutPreviousBookingNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutPreviousBookingInput, Prisma.BookingUncheckedCreateWithoutPreviousBookingInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPreviousBookingInput
+  upsert?: Prisma.BookingUpsertWithoutPreviousBookingInput
+  disconnect?: Prisma.BookingWhereInput | boolean
+  delete?: Prisma.BookingWhereInput | boolean
+  connect?: Prisma.BookingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutPreviousBookingInput, Prisma.BookingUpdateWithoutPreviousBookingInput>, Prisma.BookingUncheckedUpdateWithoutPreviousBookingInput>
+}
+
+export type BookingUncheckedUpdateOneWithoutPreviousBookingNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutPreviousBookingInput, Prisma.BookingUncheckedCreateWithoutPreviousBookingInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPreviousBookingInput
+  upsert?: Prisma.BookingUpsertWithoutPreviousBookingInput
+  disconnect?: Prisma.BookingWhereInput | boolean
+  delete?: Prisma.BookingWhereInput | boolean
+  connect?: Prisma.BookingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutPreviousBookingInput, Prisma.BookingUpdateWithoutPreviousBookingInput>, Prisma.BookingUncheckedUpdateWithoutPreviousBookingInput>
 }
 
 export type BookingCreateNestedOneWithoutPaymentsInput = {
@@ -929,6 +1173,20 @@ export type BookingUncheckedUpdateOneWithoutTransaksiRefundNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutTransaksiRefundInput, Prisma.BookingUpdateWithoutTransaksiRefundInput>, Prisma.BookingUncheckedUpdateWithoutTransaksiRefundInput>
 }
 
+export type BookingCreateNestedOneWithoutTransactionInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutTransactionInput, Prisma.BookingUncheckedCreateWithoutTransactionInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutTransactionInput
+  connect?: Prisma.BookingWhereUniqueInput
+}
+
+export type BookingUpdateOneRequiredWithoutTransactionNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutTransactionInput, Prisma.BookingUncheckedCreateWithoutTransactionInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutTransactionInput
+  upsert?: Prisma.BookingUpsertWithoutTransactionInput
+  connect?: Prisma.BookingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutTransactionInput, Prisma.BookingUpdateWithoutTransactionInput>, Prisma.BookingUncheckedUpdateWithoutTransactionInput>
+}
+
 export type BookingCreateWithoutUnitsInput = {
   id?: string
   tanggal_mulai: Date | string
@@ -942,6 +1200,13 @@ export type BookingCreateWithoutUnitsInput = {
   tanggalDitolak?: Date | string | null
   alasanPenolakan?: string | null
   statusRefundDP?: $Enums.StatusRefundDP | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   users: Prisma.usersCreateNestedOneWithoutTransaksi_bookingsInput
@@ -950,6 +1215,9 @@ export type BookingCreateWithoutUnitsInput = {
   transaksiDP?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingDPInput
   transaksiPelunasan?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingPelunasanInput
   transaksiRefund?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingRefundInput
+  transaction?: Prisma.TransactionCreateNestedOneWithoutBookingInput
+  previousBooking?: Prisma.BookingCreateNestedOneWithoutNextBookingInput
+  nextBooking?: Prisma.BookingCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingUncheckedCreateWithoutUnitsInput = {
@@ -969,10 +1237,20 @@ export type BookingUncheckedCreateWithoutUnitsInput = {
   transaksiDP_id?: string | null
   transaksiPelunasan_id?: string | null
   transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingsInput
   refund_requests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutBookingsInput
+  transaction?: Prisma.TransactionUncheckedCreateNestedOneWithoutBookingInput
+  nextBooking?: Prisma.BookingUncheckedCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingCreateOrConnectWithoutUnitsInput = {
@@ -1022,6 +1300,14 @@ export type BookingScalarWhereInput = {
   transaksiDP_id?: Prisma.StringNullableFilter<"Booking"> | string | null
   transaksiPelunasan_id?: Prisma.StringNullableFilter<"Booking"> | string | null
   transaksiRefund_id?: Prisma.StringNullableFilter<"Booking"> | string | null
+  payment_deadline?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  cancelled_at?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
+  cancelled_reason?: Prisma.StringNullableFilter<"Booking"> | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFilter<"Booking"> | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  check_out_date?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  previous_booking_id?: Prisma.UuidNullableFilter<"Booking"> | string | null
+  next_booking_id?: Prisma.UuidNullableFilter<"Booking"> | string | null
   created_at?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Booking"> | Date | string
 }
@@ -1039,6 +1325,13 @@ export type BookingCreateWithoutUsersInput = {
   tanggalDitolak?: Date | string | null
   alasanPenolakan?: string | null
   statusRefundDP?: $Enums.StatusRefundDP | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   units: Prisma.unitsCreateNestedOneWithoutTransaksi_bookingsInput
@@ -1047,6 +1340,9 @@ export type BookingCreateWithoutUsersInput = {
   transaksiDP?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingDPInput
   transaksiPelunasan?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingPelunasanInput
   transaksiRefund?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingRefundInput
+  transaction?: Prisma.TransactionCreateNestedOneWithoutBookingInput
+  previousBooking?: Prisma.BookingCreateNestedOneWithoutNextBookingInput
+  nextBooking?: Prisma.BookingCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingUncheckedCreateWithoutUsersInput = {
@@ -1066,10 +1362,20 @@ export type BookingUncheckedCreateWithoutUsersInput = {
   transaksiDP_id?: string | null
   transaksiPelunasan_id?: string | null
   transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingsInput
   refund_requests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutBookingsInput
+  transaction?: Prisma.TransactionUncheckedCreateNestedOneWithoutBookingInput
+  nextBooking?: Prisma.BookingUncheckedCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingCreateOrConnectWithoutUsersInput = {
@@ -1098,6 +1404,302 @@ export type BookingUpdateManyWithWhereWithoutUsersInput = {
   data: Prisma.XOR<Prisma.BookingUpdateManyMutationInput, Prisma.BookingUncheckedUpdateManyWithoutUsersInput>
 }
 
+export type BookingCreateWithoutNextBookingInput = {
+  id?: string
+  tanggal_mulai: Date | string
+  tanggal_selesai: Date | string
+  total_harga: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status_booking?: $Enums.StatusBooking
+  jumlahDP?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  jumlahPelunasan?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  tanggalBayarDP?: Date | string | null
+  tanggalPelunasan?: Date | string | null
+  tanggalDitolak?: Date | string | null
+  alasanPenolakan?: string | null
+  statusRefundDP?: $Enums.StatusRefundDP | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  next_booking_id?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  units: Prisma.unitsCreateNestedOneWithoutTransaksi_bookingsInput
+  users: Prisma.usersCreateNestedOneWithoutTransaksi_bookingsInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutBookingsInput
+  refund_requests?: Prisma.RefundRequestCreateNestedManyWithoutBookingsInput
+  transaksiDP?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingDPInput
+  transaksiPelunasan?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingPelunasanInput
+  transaksiRefund?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingRefundInput
+  transaction?: Prisma.TransactionCreateNestedOneWithoutBookingInput
+  previousBooking?: Prisma.BookingCreateNestedOneWithoutNextBookingInput
+}
+
+export type BookingUncheckedCreateWithoutNextBookingInput = {
+  id?: string
+  unit_id: string
+  penyewa_id: string
+  tanggal_mulai: Date | string
+  tanggal_selesai: Date | string
+  total_harga: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status_booking?: $Enums.StatusBooking
+  jumlahDP?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  jumlahPelunasan?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  tanggalBayarDP?: Date | string | null
+  tanggalPelunasan?: Date | string | null
+  tanggalDitolak?: Date | string | null
+  alasanPenolakan?: string | null
+  statusRefundDP?: $Enums.StatusRefundDP | null
+  transaksiDP_id?: string | null
+  transaksiPelunasan_id?: string | null
+  transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingsInput
+  refund_requests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutBookingsInput
+  transaction?: Prisma.TransactionUncheckedCreateNestedOneWithoutBookingInput
+}
+
+export type BookingCreateOrConnectWithoutNextBookingInput = {
+  where: Prisma.BookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingCreateWithoutNextBookingInput, Prisma.BookingUncheckedCreateWithoutNextBookingInput>
+}
+
+export type BookingCreateWithoutPreviousBookingInput = {
+  id?: string
+  tanggal_mulai: Date | string
+  tanggal_selesai: Date | string
+  total_harga: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status_booking?: $Enums.StatusBooking
+  jumlahDP?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  jumlahPelunasan?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  tanggalBayarDP?: Date | string | null
+  tanggalPelunasan?: Date | string | null
+  tanggalDitolak?: Date | string | null
+  alasanPenolakan?: string | null
+  statusRefundDP?: $Enums.StatusRefundDP | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  next_booking_id?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  units: Prisma.unitsCreateNestedOneWithoutTransaksi_bookingsInput
+  users: Prisma.usersCreateNestedOneWithoutTransaksi_bookingsInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutBookingsInput
+  refund_requests?: Prisma.RefundRequestCreateNestedManyWithoutBookingsInput
+  transaksiDP?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingDPInput
+  transaksiPelunasan?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingPelunasanInput
+  transaksiRefund?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingRefundInput
+  transaction?: Prisma.TransactionCreateNestedOneWithoutBookingInput
+  nextBooking?: Prisma.BookingCreateNestedOneWithoutPreviousBookingInput
+}
+
+export type BookingUncheckedCreateWithoutPreviousBookingInput = {
+  id?: string
+  unit_id: string
+  penyewa_id: string
+  tanggal_mulai: Date | string
+  tanggal_selesai: Date | string
+  total_harga: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status_booking?: $Enums.StatusBooking
+  jumlahDP?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  jumlahPelunasan?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  tanggalBayarDP?: Date | string | null
+  tanggalPelunasan?: Date | string | null
+  tanggalDitolak?: Date | string | null
+  alasanPenolakan?: string | null
+  statusRefundDP?: $Enums.StatusRefundDP | null
+  transaksiDP_id?: string | null
+  transaksiPelunasan_id?: string | null
+  transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  next_booking_id?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingsInput
+  refund_requests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutBookingsInput
+  transaction?: Prisma.TransactionUncheckedCreateNestedOneWithoutBookingInput
+  nextBooking?: Prisma.BookingUncheckedCreateNestedOneWithoutPreviousBookingInput
+}
+
+export type BookingCreateOrConnectWithoutPreviousBookingInput = {
+  where: Prisma.BookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingCreateWithoutPreviousBookingInput, Prisma.BookingUncheckedCreateWithoutPreviousBookingInput>
+}
+
+export type BookingUpsertWithoutNextBookingInput = {
+  update: Prisma.XOR<Prisma.BookingUpdateWithoutNextBookingInput, Prisma.BookingUncheckedUpdateWithoutNextBookingInput>
+  create: Prisma.XOR<Prisma.BookingCreateWithoutNextBookingInput, Prisma.BookingUncheckedCreateWithoutNextBookingInput>
+  where?: Prisma.BookingWhereInput
+}
+
+export type BookingUpdateToOneWithWhereWithoutNextBookingInput = {
+  where?: Prisma.BookingWhereInput
+  data: Prisma.XOR<Prisma.BookingUpdateWithoutNextBookingInput, Prisma.BookingUncheckedUpdateWithoutNextBookingInput>
+}
+
+export type BookingUpdateWithoutNextBookingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tanggal_selesai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status_booking?: Prisma.EnumStatusBookingFieldUpdateOperationsInput | $Enums.StatusBooking
+  jumlahDP?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  jumlahPelunasan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  tanggalBayarDP?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tanggalPelunasan?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  units?: Prisma.unitsUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
+  users?: Prisma.usersUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutBookingsNestedInput
+  refund_requests?: Prisma.RefundRequestUpdateManyWithoutBookingsNestedInput
+  transaksiDP?: Prisma.PaymentTransactionUpdateOneWithoutBookingDPNestedInput
+  transaksiPelunasan?: Prisma.PaymentTransactionUpdateOneWithoutBookingPelunasanNestedInput
+  transaksiRefund?: Prisma.PaymentTransactionUpdateOneWithoutBookingRefundNestedInput
+  transaction?: Prisma.TransactionUpdateOneWithoutBookingNestedInput
+  previousBooking?: Prisma.BookingUpdateOneWithoutNextBookingNestedInput
+}
+
+export type BookingUncheckedUpdateWithoutNextBookingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_id?: Prisma.StringFieldUpdateOperationsInput | string
+  penyewa_id?: Prisma.StringFieldUpdateOperationsInput | string
+  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tanggal_selesai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status_booking?: Prisma.EnumStatusBookingFieldUpdateOperationsInput | $Enums.StatusBooking
+  jumlahDP?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  jumlahPelunasan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  tanggalBayarDP?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tanggalPelunasan?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingsNestedInput
+  refund_requests?: Prisma.RefundRequestUncheckedUpdateManyWithoutBookingsNestedInput
+  transaction?: Prisma.TransactionUncheckedUpdateOneWithoutBookingNestedInput
+}
+
+export type BookingUpsertWithoutPreviousBookingInput = {
+  update: Prisma.XOR<Prisma.BookingUpdateWithoutPreviousBookingInput, Prisma.BookingUncheckedUpdateWithoutPreviousBookingInput>
+  create: Prisma.XOR<Prisma.BookingCreateWithoutPreviousBookingInput, Prisma.BookingUncheckedCreateWithoutPreviousBookingInput>
+  where?: Prisma.BookingWhereInput
+}
+
+export type BookingUpdateToOneWithWhereWithoutPreviousBookingInput = {
+  where?: Prisma.BookingWhereInput
+  data: Prisma.XOR<Prisma.BookingUpdateWithoutPreviousBookingInput, Prisma.BookingUncheckedUpdateWithoutPreviousBookingInput>
+}
+
+export type BookingUpdateWithoutPreviousBookingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tanggal_selesai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status_booking?: Prisma.EnumStatusBookingFieldUpdateOperationsInput | $Enums.StatusBooking
+  jumlahDP?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  jumlahPelunasan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  tanggalBayarDP?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tanggalPelunasan?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  units?: Prisma.unitsUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
+  users?: Prisma.usersUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutBookingsNestedInput
+  refund_requests?: Prisma.RefundRequestUpdateManyWithoutBookingsNestedInput
+  transaksiDP?: Prisma.PaymentTransactionUpdateOneWithoutBookingDPNestedInput
+  transaksiPelunasan?: Prisma.PaymentTransactionUpdateOneWithoutBookingPelunasanNestedInput
+  transaksiRefund?: Prisma.PaymentTransactionUpdateOneWithoutBookingRefundNestedInput
+  transaction?: Prisma.TransactionUpdateOneWithoutBookingNestedInput
+  nextBooking?: Prisma.BookingUpdateOneWithoutPreviousBookingNestedInput
+}
+
+export type BookingUncheckedUpdateWithoutPreviousBookingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_id?: Prisma.StringFieldUpdateOperationsInput | string
+  penyewa_id?: Prisma.StringFieldUpdateOperationsInput | string
+  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tanggal_selesai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status_booking?: Prisma.EnumStatusBookingFieldUpdateOperationsInput | $Enums.StatusBooking
+  jumlahDP?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  jumlahPelunasan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  tanggalBayarDP?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tanggalPelunasan?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingsNestedInput
+  refund_requests?: Prisma.RefundRequestUncheckedUpdateManyWithoutBookingsNestedInput
+  transaction?: Prisma.TransactionUncheckedUpdateOneWithoutBookingNestedInput
+  nextBooking?: Prisma.BookingUncheckedUpdateOneWithoutPreviousBookingNestedInput
+}
+
 export type BookingCreateWithoutPaymentsInput = {
   id?: string
   tanggal_mulai: Date | string
@@ -1111,6 +1713,13 @@ export type BookingCreateWithoutPaymentsInput = {
   tanggalDitolak?: Date | string | null
   alasanPenolakan?: string | null
   statusRefundDP?: $Enums.StatusRefundDP | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   units: Prisma.unitsCreateNestedOneWithoutTransaksi_bookingsInput
@@ -1119,6 +1728,9 @@ export type BookingCreateWithoutPaymentsInput = {
   transaksiDP?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingDPInput
   transaksiPelunasan?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingPelunasanInput
   transaksiRefund?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingRefundInput
+  transaction?: Prisma.TransactionCreateNestedOneWithoutBookingInput
+  previousBooking?: Prisma.BookingCreateNestedOneWithoutNextBookingInput
+  nextBooking?: Prisma.BookingCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingUncheckedCreateWithoutPaymentsInput = {
@@ -1139,9 +1751,19 @@ export type BookingUncheckedCreateWithoutPaymentsInput = {
   transaksiDP_id?: string | null
   transaksiPelunasan_id?: string | null
   transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   refund_requests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutBookingsInput
+  transaction?: Prisma.TransactionUncheckedCreateNestedOneWithoutBookingInput
+  nextBooking?: Prisma.BookingUncheckedCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingCreateOrConnectWithoutPaymentsInput = {
@@ -1173,6 +1795,13 @@ export type BookingUpdateWithoutPaymentsInput = {
   tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   units?: Prisma.unitsUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
@@ -1181,6 +1810,9 @@ export type BookingUpdateWithoutPaymentsInput = {
   transaksiDP?: Prisma.PaymentTransactionUpdateOneWithoutBookingDPNestedInput
   transaksiPelunasan?: Prisma.PaymentTransactionUpdateOneWithoutBookingPelunasanNestedInput
   transaksiRefund?: Prisma.PaymentTransactionUpdateOneWithoutBookingRefundNestedInput
+  transaction?: Prisma.TransactionUpdateOneWithoutBookingNestedInput
+  previousBooking?: Prisma.BookingUpdateOneWithoutNextBookingNestedInput
+  nextBooking?: Prisma.BookingUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutPaymentsInput = {
@@ -1201,9 +1833,19 @@ export type BookingUncheckedUpdateWithoutPaymentsInput = {
   transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   refund_requests?: Prisma.RefundRequestUncheckedUpdateManyWithoutBookingsNestedInput
+  transaction?: Prisma.TransactionUncheckedUpdateOneWithoutBookingNestedInput
+  nextBooking?: Prisma.BookingUncheckedUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingCreateWithoutRefund_requestsInput = {
@@ -1219,6 +1861,13 @@ export type BookingCreateWithoutRefund_requestsInput = {
   tanggalDitolak?: Date | string | null
   alasanPenolakan?: string | null
   statusRefundDP?: $Enums.StatusRefundDP | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   units: Prisma.unitsCreateNestedOneWithoutTransaksi_bookingsInput
@@ -1227,6 +1876,9 @@ export type BookingCreateWithoutRefund_requestsInput = {
   transaksiDP?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingDPInput
   transaksiPelunasan?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingPelunasanInput
   transaksiRefund?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingRefundInput
+  transaction?: Prisma.TransactionCreateNestedOneWithoutBookingInput
+  previousBooking?: Prisma.BookingCreateNestedOneWithoutNextBookingInput
+  nextBooking?: Prisma.BookingCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingUncheckedCreateWithoutRefund_requestsInput = {
@@ -1247,9 +1899,19 @@ export type BookingUncheckedCreateWithoutRefund_requestsInput = {
   transaksiDP_id?: string | null
   transaksiPelunasan_id?: string | null
   transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingsInput
+  transaction?: Prisma.TransactionUncheckedCreateNestedOneWithoutBookingInput
+  nextBooking?: Prisma.BookingUncheckedCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingCreateOrConnectWithoutRefund_requestsInput = {
@@ -1281,6 +1943,13 @@ export type BookingUpdateWithoutRefund_requestsInput = {
   tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   units?: Prisma.unitsUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
@@ -1289,6 +1958,9 @@ export type BookingUpdateWithoutRefund_requestsInput = {
   transaksiDP?: Prisma.PaymentTransactionUpdateOneWithoutBookingDPNestedInput
   transaksiPelunasan?: Prisma.PaymentTransactionUpdateOneWithoutBookingPelunasanNestedInput
   transaksiRefund?: Prisma.PaymentTransactionUpdateOneWithoutBookingRefundNestedInput
+  transaction?: Prisma.TransactionUpdateOneWithoutBookingNestedInput
+  previousBooking?: Prisma.BookingUpdateOneWithoutNextBookingNestedInput
+  nextBooking?: Prisma.BookingUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutRefund_requestsInput = {
@@ -1309,9 +1981,19 @@ export type BookingUncheckedUpdateWithoutRefund_requestsInput = {
   transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingsNestedInput
+  transaction?: Prisma.TransactionUncheckedUpdateOneWithoutBookingNestedInput
+  nextBooking?: Prisma.BookingUncheckedUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingCreateWithoutTransaksiDPInput = {
@@ -1327,6 +2009,13 @@ export type BookingCreateWithoutTransaksiDPInput = {
   tanggalDitolak?: Date | string | null
   alasanPenolakan?: string | null
   statusRefundDP?: $Enums.StatusRefundDP | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   units: Prisma.unitsCreateNestedOneWithoutTransaksi_bookingsInput
@@ -1335,6 +2024,9 @@ export type BookingCreateWithoutTransaksiDPInput = {
   refund_requests?: Prisma.RefundRequestCreateNestedManyWithoutBookingsInput
   transaksiPelunasan?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingPelunasanInput
   transaksiRefund?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingRefundInput
+  transaction?: Prisma.TransactionCreateNestedOneWithoutBookingInput
+  previousBooking?: Prisma.BookingCreateNestedOneWithoutNextBookingInput
+  nextBooking?: Prisma.BookingCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingUncheckedCreateWithoutTransaksiDPInput = {
@@ -1354,10 +2046,20 @@ export type BookingUncheckedCreateWithoutTransaksiDPInput = {
   statusRefundDP?: $Enums.StatusRefundDP | null
   transaksiPelunasan_id?: string | null
   transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingsInput
   refund_requests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutBookingsInput
+  transaction?: Prisma.TransactionUncheckedCreateNestedOneWithoutBookingInput
+  nextBooking?: Prisma.BookingUncheckedCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingCreateOrConnectWithoutTransaksiDPInput = {
@@ -1378,6 +2080,13 @@ export type BookingCreateWithoutTransaksiPelunasanInput = {
   tanggalDitolak?: Date | string | null
   alasanPenolakan?: string | null
   statusRefundDP?: $Enums.StatusRefundDP | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   units: Prisma.unitsCreateNestedOneWithoutTransaksi_bookingsInput
@@ -1386,6 +2095,9 @@ export type BookingCreateWithoutTransaksiPelunasanInput = {
   refund_requests?: Prisma.RefundRequestCreateNestedManyWithoutBookingsInput
   transaksiDP?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingDPInput
   transaksiRefund?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingRefundInput
+  transaction?: Prisma.TransactionCreateNestedOneWithoutBookingInput
+  previousBooking?: Prisma.BookingCreateNestedOneWithoutNextBookingInput
+  nextBooking?: Prisma.BookingCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingUncheckedCreateWithoutTransaksiPelunasanInput = {
@@ -1405,10 +2117,20 @@ export type BookingUncheckedCreateWithoutTransaksiPelunasanInput = {
   statusRefundDP?: $Enums.StatusRefundDP | null
   transaksiDP_id?: string | null
   transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingsInput
   refund_requests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutBookingsInput
+  transaction?: Prisma.TransactionUncheckedCreateNestedOneWithoutBookingInput
+  nextBooking?: Prisma.BookingUncheckedCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingCreateOrConnectWithoutTransaksiPelunasanInput = {
@@ -1429,6 +2151,13 @@ export type BookingCreateWithoutTransaksiRefundInput = {
   tanggalDitolak?: Date | string | null
   alasanPenolakan?: string | null
   statusRefundDP?: $Enums.StatusRefundDP | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   units: Prisma.unitsCreateNestedOneWithoutTransaksi_bookingsInput
@@ -1437,6 +2166,9 @@ export type BookingCreateWithoutTransaksiRefundInput = {
   refund_requests?: Prisma.RefundRequestCreateNestedManyWithoutBookingsInput
   transaksiDP?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingDPInput
   transaksiPelunasan?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingPelunasanInput
+  transaction?: Prisma.TransactionCreateNestedOneWithoutBookingInput
+  previousBooking?: Prisma.BookingCreateNestedOneWithoutNextBookingInput
+  nextBooking?: Prisma.BookingCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingUncheckedCreateWithoutTransaksiRefundInput = {
@@ -1456,10 +2188,20 @@ export type BookingUncheckedCreateWithoutTransaksiRefundInput = {
   statusRefundDP?: $Enums.StatusRefundDP | null
   transaksiDP_id?: string | null
   transaksiPelunasan_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingsInput
   refund_requests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutBookingsInput
+  transaction?: Prisma.TransactionUncheckedCreateNestedOneWithoutBookingInput
+  nextBooking?: Prisma.BookingUncheckedCreateNestedOneWithoutPreviousBookingInput
 }
 
 export type BookingCreateOrConnectWithoutTransaksiRefundInput = {
@@ -1491,6 +2233,13 @@ export type BookingUpdateWithoutTransaksiDPInput = {
   tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   units?: Prisma.unitsUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
@@ -1499,6 +2248,9 @@ export type BookingUpdateWithoutTransaksiDPInput = {
   refund_requests?: Prisma.RefundRequestUpdateManyWithoutBookingsNestedInput
   transaksiPelunasan?: Prisma.PaymentTransactionUpdateOneWithoutBookingPelunasanNestedInput
   transaksiRefund?: Prisma.PaymentTransactionUpdateOneWithoutBookingRefundNestedInput
+  transaction?: Prisma.TransactionUpdateOneWithoutBookingNestedInput
+  previousBooking?: Prisma.BookingUpdateOneWithoutNextBookingNestedInput
+  nextBooking?: Prisma.BookingUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutTransaksiDPInput = {
@@ -1518,10 +2270,20 @@ export type BookingUncheckedUpdateWithoutTransaksiDPInput = {
   statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
   transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingsNestedInput
   refund_requests?: Prisma.RefundRequestUncheckedUpdateManyWithoutBookingsNestedInput
+  transaction?: Prisma.TransactionUncheckedUpdateOneWithoutBookingNestedInput
+  nextBooking?: Prisma.BookingUncheckedUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingUpsertWithoutTransaksiPelunasanInput = {
@@ -1548,6 +2310,13 @@ export type BookingUpdateWithoutTransaksiPelunasanInput = {
   tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   units?: Prisma.unitsUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
@@ -1556,6 +2325,9 @@ export type BookingUpdateWithoutTransaksiPelunasanInput = {
   refund_requests?: Prisma.RefundRequestUpdateManyWithoutBookingsNestedInput
   transaksiDP?: Prisma.PaymentTransactionUpdateOneWithoutBookingDPNestedInput
   transaksiRefund?: Prisma.PaymentTransactionUpdateOneWithoutBookingRefundNestedInput
+  transaction?: Prisma.TransactionUpdateOneWithoutBookingNestedInput
+  previousBooking?: Prisma.BookingUpdateOneWithoutNextBookingNestedInput
+  nextBooking?: Prisma.BookingUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutTransaksiPelunasanInput = {
@@ -1575,10 +2347,20 @@ export type BookingUncheckedUpdateWithoutTransaksiPelunasanInput = {
   statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
   transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingsNestedInput
   refund_requests?: Prisma.RefundRequestUncheckedUpdateManyWithoutBookingsNestedInput
+  transaction?: Prisma.TransactionUncheckedUpdateOneWithoutBookingNestedInput
+  nextBooking?: Prisma.BookingUncheckedUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingUpsertWithoutTransaksiRefundInput = {
@@ -1605,6 +2387,13 @@ export type BookingUpdateWithoutTransaksiRefundInput = {
   tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   units?: Prisma.unitsUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
@@ -1613,6 +2402,9 @@ export type BookingUpdateWithoutTransaksiRefundInput = {
   refund_requests?: Prisma.RefundRequestUpdateManyWithoutBookingsNestedInput
   transaksiDP?: Prisma.PaymentTransactionUpdateOneWithoutBookingDPNestedInput
   transaksiPelunasan?: Prisma.PaymentTransactionUpdateOneWithoutBookingPelunasanNestedInput
+  transaction?: Prisma.TransactionUpdateOneWithoutBookingNestedInput
+  previousBooking?: Prisma.BookingUpdateOneWithoutNextBookingNestedInput
+  nextBooking?: Prisma.BookingUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutTransaksiRefundInput = {
@@ -1632,10 +2424,168 @@ export type BookingUncheckedUpdateWithoutTransaksiRefundInput = {
   statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
   transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingsNestedInput
   refund_requests?: Prisma.RefundRequestUncheckedUpdateManyWithoutBookingsNestedInput
+  transaction?: Prisma.TransactionUncheckedUpdateOneWithoutBookingNestedInput
+  nextBooking?: Prisma.BookingUncheckedUpdateOneWithoutPreviousBookingNestedInput
+}
+
+export type BookingCreateWithoutTransactionInput = {
+  id?: string
+  tanggal_mulai: Date | string
+  tanggal_selesai: Date | string
+  total_harga: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status_booking?: $Enums.StatusBooking
+  jumlahDP?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  jumlahPelunasan?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  tanggalBayarDP?: Date | string | null
+  tanggalPelunasan?: Date | string | null
+  tanggalDitolak?: Date | string | null
+  alasanPenolakan?: string | null
+  statusRefundDP?: $Enums.StatusRefundDP | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  next_booking_id?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  units: Prisma.unitsCreateNestedOneWithoutTransaksi_bookingsInput
+  users: Prisma.usersCreateNestedOneWithoutTransaksi_bookingsInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutBookingsInput
+  refund_requests?: Prisma.RefundRequestCreateNestedManyWithoutBookingsInput
+  transaksiDP?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingDPInput
+  transaksiPelunasan?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingPelunasanInput
+  transaksiRefund?: Prisma.PaymentTransactionCreateNestedOneWithoutBookingRefundInput
+  previousBooking?: Prisma.BookingCreateNestedOneWithoutNextBookingInput
+  nextBooking?: Prisma.BookingCreateNestedOneWithoutPreviousBookingInput
+}
+
+export type BookingUncheckedCreateWithoutTransactionInput = {
+  id?: string
+  unit_id: string
+  penyewa_id: string
+  tanggal_mulai: Date | string
+  tanggal_selesai: Date | string
+  total_harga: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status_booking?: $Enums.StatusBooking
+  jumlahDP?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  jumlahPelunasan?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  tanggalBayarDP?: Date | string | null
+  tanggalPelunasan?: Date | string | null
+  tanggalDitolak?: Date | string | null
+  alasanPenolakan?: string | null
+  statusRefundDP?: $Enums.StatusRefundDP | null
+  transaksiDP_id?: string | null
+  transaksiPelunasan_id?: string | null
+  transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingsInput
+  refund_requests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutBookingsInput
+  nextBooking?: Prisma.BookingUncheckedCreateNestedOneWithoutPreviousBookingInput
+}
+
+export type BookingCreateOrConnectWithoutTransactionInput = {
+  where: Prisma.BookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingCreateWithoutTransactionInput, Prisma.BookingUncheckedCreateWithoutTransactionInput>
+}
+
+export type BookingUpsertWithoutTransactionInput = {
+  update: Prisma.XOR<Prisma.BookingUpdateWithoutTransactionInput, Prisma.BookingUncheckedUpdateWithoutTransactionInput>
+  create: Prisma.XOR<Prisma.BookingCreateWithoutTransactionInput, Prisma.BookingUncheckedCreateWithoutTransactionInput>
+  where?: Prisma.BookingWhereInput
+}
+
+export type BookingUpdateToOneWithWhereWithoutTransactionInput = {
+  where?: Prisma.BookingWhereInput
+  data: Prisma.XOR<Prisma.BookingUpdateWithoutTransactionInput, Prisma.BookingUncheckedUpdateWithoutTransactionInput>
+}
+
+export type BookingUpdateWithoutTransactionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tanggal_selesai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status_booking?: Prisma.EnumStatusBookingFieldUpdateOperationsInput | $Enums.StatusBooking
+  jumlahDP?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  jumlahPelunasan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  tanggalBayarDP?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tanggalPelunasan?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  units?: Prisma.unitsUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
+  users?: Prisma.usersUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutBookingsNestedInput
+  refund_requests?: Prisma.RefundRequestUpdateManyWithoutBookingsNestedInput
+  transaksiDP?: Prisma.PaymentTransactionUpdateOneWithoutBookingDPNestedInput
+  transaksiPelunasan?: Prisma.PaymentTransactionUpdateOneWithoutBookingPelunasanNestedInput
+  transaksiRefund?: Prisma.PaymentTransactionUpdateOneWithoutBookingRefundNestedInput
+  previousBooking?: Prisma.BookingUpdateOneWithoutNextBookingNestedInput
+  nextBooking?: Prisma.BookingUpdateOneWithoutPreviousBookingNestedInput
+}
+
+export type BookingUncheckedUpdateWithoutTransactionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_id?: Prisma.StringFieldUpdateOperationsInput | string
+  penyewa_id?: Prisma.StringFieldUpdateOperationsInput | string
+  tanggal_mulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tanggal_selesai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_harga?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status_booking?: Prisma.EnumStatusBookingFieldUpdateOperationsInput | $Enums.StatusBooking
+  jumlahDP?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  jumlahPelunasan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  tanggalBayarDP?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tanggalPelunasan?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingsNestedInput
+  refund_requests?: Prisma.RefundRequestUncheckedUpdateManyWithoutBookingsNestedInput
+  nextBooking?: Prisma.BookingUncheckedUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingCreateManyUnitsInput = {
@@ -1655,6 +2605,14 @@ export type BookingCreateManyUnitsInput = {
   transaksiDP_id?: string | null
   transaksiPelunasan_id?: string | null
   transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -1672,6 +2630,13 @@ export type BookingUpdateWithoutUnitsInput = {
   tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.usersUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
@@ -1680,6 +2645,9 @@ export type BookingUpdateWithoutUnitsInput = {
   transaksiDP?: Prisma.PaymentTransactionUpdateOneWithoutBookingDPNestedInput
   transaksiPelunasan?: Prisma.PaymentTransactionUpdateOneWithoutBookingPelunasanNestedInput
   transaksiRefund?: Prisma.PaymentTransactionUpdateOneWithoutBookingRefundNestedInput
+  transaction?: Prisma.TransactionUpdateOneWithoutBookingNestedInput
+  previousBooking?: Prisma.BookingUpdateOneWithoutNextBookingNestedInput
+  nextBooking?: Prisma.BookingUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutUnitsInput = {
@@ -1699,10 +2667,20 @@ export type BookingUncheckedUpdateWithoutUnitsInput = {
   transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingsNestedInput
   refund_requests?: Prisma.RefundRequestUncheckedUpdateManyWithoutBookingsNestedInput
+  transaction?: Prisma.TransactionUncheckedUpdateOneWithoutBookingNestedInput
+  nextBooking?: Prisma.BookingUncheckedUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingUncheckedUpdateManyWithoutUnitsInput = {
@@ -1722,6 +2700,14 @@ export type BookingUncheckedUpdateManyWithoutUnitsInput = {
   transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1743,6 +2729,14 @@ export type BookingCreateManyUsersInput = {
   transaksiDP_id?: string | null
   transaksiPelunasan_id?: string | null
   transaksiRefund_id?: string | null
+  payment_deadline: Date | string
+  cancelled_at?: Date | string | null
+  cancelled_reason?: string | null
+  rental_period: $Enums.BookingRentalPeriod
+  check_in_date: Date | string
+  check_out_date: Date | string
+  previous_booking_id?: string | null
+  next_booking_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -1760,6 +2754,13 @@ export type BookingUpdateWithoutUsersInput = {
   tanggalDitolak?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alasanPenolakan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   statusRefundDP?: Prisma.NullableEnumStatusRefundDPFieldUpdateOperationsInput | $Enums.StatusRefundDP | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   units?: Prisma.unitsUpdateOneRequiredWithoutTransaksi_bookingsNestedInput
@@ -1768,6 +2769,9 @@ export type BookingUpdateWithoutUsersInput = {
   transaksiDP?: Prisma.PaymentTransactionUpdateOneWithoutBookingDPNestedInput
   transaksiPelunasan?: Prisma.PaymentTransactionUpdateOneWithoutBookingPelunasanNestedInput
   transaksiRefund?: Prisma.PaymentTransactionUpdateOneWithoutBookingRefundNestedInput
+  transaction?: Prisma.TransactionUpdateOneWithoutBookingNestedInput
+  previousBooking?: Prisma.BookingUpdateOneWithoutNextBookingNestedInput
+  nextBooking?: Prisma.BookingUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutUsersInput = {
@@ -1787,10 +2791,20 @@ export type BookingUncheckedUpdateWithoutUsersInput = {
   transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingsNestedInput
   refund_requests?: Prisma.RefundRequestUncheckedUpdateManyWithoutBookingsNestedInput
+  transaction?: Prisma.TransactionUncheckedUpdateOneWithoutBookingNestedInput
+  nextBooking?: Prisma.BookingUncheckedUpdateOneWithoutPreviousBookingNestedInput
 }
 
 export type BookingUncheckedUpdateManyWithoutUsersInput = {
@@ -1810,6 +2824,14 @@ export type BookingUncheckedUpdateManyWithoutUsersInput = {
   transaksiDP_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiPelunasan_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transaksiRefund_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_deadline?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelled_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rental_period?: Prisma.EnumBookingRentalPeriodFieldUpdateOperationsInput | $Enums.BookingRentalPeriod
+  check_in_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  check_out_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previous_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  next_booking_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1872,6 +2894,14 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   transaksiDP_id?: boolean
   transaksiPelunasan_id?: boolean
   transaksiRefund_id?: boolean
+  payment_deadline?: boolean
+  cancelled_at?: boolean
+  cancelled_reason?: boolean
+  rental_period?: boolean
+  check_in_date?: boolean
+  check_out_date?: boolean
+  previous_booking_id?: boolean
+  next_booking_id?: boolean
   created_at?: boolean
   updated_at?: boolean
   units?: boolean | Prisma.unitsDefaultArgs<ExtArgs>
@@ -1881,6 +2911,9 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   transaksiDP?: boolean | Prisma.Booking$transaksiDPArgs<ExtArgs>
   transaksiPelunasan?: boolean | Prisma.Booking$transaksiPelunasanArgs<ExtArgs>
   transaksiRefund?: boolean | Prisma.Booking$transaksiRefundArgs<ExtArgs>
+  transaction?: boolean | Prisma.Booking$transactionArgs<ExtArgs>
+  previousBooking?: boolean | Prisma.Booking$previousBookingArgs<ExtArgs>
+  nextBooking?: boolean | Prisma.Booking$nextBookingArgs<ExtArgs>
   _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
@@ -1902,6 +2935,14 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   transaksiDP_id?: boolean
   transaksiPelunasan_id?: boolean
   transaksiRefund_id?: boolean
+  payment_deadline?: boolean
+  cancelled_at?: boolean
+  cancelled_reason?: boolean
+  rental_period?: boolean
+  check_in_date?: boolean
+  check_out_date?: boolean
+  previous_booking_id?: boolean
+  next_booking_id?: boolean
   created_at?: boolean
   updated_at?: boolean
   units?: boolean | Prisma.unitsDefaultArgs<ExtArgs>
@@ -1909,6 +2950,7 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   transaksiDP?: boolean | Prisma.Booking$transaksiDPArgs<ExtArgs>
   transaksiPelunasan?: boolean | Prisma.Booking$transaksiPelunasanArgs<ExtArgs>
   transaksiRefund?: boolean | Prisma.Booking$transaksiRefundArgs<ExtArgs>
+  previousBooking?: boolean | Prisma.Booking$previousBookingArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
 export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1929,6 +2971,14 @@ export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   transaksiDP_id?: boolean
   transaksiPelunasan_id?: boolean
   transaksiRefund_id?: boolean
+  payment_deadline?: boolean
+  cancelled_at?: boolean
+  cancelled_reason?: boolean
+  rental_period?: boolean
+  check_in_date?: boolean
+  check_out_date?: boolean
+  previous_booking_id?: boolean
+  next_booking_id?: boolean
   created_at?: boolean
   updated_at?: boolean
   units?: boolean | Prisma.unitsDefaultArgs<ExtArgs>
@@ -1936,6 +2986,7 @@ export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   transaksiDP?: boolean | Prisma.Booking$transaksiDPArgs<ExtArgs>
   transaksiPelunasan?: boolean | Prisma.Booking$transaksiPelunasanArgs<ExtArgs>
   transaksiRefund?: boolean | Prisma.Booking$transaksiRefundArgs<ExtArgs>
+  previousBooking?: boolean | Prisma.Booking$previousBookingArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
 export type BookingSelectScalar = {
@@ -1956,11 +3007,19 @@ export type BookingSelectScalar = {
   transaksiDP_id?: boolean
   transaksiPelunasan_id?: boolean
   transaksiRefund_id?: boolean
+  payment_deadline?: boolean
+  cancelled_at?: boolean
+  cancelled_reason?: boolean
+  rental_period?: boolean
+  check_in_date?: boolean
+  check_out_date?: boolean
+  previous_booking_id?: boolean
+  next_booking_id?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "unit_id" | "penyewa_id" | "tanggal_mulai" | "tanggal_selesai" | "total_harga" | "status_booking" | "jumlahDP" | "jumlahPelunasan" | "tanggalBayarDP" | "tanggalPelunasan" | "tanggalDitolak" | "alasanPenolakan" | "statusRefundDP" | "transaksiDP_id" | "transaksiPelunasan_id" | "transaksiRefund_id" | "created_at" | "updated_at", ExtArgs["result"]["booking"]>
+export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "unit_id" | "penyewa_id" | "tanggal_mulai" | "tanggal_selesai" | "total_harga" | "status_booking" | "jumlahDP" | "jumlahPelunasan" | "tanggalBayarDP" | "tanggalPelunasan" | "tanggalDitolak" | "alasanPenolakan" | "statusRefundDP" | "transaksiDP_id" | "transaksiPelunasan_id" | "transaksiRefund_id" | "payment_deadline" | "cancelled_at" | "cancelled_reason" | "rental_period" | "check_in_date" | "check_out_date" | "previous_booking_id" | "next_booking_id" | "created_at" | "updated_at", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   units?: boolean | Prisma.unitsDefaultArgs<ExtArgs>
   users?: boolean | Prisma.usersDefaultArgs<ExtArgs>
@@ -1969,6 +3028,9 @@ export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   transaksiDP?: boolean | Prisma.Booking$transaksiDPArgs<ExtArgs>
   transaksiPelunasan?: boolean | Prisma.Booking$transaksiPelunasanArgs<ExtArgs>
   transaksiRefund?: boolean | Prisma.Booking$transaksiRefundArgs<ExtArgs>
+  transaction?: boolean | Prisma.Booking$transactionArgs<ExtArgs>
+  previousBooking?: boolean | Prisma.Booking$previousBookingArgs<ExtArgs>
+  nextBooking?: boolean | Prisma.Booking$nextBookingArgs<ExtArgs>
   _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BookingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1977,6 +3039,7 @@ export type BookingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   transaksiDP?: boolean | Prisma.Booking$transaksiDPArgs<ExtArgs>
   transaksiPelunasan?: boolean | Prisma.Booking$transaksiPelunasanArgs<ExtArgs>
   transaksiRefund?: boolean | Prisma.Booking$transaksiRefundArgs<ExtArgs>
+  previousBooking?: boolean | Prisma.Booking$previousBookingArgs<ExtArgs>
 }
 export type BookingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   units?: boolean | Prisma.unitsDefaultArgs<ExtArgs>
@@ -1984,6 +3047,7 @@ export type BookingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   transaksiDP?: boolean | Prisma.Booking$transaksiDPArgs<ExtArgs>
   transaksiPelunasan?: boolean | Prisma.Booking$transaksiPelunasanArgs<ExtArgs>
   transaksiRefund?: boolean | Prisma.Booking$transaksiRefundArgs<ExtArgs>
+  previousBooking?: boolean | Prisma.Booking$previousBookingArgs<ExtArgs>
 }
 
 export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1996,6 +3060,9 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     transaksiDP: Prisma.$PaymentTransactionPayload<ExtArgs> | null
     transaksiPelunasan: Prisma.$PaymentTransactionPayload<ExtArgs> | null
     transaksiRefund: Prisma.$PaymentTransactionPayload<ExtArgs> | null
+    transaction: Prisma.$TransactionPayload<ExtArgs> | null
+    previousBooking: Prisma.$BookingPayload<ExtArgs> | null
+    nextBooking: Prisma.$BookingPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2015,6 +3082,14 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     transaksiDP_id: string | null
     transaksiPelunasan_id: string | null
     transaksiRefund_id: string | null
+    payment_deadline: Date
+    cancelled_at: Date | null
+    cancelled_reason: string | null
+    rental_period: $Enums.BookingRentalPeriod
+    check_in_date: Date
+    check_out_date: Date
+    previous_booking_id: string | null
+    next_booking_id: string | null
     created_at: Date
     updated_at: Date
   }, ExtArgs["result"]["booking"]>
@@ -2418,6 +3493,9 @@ export interface Prisma__BookingClient<T, Null = never, ExtArgs extends runtime.
   transaksiDP<T extends Prisma.Booking$transaksiDPArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$transaksiDPArgs<ExtArgs>>): Prisma.Prisma__PaymentTransactionClient<runtime.Types.Result.GetResult<Prisma.$PaymentTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   transaksiPelunasan<T extends Prisma.Booking$transaksiPelunasanArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$transaksiPelunasanArgs<ExtArgs>>): Prisma.Prisma__PaymentTransactionClient<runtime.Types.Result.GetResult<Prisma.$PaymentTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   transaksiRefund<T extends Prisma.Booking$transaksiRefundArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$transaksiRefundArgs<ExtArgs>>): Prisma.Prisma__PaymentTransactionClient<runtime.Types.Result.GetResult<Prisma.$PaymentTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  transaction<T extends Prisma.Booking$transactionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$transactionArgs<ExtArgs>>): Prisma.Prisma__TransactionClient<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  previousBooking<T extends Prisma.Booking$previousBookingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$previousBookingArgs<ExtArgs>>): Prisma.Prisma__BookingClient<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  nextBooking<T extends Prisma.Booking$nextBookingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$nextBookingArgs<ExtArgs>>): Prisma.Prisma__BookingClient<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2464,6 +3542,14 @@ export interface BookingFieldRefs {
   readonly transaksiDP_id: Prisma.FieldRef<"Booking", 'String'>
   readonly transaksiPelunasan_id: Prisma.FieldRef<"Booking", 'String'>
   readonly transaksiRefund_id: Prisma.FieldRef<"Booking", 'String'>
+  readonly payment_deadline: Prisma.FieldRef<"Booking", 'DateTime'>
+  readonly cancelled_at: Prisma.FieldRef<"Booking", 'DateTime'>
+  readonly cancelled_reason: Prisma.FieldRef<"Booking", 'String'>
+  readonly rental_period: Prisma.FieldRef<"Booking", 'BookingRentalPeriod'>
+  readonly check_in_date: Prisma.FieldRef<"Booking", 'DateTime'>
+  readonly check_out_date: Prisma.FieldRef<"Booking", 'DateTime'>
+  readonly previous_booking_id: Prisma.FieldRef<"Booking", 'String'>
+  readonly next_booking_id: Prisma.FieldRef<"Booking", 'String'>
   readonly created_at: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"Booking", 'DateTime'>
 }
@@ -2969,6 +4055,63 @@ export type Booking$transaksiRefundArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.PaymentTransactionInclude<ExtArgs> | null
   where?: Prisma.PaymentTransactionWhereInput
+}
+
+/**
+ * Booking.transaction
+ */
+export type Booking$transactionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Transaction
+   */
+  select?: Prisma.TransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Transaction
+   */
+  omit?: Prisma.TransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null
+  where?: Prisma.TransactionWhereInput
+}
+
+/**
+ * Booking.previousBooking
+ */
+export type Booking$previousBookingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Booking
+   */
+  select?: Prisma.BookingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Booking
+   */
+  omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  where?: Prisma.BookingWhereInput
+}
+
+/**
+ * Booking.nextBooking
+ */
+export type Booking$nextBookingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Booking
+   */
+  select?: Prisma.BookingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Booking
+   */
+  omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  where?: Prisma.BookingWhereInput
 }
 
 /**

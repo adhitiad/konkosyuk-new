@@ -122,7 +122,7 @@ function BookingFormContent() {
       return
     }
 
-    if (room.status !== 'available') {
+    if (room.status !== 'AVAILABLE') {
       setError('Kamar ini tidak tersedia')
       return
     }

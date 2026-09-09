@@ -40,7 +40,7 @@ export interface RoomWithRelations {
   property_id: string
   name: string
   price: string
-  status: 'available' | 'booked' | 'maintenance'
+  status: 'AVAILABLE' | 'RESERVED' | 'OCCUPIED' | 'MAINTENANCE'
   facilities: string[]
   created_at: Date
   updated_at: Date

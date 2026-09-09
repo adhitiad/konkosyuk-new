@@ -130,7 +130,7 @@ function BookingActiveCard({ booking }: { booking: BookingOutput }) {
           </CardTitle>
           <Badge
             variant={
-              booking.status_booking === 'AKTIF' ? 'default' : 'secondary'
+              booking.status_booking === 'ACTIVE' ? 'default' : 'secondary'
             }
           >
             {status}
