@@ -10,6 +10,7 @@ import {
   Clock,
   History,
   CalendarClock,
+  MessageSquare,
 } from 'lucide-react'
 import { authClient } from '#/lib/auth-client'
 
@@ -59,6 +60,7 @@ function DashboardLayout() {
       icon: CalendarClock,
     },
     { to: '/pemilik/dashboard/history', label: 'Riwayat', icon: History },
+    { to: '/pemilik/dashboard/messages', label: 'Pesan', icon: MessageSquare },
   ]
 
   const isActive = (to: string) => location.pathname === to

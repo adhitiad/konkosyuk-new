@@ -197,6 +197,11 @@ export type Conversation = Prisma.ConversationModel
  */
 export type Message = Prisma.MessageModel
 /**
+ * Model UserPresence
+ * 
+ */
+export type UserPresence = Prisma.UserPresenceModel
+/**
  * Model nearby_places
  * 
  */

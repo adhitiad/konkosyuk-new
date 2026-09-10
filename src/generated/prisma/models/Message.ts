@@ -47,6 +47,7 @@ export type MessageCountAggregateOutputType = {
   conversationId: number
   senderId: number
   content: number
+  attachments: number
   isRead: number
   createdAt: number
   _all: number
@@ -76,6 +77,7 @@ export type MessageCountAggregateInputType = {
   conversationId?: true
   senderId?: true
   content?: true
+  attachments?: true
   isRead?: true
   createdAt?: true
   _all?: true
@@ -157,7 +159,8 @@ export type MessageGroupByOutputType = {
   id: string
   conversationId: string
   senderId: string
-  content: string
+  content: string | null
+  attachments: runtime.JsonValue | null
   isRead: boolean
   createdAt: Date
   _count: MessageCountAggregateOutputType | null
@@ -186,8 +189,9 @@ export type MessageWhereInput = {
   NOT?: Prisma.MessageWhereInput | Prisma.MessageWhereInput[]
   id?: Prisma.StringFilter<"Message"> | string
   conversationId?: Prisma.StringFilter<"Message"> | string
-  senderId?: Prisma.StringFilter<"Message"> | string
-  content?: Prisma.StringFilter<"Message"> | string
+  senderId?: Prisma.UuidFilter<"Message"> | string
+  content?: Prisma.StringNullableFilter<"Message"> | string | null
+  attachments?: Prisma.JsonNullableFilter<"Message">
   isRead?: Prisma.BoolFilter<"Message"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Message"> | Date | string
   conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
@@ -198,7 +202,8 @@ export type MessageOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   conversationId?: Prisma.SortOrder
   senderId?: Prisma.SortOrder
-  content?: Prisma.SortOrder
+  content?: Prisma.SortOrderInput | Prisma.SortOrder
+  attachments?: Prisma.SortOrderInput | Prisma.SortOrder
   isRead?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   conversation?: Prisma.ConversationOrderByWithRelationInput
@@ -211,8 +216,9 @@ export type MessageWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MessageWhereInput[]
   NOT?: Prisma.MessageWhereInput | Prisma.MessageWhereInput[]
   conversationId?: Prisma.StringFilter<"Message"> | string
-  senderId?: Prisma.StringFilter<"Message"> | string
-  content?: Prisma.StringFilter<"Message"> | string
+  senderId?: Prisma.UuidFilter<"Message"> | string
+  content?: Prisma.StringNullableFilter<"Message"> | string | null
+  attachments?: Prisma.JsonNullableFilter<"Message">
   isRead?: Prisma.BoolFilter<"Message"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Message"> | Date | string
   conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
@@ -223,7 +229,8 @@ export type MessageOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   conversationId?: Prisma.SortOrder
   senderId?: Prisma.SortOrder
-  content?: Prisma.SortOrder
+  content?: Prisma.SortOrderInput | Prisma.SortOrder
+  attachments?: Prisma.SortOrderInput | Prisma.SortOrder
   isRead?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.MessageCountOrderByAggregateInput
@@ -237,15 +244,17 @@ export type MessageScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MessageScalarWhereWithAggregatesInput | Prisma.MessageScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Message"> | string
   conversationId?: Prisma.StringWithAggregatesFilter<"Message"> | string
-  senderId?: Prisma.StringWithAggregatesFilter<"Message"> | string
-  content?: Prisma.StringWithAggregatesFilter<"Message"> | string
+  senderId?: Prisma.UuidWithAggregatesFilter<"Message"> | string
+  content?: Prisma.StringNullableWithAggregatesFilter<"Message"> | string | null
+  attachments?: Prisma.JsonNullableWithAggregatesFilter<"Message">
   isRead?: Prisma.BoolWithAggregatesFilter<"Message"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Message"> | Date | string
 }
 
 export type MessageCreateInput = {
   id?: string
-  content: string
+  content?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: boolean
   createdAt?: Date | string
   conversation: Prisma.ConversationCreateNestedOneWithoutMessagesInput
@@ -256,14 +265,16 @@ export type MessageUncheckedCreateInput = {
   id?: string
   conversationId: string
   senderId: string
-  content: string
+  content?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: boolean
   createdAt?: Date | string
 }
 
 export type MessageUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversation?: Prisma.ConversationUpdateOneRequiredWithoutMessagesNestedInput
@@ -274,7 +285,8 @@ export type MessageUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   conversationId?: Prisma.StringFieldUpdateOperationsInput | string
   senderId?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -283,14 +295,16 @@ export type MessageCreateManyInput = {
   id?: string
   conversationId: string
   senderId: string
-  content: string
+  content?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: boolean
   createdAt?: Date | string
 }
 
 export type MessageUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -299,7 +313,8 @@ export type MessageUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   conversationId?: Prisma.StringFieldUpdateOperationsInput | string
   senderId?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -319,6 +334,7 @@ export type MessageCountOrderByAggregateInput = {
   conversationId?: Prisma.SortOrder
   senderId?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  attachments?: Prisma.SortOrder
   isRead?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -427,7 +443,8 @@ export type MessageUncheckedUpdateManyWithoutSenderNestedInput = {
 
 export type MessageCreateWithoutConversationInput = {
   id?: string
-  content: string
+  content?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: boolean
   createdAt?: Date | string
   sender: Prisma.usersCreateNestedOneWithoutSentMessagesInput
@@ -436,7 +453,8 @@ export type MessageCreateWithoutConversationInput = {
 export type MessageUncheckedCreateWithoutConversationInput = {
   id?: string
   senderId: string
-  content: string
+  content?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: boolean
   createdAt?: Date | string
 }
@@ -473,15 +491,17 @@ export type MessageScalarWhereInput = {
   NOT?: Prisma.MessageScalarWhereInput | Prisma.MessageScalarWhereInput[]
   id?: Prisma.StringFilter<"Message"> | string
   conversationId?: Prisma.StringFilter<"Message"> | string
-  senderId?: Prisma.StringFilter<"Message"> | string
-  content?: Prisma.StringFilter<"Message"> | string
+  senderId?: Prisma.UuidFilter<"Message"> | string
+  content?: Prisma.StringNullableFilter<"Message"> | string | null
+  attachments?: Prisma.JsonNullableFilter<"Message">
   isRead?: Prisma.BoolFilter<"Message"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Message"> | Date | string
 }
 
 export type MessageCreateWithoutSenderInput = {
   id?: string
-  content: string
+  content?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: boolean
   createdAt?: Date | string
   conversation: Prisma.ConversationCreateNestedOneWithoutMessagesInput
@@ -490,7 +510,8 @@ export type MessageCreateWithoutSenderInput = {
 export type MessageUncheckedCreateWithoutSenderInput = {
   id?: string
   conversationId: string
-  content: string
+  content?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: boolean
   createdAt?: Date | string
 }
@@ -524,14 +545,16 @@ export type MessageUpdateManyWithWhereWithoutSenderInput = {
 export type MessageCreateManyConversationInput = {
   id?: string
   senderId: string
-  content: string
+  content?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: boolean
   createdAt?: Date | string
 }
 
 export type MessageUpdateWithoutConversationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.usersUpdateOneRequiredWithoutSentMessagesNestedInput
@@ -540,7 +563,8 @@ export type MessageUpdateWithoutConversationInput = {
 export type MessageUncheckedUpdateWithoutConversationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   senderId?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -548,7 +572,8 @@ export type MessageUncheckedUpdateWithoutConversationInput = {
 export type MessageUncheckedUpdateManyWithoutConversationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   senderId?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -556,14 +581,16 @@ export type MessageUncheckedUpdateManyWithoutConversationInput = {
 export type MessageCreateManySenderInput = {
   id?: string
   conversationId: string
-  content: string
+  content?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: boolean
   createdAt?: Date | string
 }
 
 export type MessageUpdateWithoutSenderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversation?: Prisma.ConversationUpdateOneRequiredWithoutMessagesNestedInput
@@ -572,7 +599,8 @@ export type MessageUpdateWithoutSenderInput = {
 export type MessageUncheckedUpdateWithoutSenderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -580,7 +608,8 @@ export type MessageUncheckedUpdateWithoutSenderInput = {
 export type MessageUncheckedUpdateManyWithoutSenderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -592,6 +621,7 @@ export type MessageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   conversationId?: boolean
   senderId?: boolean
   content?: boolean
+  attachments?: boolean
   isRead?: boolean
   createdAt?: boolean
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
@@ -603,6 +633,7 @@ export type MessageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   conversationId?: boolean
   senderId?: boolean
   content?: boolean
+  attachments?: boolean
   isRead?: boolean
   createdAt?: boolean
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
@@ -614,6 +645,7 @@ export type MessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   conversationId?: boolean
   senderId?: boolean
   content?: boolean
+  attachments?: boolean
   isRead?: boolean
   createdAt?: boolean
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
@@ -625,11 +657,12 @@ export type MessageSelectScalar = {
   conversationId?: boolean
   senderId?: boolean
   content?: boolean
+  attachments?: boolean
   isRead?: boolean
   createdAt?: boolean
 }
 
-export type MessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "conversationId" | "senderId" | "content" | "isRead" | "createdAt", ExtArgs["result"]["message"]>
+export type MessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "conversationId" | "senderId" | "content" | "attachments" | "isRead" | "createdAt", ExtArgs["result"]["message"]>
 export type MessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   sender?: boolean | Prisma.usersDefaultArgs<ExtArgs>
@@ -653,7 +686,8 @@ export type $MessagePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     id: string
     conversationId: string
     senderId: string
-    content: string
+    content: string | null
+    attachments: runtime.JsonValue | null
     isRead: boolean
     createdAt: Date
   }, ExtArgs["result"]["message"]>
@@ -1085,6 +1119,7 @@ export interface MessageFieldRefs {
   readonly conversationId: Prisma.FieldRef<"Message", 'String'>
   readonly senderId: Prisma.FieldRef<"Message", 'String'>
   readonly content: Prisma.FieldRef<"Message", 'String'>
+  readonly attachments: Prisma.FieldRef<"Message", 'Json'>
   readonly isRead: Prisma.FieldRef<"Message", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Message", 'DateTime'>
 }

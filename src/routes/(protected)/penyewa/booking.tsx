@@ -11,6 +11,7 @@ import {
   Clock,
   LogIn,
   Search,
+  MessageSquare,
 } from 'lucide-react'
 
 import { authClient } from '#/lib/auth-client'
@@ -28,6 +29,7 @@ import {
 } from '#/components/ui/dialog'
 import { useState } from 'react'
 import type { PemesananWithRelations } from '#/types/pemesanan'
+import { ChatDialog } from '#/components/chat/ChatDialog'
 
 export const Route = createFileRoute('/(protected)/penyewa/booking')({
   component: BookingListPage,
@@ -172,6 +174,10 @@ function BookingListContent() {
 function BookingCard({ booking }: { booking: PemesananWithRelations }) {
   const queryClient = useQueryClient()
   const [showCancelDialog, setShowCancelDialog] = useState(false)
+  const [chatOpen, setChatOpen] = useState(false)
+  const [chatConversationId, setChatConversationId] = useState<string | null>(
+    null,
+  )
 
   const cancelMutation = useMutation({
     mutationFn: async (input: { id: string }) => {
@@ -185,7 +191,20 @@ function BookingCard({ booking }: { booking: PemesananWithRelations }) {
     },
   })
 
+  const chatMutation = useMutation({
+    mutationFn: async () => {
+      return orpc.createConversationFromBooking.call({
+        bookingId: booking.id,
+      })
+    },
+    onSuccess: (data) => {
+      setChatConversationId(data.id)
+      setChatOpen(true)
+    },
+  })
+
   const canCancel = booking.status === 'MENUNGGU_PERSETUJUAN'
+  const canChat = booking.status === 'DITERIMA'
 
   return (
     <>
@@ -230,19 +249,37 @@ function BookingCard({ booking }: { booking: PemesananWithRelations }) {
           <div className="text-lg font-bold text-[var(--lagoon-deep)]">
             Rp{Number(booking.total_harga).toLocaleString('id-ID')}
           </div>
-          {canCancel && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowCancelDialog(true)}
-              disabled={cancelMutation.isPending}
-            >
-              <Ban className="h-3.5 w-3.5" />
-              Batalkan
-            </Button>
-          )}
+          <div className="flex gap-2">
+            {canCancel && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowCancelDialog(true)}
+                disabled={cancelMutation.isPending}
+              >
+                <Ban className="h-3.5 w-3.5" />
+                Batalkan
+              </Button>
+            )}
+            {canChat && (
+              <Button
+                size="sm"
+                onClick={() => chatMutation.mutate()}
+                disabled={chatMutation.isPending}
+              >
+                <MessageSquare className="h-3.5 w-3.5" />
+                Chat
+              </Button>
+            )}
+          </div>
         </CardContent>
       </Card>
+
+      <ChatDialog
+        open={chatOpen}
+        onOpenChange={setChatOpen}
+        preselectedConversationId={chatConversationId}
+      />
 
       <Dialog open={showCancelDialog} onOpenChange={setShowCancelDialog}>
         <DialogContent>

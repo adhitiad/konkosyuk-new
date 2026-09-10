@@ -546,7 +546,7 @@ model messages {
 }
 
 model Conversation {
-  id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id             String    @id @default(cuid())
   bookingId      String?   @db.Uuid @unique
   propertyId     String?   @db.Uuid
   userId         String    @db.Uuid
@@ -565,16 +565,27 @@ model Conversation {
 }
 
 model Message {
-  id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  conversationId String    @db.Uuid
+  id             String    @id @default(cuid())
+  conversationId String
   senderId       String    @db.Uuid
-  content        String    @db.VarChar(2000)
+  content        String?   @db.VarChar(2000)
+  attachments    Json?
   isRead         Boolean   @default(false)
   createdAt      DateTime  @default(now()) @db.Timestamp(6)
   conversation   Conversation @relation("ConversationMessages", fields: [conversationId], references: [id], onDelete: Cascade)
   sender         users     @relation("UserSentMessages", fields: [senderId], references: [id], onDelete: Cascade)
 
   @@index([conversationId, createdAt])
+}
+
+model UserPresence {
+  userId        String    @id @db.Uuid
+  isOnline      Boolean   @default(false)
+  lastSeenAt    DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime  @updatedAt @db.Timestamp(6)
+  user          users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([isOnline])
 }
 
 model nearby_places {
@@ -1396,6 +1407,7 @@ model users {
   sentMessages                                       Message[]                      @relation("UserSentMessages")
   conversationsAsUser                                Conversation[]                 @relation("UserConversationsAsUser")
   conversationsAsOwner                               Conversation[]                 @relation("UserConversationsAsOwner")
+  userPresence                                       UserPresence?
 
    @@index([is_active])
 }

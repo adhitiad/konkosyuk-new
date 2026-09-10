@@ -82,6 +82,7 @@ export const ModelName = {
   messages: 'messages',
   Conversation: 'Conversation',
   Message: 'Message',
+  UserPresence: 'UserPresence',
   nearby_places: 'nearby_places',
   neighborhood_insights: 'neighborhood_insights',
   neighborhood_places: 'neighborhood_places',
@@ -655,11 +656,22 @@ export const MessageScalarFieldEnum = {
   conversationId: 'conversationId',
   senderId: 'senderId',
   content: 'content',
+  attachments: 'attachments',
   isRead: 'isRead',
   createdAt: 'createdAt'
 } as const
 
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const UserPresenceScalarFieldEnum = {
+  userId: 'userId',
+  isOnline: 'isOnline',
+  lastSeenAt: 'lastSeenAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserPresenceScalarFieldEnum = (typeof UserPresenceScalarFieldEnum)[keyof typeof UserPresenceScalarFieldEnum]
 
 
 export const Nearby_placesScalarFieldEnum = {

@@ -453,6 +453,7 @@ export type usersWhereInput = {
   sentMessages?: Prisma.MessageListRelationFilter
   conversationsAsUser?: Prisma.ConversationListRelationFilter
   conversationsAsOwner?: Prisma.ConversationListRelationFilter
+  userPresence?: Prisma.XOR<Prisma.UserPresenceNullableScalarRelationFilter, Prisma.UserPresenceWhereInput> | null
 }
 
 export type usersOrderByWithRelationInput = {
@@ -536,6 +537,7 @@ export type usersOrderByWithRelationInput = {
   sentMessages?: Prisma.MessageOrderByRelationAggregateInput
   conversationsAsUser?: Prisma.ConversationOrderByRelationAggregateInput
   conversationsAsOwner?: Prisma.ConversationOrderByRelationAggregateInput
+  userPresence?: Prisma.UserPresenceOrderByWithRelationInput
 }
 
 export type usersWhereUniqueInput = Prisma.AtLeast<{
@@ -622,6 +624,7 @@ export type usersWhereUniqueInput = Prisma.AtLeast<{
   sentMessages?: Prisma.MessageListRelationFilter
   conversationsAsUser?: Prisma.ConversationListRelationFilter
   conversationsAsOwner?: Prisma.ConversationListRelationFilter
+  userPresence?: Prisma.XOR<Prisma.UserPresenceNullableScalarRelationFilter, Prisma.UserPresenceWhereInput> | null
 }, "id" | "email" | "referral_code">
 
 export type usersOrderByWithAggregationInput = {
@@ -773,6 +776,7 @@ export type usersCreateInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateInput = {
@@ -856,6 +860,7 @@ export type usersUncheckedCreateInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersUpdateInput = {
@@ -939,6 +944,7 @@ export type usersUpdateInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateInput = {
@@ -1022,6 +1028,7 @@ export type usersUncheckedUpdateInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateManyInput = {
@@ -1624,6 +1631,20 @@ export type usersUpdateOneRequiredWithoutSentMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutSentMessagesInput, Prisma.usersUpdateWithoutSentMessagesInput>, Prisma.usersUncheckedUpdateWithoutSentMessagesInput>
 }
 
+export type usersCreateNestedOneWithoutUserPresenceInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutUserPresenceInput, Prisma.usersUncheckedCreateWithoutUserPresenceInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutUserPresenceInput
+  connect?: Prisma.usersWhereUniqueInput
+}
+
+export type usersUpdateOneRequiredWithoutUserPresenceNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutUserPresenceInput, Prisma.usersUncheckedCreateWithoutUserPresenceInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutUserPresenceInput
+  upsert?: Prisma.usersUpsertWithoutUserPresenceInput
+  connect?: Prisma.usersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutUserPresenceInput, Prisma.usersUpdateWithoutUserPresenceInput>, Prisma.usersUncheckedUpdateWithoutUserPresenceInput>
+}
+
 export type usersCreateNestedOneWithoutNeighborhood_insightsInput = {
   create?: Prisma.XOR<Prisma.usersCreateWithoutNeighborhood_insightsInput, Prisma.usersUncheckedCreateWithoutNeighborhood_insightsInput>
   connectOrCreate?: Prisma.usersCreateOrConnectWithoutNeighborhood_insightsInput
@@ -2114,6 +2135,7 @@ export type usersCreateWithoutAccountsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutAccountsInput = {
@@ -2196,6 +2218,7 @@ export type usersUncheckedCreateWithoutAccountsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutAccountsInput = {
@@ -2294,6 +2317,7 @@ export type usersUpdateWithoutAccountsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutAccountsInput = {
@@ -2376,6 +2400,7 @@ export type usersUncheckedUpdateWithoutAccountsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutAnalytics_eventsInput = {
@@ -2458,6 +2483,7 @@ export type usersCreateWithoutAnalytics_eventsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutAnalytics_eventsInput = {
@@ -2540,6 +2566,7 @@ export type usersUncheckedCreateWithoutAnalytics_eventsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutAnalytics_eventsInput = {
@@ -2638,6 +2665,7 @@ export type usersUpdateWithoutAnalytics_eventsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutAnalytics_eventsInput = {
@@ -2720,6 +2748,7 @@ export type usersUncheckedUpdateWithoutAnalytics_eventsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutAudit_logsInput = {
@@ -2802,6 +2831,7 @@ export type usersCreateWithoutAudit_logsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutAudit_logsInput = {
@@ -2884,6 +2914,7 @@ export type usersUncheckedCreateWithoutAudit_logsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutAudit_logsInput = {
@@ -2982,6 +3013,7 @@ export type usersUpdateWithoutAudit_logsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutAudit_logsInput = {
@@ -3064,6 +3096,7 @@ export type usersUncheckedUpdateWithoutAudit_logsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutBalance_logsInput = {
@@ -3146,6 +3179,7 @@ export type usersCreateWithoutBalance_logsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutBalance_logsInput = {
@@ -3228,6 +3262,7 @@ export type usersUncheckedCreateWithoutBalance_logsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutBalance_logsInput = {
@@ -3326,6 +3361,7 @@ export type usersUpdateWithoutBalance_logsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutBalance_logsInput = {
@@ -3408,6 +3444,7 @@ export type usersUncheckedUpdateWithoutBalance_logsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutBooking_requestsInput = {
@@ -3490,6 +3527,7 @@ export type usersCreateWithoutBooking_requestsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutBooking_requestsInput = {
@@ -3572,6 +3610,7 @@ export type usersUncheckedCreateWithoutBooking_requestsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutBooking_requestsInput = {
@@ -3670,6 +3709,7 @@ export type usersUpdateWithoutBooking_requestsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutBooking_requestsInput = {
@@ -3752,6 +3792,7 @@ export type usersUncheckedUpdateWithoutBooking_requestsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutBookingsInput = {
@@ -3834,6 +3875,7 @@ export type usersCreateWithoutBookingsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutBookingsInput = {
@@ -3916,6 +3958,7 @@ export type usersUncheckedCreateWithoutBookingsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutBookingsInput = {
@@ -4014,6 +4057,7 @@ export type usersUpdateWithoutBookingsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutBookingsInput = {
@@ -4096,6 +4140,7 @@ export type usersUncheckedUpdateWithoutBookingsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
@@ -4178,6 +4223,7 @@ export type usersCreateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
@@ -4260,6 +4306,7 @@ export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_owner_idTousersInpu
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
@@ -4347,6 +4394,7 @@ export type usersCreateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
@@ -4429,6 +4477,7 @@ export type usersUncheckedCreateWithoutChat_rooms_chat_rooms_tenant_idTousersInp
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
@@ -4527,6 +4576,7 @@ export type usersUpdateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_owner_idTousersInput = {
@@ -4609,6 +4659,7 @@ export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_owner_idTousersInpu
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersUpsertWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
@@ -4702,6 +4753,7 @@ export type usersUpdateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_tenant_idTousersInput = {
@@ -4784,6 +4836,7 @@ export type usersUncheckedUpdateWithoutChat_rooms_chat_rooms_tenant_idTousersInp
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutDamage_reports_damage_reports_reported_byTousersInput = {
@@ -4866,6 +4919,7 @@ export type usersCreateWithoutDamage_reports_damage_reports_reported_byTousersIn
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutDamage_reports_damage_reports_reported_byTousersInput = {
@@ -4948,6 +5002,7 @@ export type usersUncheckedCreateWithoutDamage_reports_damage_reports_reported_by
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutDamage_reports_damage_reports_reported_byTousersInput = {
@@ -5035,6 +5090,7 @@ export type usersCreateWithoutDamage_reports_damage_reports_resolved_byTousersIn
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutDamage_reports_damage_reports_resolved_byTousersInput = {
@@ -5117,6 +5173,7 @@ export type usersUncheckedCreateWithoutDamage_reports_damage_reports_resolved_by
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutDamage_reports_damage_reports_resolved_byTousersInput = {
@@ -5215,6 +5272,7 @@ export type usersUpdateWithoutDamage_reports_damage_reports_reported_byTousersIn
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_reported_byTousersInput = {
@@ -5297,6 +5355,7 @@ export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_reported_by
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersUpsertWithoutDamage_reports_damage_reports_resolved_byTousersInput = {
@@ -5390,6 +5449,7 @@ export type usersUpdateWithoutDamage_reports_damage_reports_resolved_byTousersIn
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_resolved_byTousersInput = {
@@ -5472,6 +5532,7 @@ export type usersUncheckedUpdateWithoutDamage_reports_damage_reports_resolved_by
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutExperiment_assignmentsInput = {
@@ -5554,6 +5615,7 @@ export type usersCreateWithoutExperiment_assignmentsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutExperiment_assignmentsInput = {
@@ -5636,6 +5698,7 @@ export type usersUncheckedCreateWithoutExperiment_assignmentsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutExperiment_assignmentsInput = {
@@ -5734,6 +5797,7 @@ export type usersUpdateWithoutExperiment_assignmentsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutExperiment_assignmentsInput = {
@@ -5816,6 +5880,7 @@ export type usersUncheckedUpdateWithoutExperiment_assignmentsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutFavoritesInput = {
@@ -5898,6 +5963,7 @@ export type usersCreateWithoutFavoritesInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutFavoritesInput = {
@@ -5980,6 +6046,7 @@ export type usersUncheckedCreateWithoutFavoritesInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutFavoritesInput = {
@@ -6078,6 +6145,7 @@ export type usersUpdateWithoutFavoritesInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutFavoritesInput = {
@@ -6160,6 +6228,7 @@ export type usersUncheckedUpdateWithoutFavoritesInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutFeedbacksInput = {
@@ -6242,6 +6311,7 @@ export type usersCreateWithoutFeedbacksInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutFeedbacksInput = {
@@ -6324,6 +6394,7 @@ export type usersUncheckedCreateWithoutFeedbacksInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutFeedbacksInput = {
@@ -6422,6 +6493,7 @@ export type usersUpdateWithoutFeedbacksInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutFeedbacksInput = {
@@ -6504,6 +6576,7 @@ export type usersUncheckedUpdateWithoutFeedbacksInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutGeneral_ledgerInput = {
@@ -6586,6 +6659,7 @@ export type usersCreateWithoutGeneral_ledgerInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutGeneral_ledgerInput = {
@@ -6668,6 +6742,7 @@ export type usersUncheckedCreateWithoutGeneral_ledgerInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutGeneral_ledgerInput = {
@@ -6766,6 +6841,7 @@ export type usersUpdateWithoutGeneral_ledgerInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutGeneral_ledgerInput = {
@@ -6848,6 +6924,7 @@ export type usersUncheckedUpdateWithoutGeneral_ledgerInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutGroup_booking_membersInput = {
@@ -6930,6 +7007,7 @@ export type usersCreateWithoutGroup_booking_membersInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutGroup_booking_membersInput = {
@@ -7012,6 +7090,7 @@ export type usersUncheckedCreateWithoutGroup_booking_membersInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutGroup_booking_membersInput = {
@@ -7110,6 +7189,7 @@ export type usersUpdateWithoutGroup_booking_membersInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutGroup_booking_membersInput = {
@@ -7192,6 +7272,7 @@ export type usersUncheckedUpdateWithoutGroup_booking_membersInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutGroup_bookingsInput = {
@@ -7274,6 +7355,7 @@ export type usersCreateWithoutGroup_bookingsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutGroup_bookingsInput = {
@@ -7356,6 +7438,7 @@ export type usersUncheckedCreateWithoutGroup_bookingsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutGroup_bookingsInput = {
@@ -7454,6 +7537,7 @@ export type usersUpdateWithoutGroup_bookingsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutGroup_bookingsInput = {
@@ -7536,6 +7620,7 @@ export type usersUncheckedUpdateWithoutGroup_bookingsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutInspections_inspections_performed_byTousersInput = {
@@ -7618,6 +7703,7 @@ export type usersCreateWithoutInspections_inspections_performed_byTousersInput =
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutInspections_inspections_performed_byTousersInput = {
@@ -7700,6 +7786,7 @@ export type usersUncheckedCreateWithoutInspections_inspections_performed_byTouse
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutInspections_inspections_performed_byTousersInput = {
@@ -7787,6 +7874,7 @@ export type usersCreateWithoutInspections_inspections_witness_idTousersInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutInspections_inspections_witness_idTousersInput = {
@@ -7869,6 +7957,7 @@ export type usersUncheckedCreateWithoutInspections_inspections_witness_idTousers
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutInspections_inspections_witness_idTousersInput = {
@@ -7967,6 +8056,7 @@ export type usersUpdateWithoutInspections_inspections_performed_byTousersInput =
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutInspections_inspections_performed_byTousersInput = {
@@ -8049,6 +8139,7 @@ export type usersUncheckedUpdateWithoutInspections_inspections_performed_byTouse
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersUpsertWithoutInspections_inspections_witness_idTousersInput = {
@@ -8142,6 +8233,7 @@ export type usersUpdateWithoutInspections_inspections_witness_idTousersInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutInspections_inspections_witness_idTousersInput = {
@@ -8224,6 +8316,7 @@ export type usersUncheckedUpdateWithoutInspections_inspections_witness_idTousers
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutKyc_verificationsInput = {
@@ -8306,6 +8399,7 @@ export type usersCreateWithoutKyc_verificationsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutKyc_verificationsInput = {
@@ -8388,6 +8482,7 @@ export type usersUncheckedCreateWithoutKyc_verificationsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutKyc_verificationsInput = {
@@ -8486,6 +8581,7 @@ export type usersUpdateWithoutKyc_verificationsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutKyc_verificationsInput = {
@@ -8568,6 +8664,7 @@ export type usersUncheckedUpdateWithoutKyc_verificationsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutLoyalty_transactionsInput = {
@@ -8650,6 +8747,7 @@ export type usersCreateWithoutLoyalty_transactionsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutLoyalty_transactionsInput = {
@@ -8732,6 +8830,7 @@ export type usersUncheckedCreateWithoutLoyalty_transactionsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutLoyalty_transactionsInput = {
@@ -8830,6 +8929,7 @@ export type usersUpdateWithoutLoyalty_transactionsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutLoyalty_transactionsInput = {
@@ -8912,6 +9012,7 @@ export type usersUncheckedUpdateWithoutLoyalty_transactionsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutMaintenance_reportsInput = {
@@ -8994,6 +9095,7 @@ export type usersCreateWithoutMaintenance_reportsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutMaintenance_reportsInput = {
@@ -9076,6 +9178,7 @@ export type usersUncheckedCreateWithoutMaintenance_reportsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutMaintenance_reportsInput = {
@@ -9174,6 +9277,7 @@ export type usersUpdateWithoutMaintenance_reportsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutMaintenance_reportsInput = {
@@ -9256,6 +9360,7 @@ export type usersUncheckedUpdateWithoutMaintenance_reportsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutMaintenance_ticketsInput = {
@@ -9338,6 +9443,7 @@ export type usersCreateWithoutMaintenance_ticketsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutMaintenance_ticketsInput = {
@@ -9420,6 +9526,7 @@ export type usersUncheckedCreateWithoutMaintenance_ticketsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutMaintenance_ticketsInput = {
@@ -9518,6 +9625,7 @@ export type usersUpdateWithoutMaintenance_ticketsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutMaintenance_ticketsInput = {
@@ -9600,6 +9708,7 @@ export type usersUncheckedUpdateWithoutMaintenance_ticketsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutMessagesInput = {
@@ -9682,6 +9791,7 @@ export type usersCreateWithoutMessagesInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutMessagesInput = {
@@ -9764,6 +9874,7 @@ export type usersUncheckedCreateWithoutMessagesInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutMessagesInput = {
@@ -9862,6 +9973,7 @@ export type usersUpdateWithoutMessagesInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutMessagesInput = {
@@ -9944,6 +10056,7 @@ export type usersUncheckedUpdateWithoutMessagesInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutConversationsAsUserInput = {
@@ -10026,6 +10139,7 @@ export type usersCreateWithoutConversationsAsUserInput = {
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutConversationsAsUserInput = {
@@ -10108,6 +10222,7 @@ export type usersUncheckedCreateWithoutConversationsAsUserInput = {
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutConversationsAsUserInput = {
@@ -10195,6 +10310,7 @@ export type usersCreateWithoutConversationsAsOwnerInput = {
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutConversationsAsOwnerInput = {
@@ -10277,6 +10393,7 @@ export type usersUncheckedCreateWithoutConversationsAsOwnerInput = {
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutConversationsAsOwnerInput = {
@@ -10375,6 +10492,7 @@ export type usersUpdateWithoutConversationsAsUserInput = {
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutConversationsAsUserInput = {
@@ -10457,6 +10575,7 @@ export type usersUncheckedUpdateWithoutConversationsAsUserInput = {
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersUpsertWithoutConversationsAsOwnerInput = {
@@ -10550,6 +10669,7 @@ export type usersUpdateWithoutConversationsAsOwnerInput = {
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutConversationsAsOwnerInput = {
@@ -10632,6 +10752,7 @@ export type usersUncheckedUpdateWithoutConversationsAsOwnerInput = {
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutSentMessagesInput = {
@@ -10714,6 +10835,7 @@ export type usersCreateWithoutSentMessagesInput = {
   pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutSentMessagesInput = {
@@ -10796,6 +10918,7 @@ export type usersUncheckedCreateWithoutSentMessagesInput = {
   pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutSentMessagesInput = {
@@ -10894,6 +11017,7 @@ export type usersUpdateWithoutSentMessagesInput = {
   pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutSentMessagesInput = {
@@ -10974,6 +11098,355 @@ export type usersUncheckedUpdateWithoutSentMessagesInput = {
   kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
   propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
   pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type usersCreateWithoutUserPresenceInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+}
+
+export type usersUncheckedCreateWithoutUserPresenceInput = {
+  id?: string
+  email: string
+  email_verified?: boolean
+  name: string
+  image?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  role?: $Enums.Role
+  is_active?: boolean
+  is_banned?: boolean
+  ban_reason?: string | null
+  two_factor_enabled?: boolean | null
+  kyc_status?: $Enums.KycStatus
+  ktp_number?: string | null
+  ktp_image_url?: string | null
+  reputation_score?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: string | null
+  city?: string | null
+  district?: string | null
+  referral_code?: string | null
+  referred_by?: string | null
+  loyalty_tier?: $Enums.LoyaltyTier
+  total_referrals?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsUncheckedCreateNestedManyWithoutUsersInput
+  analytics_events?: Prisma.analytics_eventsUncheckedCreateNestedManyWithoutUsersInput
+  audit_logs?: Prisma.audit_logsUncheckedCreateNestedManyWithoutUsersInput
+  balance_logs?: Prisma.balance_logsUncheckedCreateNestedManyWithoutUsersInput
+  booking_requests?: Prisma.booking_requestsUncheckedCreateNestedManyWithoutUsersInput
+  bookings?: Prisma.bookingsUncheckedCreateNestedManyWithoutUsersInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_owner_idTousersInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedCreateNestedManyWithoutUsers_chat_rooms_tenant_idTousersInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_reported_byTousersInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedCreateNestedManyWithoutUsers_damage_reports_resolved_byTousersInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.favoritesUncheckedCreateNestedManyWithoutUsersInput
+  feedbacks?: Prisma.feedbacksUncheckedCreateNestedManyWithoutUsersInput
+  general_ledger?: Prisma.general_ledgerUncheckedCreateNestedManyWithoutUsersInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedCreateNestedManyWithoutUsersInput
+  group_bookings?: Prisma.group_bookingsUncheckedCreateNestedManyWithoutUsersInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_performed_byTousersInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedCreateNestedManyWithoutUsers_inspections_witness_idTousersInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedCreateNestedManyWithoutUsersInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedCreateNestedManyWithoutUsersInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedCreateNestedManyWithoutUsersInput
+  messages?: Prisma.messagesUncheckedCreateNestedManyWithoutUsersInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedCreateNestedManyWithoutUsersInput
+  notifications?: Prisma.notificationsUncheckedCreateNestedManyWithoutUsersInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedCreateNestedManyWithoutUsersInput
+  properties?: Prisma.propertiesUncheckedCreateNestedManyWithoutUsersInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedCreateNestedManyWithoutUsersInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedCreateNestedManyWithoutUsersInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referee_idTousersInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedCreateNestedManyWithoutUsers_referrals_referrer_idTousersInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_reviewed_byTousersInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedCreateNestedManyWithoutUsers_refund_requests_user_idTousersInput
+  review_replies?: Prisma.review_repliesUncheckedCreateNestedManyWithoutUsersInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_created_by_idTousersInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedCreateNestedManyWithoutUsers_reviews_reviewed_user_idTousersInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedCreateNestedManyWithoutUsersInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  saved_searches?: Prisma.saved_searchesUncheckedCreateNestedManyWithoutUsersInput
+  sessions?: Prisma.sessionsUncheckedCreateNestedManyWithoutUsersInput
+  twoFactor?: Prisma.twoFactorUncheckedCreateNestedManyWithoutUsersInput
+  user_contracts?: Prisma.user_contractsUncheckedCreateNestedManyWithoutUsersInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedCreateNestedOneWithoutUsersInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedCreateNestedOneWithoutUsersInput
+  wishlists?: Prisma.wishlistsUncheckedCreateNestedManyWithoutUsersInput
+  withdrawals?: Prisma.withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  transaksi_bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUsersInput
+  kyc_requests?: Prisma.KycRequestUncheckedCreateNestedManyWithoutUsersInput
+  propertis_wizard?: Prisma.PropertyUncheckedCreateNestedManyWithoutUsersInput
+  pemesanans?: Prisma.PemesananUncheckedCreateNestedManyWithoutTenantInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+}
+
+export type usersCreateOrConnectWithoutUserPresenceInput = {
+  where: Prisma.usersWhereUniqueInput
+  create: Prisma.XOR<Prisma.usersCreateWithoutUserPresenceInput, Prisma.usersUncheckedCreateWithoutUserPresenceInput>
+}
+
+export type usersUpsertWithoutUserPresenceInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutUserPresenceInput, Prisma.usersUncheckedUpdateWithoutUserPresenceInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutUserPresenceInput, Prisma.usersUncheckedCreateWithoutUserPresenceInput>
+  where?: Prisma.usersWhereInput
+}
+
+export type usersUpdateToOneWithWhereWithoutUserPresenceInput = {
+  where?: Prisma.usersWhereInput
+  data: Prisma.XOR<Prisma.usersUpdateWithoutUserPresenceInput, Prisma.usersUncheckedUpdateWithoutUserPresenceInput>
+}
+
+export type usersUpdateWithoutUserPresenceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+}
+
+export type usersUncheckedUpdateWithoutUserPresenceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ban_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_enabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  kyc_status?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  ktp_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ktp_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation_score?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referral_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referred_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loyalty_tier?: Prisma.EnumLoyaltyTierFieldUpdateOperationsInput | $Enums.LoyaltyTier
+  total_referrals?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUncheckedUpdateManyWithoutUsersNestedInput
+  analytics_events?: Prisma.analytics_eventsUncheckedUpdateManyWithoutUsersNestedInput
+  audit_logs?: Prisma.audit_logsUncheckedUpdateManyWithoutUsersNestedInput
+  balance_logs?: Prisma.balance_logsUncheckedUpdateManyWithoutUsersNestedInput
+  booking_requests?: Prisma.booking_requestsUncheckedUpdateManyWithoutUsersNestedInput
+  bookings?: Prisma.bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  chat_rooms_chat_rooms_owner_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_owner_idTousersNestedInput
+  chat_rooms_chat_rooms_tenant_idTousers?: Prisma.chat_roomsUncheckedUpdateManyWithoutUsers_chat_rooms_tenant_idTousersNestedInput
+  damage_reports_damage_reports_reported_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_reported_byTousersNestedInput
+  damage_reports_damage_reports_resolved_byTousers?: Prisma.damage_reportsUncheckedUpdateManyWithoutUsers_damage_reports_resolved_byTousersNestedInput
+  experiment_assignments?: Prisma.experiment_assignmentsUncheckedUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.favoritesUncheckedUpdateManyWithoutUsersNestedInput
+  feedbacks?: Prisma.feedbacksUncheckedUpdateManyWithoutUsersNestedInput
+  general_ledger?: Prisma.general_ledgerUncheckedUpdateManyWithoutUsersNestedInput
+  group_booking_members?: Prisma.group_booking_membersUncheckedUpdateManyWithoutUsersNestedInput
+  group_bookings?: Prisma.group_bookingsUncheckedUpdateManyWithoutUsersNestedInput
+  inspections_inspections_performed_byTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_performed_byTousersNestedInput
+  inspections_inspections_witness_idTousers?: Prisma.inspectionsUncheckedUpdateManyWithoutUsers_inspections_witness_idTousersNestedInput
+  kyc_verifications?: Prisma.kyc_verificationsUncheckedUpdateManyWithoutUsersNestedInput
+  loyalty_transactions?: Prisma.loyalty_transactionsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_reports?: Prisma.maintenance_reportsUncheckedUpdateManyWithoutUsersNestedInput
+  maintenance_tickets?: Prisma.maintenance_ticketsUncheckedUpdateManyWithoutUsersNestedInput
+  messages?: Prisma.messagesUncheckedUpdateManyWithoutUsersNestedInput
+  neighborhood_insights?: Prisma.neighborhood_insightsUncheckedUpdateManyWithoutUsersNestedInput
+  notifications?: Prisma.notificationsUncheckedUpdateManyWithoutUsersNestedInput
+  owner_bank_accounts?: Prisma.owner_bank_accountsUncheckedUpdateManyWithoutUsersNestedInput
+  properties?: Prisma.propertiesUncheckedUpdateManyWithoutUsersNestedInput
+  property_comparisons?: Prisma.property_comparisonsUncheckedUpdateManyWithoutUsersNestedInput
+  push_subscriptions?: Prisma.push_subscriptionsUncheckedUpdateManyWithoutUsersNestedInput
+  referrals_referrals_referee_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referee_idTousersNestedInput
+  referrals_referrals_referrer_idTousers?: Prisma.referralsUncheckedUpdateManyWithoutUsers_referrals_referrer_idTousersNestedInput
+  refund_requests_refund_requests_reviewed_byTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_reviewed_byTousersNestedInput
+  refund_requests_refund_requests_user_idTousers?: Prisma.refund_requestsUncheckedUpdateManyWithoutUsers_refund_requests_user_idTousersNestedInput
+  review_replies?: Prisma.review_repliesUncheckedUpdateManyWithoutUsersNestedInput
+  reviews_reviews_created_by_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_created_by_idTousersNestedInput
+  reviews_reviews_reviewed_user_idTousers?: Prisma.reviewsUncheckedUpdateManyWithoutUsers_reviews_reviewed_user_idTousersNestedInput
+  reward_redemptions?: Prisma.reward_redemptionsUncheckedUpdateManyWithoutUsersNestedInput
+  roommate_preferences?: Prisma.roommate_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  saved_searches?: Prisma.saved_searchesUncheckedUpdateManyWithoutUsersNestedInput
+  sessions?: Prisma.sessionsUncheckedUpdateManyWithoutUsersNestedInput
+  twoFactor?: Prisma.twoFactorUncheckedUpdateManyWithoutUsersNestedInput
+  user_contracts?: Prisma.user_contractsUncheckedUpdateManyWithoutUsersNestedInput
+  user_interest_vectors?: Prisma.user_interest_vectorsUncheckedUpdateOneWithoutUsersNestedInput
+  user_notification_preferences?: Prisma.user_notification_preferencesUncheckedUpdateOneWithoutUsersNestedInput
+  wishlists?: Prisma.wishlistsUncheckedUpdateManyWithoutUsersNestedInput
+  withdrawals?: Prisma.withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  transaksi_bookings?: Prisma.BookingUncheckedUpdateManyWithoutUsersNestedInput
+  kyc_requests?: Prisma.KycRequestUncheckedUpdateManyWithoutUsersNestedInput
+  propertis_wizard?: Prisma.PropertyUncheckedUpdateManyWithoutUsersNestedInput
+  pemesanans?: Prisma.PemesananUncheckedUpdateManyWithoutTenantNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
 }
@@ -11058,6 +11531,7 @@ export type usersCreateWithoutNeighborhood_insightsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutNeighborhood_insightsInput = {
@@ -11140,6 +11614,7 @@ export type usersUncheckedCreateWithoutNeighborhood_insightsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutNeighborhood_insightsInput = {
@@ -11238,6 +11713,7 @@ export type usersUpdateWithoutNeighborhood_insightsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutNeighborhood_insightsInput = {
@@ -11320,6 +11796,7 @@ export type usersUncheckedUpdateWithoutNeighborhood_insightsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutNotificationsInput = {
@@ -11402,6 +11879,7 @@ export type usersCreateWithoutNotificationsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutNotificationsInput = {
@@ -11484,6 +11962,7 @@ export type usersUncheckedCreateWithoutNotificationsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutNotificationsInput = {
@@ -11582,6 +12061,7 @@ export type usersUpdateWithoutNotificationsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutNotificationsInput = {
@@ -11664,6 +12144,7 @@ export type usersUncheckedUpdateWithoutNotificationsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutOwner_bank_accountsInput = {
@@ -11746,6 +12227,7 @@ export type usersCreateWithoutOwner_bank_accountsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutOwner_bank_accountsInput = {
@@ -11828,6 +12310,7 @@ export type usersUncheckedCreateWithoutOwner_bank_accountsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutOwner_bank_accountsInput = {
@@ -11926,6 +12409,7 @@ export type usersUpdateWithoutOwner_bank_accountsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutOwner_bank_accountsInput = {
@@ -12008,6 +12492,7 @@ export type usersUncheckedUpdateWithoutOwner_bank_accountsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutPropertiesInput = {
@@ -12090,6 +12575,7 @@ export type usersCreateWithoutPropertiesInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutPropertiesInput = {
@@ -12172,6 +12658,7 @@ export type usersUncheckedCreateWithoutPropertiesInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutPropertiesInput = {
@@ -12270,6 +12757,7 @@ export type usersUpdateWithoutPropertiesInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutPropertiesInput = {
@@ -12352,6 +12840,7 @@ export type usersUncheckedUpdateWithoutPropertiesInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutProperty_comparisonsInput = {
@@ -12434,6 +12923,7 @@ export type usersCreateWithoutProperty_comparisonsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutProperty_comparisonsInput = {
@@ -12516,6 +13006,7 @@ export type usersUncheckedCreateWithoutProperty_comparisonsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutProperty_comparisonsInput = {
@@ -12614,6 +13105,7 @@ export type usersUpdateWithoutProperty_comparisonsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutProperty_comparisonsInput = {
@@ -12696,6 +13188,7 @@ export type usersUncheckedUpdateWithoutProperty_comparisonsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutPush_subscriptionsInput = {
@@ -12778,6 +13271,7 @@ export type usersCreateWithoutPush_subscriptionsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutPush_subscriptionsInput = {
@@ -12860,6 +13354,7 @@ export type usersUncheckedCreateWithoutPush_subscriptionsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutPush_subscriptionsInput = {
@@ -12958,6 +13453,7 @@ export type usersUpdateWithoutPush_subscriptionsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutPush_subscriptionsInput = {
@@ -13040,6 +13536,7 @@ export type usersUncheckedUpdateWithoutPush_subscriptionsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutReferrals_referrals_referee_idTousersInput = {
@@ -13122,6 +13619,7 @@ export type usersCreateWithoutReferrals_referrals_referee_idTousersInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutReferrals_referrals_referee_idTousersInput = {
@@ -13204,6 +13702,7 @@ export type usersUncheckedCreateWithoutReferrals_referrals_referee_idTousersInpu
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutReferrals_referrals_referee_idTousersInput = {
@@ -13291,6 +13790,7 @@ export type usersCreateWithoutReferrals_referrals_referrer_idTousersInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutReferrals_referrals_referrer_idTousersInput = {
@@ -13373,6 +13873,7 @@ export type usersUncheckedCreateWithoutReferrals_referrals_referrer_idTousersInp
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutReferrals_referrals_referrer_idTousersInput = {
@@ -13471,6 +13972,7 @@ export type usersUpdateWithoutReferrals_referrals_referee_idTousersInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReferrals_referrals_referee_idTousersInput = {
@@ -13553,6 +14055,7 @@ export type usersUncheckedUpdateWithoutReferrals_referrals_referee_idTousersInpu
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersUpsertWithoutReferrals_referrals_referrer_idTousersInput = {
@@ -13646,6 +14149,7 @@ export type usersUpdateWithoutReferrals_referrals_referrer_idTousersInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReferrals_referrals_referrer_idTousersInput = {
@@ -13728,6 +14232,7 @@ export type usersUncheckedUpdateWithoutReferrals_referrals_referrer_idTousersInp
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutRefund_requests_refund_requests_reviewed_byTousersInput = {
@@ -13810,6 +14315,7 @@ export type usersCreateWithoutRefund_requests_refund_requests_reviewed_byTousers
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutRefund_requests_refund_requests_reviewed_byTousersInput = {
@@ -13892,6 +14398,7 @@ export type usersUncheckedCreateWithoutRefund_requests_refund_requests_reviewed_
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutRefund_requests_refund_requests_reviewed_byTousersInput = {
@@ -13979,6 +14486,7 @@ export type usersCreateWithoutRefund_requests_refund_requests_user_idTousersInpu
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutRefund_requests_refund_requests_user_idTousersInput = {
@@ -14061,6 +14569,7 @@ export type usersUncheckedCreateWithoutRefund_requests_refund_requests_user_idTo
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutRefund_requests_refund_requests_user_idTousersInput = {
@@ -14159,6 +14668,7 @@ export type usersUpdateWithoutRefund_requests_refund_requests_reviewed_byTousers
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_reviewed_byTousersInput = {
@@ -14241,6 +14751,7 @@ export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_reviewed_
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersUpsertWithoutRefund_requests_refund_requests_user_idTousersInput = {
@@ -14334,6 +14845,7 @@ export type usersUpdateWithoutRefund_requests_refund_requests_user_idTousersInpu
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_user_idTousersInput = {
@@ -14416,6 +14928,7 @@ export type usersUncheckedUpdateWithoutRefund_requests_refund_requests_user_idTo
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutReview_repliesInput = {
@@ -14498,6 +15011,7 @@ export type usersCreateWithoutReview_repliesInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutReview_repliesInput = {
@@ -14580,6 +15094,7 @@ export type usersUncheckedCreateWithoutReview_repliesInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutReview_repliesInput = {
@@ -14678,6 +15193,7 @@ export type usersUpdateWithoutReview_repliesInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReview_repliesInput = {
@@ -14760,6 +15276,7 @@ export type usersUncheckedUpdateWithoutReview_repliesInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutReviews_reviews_created_by_idTousersInput = {
@@ -14842,6 +15359,7 @@ export type usersCreateWithoutReviews_reviews_created_by_idTousersInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutReviews_reviews_created_by_idTousersInput = {
@@ -14924,6 +15442,7 @@ export type usersUncheckedCreateWithoutReviews_reviews_created_by_idTousersInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutReviews_reviews_created_by_idTousersInput = {
@@ -15011,6 +15530,7 @@ export type usersCreateWithoutReviews_reviews_reviewed_user_idTousersInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutReviews_reviews_reviewed_user_idTousersInput = {
@@ -15093,6 +15613,7 @@ export type usersUncheckedCreateWithoutReviews_reviews_reviewed_user_idTousersIn
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutReviews_reviews_reviewed_user_idTousersInput = {
@@ -15191,6 +15712,7 @@ export type usersUpdateWithoutReviews_reviews_created_by_idTousersInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReviews_reviews_created_by_idTousersInput = {
@@ -15273,6 +15795,7 @@ export type usersUncheckedUpdateWithoutReviews_reviews_created_by_idTousersInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersUpsertWithoutReviews_reviews_reviewed_user_idTousersInput = {
@@ -15366,6 +15889,7 @@ export type usersUpdateWithoutReviews_reviews_reviewed_user_idTousersInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReviews_reviews_reviewed_user_idTousersInput = {
@@ -15448,6 +15972,7 @@ export type usersUncheckedUpdateWithoutReviews_reviews_reviewed_user_idTousersIn
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutReward_redemptionsInput = {
@@ -15530,6 +16055,7 @@ export type usersCreateWithoutReward_redemptionsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutReward_redemptionsInput = {
@@ -15612,6 +16138,7 @@ export type usersUncheckedCreateWithoutReward_redemptionsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutReward_redemptionsInput = {
@@ -15710,6 +16237,7 @@ export type usersUpdateWithoutReward_redemptionsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutReward_redemptionsInput = {
@@ -15792,6 +16320,7 @@ export type usersUncheckedUpdateWithoutReward_redemptionsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutRoommate_preferencesInput = {
@@ -15874,6 +16403,7 @@ export type usersCreateWithoutRoommate_preferencesInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutRoommate_preferencesInput = {
@@ -15956,6 +16486,7 @@ export type usersUncheckedCreateWithoutRoommate_preferencesInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutRoommate_preferencesInput = {
@@ -16054,6 +16585,7 @@ export type usersUpdateWithoutRoommate_preferencesInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutRoommate_preferencesInput = {
@@ -16136,6 +16668,7 @@ export type usersUncheckedUpdateWithoutRoommate_preferencesInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutSaved_searchesInput = {
@@ -16218,6 +16751,7 @@ export type usersCreateWithoutSaved_searchesInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutSaved_searchesInput = {
@@ -16300,6 +16834,7 @@ export type usersUncheckedCreateWithoutSaved_searchesInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutSaved_searchesInput = {
@@ -16398,6 +16933,7 @@ export type usersUpdateWithoutSaved_searchesInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutSaved_searchesInput = {
@@ -16480,6 +17016,7 @@ export type usersUncheckedUpdateWithoutSaved_searchesInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutSessionsInput = {
@@ -16562,6 +17099,7 @@ export type usersCreateWithoutSessionsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutSessionsInput = {
@@ -16644,6 +17182,7 @@ export type usersUncheckedCreateWithoutSessionsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutSessionsInput = {
@@ -16742,6 +17281,7 @@ export type usersUpdateWithoutSessionsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutSessionsInput = {
@@ -16824,6 +17364,7 @@ export type usersUncheckedUpdateWithoutSessionsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutTwoFactorInput = {
@@ -16906,6 +17447,7 @@ export type usersCreateWithoutTwoFactorInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutTwoFactorInput = {
@@ -16988,6 +17530,7 @@ export type usersUncheckedCreateWithoutTwoFactorInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutTwoFactorInput = {
@@ -17086,6 +17629,7 @@ export type usersUpdateWithoutTwoFactorInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutTwoFactorInput = {
@@ -17168,6 +17712,7 @@ export type usersUncheckedUpdateWithoutTwoFactorInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutUser_contractsInput = {
@@ -17250,6 +17795,7 @@ export type usersCreateWithoutUser_contractsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutUser_contractsInput = {
@@ -17332,6 +17878,7 @@ export type usersUncheckedCreateWithoutUser_contractsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutUser_contractsInput = {
@@ -17430,6 +17977,7 @@ export type usersUpdateWithoutUser_contractsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutUser_contractsInput = {
@@ -17512,6 +18060,7 @@ export type usersUncheckedUpdateWithoutUser_contractsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutUser_interest_vectorsInput = {
@@ -17594,6 +18143,7 @@ export type usersCreateWithoutUser_interest_vectorsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutUser_interest_vectorsInput = {
@@ -17676,6 +18226,7 @@ export type usersUncheckedCreateWithoutUser_interest_vectorsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutUser_interest_vectorsInput = {
@@ -17774,6 +18325,7 @@ export type usersUpdateWithoutUser_interest_vectorsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutUser_interest_vectorsInput = {
@@ -17856,6 +18408,7 @@ export type usersUncheckedUpdateWithoutUser_interest_vectorsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutUser_notification_preferencesInput = {
@@ -17938,6 +18491,7 @@ export type usersCreateWithoutUser_notification_preferencesInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutUser_notification_preferencesInput = {
@@ -18020,6 +18574,7 @@ export type usersUncheckedCreateWithoutUser_notification_preferencesInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutUser_notification_preferencesInput = {
@@ -18118,6 +18673,7 @@ export type usersUpdateWithoutUser_notification_preferencesInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutUser_notification_preferencesInput = {
@@ -18200,6 +18756,7 @@ export type usersUncheckedUpdateWithoutUser_notification_preferencesInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutWishlistsInput = {
@@ -18282,6 +18839,7 @@ export type usersCreateWithoutWishlistsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutWishlistsInput = {
@@ -18364,6 +18922,7 @@ export type usersUncheckedCreateWithoutWishlistsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutWishlistsInput = {
@@ -18462,6 +19021,7 @@ export type usersUpdateWithoutWishlistsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutWishlistsInput = {
@@ -18544,6 +19104,7 @@ export type usersUncheckedUpdateWithoutWishlistsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutWithdrawalsInput = {
@@ -18626,6 +19187,7 @@ export type usersCreateWithoutWithdrawalsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutWithdrawalsInput = {
@@ -18708,6 +19270,7 @@ export type usersUncheckedCreateWithoutWithdrawalsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutWithdrawalsInput = {
@@ -18806,6 +19369,7 @@ export type usersUpdateWithoutWithdrawalsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutWithdrawalsInput = {
@@ -18888,6 +19452,7 @@ export type usersUncheckedUpdateWithoutWithdrawalsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutTransaksi_bookingsInput = {
@@ -18970,6 +19535,7 @@ export type usersCreateWithoutTransaksi_bookingsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutTransaksi_bookingsInput = {
@@ -19052,6 +19618,7 @@ export type usersUncheckedCreateWithoutTransaksi_bookingsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutTransaksi_bookingsInput = {
@@ -19150,6 +19717,7 @@ export type usersUpdateWithoutTransaksi_bookingsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutTransaksi_bookingsInput = {
@@ -19232,6 +19800,7 @@ export type usersUncheckedUpdateWithoutTransaksi_bookingsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutKyc_requestsInput = {
@@ -19314,6 +19883,7 @@ export type usersCreateWithoutKyc_requestsInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutKyc_requestsInput = {
@@ -19396,6 +19966,7 @@ export type usersUncheckedCreateWithoutKyc_requestsInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutKyc_requestsInput = {
@@ -19494,6 +20065,7 @@ export type usersUpdateWithoutKyc_requestsInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutKyc_requestsInput = {
@@ -19576,6 +20148,7 @@ export type usersUncheckedUpdateWithoutKyc_requestsInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutPropertis_wizardInput = {
@@ -19658,6 +20231,7 @@ export type usersCreateWithoutPropertis_wizardInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutPropertis_wizardInput = {
@@ -19740,6 +20314,7 @@ export type usersUncheckedCreateWithoutPropertis_wizardInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutPropertis_wizardInput = {
@@ -19838,6 +20413,7 @@ export type usersUpdateWithoutPropertis_wizardInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutPropertis_wizardInput = {
@@ -19920,6 +20496,7 @@ export type usersUncheckedUpdateWithoutPropertis_wizardInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type usersCreateWithoutPemesanansInput = {
@@ -20002,6 +20579,7 @@ export type usersCreateWithoutPemesanansInput = {
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceCreateNestedOneWithoutUserInput
 }
 
 export type usersUncheckedCreateWithoutPemesanansInput = {
@@ -20084,6 +20662,7 @@ export type usersUncheckedCreateWithoutPemesanansInput = {
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationsAsUser?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   conversationsAsOwner?: Prisma.ConversationUncheckedCreateNestedManyWithoutOwnerInput
+  userPresence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type usersCreateOrConnectWithoutPemesanansInput = {
@@ -20182,6 +20761,7 @@ export type usersUpdateWithoutPemesanansInput = {
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUpdateOneWithoutUserNestedInput
 }
 
 export type usersUncheckedUpdateWithoutPemesanansInput = {
@@ -20264,6 +20844,7 @@ export type usersUncheckedUpdateWithoutPemesanansInput = {
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsUser?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   conversationsAsOwner?: Prisma.ConversationUncheckedUpdateManyWithoutOwnerNestedInput
+  userPresence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 
@@ -20819,6 +21400,7 @@ export type usersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   sentMessages?: boolean | Prisma.users$sentMessagesArgs<ExtArgs>
   conversationsAsUser?: boolean | Prisma.users$conversationsAsUserArgs<ExtArgs>
   conversationsAsOwner?: boolean | Prisma.users$conversationsAsOwnerArgs<ExtArgs>
+  userPresence?: boolean | Prisma.users$userPresenceArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["users"]>
 
@@ -20967,6 +21549,7 @@ export type usersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   sentMessages?: boolean | Prisma.users$sentMessagesArgs<ExtArgs>
   conversationsAsUser?: boolean | Prisma.users$conversationsAsUserArgs<ExtArgs>
   conversationsAsOwner?: boolean | Prisma.users$conversationsAsOwnerArgs<ExtArgs>
+  userPresence?: boolean | Prisma.users$userPresenceArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type usersIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -21028,6 +21611,7 @@ export type $usersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     sentMessages: Prisma.$MessagePayload<ExtArgs>[]
     conversationsAsUser: Prisma.$ConversationPayload<ExtArgs>[]
     conversationsAsOwner: Prisma.$ConversationPayload<ExtArgs>[]
+    userPresence: Prisma.$UserPresencePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -21504,6 +22088,7 @@ export interface Prisma__usersClient<T, Null = never, ExtArgs extends runtime.Ty
   sentMessages<T extends Prisma.users$sentMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   conversationsAsUser<T extends Prisma.users$conversationsAsUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$conversationsAsUserArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   conversationsAsOwner<T extends Prisma.users$conversationsAsOwnerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$conversationsAsOwnerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  userPresence<T extends Prisma.users$userPresenceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$userPresenceArgs<ExtArgs>>): Prisma.Prisma__UserPresenceClient<runtime.Types.Result.GetResult<Prisma.$UserPresencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23207,6 +23792,25 @@ export type users$conversationsAsOwnerArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.ConversationScalarFieldEnum | Prisma.ConversationScalarFieldEnum[]
+}
+
+/**
+ * users.userPresence
+ */
+export type users$userPresenceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserPresence
+   */
+  select?: Prisma.UserPresenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserPresence
+   */
+  omit?: Prisma.UserPresenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserPresenceInclude<ExtArgs> | null
+  where?: Prisma.UserPresenceWhereInput
 }
 
 /**

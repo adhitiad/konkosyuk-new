@@ -20,6 +20,7 @@ import { Route as protectedAdminRouteRouteImport } from './routes/(protected)/ad
 import { Route as AuthSignInRouteImport } from './routes/_auth.sign-in'
 import { Route as AuthSignUpRouteImport } from './routes/_auth.sign-up'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
+import { Route as ApiSseRouteImport } from './routes/api/sse'
 import { Route as BookingBookingIdRouteImport } from './routes/booking/$bookingId'
 import { Route as OwnerPropertiesRouteImport } from './routes/owner.properties'
 import { Route as PropertiesIdRouteImport } from './routes/properties/$id'
@@ -43,6 +44,7 @@ import { Route as protectedPemilikDashboardIndexRouteImport } from './routes/(pr
 import { Route as protectedPemilikDashboardActiveRouteImport } from './routes/(protected)/pemilik/dashboard/active'
 import { Route as protectedPemilikDashboardExpirationsRouteImport } from './routes/(protected)/pemilik/dashboard/expirations'
 import { Route as protectedPemilikDashboardHistoryRouteImport } from './routes/(protected)/pemilik/dashboard/history'
+import { Route as protectedPemilikDashboardMessagesRouteImport } from './routes/(protected)/pemilik/dashboard/messages'
 import { Route as protectedPemilikDashboardRequestsRouteImport } from './routes/(protected)/pemilik/dashboard/requests'
 import { Route as protectedPenyewaBookingBaruRouteImport } from './routes/(protected)/penyewa/booking/baru'
 import { Route as ApiWebhooksQstashSplatRouteImport } from './routes/api/webhooks/qstash/$'
@@ -99,6 +101,11 @@ const AuthSignUpRoute = AuthSignUpRouteImport.update({
 const ApiSplatRoute = ApiSplatRouteImport.update({
   id: '/api/$',
   path: '/api/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSseRoute = ApiSseRouteImport.update({
+  id: '/api/sse',
+  path: '/api/sse',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BookingBookingIdRoute = BookingBookingIdRouteImport.update({
@@ -226,6 +233,12 @@ const protectedPemilikDashboardHistoryRoute =
     path: '/history',
     getParentRoute: () => protectedPemilikDashboardRouteRoute,
   } as any)
+const protectedPemilikDashboardMessagesRoute =
+  protectedPemilikDashboardMessagesRouteImport.update({
+    id: '/messages',
+    path: '/messages',
+    getParentRoute: () => protectedPemilikDashboardRouteRoute,
+  } as any)
 const protectedPemilikDashboardRequestsRoute =
   protectedPemilikDashboardRequestsRouteImport.update({
     id: '/requests',
@@ -255,6 +268,7 @@ export interface FileRoutesByFullPath {
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
   '/api/$': typeof ApiSplatRoute
+  '/api/sse': typeof ApiSseRoute
   '/booking/$bookingId': typeof BookingBookingIdRoute
   '/owner/properties': typeof OwnerPropertiesRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
@@ -277,6 +291,7 @@ export interface FileRoutesByFullPath {
   '/pemilik/dashboard/active': typeof protectedPemilikDashboardActiveRoute
   '/pemilik/dashboard/expirations': typeof protectedPemilikDashboardExpirationsRoute
   '/pemilik/dashboard/history': typeof protectedPemilikDashboardHistoryRoute
+  '/pemilik/dashboard/messages': typeof protectedPemilikDashboardMessagesRoute
   '/pemilik/dashboard/requests': typeof protectedPemilikDashboardRequestsRoute
   '/penyewa/booking/baru': typeof protectedPenyewaBookingBaruRoute
   '/api/webhooks/qstash/$': typeof ApiWebhooksQstashSplatRoute
@@ -292,6 +307,7 @@ export interface FileRoutesByTo {
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
   '/api/$': typeof ApiSplatRoute
+  '/api/sse': typeof ApiSseRoute
   '/booking/$bookingId': typeof BookingBookingIdRoute
   '/owner/properties': typeof OwnerPropertiesRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
@@ -313,6 +329,7 @@ export interface FileRoutesByTo {
   '/pemilik/dashboard/active': typeof protectedPemilikDashboardActiveRoute
   '/pemilik/dashboard/expirations': typeof protectedPemilikDashboardExpirationsRoute
   '/pemilik/dashboard/history': typeof protectedPemilikDashboardHistoryRoute
+  '/pemilik/dashboard/messages': typeof protectedPemilikDashboardMessagesRoute
   '/pemilik/dashboard/requests': typeof protectedPemilikDashboardRequestsRoute
   '/penyewa/booking/baru': typeof protectedPenyewaBookingBaruRoute
   '/api/webhooks/qstash/$': typeof ApiWebhooksQstashSplatRoute
@@ -331,6 +348,7 @@ export interface FileRoutesById {
   '/_auth/sign-in': typeof AuthSignInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
   '/api/$': typeof ApiSplatRoute
+  '/api/sse': typeof ApiSseRoute
   '/booking/$bookingId': typeof BookingBookingIdRoute
   '/owner/properties': typeof OwnerPropertiesRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
@@ -353,6 +371,7 @@ export interface FileRoutesById {
   '/(protected)/pemilik/dashboard/active': typeof protectedPemilikDashboardActiveRoute
   '/(protected)/pemilik/dashboard/expirations': typeof protectedPemilikDashboardExpirationsRoute
   '/(protected)/pemilik/dashboard/history': typeof protectedPemilikDashboardHistoryRoute
+  '/(protected)/pemilik/dashboard/messages': typeof protectedPemilikDashboardMessagesRoute
   '/(protected)/pemilik/dashboard/requests': typeof protectedPemilikDashboardRequestsRoute
   '/(protected)/penyewa/booking/baru': typeof protectedPenyewaBookingBaruRoute
   '/api/webhooks/qstash/$': typeof ApiWebhooksQstashSplatRoute
@@ -371,6 +390,7 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/api/$'
+    | '/api/sse'
     | '/booking/$bookingId'
     | '/owner/properties'
     | '/properties/$id'
@@ -393,6 +413,7 @@ export interface FileRouteTypes {
     | '/pemilik/dashboard/active'
     | '/pemilik/dashboard/expirations'
     | '/pemilik/dashboard/history'
+    | '/pemilik/dashboard/messages'
     | '/pemilik/dashboard/requests'
     | '/penyewa/booking/baru'
     | '/api/webhooks/qstash/$'
@@ -408,6 +429,7 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/api/$'
+    | '/api/sse'
     | '/booking/$bookingId'
     | '/owner/properties'
     | '/properties/$id'
@@ -429,6 +451,7 @@ export interface FileRouteTypes {
     | '/pemilik/dashboard/active'
     | '/pemilik/dashboard/expirations'
     | '/pemilik/dashboard/history'
+    | '/pemilik/dashboard/messages'
     | '/pemilik/dashboard/requests'
     | '/penyewa/booking/baru'
     | '/api/webhooks/qstash/$'
@@ -446,6 +469,7 @@ export interface FileRouteTypes {
     | '/_auth/sign-in'
     | '/_auth/sign-up'
     | '/api/$'
+    | '/api/sse'
     | '/booking/$bookingId'
     | '/owner/properties'
     | '/properties/$id'
@@ -468,6 +492,7 @@ export interface FileRouteTypes {
     | '/(protected)/pemilik/dashboard/active'
     | '/(protected)/pemilik/dashboard/expirations'
     | '/(protected)/pemilik/dashboard/history'
+    | '/(protected)/pemilik/dashboard/messages'
     | '/(protected)/pemilik/dashboard/requests'
     | '/(protected)/penyewa/booking/baru'
     | '/api/webhooks/qstash/$'
@@ -484,6 +509,7 @@ export interface RootRouteChildren {
   PropertiesRoute: typeof PropertiesRouteWithChildren
   protectedAdminRouteRoute: typeof protectedAdminRouteRouteWithChildren
   ApiSplatRoute: typeof ApiSplatRoute
+  ApiSseRoute: typeof ApiSseRoute
   BookingBookingIdRoute: typeof BookingBookingIdRoute
   OwnerPropertiesRoute: typeof OwnerPropertiesRouteWithChildren
   protectedPemilikDashboardRouteRoute: typeof protectedPemilikDashboardRouteRouteWithChildren
@@ -575,6 +601,13 @@ declare module '@tanstack/react-router' {
       path: '/api/$'
       fullPath: '/api/$'
       preLoaderRoute: typeof ApiSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sse': {
+      id: '/api/sse'
+      path: '/api/sse'
+      fullPath: '/api/sse'
+      preLoaderRoute: typeof ApiSseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/booking/$bookingId': {
@@ -738,6 +771,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof protectedPemilikDashboardHistoryRouteImport
       parentRoute: typeof protectedPemilikDashboardRouteRoute
     }
+    '/(protected)/pemilik/dashboard/messages': {
+      id: '/(protected)/pemilik/dashboard/messages'
+      path: '/messages'
+      fullPath: '/pemilik/dashboard/messages'
+      preLoaderRoute: typeof protectedPemilikDashboardMessagesRouteImport
+      parentRoute: typeof protectedPemilikDashboardRouteRoute
+    }
     '/(protected)/pemilik/dashboard/requests': {
       id: '/(protected)/pemilik/dashboard/requests'
       path: '/requests'
@@ -823,6 +863,7 @@ interface protectedPemilikDashboardRouteRouteChildren {
   protectedPemilikDashboardActiveRoute: typeof protectedPemilikDashboardActiveRoute
   protectedPemilikDashboardExpirationsRoute: typeof protectedPemilikDashboardExpirationsRoute
   protectedPemilikDashboardHistoryRoute: typeof protectedPemilikDashboardHistoryRoute
+  protectedPemilikDashboardMessagesRoute: typeof protectedPemilikDashboardMessagesRoute
   protectedPemilikDashboardRequestsRoute: typeof protectedPemilikDashboardRequestsRoute
   protectedPemilikDashboardIndexRoute: typeof protectedPemilikDashboardIndexRoute
 }
@@ -834,6 +875,8 @@ const protectedPemilikDashboardRouteRouteChildren: protectedPemilikDashboardRout
       protectedPemilikDashboardExpirationsRoute,
     protectedPemilikDashboardHistoryRoute:
       protectedPemilikDashboardHistoryRoute,
+    protectedPemilikDashboardMessagesRoute:
+      protectedPemilikDashboardMessagesRoute,
     protectedPemilikDashboardRequestsRoute:
       protectedPemilikDashboardRequestsRoute,
     protectedPemilikDashboardIndexRoute: protectedPemilikDashboardIndexRoute,
@@ -868,6 +911,7 @@ const rootRouteChildren: RootRouteChildren = {
   PropertiesRoute: PropertiesRouteWithChildren,
   protectedAdminRouteRoute: protectedAdminRouteRouteWithChildren,
   ApiSplatRoute: ApiSplatRoute,
+  ApiSseRoute: ApiSseRoute,
   BookingBookingIdRoute: BookingBookingIdRoute,
   OwnerPropertiesRoute: OwnerPropertiesRouteWithChildren,
   protectedPemilikDashboardRouteRoute:

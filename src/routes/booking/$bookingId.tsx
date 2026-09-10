@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useQuery } from '@tanstack/react-query'
-import { ArrowLeft, Calendar, User, Hash } from 'lucide-react'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { ArrowLeft, Calendar, User, Hash, MessageSquare } from 'lucide-react'
 
 import { orpc } from '#/orpc/client'
 import { BookingStatusBadge } from '#/components/booking/BookingStatusBadge'
@@ -17,6 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from '#/components/ui/table'
+import { ChatDialog } from '#/components/chat/ChatDialog'
 
 export const Route = createFileRoute('/booking/$bookingId')({
   component: BookingDetailPage,
@@ -39,6 +41,7 @@ export const Route = createFileRoute('/booking/$bookingId')({
 
 function BookingDetailPage() {
   const { bookingId } = Route.useParams()
+  const queryClient = useQueryClient()
 
   const {
     data: booking,
@@ -49,6 +52,17 @@ function BookingDetailPage() {
       input: { booking_id: bookingId },
     }),
   )
+
+  const chatMutation = useMutation({
+    mutationFn: async () => {
+      return orpc.createConversationFromBooking.call({
+        bookingId: bookingId,
+      })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['conversations'] })
+    },
+  })
 
   if (isLoading) {
     return null
@@ -78,6 +92,25 @@ function BookingDetailPage() {
     (booking.status_booking === 'ACTIVE' ||
       booking.status_booking === 'COMPLETED') &&
     !booking.next_booking_id
+
+  const canChat =
+    booking.status_booking === 'CONFIRMED' ||
+    booking.status_booking === 'ACTIVE'
+
+  const [chatOpen, setChatOpen] = useState(false)
+  const [chatConversationId, setChatConversationId] = useState<string | null>(
+    null,
+  )
+
+  const handleOpenChat = async () => {
+    try {
+      const result = await chatMutation.mutateAsync()
+      setChatConversationId(result.id)
+      setChatOpen(true)
+    } catch {
+      // error handled by mutation
+    }
+  }
 
   return (
     <main className="page-wrap py-8">
@@ -187,6 +220,23 @@ function BookingDetailPage() {
         )}
 
         <BookingTimeline bookingId={booking.id} />
+
+        {canChat && (
+          <Button
+            className="w-full"
+            onClick={handleOpenChat}
+            disabled={chatMutation.isPending}
+          >
+            <MessageSquare className="mr-2 h-4 w-4" />
+            Chat dengan Owner
+          </Button>
+        )}
+
+        <ChatDialog
+          open={chatOpen}
+          onOpenChange={setChatOpen}
+          preselectedConversationId={chatConversationId}
+        />
       </div>
     </main>
   )

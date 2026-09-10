@@ -1,6 +1,15 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { MapPin, ChevronLeft, Bed, Ruler, Zap, Armchair, X } from 'lucide-react'
+import {
+  MapPin,
+  ChevronLeft,
+  Bed,
+  Ruler,
+  Zap,
+  Armchair,
+  X,
+  MessageSquare,
+} from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -28,6 +37,7 @@ import {
   SelectValue,
 } from '#/components/ui/select'
 import { getPropertyTypeName } from '#/utils/propertyType'
+import { ChatDialog } from '#/components/chat/ChatDialog'
 
 export const Route = createFileRoute('/properties/$id')({
   component: PropertyDetailPage,
@@ -296,9 +306,40 @@ function BookingRequestForm({ propertyId, units }: BookingRequestFormProps) {
 
 function PropertyDetailPage() {
   const { id } = Route.useParams()
+  const queryClient = useQueryClient()
   const { data: property, isLoading } = useQuery(
     orpc.getProperty.queryOptions({ input: { id } }),
   )
+
+  const chatMutation = useMutation({
+    mutationFn: async () => {
+      if (!property?.owner_id) {
+        throw new Error('Property owner not found')
+      }
+      return orpc.createConversationFromProperty.call({
+        propertyId: id,
+        ownerId: property.owner_id,
+      })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['conversations'] })
+    },
+  })
+
+  const [chatOpen, setChatOpen] = useState(false)
+  const [chatConversationId, setChatConversationId] = useState<string | null>(
+    null,
+  )
+
+  const handleOpenChat = async () => {
+    try {
+      const result = await chatMutation.mutateAsync()
+      setChatConversationId(result.id)
+      setChatOpen(true)
+    } catch {
+      // error handled by mutation
+    }
+  }
 
   if (isLoading) {
     return (
@@ -606,8 +647,25 @@ function PropertyDetailPage() {
               )}
             </CardContent>
           </Card>
+
+          {property.owner_id && (
+            <Button
+              className="w-full"
+              onClick={handleOpenChat}
+              disabled={chatMutation.isPending}
+            >
+              <MessageSquare className="mr-2 h-4 w-4" />
+              Chat dengan Pemilik
+            </Button>
+          )}
         </div>
       </div>
+
+      <ChatDialog
+        open={chatOpen}
+        onOpenChange={setChatOpen}
+        preselectedConversationId={chatConversationId}
+      />
     </main>
   )
 }

@@ -93,6 +93,19 @@ import {
   markNotificationRead,
   markAllNotificationsRead,
 } from './notifications'
+import {
+  getConversations,
+  getConversationMessages,
+  sendMessage,
+  markMessagesAsRead,
+  createConversationFromBooking,
+  createConversationFromProperty,
+  subscribeToConversation,
+  getPresence,
+  updatePresence,
+  sendTypingIndicator,
+  uploadAttachment,
+} from './chat'
 import { getUpcomingExpirations, getMonthlyRevenue } from './owner'
 
 export default {
@@ -178,6 +191,17 @@ export default {
   getNotifications,
   markNotificationRead,
   markAllNotificationsRead,
+  getConversations,
+  getConversationMessages,
+  sendMessage,
+  markMessagesAsRead,
+  createConversationFromBooking,
+  createConversationFromProperty,
+  subscribeToConversation,
+  getPresence,
+  updatePresence,
+  sendTypingIndicator,
+  uploadAttachment,
   getUpcomingExpirations,
   getMonthlyRevenue,
 }

@@ -5,6 +5,7 @@ import {
 } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
+import { ChatButton } from '#/components/chat/ChatButton'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import NotFound from '../components/NotFound'
@@ -82,6 +83,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <PageTransition>{children}</PageTransition>
         </ErrorBoundary>
         <Footer />
+        <ChatButton />
         <TanStackDevtools
           config={{
             position: 'bottom-right',

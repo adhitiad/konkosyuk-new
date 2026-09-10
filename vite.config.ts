@@ -23,7 +23,11 @@ const config = defineConfig({
       outdir: './src/paraglide',
       strategy: ['url', 'baseLocale'],
     }),
-    nitro(),
+    nitro({
+      features: {
+        websocket: true,
+      },
+    }),
     tailwindcss(),
     tanstackStart(),
     viteReact(),

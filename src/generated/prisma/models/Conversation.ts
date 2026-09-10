@@ -199,10 +199,10 @@ export type ConversationWhereInput = {
   OR?: Prisma.ConversationWhereInput[]
   NOT?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
   id?: Prisma.StringFilter<"Conversation"> | string
-  bookingId?: Prisma.StringNullableFilter<"Conversation"> | string | null
-  propertyId?: Prisma.StringNullableFilter<"Conversation"> | string | null
-  userId?: Prisma.StringFilter<"Conversation"> | string
-  ownerId?: Prisma.StringFilter<"Conversation"> | string
+  bookingId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
+  propertyId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
+  userId?: Prisma.UuidFilter<"Conversation"> | string
+  ownerId?: Prisma.UuidFilter<"Conversation"> | string
   lastMessageAt?: Prisma.DateTimeNullableFilter<"Conversation"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
@@ -235,9 +235,9 @@ export type ConversationWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
   OR?: Prisma.ConversationWhereInput[]
   NOT?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
-  propertyId?: Prisma.StringNullableFilter<"Conversation"> | string | null
-  userId?: Prisma.StringFilter<"Conversation"> | string
-  ownerId?: Prisma.StringFilter<"Conversation"> | string
+  propertyId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
+  userId?: Prisma.UuidFilter<"Conversation"> | string
+  ownerId?: Prisma.UuidFilter<"Conversation"> | string
   lastMessageAt?: Prisma.DateTimeNullableFilter<"Conversation"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
@@ -267,10 +267,10 @@ export type ConversationScalarWhereWithAggregatesInput = {
   OR?: Prisma.ConversationScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ConversationScalarWhereWithAggregatesInput | Prisma.ConversationScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Conversation"> | string
-  bookingId?: Prisma.StringNullableWithAggregatesFilter<"Conversation"> | string | null
-  propertyId?: Prisma.StringNullableWithAggregatesFilter<"Conversation"> | string | null
-  userId?: Prisma.StringWithAggregatesFilter<"Conversation"> | string
-  ownerId?: Prisma.StringWithAggregatesFilter<"Conversation"> | string
+  bookingId?: Prisma.UuidNullableWithAggregatesFilter<"Conversation"> | string | null
+  propertyId?: Prisma.UuidNullableWithAggregatesFilter<"Conversation"> | string | null
+  userId?: Prisma.UuidWithAggregatesFilter<"Conversation"> | string
+  ownerId?: Prisma.UuidWithAggregatesFilter<"Conversation"> | string
   lastMessageAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Conversation"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Conversation"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Conversation"> | Date | string
@@ -723,10 +723,10 @@ export type ConversationScalarWhereInput = {
   OR?: Prisma.ConversationScalarWhereInput[]
   NOT?: Prisma.ConversationScalarWhereInput | Prisma.ConversationScalarWhereInput[]
   id?: Prisma.StringFilter<"Conversation"> | string
-  bookingId?: Prisma.StringNullableFilter<"Conversation"> | string | null
-  propertyId?: Prisma.StringNullableFilter<"Conversation"> | string | null
-  userId?: Prisma.StringFilter<"Conversation"> | string
-  ownerId?: Prisma.StringFilter<"Conversation"> | string
+  bookingId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
+  propertyId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
+  userId?: Prisma.UuidFilter<"Conversation"> | string
+  ownerId?: Prisma.UuidFilter<"Conversation"> | string
   lastMessageAt?: Prisma.DateTimeNullableFilter<"Conversation"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string

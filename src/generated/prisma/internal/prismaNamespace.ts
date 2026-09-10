@@ -428,6 +428,7 @@ export const ModelName = {
   messages: 'messages',
   Conversation: 'Conversation',
   Message: 'Message',
+  UserPresence: 'UserPresence',
   nearby_places: 'nearby_places',
   neighborhood_insights: 'neighborhood_insights',
   neighborhood_places: 'neighborhood_places',
@@ -502,7 +503,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "accounts" | "ad_packages" | "analytics_events" | "app_settings" | "audit_logs" | "balance_logs" | "booking_requests" | "bookings" | "campus_areas" | "chart_of_accounts" | "chat_rooms" | "damage_reports" | "experiment_assignments" | "experiments" | "favorites" | "feature_flags" | "feedbacks" | "general_ledger" | "group_booking_members" | "group_bookings" | "inspection_items" | "inspection_photos" | "inspection_templates" | "inspections" | "kyc_verifications" | "loyalty_transactions" | "maintenance_reports" | "maintenance_tickets" | "messages" | "conversation" | "message" | "nearby_places" | "neighborhood_insights" | "neighborhood_places" | "notification_settings" | "notifications" | "owner_bank_accounts" | "payment_gateway_configs" | "payment_gateway_credentials" | "payment_transactions" | "payments" | "platform_settings" | "popular_areas" | "pricing_analytics" | "pricing_suggestions" | "properties" | "property_ads" | "property_comparisons" | "property_ratings" | "property_rules" | "property_similarities" | "property_tags" | "push_subscriptions" | "referrals" | "refund_requests" | "review_replies" | "reviews" | "reward_redemptions" | "rewards" | "rooms" | "room_facilities" | "roommate_preferences" | "saved_searches" | "seasonal_pricing_rules" | "sessions" | "tags" | "twoFactor" | "unit_pricing_tiers" | "units" | "user_contracts" | "user_interest_vectors" | "user_notification_preferences" | "users" | "verifications" | "wa_session" | "webhook_events" | "wishlists" | "withdrawals" | "booking" | "payment" | "kycRequest" | "refundRequest" | "platformConfig" | "paymentTransaction" | "transaction" | "property" | "unitProperti" | "fasilitas" | "fotoProperti" | "pemesanan"
+    modelProps: "accounts" | "ad_packages" | "analytics_events" | "app_settings" | "audit_logs" | "balance_logs" | "booking_requests" | "bookings" | "campus_areas" | "chart_of_accounts" | "chat_rooms" | "damage_reports" | "experiment_assignments" | "experiments" | "favorites" | "feature_flags" | "feedbacks" | "general_ledger" | "group_booking_members" | "group_bookings" | "inspection_items" | "inspection_photos" | "inspection_templates" | "inspections" | "kyc_verifications" | "loyalty_transactions" | "maintenance_reports" | "maintenance_tickets" | "messages" | "conversation" | "message" | "userPresence" | "nearby_places" | "neighborhood_insights" | "neighborhood_places" | "notification_settings" | "notifications" | "owner_bank_accounts" | "payment_gateway_configs" | "payment_gateway_credentials" | "payment_transactions" | "payments" | "platform_settings" | "popular_areas" | "pricing_analytics" | "pricing_suggestions" | "properties" | "property_ads" | "property_comparisons" | "property_ratings" | "property_rules" | "property_similarities" | "property_tags" | "push_subscriptions" | "referrals" | "refund_requests" | "review_replies" | "reviews" | "reward_redemptions" | "rewards" | "rooms" | "room_facilities" | "roommate_preferences" | "saved_searches" | "seasonal_pricing_rules" | "sessions" | "tags" | "twoFactor" | "unit_pricing_tiers" | "units" | "user_contracts" | "user_interest_vectors" | "user_notification_preferences" | "users" | "verifications" | "wa_session" | "webhook_events" | "wishlists" | "withdrawals" | "booking" | "payment" | "kycRequest" | "refundRequest" | "platformConfig" | "paymentTransaction" | "transaction" | "property" | "unitProperti" | "fasilitas" | "fotoProperti" | "pemesanan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2797,6 +2798,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.MessageCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.MessageCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserPresence: {
+      payload: Prisma.$UserPresencePayload<ExtArgs>
+      fields: Prisma.UserPresenceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserPresenceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPresencePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserPresenceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPresencePayload>
+        }
+        findFirst: {
+          args: Prisma.UserPresenceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPresencePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserPresenceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPresencePayload>
+        }
+        findMany: {
+          args: Prisma.UserPresenceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPresencePayload>[]
+        }
+        create: {
+          args: Prisma.UserPresenceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPresencePayload>
+        }
+        createMany: {
+          args: Prisma.UserPresenceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserPresenceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPresencePayload>[]
+        }
+        delete: {
+          args: Prisma.UserPresenceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPresencePayload>
+        }
+        update: {
+          args: Prisma.UserPresenceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPresencePayload>
+        }
+        deleteMany: {
+          args: Prisma.UserPresenceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserPresenceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserPresenceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPresencePayload>[]
+        }
+        upsert: {
+          args: Prisma.UserPresenceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPresencePayload>
+        }
+        aggregate: {
+          args: Prisma.UserPresenceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserPresence>
+        }
+        groupBy: {
+          args: Prisma.UserPresenceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserPresenceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserPresenceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserPresenceCountAggregateOutputType> | number
         }
       }
     }
@@ -7701,11 +7776,22 @@ export const MessageScalarFieldEnum = {
   conversationId: 'conversationId',
   senderId: 'senderId',
   content: 'content',
+  attachments: 'attachments',
   isRead: 'isRead',
   createdAt: 'createdAt'
 } as const
 
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const UserPresenceScalarFieldEnum = {
+  userId: 'userId',
+  isOnline: 'isOnline',
+  lastSeenAt: 'lastSeenAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserPresenceScalarFieldEnum = (typeof UserPresenceScalarFieldEnum)[keyof typeof UserPresenceScalarFieldEnum]
 
 
 export const Nearby_placesScalarFieldEnum = {
@@ -9999,6 +10085,7 @@ export type GlobalOmitConfig = {
   messages?: Prisma.messagesOmit
   conversation?: Prisma.ConversationOmit
   message?: Prisma.MessageOmit
+  userPresence?: Prisma.UserPresenceOmit
   nearby_places?: Prisma.nearby_placesOmit
   neighborhood_insights?: Prisma.neighborhood_insightsOmit
   neighborhood_places?: Prisma.neighborhood_placesOmit
