@@ -8,6 +8,7 @@ import type { BookingStatus, Prisma } from '#/generated/prisma/client'
 import type { PropertyWithRelations } from '#/types/property'
 
 import {
+  BoundsSchema,
   CheckPropertyAvailabilityInput,
   CheckUnitAvailabilityInput,
   CreatePropertyInput,
@@ -56,6 +57,7 @@ export const listProperties = os
       city: z.string().optional(),
       search: z.string().optional(),
       nearby: NearbyFilterSchema.optional(),
+      bounds: BoundsSchema.optional(),
     }),
   )
   .handler(async ({ input }) => {
@@ -85,6 +87,11 @@ export const listProperties = os
       const lngDelta = radius_km / (111 * Math.cos((lat * Math.PI) / 180))
       where.latitude = { gte: lat - latDelta, lte: lat + latDelta }
       where.longitude = { gte: lng - lngDelta, lte: lng + lngDelta }
+    }
+    if (input.bounds) {
+      const { north, south, east, west } = input.bounds
+      where.latitude = { gte: south, lte: north }
+      where.longitude = { gte: west, lte: east }
     }
     const properties = await prisma.properties.findMany({
       where,
@@ -173,6 +180,7 @@ export const searchRooms = os
       facilities: z.array(z.string()).optional(),
       search: z.string().optional(),
       limit: z.number().int().min(1).max(100).default(50),
+      bounds: BoundsSchema.optional(),
     }),
   )
   .handler(async ({ input }) => {
@@ -191,6 +199,11 @@ export const searchRooms = os
             ],
           }
         : {}),
+    }
+    if (input.bounds) {
+      const { north, south, east, west } = input.bounds
+      where.latitude = { gte: south, lte: north }
+      where.longitude = { gte: west, lte: east }
     }
 
     const properties = await prisma.properties.findMany({

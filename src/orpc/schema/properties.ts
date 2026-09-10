@@ -1,5 +1,16 @@
 import { z } from 'zod'
 
+export const BoundsSchema = z
+  .object({
+    north: z.number().min(-90).max(90),
+    south: z.number().min(-90).max(90),
+    east: z.number().min(-180).max(180),
+    west: z.number().min(-180).max(180),
+  })
+  .refine((b) => b.north >= b.south && b.east >= b.west, {
+    message: 'Invalid bounds: north must be >= south, east must be >= west',
+  })
+
 export const NearbyFilterSchema = z.object({
   lat: z.number(),
   lng: z.number(),
@@ -198,4 +209,5 @@ export const RoomSearchSchema = z.object({
   facilities: z.array(z.string()).optional(),
   search: z.string().optional(),
   limit: z.number().int().min(1).max(100).default(50),
+  bounds: BoundsSchema.optional(),
 })

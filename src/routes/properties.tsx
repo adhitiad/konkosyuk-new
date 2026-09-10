@@ -5,7 +5,7 @@ import {
   useNavigate,
 } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
-import { ChevronDown, MapPin, Bed, Search, X } from 'lucide-react'
+import { ChevronDown, MapPin, Bed, Search, X, Loader2 } from 'lucide-react'
 import type { Prisma, PropertyType } from '#/generated/prisma/client'
 import { useState } from 'react'
 
@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from '#/components/ui/select'
 import { PROPERTY_TYPE_LABELS } from '#/utils/propertyType'
-import { MapPicker } from '#/components/MapPicker'
+import { PropertyMap } from '#/components/property/PropertyMap'
 import { GenderTypeSchema, RentalPeriodSchema } from '#/orpc/schema/properties'
 
 export const Route = createFileRoute('/properties')({
@@ -70,22 +70,24 @@ function PropertiesList() {
   const [keyword, setKeyword] = useState(searchParam ?? '')
   const [city, setCity] = useState(cityParam ?? '')
   const [selectedType, setSelectedType] = useState<PropertyType | undefined>()
-  const [selectedLat, setSelectedLat] = useState<number | null>(null)
-  const [selectedLng, setSelectedLng] = useState<number | null>(null)
-  const [radiusKm, setRadiusKm] = useState(10)
   const [showMap, setShowMap] = useState(false)
+  const [bounds, setBounds] = useState<{
+    north: number
+    south: number
+    east: number
+    west: number
+  } | null>(null)
 
   const genderType = typeParam ? GenderTypeSchema.safeParse(typeParam) : null
   const rentalPeriod = typeParam
     ? RentalPeriodSchema.safeParse(typeParam)
     : null
 
-  const nearby =
-    selectedLat && selectedLng
-      ? { lat: selectedLat, lng: selectedLng, radius_km: radiusKm }
-      : undefined
-
-  const { data: properties, isLoading } = useQuery(
+  const {
+    data: properties,
+    isLoading,
+    isFetching,
+  } = useQuery(
     orpc.listProperties.queryOptions({
       input: {
         type: selectedType,
@@ -93,7 +95,7 @@ function PropertiesList() {
         rental_period: rentalPeriod?.success ? rentalPeriod.data : undefined,
         city: cityParam,
         search: searchParam,
-        nearby,
+        bounds: bounds ?? undefined,
       },
     }),
   )
@@ -236,32 +238,27 @@ function PropertiesList() {
         <div className="mb-6">
           <div className="mb-2 flex items-center justify-between text-sm">
             <span className="text-[var(--sea-ink-soft)]">
-              {selectedLat && selectedLng
-                ? `Lokasi terpilih: ${selectedLat.toFixed(4)}, ${selectedLng.toFixed(4)}`
-                : 'Pilih lokasi di peta atau cari di kolom pencarian'}
+              {bounds
+                ? `Area: ${bounds.west.toFixed(2)},${bounds.south.toFixed(2)} - ${bounds.east.toFixed(2)},${bounds.north.toFixed(2)}`
+                : 'Geser peta untuk memperbarui hasil pencarian'}
             </span>
-            <Select
-              value={String(radiusKm)}
-              onValueChange={(v) => setRadiusKm(Number(v))}
-            >
-              <SelectTrigger className="w-32">
-                <SelectValue placeholder="Radius" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="5">5 km</SelectItem>
-                <SelectItem value="10">10 km</SelectItem>
-                <SelectItem value="20">20 km</SelectItem>
-                <SelectItem value="50">50 km</SelectItem>
-              </SelectContent>
-            </Select>
+            {isFetching && (
+              <div className="flex items-center gap-1 text-xs text-[var(--lagoon-deep)]">
+                <Loader2 className="h-3 w-3 animate-spin" />
+                Memuat...
+              </div>
+            )}
           </div>
-          <MapPicker
-            lat={selectedLat}
-            lng={selectedLng}
-            onLocationSelect={(lat, lng) => {
-              setSelectedLat(lat)
-              setSelectedLng(lng)
-            }}
+          <PropertyMap
+            properties={(properties ?? []).map((p) => ({
+              id: p.id,
+              name: p.name,
+              latitude: p.latitude ?? 0,
+              longitude: p.longitude ?? 0,
+              address: p.address,
+              images: p.images,
+            }))}
+            onBoundsChange={setBounds}
           />
         </div>
       )}

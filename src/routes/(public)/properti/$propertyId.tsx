@@ -279,9 +279,20 @@ function PropertyDetailPage() {
                 !Number.isNaN(Number(property.latitude)) &&
                 !Number.isNaN(Number(property.longitude)) && (
                   <PropertyMap
-                    lat={Number(property.latitude)}
-                    lng={Number(property.longitude)}
-                    address={property.alamat_lengkap}
+                    properties={[
+                      {
+                        id: property.id,
+                        name: property.nama_properti,
+                        latitude: Number(property.latitude),
+                        longitude: Number(property.longitude),
+                        address: property.alamat_lengkap,
+                      },
+                    ]}
+                    center={{
+                      lat: Number(property.latitude),
+                      lng: Number(property.longitude),
+                    }}
+                    zoom={16}
                   />
                 )}
               {mapLink && (

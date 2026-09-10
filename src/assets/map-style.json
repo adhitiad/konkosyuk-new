@@ -1,0 +1,29 @@
+{
+  "$schema": "https://maplibre.org/maplibre-gl-style-spec/26.4.1/style.json",
+  "name": "Konkosyuk",
+  "version": 8,
+  "metadata": {},
+  "sources": {
+    "osm": {
+      "type": "raster",
+      "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      "tileSize": 256,
+      "attribution": "© OpenStreetMap contributors"
+    },
+    "carto-positron": {
+      "type": "raster",
+      "tiles": [
+        "https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
+      ],
+      "tileSize": 256,
+      "attribution": "© OpenStreetMap contributors, © CARTO"
+    },
+    "carto-dark": {
+      "type": "raster",
+      "tiles": ["https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"],
+      "tileSize": 256,
+      "attribution": "© OpenStreetMap contributors, © CARTO"
+    }
+  },
+  "layers": []
+}
