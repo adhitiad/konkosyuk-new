@@ -14,7 +14,8 @@ import { Button } from '#/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
 import { Skeleton } from '#/components/ui/skeleton'
 import { PropertyImageGallery } from '#/components/property/PropertyImageGallery'
-import { PropertyMap } from '#/components/property/PropertyMap'
+import { PropertyMap, MapPropertiesContext } from '#/components/property/PropertyMap'
+import { GoogleMapsProvider } from '#/components/property/GoogleMapsProvider'
 import {
   getTipePropertiLabel,
   getStatusPropertiLabel,
@@ -278,22 +279,27 @@ function PropertyDetailPage() {
                 property.longitude &&
                 !Number.isNaN(Number(property.latitude)) &&
                 !Number.isNaN(Number(property.longitude)) && (
-                  <PropertyMap
-                    properties={[
-                      {
-                        id: property.id,
-                        name: property.nama_properti,
-                        latitude: Number(property.latitude),
-                        longitude: Number(property.longitude),
-                        address: property.alamat_lengkap,
-                      },
-                    ]}
-                    center={{
-                      lat: Number(property.latitude),
-                      lng: Number(property.longitude),
-                    }}
-                    zoom={16}
-                  />
+                  <GoogleMapsProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+                    <MapPropertiesContext.Provider
+                      value={[
+                        {
+                          id: property.id,
+                          name: property.nama_properti,
+                          latitude: Number(property.latitude),
+                          longitude: Number(property.longitude),
+                          address: property.alamat_lengkap,
+                        },
+                      ]}
+                    >
+                      <PropertyMap
+                        center={{
+                          lat: Number(property.latitude),
+                          lng: Number(property.longitude),
+                        }}
+                        zoom={16}
+                      />
+                    </MapPropertiesContext.Provider>
+                  </GoogleMapsProvider>
                 )}
               {mapLink && (
                 <Button variant="link" asChild className="p-0">

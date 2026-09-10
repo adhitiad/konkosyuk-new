@@ -7,7 +7,7 @@ import {
 import { useQuery } from '@tanstack/react-query'
 import { ChevronDown, MapPin, Bed, Search, X, Loader2 } from 'lucide-react'
 import type { Prisma, PropertyType } from '#/generated/prisma/client'
-import { useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 
 import { orpc } from '#/orpc/client'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
@@ -23,7 +23,8 @@ import {
   SelectValue,
 } from '#/components/ui/select'
 import { PROPERTY_TYPE_LABELS } from '#/utils/propertyType'
-import { PropertyMap } from '#/components/property/PropertyMap'
+import { PropertyMap, MapPropertiesContext } from '#/components/property/PropertyMap'
+import { GoogleMapsProvider } from '#/components/property/GoogleMapsProvider'
 import { GenderTypeSchema, RentalPeriodSchema } from '#/orpc/schema/properties'
 
 export const Route = createFileRoute('/properties')({
@@ -99,6 +100,35 @@ function PropertiesList() {
       },
     }),
   )
+
+  const mapPropertiesRef = useRef<
+    Array<{
+      id: string
+      name: string
+      latitude: number
+      longitude: number
+      address: string
+    }>
+  >([])
+
+  const mapProperties = useMemo(() => {
+    const next = (properties ?? []).map((p) => ({
+      id: p.id,
+      name: p.name,
+      latitude: p.latitude ?? 0,
+      longitude: p.longitude ?? 0,
+      address: p.address,
+    }))
+
+    const prev = mapPropertiesRef.current
+    const sameLength = prev.length === next.length
+    const sameIds =
+      sameLength && next.every((p, i) => p.id === prev[i].id)
+
+    if (sameIds) return prev
+    mapPropertiesRef.current = next
+    return next
+  }, [properties])
 
   function onSearch(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -249,17 +279,11 @@ function PropertiesList() {
               </div>
             )}
           </div>
-          <PropertyMap
-            properties={(properties ?? []).map((p) => ({
-              id: p.id,
-              name: p.name,
-              latitude: p.latitude ?? 0,
-              longitude: p.longitude ?? 0,
-              address: p.address,
-              images: p.images,
-            }))}
-            onBoundsChange={setBounds}
-          />
+          <GoogleMapsProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+            <MapPropertiesContext.Provider value={mapProperties}>
+              <PropertyMap onBoundsChange={setBounds} />
+            </MapPropertiesContext.Provider>
+          </GoogleMapsProvider>
         </div>
       )}
 

@@ -17,6 +17,7 @@ export const env = createEnv({
   client: {
     VITE_APP_TITLE: z.string().min(1).optional(),
     VITE_MIDTRANS_CLIENT_KEY: z.string().min(1).optional(),
+    VITE_GOOGLE_MAPS_API_KEY: z.string().min(1).optional(),
   },
 
   /**
@@ -33,7 +34,7 @@ export const env = createEnv({
    * to be a number (e.g. `PORT=` in a ".env" file), Zod will incorrectly flag
    * it as a type mismatch violation. Additionally, if you have an empty string
    * for a value that is supposed to be a string with a default value (e.g.
-   * `DOMAIN=` in an ".env" file), the default value will never be applied.
+   * `DOMAIN=` in a ".env" file), the default value will never be applied.
    *
    * In order to solve these issues, we recommend that all new projects
    * explicitly specify this option as true.
