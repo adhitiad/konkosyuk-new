@@ -56,5 +56,21 @@
   "auth_error_email_exists": "Email sudah terdaftar. Silakan masuk atau gunakan email lain.",
   "auth_error_generic": "Terjadi kesalahan. Silakan coba lagi.",
   "auth_success_signin": "Berhasil masuk. Mengarahkan...",
-  "auth_success_signup": "Akun berhasil dibuat. Mengarahkan..."
+  "auth_success_signup": "Akun berhasil dibuat. Mengarahkan...",
+  "chat_select_conversation": "Pilih percakapan untuk mulai chat",
+  "chat_loading_conversations": "Memuat percakapan...",
+  "chat_no_conversations": "Belum ada percakapan.",
+  "chat_loading_messages": "Memuat pesan...",
+  "chat_online": "Online",
+  "chat_last_seen": "Terakhir dilihat {time}",
+  "chat_typing": "{name} sedang mengetik...",
+  "chat_attachment_preview": "Pratinjau lampiran",
+  "chat_max_chars": "Maksimal {n} karakter",
+  "chat_sending": "Mengirim...",
+  "chat_uploading": "Mengunggah...",
+  "chat_upload_failed": "Gagal mengunggah file",
+  "chat_send_failed": "Gagal mengirim pesan",
+  "chat_select_file": "Pilih file",
+  "chat_remove": "Hapus",
+  "chat_image_preview": "Pratinjau gambar"
 }

@@ -6,6 +6,7 @@ import {
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { ChatButton } from '#/components/chat/ChatButton'
+import { MessageScrollerProvider } from '#/components/ui/message-scroller'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import NotFound from '../components/NotFound'
@@ -78,26 +79,28 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
-        <Header />
-        <ErrorBoundary>
-          <PageTransition>{children}</PageTransition>
-        </ErrorBoundary>
-        <Footer />
-        <ChatButton />
-        <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-            TanStackQueryDevtools,
-          ]}
-        />
-        <Toaster />
-        <Scripts />
+        <MessageScrollerProvider>
+          <Header />
+          <ErrorBoundary>
+            <PageTransition>{children}</PageTransition>
+          </ErrorBoundary>
+          <Footer />
+          <ChatButton />
+          <TanStackDevtools
+            config={{
+              position: 'bottom-right',
+            }}
+            plugins={[
+              {
+                name: 'Tanstack Router',
+                render: <TanStackRouterDevtoolsPanel />,
+              },
+              TanStackQueryDevtools,
+            ]}
+          />
+          <Toaster />
+          <Scripts />
+        </MessageScrollerProvider>
       </body>
     </html>
   )

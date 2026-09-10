@@ -18,6 +18,8 @@ type Message = {
   conversationId: string
   senderId: string
   content: string | null
+  attachments?:
+    { url: string; type: string; filename: string; size: number }[] | null
   isRead: boolean
   createdAt: Date
   sender: Participant
@@ -339,7 +341,16 @@ export function useChat(options: UseChatOptions = {}) {
   })
 
   const sendMessageMutation = useMutation({
-    mutationFn: async (input: { conversationId: string; content: string }) => {
+    mutationFn: async (input: {
+      conversationId: string
+      content: string
+      attachments?: {
+        url: string
+        type: string
+        filename: string
+        size: number
+      }[]
+    }) => {
       return client.sendMessage(input)
     },
     onMutate: async (input) => {
@@ -357,6 +368,7 @@ export function useChat(options: UseChatOptions = {}) {
         conversationId: input.conversationId,
         senderId: '',
         content: input.content,
+        attachments: input.attachments,
         isRead: false,
         createdAt: new Date(),
         sender: {
@@ -466,6 +478,7 @@ export function useChat(options: UseChatOptions = {}) {
     isSending: sendMessageMutation.isPending,
     isMarkingRead: markAsReadMutation.isPending,
     isUploading: uploadAttachmentMutation.isPending,
+    currentUserId: userIdRef.current,
     refetchConversations: conversationsQuery.refetch,
     refetchMessages: messagesQuery.refetch,
   }

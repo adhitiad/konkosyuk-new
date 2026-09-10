@@ -252,7 +252,9 @@ export const getConversationMessages = withSession
         conversationId: msg.conversationId,
         senderId: msg.senderId,
         content: msg.content,
-        attachments: msg.attachments,
+        attachments: msg.attachments as
+          | { url: string; type: string; filename: string; size: number }[]
+          | null,
         isRead: msg.isRead,
         createdAt: msg.createdAt,
         sender: {

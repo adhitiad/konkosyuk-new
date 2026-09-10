@@ -1,9 +1,8 @@
+import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import { useQuery } from '@tanstack/react-query'
-import { MessageSquare } from 'lucide-react'
 
-import { orpc } from '#/orpc/client'
-import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
+import { ChatWindow } from '#/components/chat/ChatWindow'
+import { ConversationList } from '#/components/chat/ConversationList'
 
 export const Route = createFileRoute('/(protected)/pemilik/dashboard/messages')(
   {
@@ -12,33 +11,9 @@ export const Route = createFileRoute('/(protected)/pemilik/dashboard/messages')(
 )
 
 function PemilikMessagesPage() {
-  const { data: conversations, isLoading } = useQuery(
-    orpc.getConversations.queryOptions(),
-  )
-
-  if (isLoading) {
-    return (
-      <main className="page-wrap py-8">
-        <p className="text-sm text-[var(--sea-ink-soft)]">Memuat pesan...</p>
-      </main>
-    )
-  }
-
-  if (!conversations || conversations.length === 0) {
-    return (
-      <main className="page-wrap py-8">
-        <Card>
-          <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-            <MessageSquare className="mb-4 h-12 w-12 text-[var(--sea-ink-soft)]" />
-            <p className="text-sm text-[var(--sea-ink-soft)]">
-              Belum ada percakapan. Percakapan akan muncul ketika ada penyewa
-              yang menghubungi Anda.
-            </p>
-          </CardContent>
-        </Card>
-      </main>
-    )
-  }
+  const [selectedConversationId, setSelectedConversationId] = useState<
+    string | null
+  >(null)
 
   return (
     <main className="page-wrap py-8">
@@ -49,41 +24,28 @@ function PemilikMessagesPage() {
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 gap-4">
-        {conversations.map((conversation) => (
-          <Card key={conversation.id}>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-lg">
-                  {conversation.otherParticipant.name}
-                </CardTitle>
-                {conversation.unreadCount > 0 && (
-                  <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-bold text-white">
-                    {conversation.unreadCount}
-                  </span>
-                )}
-              </div>
-            </CardHeader>
-            <CardContent>
-              {conversation.lastMessage ? (
-                <div className="space-y-1">
-                  <p className="text-sm text-[var(--sea-ink-soft)]">
-                    {conversation.lastMessage.content}
-                  </p>
-                  <p className="text-xs text-[var(--sea-ink-soft)]">
-                    {new Date(
-                      conversation.lastMessage.createdAt,
-                    ).toLocaleString('id-ID')}
-                  </p>
-                </div>
-              ) : (
-                <p className="text-sm text-[var(--sea-ink-soft)]">
-                  Belum ada pesan
-                </p>
-              )}
-            </CardContent>
-          </Card>
-        ))}
+      <div className="flex h-[75vh] overflow-hidden rounded-xl border border-[var(--line)] bg-white shadow-sm">
+        <div className="hidden w-72 border-r border-[var(--line)] md:block">
+          <ConversationList
+            selectedId={selectedConversationId}
+            onSelect={setSelectedConversationId}
+          />
+        </div>
+
+        <div className="flex w-full flex-col md:w-auto md:flex-1">
+          {selectedConversationId ? (
+            <ChatWindow
+              conversationId={selectedConversationId}
+              onBack={() => setSelectedConversationId(null)}
+            />
+          ) : (
+            <div className="flex flex-1 items-center justify-center">
+              <p className="text-sm text-[var(--sea-ink-soft)]">
+                Pilih percakapan untuk mulai chat
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </main>
   )

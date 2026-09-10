@@ -36,6 +36,7 @@
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",
     "@prisma/extension-accelerate": "^3.0.1",
+    "@shadcn/react": "^0.3.1",
     "@t3-oss/env-core": "^0.13.10",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/intent": "^0.3.8",
