@@ -3,7 +3,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 
 import { client } from '#/orpc/client'
-import { authClient } from '#/lib/auth-client'
 
 type ConnectionState = 'connecting' | 'connected' | 'disconnected'
 
@@ -27,6 +26,7 @@ type Message = {
 
 type UseChatOptions = {
   conversationId?: string | null
+  userId?: string | null
 }
 
 type WSMessage = {
@@ -55,7 +55,7 @@ const MAX_RECONNECT_ATTEMPTS = 5
 const WS_URL = import.meta.env.VITE_WS_URL || 'ws://localhost:3000/api/ws/chat'
 
 export function useChat(options: UseChatOptions = {}) {
-  const { conversationId } = options
+  const { conversationId, userId } = options
   const queryClient = useQueryClient()
   const [isConnected, setIsConnected] = useState(false)
   const [connectionState, setConnectionState] =
@@ -72,10 +72,14 @@ export function useChat(options: UseChatOptions = {}) {
   const reconnectTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const mountedRef = useRef(true)
   const fallbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const userIdRef = useRef<string | null>(null)
+  const userIdRef = useRef<string | null>(userId ?? null)
   const typingTimersRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(
     new Map(),
   )
+
+  useEffect(() => {
+    userIdRef.current = userId ?? null
+  }, [userId])
 
   const clearTimers = useCallback(() => {
     if (reconnectTimerRef.current) {
@@ -279,22 +283,9 @@ export function useChat(options: UseChatOptions = {}) {
   }, [clearTimers, client, conversationId, formatLastSeen, queryClient])
 
   useEffect(() => {
-    const init = async () => {
-      const { data: session } = await authClient.useSession()
-      if (!session) {
-        return
-      }
-      const userId = session.user.id
-      userIdRef.current = userId
-
-      if (!userId) {
-        return
-      }
-
+    if (userIdRef.current) {
       connect()
     }
-
-    init()
 
     const handleOnline = () => {
       if (reconnectAttemptsRef.current >= MAX_RECONNECT_ATTEMPTS) {
@@ -315,7 +306,7 @@ export function useChat(options: UseChatOptions = {}) {
         wsRef.current = null
       }
     }
-  }, [clearTimers, connect])
+  }, [clearTimers, connect, userId])
 
   const conversationsQuery = useQuery({
     queryKey: ['conversations'],
@@ -478,7 +469,7 @@ export function useChat(options: UseChatOptions = {}) {
     isSending: sendMessageMutation.isPending,
     isMarkingRead: markAsReadMutation.isPending,
     isUploading: uploadAttachmentMutation.isPending,
-    currentUserId: userIdRef.current,
+    currentUserId: userId,
     refetchConversations: conversationsQuery.refetch,
     refetchMessages: messagesQuery.refetch,
   }

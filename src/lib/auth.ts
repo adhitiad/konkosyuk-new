@@ -1,6 +1,7 @@
 import { betterAuth } from 'better-auth'
 import { tanstackStartCookies } from 'better-auth/tanstack-start'
 import { prismaAdapter } from 'better-auth/adapters/prisma'
+import { createAuthMiddleware, APIError } from 'better-auth/api'
 
 import { prisma } from '#/db'
 
@@ -11,6 +12,29 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+  },
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    },
+  },
+  advanced: {
+    database: {
+      generateId: 'uuid',
+    },
+  },
+  hooks: {
+    after: createAuthMiddleware(async (ctx) => {
+      if (ctx.path === '/sign-in/email') {
+        const returned = ctx.context.returned
+        if (returned instanceof APIError) {
+          throw new APIError('UNAUTHORIZED', {
+            message: 'Email atau kata sandi salah',
+          })
+        }
+      }
+    }),
   },
   // Kolom di schema Prisma memakai snake_case, sedangkan Better Auth secara default
   // memakai nama field camelCase (tanpa konversi otomatis). Petakan semua field

@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { format } from 'date-fns'
 
 import { useChat } from '#/hooks/useChat'
+import { authClient } from '#/lib/auth-client'
 import { cn } from '#/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/ui/avatar'
 import { Badge } from '#/components/ui/badge'
@@ -47,10 +48,16 @@ export function ConversationList({
   selectedId,
   onSelect,
 }: ConversationListProps) {
-  const { conversations, isLoading, presence } = useChat({})
+  const { data: session } = authClient.useSession()
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  const currentUserId = session?.user?.id ?? null
+
+  const { conversations, isLoading, presence } = useChat({
+    userId: currentUserId,
+  })
 
   const getPresenceForUser = useMemo(
-    () => (userId: string) => presence.find((p) => p.userId === userId),
+    () => (uid: string) => presence.find((p) => p.userId === uid),
     [presence],
   )
 

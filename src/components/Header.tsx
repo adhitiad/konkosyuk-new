@@ -23,9 +23,9 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   { label: 'Beranda', href: '/', icon: Home, isRoute: true },
-  { label: 'Cari Kos', href: '#kategori', icon: Compass },
-  { label: 'Rekomendasi', href: '#rekomendasi', icon: Sparkles },
-  { label: 'Pasang Iklan', href: '#pemilik', icon: Wallet },
+  { label: 'Cari Kos', href: '/#kategori', icon: Compass },
+  { label: 'Rekomendasi', href: '/#rekomendasi', icon: Sparkles },
+  { label: 'Pasang Iklan', href: '/#pemilik', icon: Wallet },
 ]
 
 function isActiveRoute(pathname: string, href: string) {

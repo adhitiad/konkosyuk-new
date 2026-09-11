@@ -1,4 +1,4 @@
-﻿import {
+import {
   getStatistikPlatform,
   getKonfigurasiPlatform,
   updateKonfigurasiPlatform,
@@ -60,6 +60,7 @@ import {
   getPropertyWithRelations,
   listProperties,
   listFeaturedProperties,
+  getPlatformPublicStats,
   searchRooms,
   updateProperty,
   updateUnit,
@@ -113,6 +114,7 @@ export default {
   addTodo,
   listProperties,
   listFeaturedProperties,
+  getPlatformPublicStats,
   searchRooms,
   getProperty,
   getPropertyWithRelations,

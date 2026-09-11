@@ -36,15 +36,12 @@ export default function NotificationSheet() {
   const queryClient = useQueryClient()
   const [open, setOpen] = useState(false)
 
-  if (!session?.user) {
-    return null
-  }
-
-  const userId = session.user.id
+  const userId =
+    (session as { user?: { id: string } } | undefined)?.user?.id ?? null
 
   const { data: notificationsData, isLoading: notificationsLoading } = useQuery(
     {
-      queryKey: ['notifications', 'list', userId],
+      queryKey: ['notifications', 'list', userId ?? ''],
       queryFn: async () => {
         if (!userId) throw new Error('Unauthenticated')
         const result = await orpc.getNotifications.call({
@@ -58,7 +55,7 @@ export default function NotificationSheet() {
   )
 
   const { data: unreadData } = useQuery({
-    queryKey: ['notifications', 'unread', userId],
+    queryKey: ['notifications', 'unread', userId ?? ''],
     queryFn: async () => {
       if (!userId) throw new Error('Unauthenticated')
       const result = await orpc.getUnreadNotifications.call({
@@ -92,6 +89,10 @@ export default function NotificationSheet() {
       })
     },
   })
+
+  if (!userId) {
+    return null
+  }
 
   const notifications = notificationsData?.notifications ?? []
   const unreadCount = unreadData?.length ?? 0

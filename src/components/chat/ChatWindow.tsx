@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef } from 'react'
 import { ArrowLeft } from 'lucide-react'
 
 import { useChat } from '#/hooks/useChat'
+import { authClient } from '#/lib/auth-client'
 import { Button } from '#/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/ui/avatar'
 import { Skeleton } from '#/components/ui/skeleton'
@@ -51,6 +52,10 @@ function formatRelativeTime(date: Date): string {
 }
 
 export function ChatWindow({ conversationId, onBack }: ChatWindowProps) {
+  const { data: session } = authClient.useSession()
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  const userId = session?.user?.id ?? null
+
   const {
     conversations,
     messages,
@@ -64,7 +69,7 @@ export function ChatWindow({ conversationId, onBack }: ChatWindowProps) {
     isLoading,
     typingUsers,
     currentUserId,
-  } = useChat({ conversationId })
+  } = useChat({ conversationId, userId })
 
   const conversation = conversations.find((c) => c.id === conversationId)
   const messagesEndRef = useRef<HTMLDivElement>(null)

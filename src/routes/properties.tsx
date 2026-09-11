@@ -23,9 +23,16 @@ import {
   SelectValue,
 } from '#/components/ui/select'
 import { PROPERTY_TYPE_LABELS } from '#/utils/propertyType'
-import { PropertyMap, MapPropertiesContext } from '#/components/property/PropertyMap'
+import {
+  PropertyMap,
+  MapPropertiesContext,
+} from '#/components/property/PropertyMap'
 import { GoogleMapsProvider } from '#/components/property/GoogleMapsProvider'
-import { GenderTypeSchema, RentalPeriodSchema } from '#/orpc/schema/properties'
+import {
+  GenderTypeSchema,
+  PropertyTypeSchema,
+  RentalPeriodSchema,
+} from '#/orpc/schema/properties'
 
 export const Route = createFileRoute('/properties')({
   component: PropertiesList,
@@ -83,6 +90,13 @@ function PropertiesList() {
   const rentalPeriod = typeParam
     ? RentalPeriodSchema.safeParse(typeParam)
     : null
+  const parsedPropertyType = typeParam
+    ? PropertyTypeSchema.safeParse(typeParam)
+    : null
+
+  const effectiveType =
+    selectedType ??
+    (parsedPropertyType?.success ? parsedPropertyType.data : undefined)
 
   const {
     data: properties,
@@ -91,7 +105,7 @@ function PropertiesList() {
   } = useQuery({
     ...orpc.listProperties.queryOptions({
       input: {
-        type: selectedType,
+        type: effectiveType,
         gender_type: genderType?.success ? genderType.data : undefined,
         rental_period: rentalPeriod?.success ? rentalPeriod.data : undefined,
         city: cityParam,
@@ -135,8 +149,7 @@ function PropertiesList() {
 
     const prev = mapPropertiesRef.current
     const sameLength = prev.length === next.length
-    const sameIds =
-      sameLength && next.every((p, i) => p.id === prev[i].id)
+    const sameIds = sameLength && next.every((p, i) => p.id === prev[i].id)
 
     if (sameIds) return prev
     mapPropertiesRef.current = next
@@ -242,7 +255,7 @@ function PropertiesList() {
           <Button type="submit" size="sm" className="sm:h-9">
             Cari
           </Button>
-          {(searchParam || cityParam) && (
+          {(searchParam || cityParam || typeParam) && (
             <Button
               type="button"
               variant="ghost"
@@ -256,8 +269,13 @@ function PropertiesList() {
           )}
         </form>
 
-        {(cityParam || searchParam) && (
+        {(cityParam || searchParam || typeParam) && (
           <div className="mt-3 flex flex-wrap gap-2">
+            {typeParam ? (
+              <Badge variant="secondary" className="text-xs capitalize">
+                Tipe: {typeParam}
+              </Badge>
+            ) : null}
             {cityParam ? (
               <Badge variant="secondary" className="text-xs">
                 Kota: {cityParam}
@@ -298,7 +316,9 @@ function PropertiesList() {
       {isLoading ? (
         <div className="flex items-center justify-center py-12">
           <Loader2 className="h-6 w-6 animate-spin text-[var(--lagoon-deep)]" />
-          <span className="ml-2 text-sm text-[var(--sea-ink-soft)]">Memuat properti...</span>
+          <span className="ml-2 text-sm text-[var(--sea-ink-soft)]">
+            Memuat properti...
+          </span>
         </div>
       ) : properties && properties.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

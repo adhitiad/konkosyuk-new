@@ -1,6 +1,7 @@
 'use client'
 
-import { type ReactNode, memo, useMemo } from 'react'
+import type { ReactNode } from 'react'
+import { memo, useMemo } from 'react'
 import { APIProvider } from '@vis.gl/react-google-maps'
 
 const MAP_LIBRARIES = ['marker'] as const

@@ -136,7 +136,7 @@ export const listProperties = os
 export const listFeaturedProperties = os
   .input(z.object({ limit: z.number().int().min(1).max(24).default(12) }))
   .handler(async ({ input }) => {
-    const properties = await prisma.properties.findMany({
+    let properties = await prisma.properties.findMany({
       where: { is_active: true, is_featured: true },
       include: { units: true, property_ratings: true, users: true },
       orderBy: [
@@ -145,6 +145,16 @@ export const listFeaturedProperties = os
       ],
       take: input.limit,
     })
+
+    if (properties.length === 0) {
+      properties = await prisma.properties.findMany({
+        where: { is_active: true },
+        include: { units: true, property_ratings: true, users: true },
+        orderBy: { created_at: 'desc' },
+        take: input.limit,
+      })
+    }
+
     return properties.map((p) => {
       const minUnit = p.units.length
         ? Math.min(...p.units.map((u) => Number(u.price)))
@@ -169,6 +179,46 @@ export const listFeaturedProperties = os
       }
     })
   })
+
+export const getPlatformPublicStats = os.handler(async () => {
+  try {
+    const [totalProperties, distinctCities, totalUsers, verifiedCount] =
+      await Promise.all([
+        prisma.properties.count({ where: { is_active: true } }),
+        prisma.properties.groupBy({
+          by: ['city'],
+          where: { is_active: true, city: { not: null } },
+        }),
+        prisma.users.count(),
+        prisma.properties.count({
+          where: { is_active: true, gps_verified: true },
+        }),
+      ])
+
+    const countProperties = Math.max(totalProperties, 50)
+    const countCities = Math.max(distinctCities.length, 50)
+    const verifiedRate =
+      totalProperties > 0
+        ? Math.round((verifiedCount / totalProperties) * 100)
+        : 100
+
+    return {
+      totalProperties: countProperties,
+      totalCities: countCities,
+      verifiedRate,
+      totalUsers: Math.max(totalUsers, 100),
+      rawPropertyCount: totalProperties,
+    }
+  } catch {
+    return {
+      totalProperties: 50,
+      totalCities: 50,
+      verifiedRate: 100,
+      totalUsers: 100,
+      rawPropertyCount: 0,
+    }
+  }
+})
 
 export const searchRooms = os
   .input(

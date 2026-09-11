@@ -14,7 +14,10 @@ import { Button } from '#/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
 import { Skeleton } from '#/components/ui/skeleton'
 import { PropertyImageGallery } from '#/components/property/PropertyImageGallery'
-import { PropertyMap, MapPropertiesContext } from '#/components/property/PropertyMap'
+import {
+  PropertyMap,
+  MapPropertiesContext,
+} from '#/components/property/PropertyMap'
 import { GoogleMapsProvider } from '#/components/property/GoogleMapsProvider'
 import {
   getTipePropertiLabel,
@@ -279,7 +282,9 @@ function PropertyDetailPage() {
                 property.longitude &&
                 !Number.isNaN(Number(property.latitude)) &&
                 !Number.isNaN(Number(property.longitude)) && (
-                  <GoogleMapsProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+                  <GoogleMapsProvider
+                    apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+                  >
                     <MapPropertiesContext.Provider
                       value={[
                         {

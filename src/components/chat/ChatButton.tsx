@@ -10,17 +10,20 @@ export function ChatButton() {
   const { data: session } = authClient.useSession()
   const [open, setOpen] = useState(false)
 
-  if (!session?.user) {
-    return null
-  }
+  const userId =
+    (session as { user?: { id: string } } | undefined)?.user?.id ?? null
 
   const { data: unreadData } = useQuery({
-    queryKey: ['notifications', 'unread', session.user.id],
+    queryKey: ['notifications', 'unread', userId],
     queryFn: async () => {
       return orpc.getUnreadNotifications.call({ limit: 1 })
     },
-    enabled: !!session.user.id,
+    enabled: !!userId,
   })
+
+  if (!userId) {
+    return null
+  }
 
   const unreadCount = unreadData?.length ?? 0
 
