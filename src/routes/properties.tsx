@@ -7,7 +7,7 @@ import {
 import { useQuery } from '@tanstack/react-query'
 import { ChevronDown, MapPin, Bed, Search, X, Loader2 } from 'lucide-react'
 import type { Prisma, PropertyType } from '#/generated/prisma/client'
-import { useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 
 import { orpc } from '#/orpc/client'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card'
@@ -88,8 +88,8 @@ function PropertiesList() {
     data: properties,
     isLoading,
     isFetching,
-  } = useQuery(
-    orpc.listProperties.queryOptions({
+  } = useQuery({
+    ...orpc.listProperties.queryOptions({
       input: {
         type: selectedType,
         gender_type: genderType?.success ? genderType.data : undefined,
@@ -99,6 +99,19 @@ function PropertiesList() {
         bounds: bounds ?? undefined,
       },
     }),
+    placeholderData: (prev) => prev,
+  })
+
+  const handleBoundsChange = useCallback(
+    (newBounds: {
+      north: number
+      south: number
+      east: number
+      west: number
+    }) => {
+      setBounds(newBounds)
+    },
+    [],
   )
 
   const mapPropertiesRef = useRef<
@@ -148,13 +161,8 @@ function PropertiesList() {
     navigate({ to: '/properties' })
   }
 
-  if (isLoading) {
-    return (
-      <main className="page-wrap py-8">
-        <p className="text-sm text-[var(--sea-ink-soft)]">Memuat properti...</p>
-      </main>
-    )
-  }
+  // NOTE: isLoading guard dihapus agar peta & filter tidak di-unmount saat
+  // queryKey berubah (misal zoom out). Loading state ditampilkan inline di grid.
 
   return (
     <main className="page-wrap py-8">
@@ -281,13 +289,18 @@ function PropertiesList() {
           </div>
           <GoogleMapsProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
             <MapPropertiesContext.Provider value={mapProperties}>
-              <PropertyMap onBoundsChange={setBounds} />
+              <PropertyMap onBoundsChange={handleBoundsChange} />
             </MapPropertiesContext.Provider>
           </GoogleMapsProvider>
         </div>
       )}
 
-      {properties && properties.length > 0 ? (
+      {isLoading ? (
+        <div className="flex items-center justify-center py-12">
+          <Loader2 className="h-6 w-6 animate-spin text-[var(--lagoon-deep)]" />
+          <span className="ml-2 text-sm text-[var(--sea-ink-soft)]">Memuat properti...</span>
+        </div>
+      ) : properties && properties.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {properties.map((property) => (
             <PropertyCard key={property.id} property={property} />

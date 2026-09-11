@@ -58,9 +58,10 @@ function BoundsHandler({
         onBoundsChange(next)
       }, 1000)
     }
-    map.addListener('idle', handleBoundsChanged)
+    const listener = map.addListener('idle', handleBoundsChanged)
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current)
+      listener.remove()
     }
   }, [map, onBoundsChange])
 
